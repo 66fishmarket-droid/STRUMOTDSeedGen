@@ -21,12 +21,10 @@ OUT_MOVIES = "data/movies_rt80.csv"    # placeholder for now
 WIKIDATA_ENDPOINT = "https://query.wikidata.org/sparql"
 
 def ua_contact():
-    # Provided by workflow env; safe default is your repo issues page
     return os.getenv("USER_AGENT_CONTACT", "https://github.com/OWNER/REPO/issues")
 
 def make_sparql():
     s = SPARQLWrapper(WIKIDATA_ENDPOINT, agent=f"StrumOTD/1.0 (+{ua_contact()})")
-    # Extra header for good citizenship
     try:
         s.addCustomHttpHeader("User-Agent", f"StrumOTD/1.0 (+{ua_contact()})")
     except Exception:
@@ -34,12 +32,12 @@ def make_sparql():
     s.setReturnFormat(JSON)
     return s
 
-def run_paged(query_tmpl: str, page_size: int = 5000, sleep_s: float = 0.8) -> List[Dict]:
+def run_paged(query_tmpl: str, page_size: int = 2000, sleep_s: float = 0.7) -> List[Dict]:
     s = make_sparql()
     results = []
     offset = 0
     while True:
-        q = query_tmpl.format(limit=page_size, offset=offset)
+        q = query_tmpl.replace("{LIMIT}", str(page_size)).replace("{OFFSET}", str(offset))
         s.setQuery(q)
         data = s.query().convert()
         rows = data.get("results", {}).get("bindings", [])
@@ -51,7 +49,6 @@ def run_paged(query_tmpl: str, page_size: int = 5000, sleep_s: float = 0.8) -> L
     return results
 
 def norm_date(d: str) -> str:
-    # Expect xsd:dateTime or xsd:date, use first 10 chars if present
     if not d:
         return ""
     return d[:10] if len(d) >= 10 else d
@@ -70,11 +67,7 @@ def write_csv(path: str, rows: List[Dict]):
             w.writerow({k: r.get(k, "") for k in FIELDS})
 
 def build_songs_top10() -> List[Dict]:
-    # SPARQL:
-    # - song (Q7366)
-    # - charted in (P2291) Billboard Hot 100 (Q180072) with ranking (P1352) <= 10
-    # - optional release date (P577)
-    # - optional performers (P175), aggregated
+    # Using placeholders {LIMIT} and {OFFSET} that we replace manually.
     query = """
     SELECT ?song ?songLabel ?date (GROUP_CONCAT(DISTINCT ?artistLabel; separator=", ") AS ?artists) (MIN(?rank) AS ?bestRank)
     WHERE {
@@ -91,12 +84,12 @@ def build_songs_top10() -> List[Dict]:
     }
     GROUP BY ?song ?songLabel ?date
     ORDER BY ?song
-    LIMIT {limit} OFFSET {offset}
+    LIMIT {LIMIT} OFFSET {OFFSET}
     """
 
     raw = run_paged(query, page_size=2000, sleep_s=0.7)
 
-    # Deduplicate by QID; prefer an earliest date if duplicates appear
+    # Deduplicate by QID; keep earliest date
     by_qid = {}
     for b in raw:
         uri = b.get("song", {}).get("value", "")
@@ -105,7 +98,7 @@ def build_songs_top10() -> List[Dict]:
         artists = b.get("artists", {}).get("value", "")
         date = norm_date(b.get("date", {}).get("value", ""))
         best_rank = b.get("bestRank", {}).get("value", "")
-        # keep earliest date if multiple
+
         if qid in by_qid:
             old_date = by_qid[qid].get("release_date", "")
             if old_date and date and date < old_date:
@@ -126,19 +119,16 @@ def build_songs_top10() -> List[Dict]:
             }
 
     rows = list(by_qid.values())
-    # Sort for stable diffs: by title
     rows.sort(key=lambda r: (r["title"].lower(), r["release_date"]))
     return rows
 
 def main():
-    # Build real songs Top 10 dataset
     songs = build_songs_top10()
     write_csv(OUT_SONGS, songs)
 
-    # Keep placeholders for the other outputs so downstream steps stay green
-    empty = []
-    write_csv(OUT_ALBUMS, empty)
-    write_csv(OUT_MOVIES, empty)
+    # Keep placeholders so downstream steps are stable
+    write_csv(OUT_ALBUMS, [])
+    write_csv(OUT_MOVIES, [])
 
     print(f"Wrote {OUT_SONGS} [{len(songs)} rows]")
     print(f"Initialized placeholders: {OUT_ALBUMS}, {OUT_MOVIES}")

@@ -42,6 +42,38 @@ const safe = (val, d = "") => (val ?? d);
 function chunk(arr, n) { const out = []; for (let i = 0; i < arr.length; i += n) out.push(arr.slice(i, i + n)); return out; }
 
 // Fetch helpers
+async function runSparql(query, headers) {
+  // 1) Try GET
+  const url = `${WD_SPARQL}?query=${encodeURIComponent(query)}`;
+  const getRes = await fetch(url, { method: "GET", headers });
+  const getCT = (getRes.headers.get("content-type") || "").toLowerCase();
+  const getText = await getRes.text();
+
+  if (getRes.ok && getCT.includes("application/sparql-results+json")) {
+    return JSON.parse(getText);
+  }
+
+  // If parser complains or server rejects GET, try POST (form-encoded)
+  if (!getRes.ok && (getRes.status === 400 || getRes.status === 415)) {
+    const postRes = await fetch(WD_SPARQL, {
+      method: "POST",
+      headers: {
+        ...headers,
+        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
+      },
+      body: `query=${encodeURIComponent(query)}`
+    });
+    const postCT = (postRes.headers.get("content-type") || "").toLowerCase();
+    const postText = await postRes.text();
+    if (!postRes.ok || !postCT.includes("application/sparql-results+json")) {
+      throw new Error(`SPARQL error (POST) status=${postRes.status} ct=${postCT} snippet=${postText.slice(0,200)}`);
+    }
+    return JSON.parse(postText);
+  }
+
+  throw new Error(`SPARQL error (GET) status=${getRes.status} ct=${getCT} snippet=${getText.slice(0,200)}`);
+}
+
 async function fetchTextWithRetry(url, opts = {}, retries = 3) {
   let lastErr;
   for (let i = 1; i <= retries; i++) {
@@ -93,8 +125,12 @@ async function filterArts(qids) {
   const keep = new Set();
   const categoryMap = new Map();
 
-  for (const batch of chunk(qids, MAX_BATCH)) {
+  // Conservative default helps avoid 400s; can still be overridden via --max-batch
+  const maxBatch = Math.min(MAX_BATCH, 35);
+
+  for (const batch of chunk(qids, maxBatch)) {
     const VALUES = batch.map(q => `wd:${q}`).join(" ");
+
     const query = `
 PREFIX wd:  <http://www.wikidata.org/entity/>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
@@ -108,67 +144,48 @@ SELECT ?item ?category WHERE {
     IF(EXISTS {
       ?item wdt:P31/wdt:P279* ?c1 .
       FILTER(?c1 IN (
-        wd:Q482994,   # album
-        wd:Q134556,   # single
-        wd:Q7366,     # song
-        wd:Q105420,   # EP
-        wd:Q753110,   # musical work
-        wd:Q182832,   # concert tour
-        wd:Q222634    # music award
+        wd:Q482994, wd:Q134556, wd:Q7366, wd:Q105420, wd:Q753110, wd:Q182832, wd:Q222634
       ))
-    },"music", UNDEF),
+    },"music", ""),
 
     # Works: Film / TV
     IF(EXISTS {
       ?item wdt:P31/wdt:P279* ?c2 .
       FILTER(?c2 IN (
-        wd:Q11424,     # film
-        wd:Q5398426,   # TV series
-        wd:Q21191270,  # TV episode
-        wd:Q24862,     # short film
-        wd:Q226730     # film festival
+        wd:Q11424, wd:Q5398426, wd:Q21191270, wd:Q24862, wd:Q226730
       ))
-    },"film_tv", UNDEF),
+    },"film_tv", ""),
 
-    # Works: Books / Literature
+    # Works: Books
     IF(EXISTS {
       ?item wdt:P31/wdt:P279* ?c3 .
       FILTER(?c3 IN (
-        wd:Q7725634,   # literary work
-        wd:Q571,       # book
-        wd:Q8261,      # novel
-        wd:Q25379      # play (as written work)
+        wd:Q7725634, wd:Q571, wd:Q8261, wd:Q25379
       ))
-    },"books", UNDEF),
+    },"books", ""),
 
     # Works: Visual / Performance
     IF(EXISTS {
       ?item wdt:P31/wdt:P279* ?c4 .
       FILTER(?c4 IN (
-        wd:Q3305213,   # painting
-        wd:Q860861,    # sculpture
-        wd:Q2798201,   # ballet
-        wd:Q2431196,   # opera
-        wd:Q2743,      # theater production
-        wd:Q25379      # play (as performance)
+        wd:Q3305213, wd:Q860861, wd:Q2798201, wd:Q2431196, wd:Q2743, wd:Q25379
       ))
-    },"visual_or_performance", UNDEF),
+    },"visual_or_performance", ""),
 
     # Works: Awards
     IF(EXISTS {
       ?item wdt:P31/wdt:P279* ?c5 .
       FILTER(?c5 IN (wd:Q618779, wd:Q132241))
-    },"awards", UNDEF),
+    },"awards", ""),
 
     # Humans: Music
     IF(EXISTS {
       ?item wdt:P31 wd:Q5 ; wdt:P106/wdt:P279* ?o1 .
       FILTER(?o1 IN (
-        wd:Q639669, wd:Q177220, wd:Q488205, wd:Q36834, wd:Q1128996,
-        wd:Q130857, wd:Q155309, wd:Q161251, wd:Q973127, wd:Q488111,
-        wd:Q158852, wd:Q14623646
+        wd:Q639669, wd:Q177220, wd:Q488205, wd:Q36834, wd:Q1128996, wd:Q130857, wd:Q155309,
+        wd:Q161251, wd:Q973127, wd:Q488111, wd:Q158852, wd:Q14623646
       ))
-    },"music", UNDEF),
+    },"music", ""),
 
     # Humans: Film / TV
     IF(EXISTS {
@@ -176,7 +193,7 @@ SELECT ?item ?category WHERE {
       FILTER(?o2 IN (
         wd:Q33999, wd:Q2526255, wd:Q28389, wd:Q3455803, wd:Q48820545, wd:Q10800557
       ))
-    },"film_tv", UNDEF),
+    },"film_tv", ""),
 
     # Humans: Books
     IF(EXISTS {
@@ -184,7 +201,7 @@ SELECT ?item ?category WHERE {
       FILTER(?o3 IN (
         wd:Q36180, wd:Q482980, wd:Q49757, wd:Q214917, wd:Q6625963, wd:Q11774202
       ))
-    },"books", UNDEF),
+    },"books", ""),
 
     # Humans: Visual / Performance
     IF(EXISTS {
@@ -192,25 +209,30 @@ SELECT ?item ?category WHERE {
       FILTER(?o4 IN (
         wd:Q33231, wd:Q42973, wd:Q571668, wd:Q245068, wd:Q256145, wd:Q1028181, wd:Q1281618
       ))
-    },"visual_or_performance", UNDEF)
+    },"visual_or_performance", "")
 
   ) AS ?category)
 
-  FILTER(BOUND(?category))
+  FILTER( STRLEN(?category) > 0 )
 }
 `.trim();
 
-    const url = `${WD_SPARQL}?query=${encodeURIComponent(query)}`;
-    if (FLAG_DEBUG) { console.error("\n--- SPARQL BATCH ---\n" + query); }
-
-    const { ct, text } = await fetchTextWithRetry(url, { method: "GET", headers }, 3);
-    if (!ct.includes("application/sparql-results+json")) {
-      throw new Error(`Unexpected content-type: ${ct} :: ${text.slice(0, 200)}`);
+    // If the encoded query would be huge, split once more to be safe
+    const testUrl = `${WD_SPARQL}?query=${encodeURIComponent(query)}`;
+    if (testUrl.length > 7000 && batch.length > 10) {
+      // Split batch into halves and process recursively
+      const halves = chunk(batch, Math.ceil(batch.length / 2));
+      const rec = await Promise.all(halves.map(h => filterArts(h)));
+      // Merge results
+      for (const r of rec) {
+        r.keep.forEach(q => keep.add(q));
+        for (const [k, v] of r.categoryMap.entries()) categoryMap.set(k, v);
+      }
+      continue;
     }
 
-    let j;
-    try { j = JSON.parse(text); }
-    catch { throw new Error(`SPARQL parse error ct=${ct} :: ${text.slice(0,200)}`); }
+    // Execute query (GET, fallback to POST form on 400/415)
+    const j = await runSparql(query, headers);
 
     for (const b of (j?.results?.bindings || [])) {
       const qid = b.item.value.split("/").pop();
@@ -218,11 +240,12 @@ SELECT ?item ?category WHERE {
       categoryMap.set(qid, b.category.value);
     }
 
-    if (!FLAG_DEBUG) await sleep(250);
+    await new Promise(r => setTimeout(r, 250)); // gentle pacing
   }
 
   return { keep, categoryMap };
 }
+
 
 // Flatten
 function flatten(items) {

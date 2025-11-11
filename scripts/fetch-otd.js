@@ -16,7 +16,9 @@
 const WD_SPARQL = "https://query.wikidata.org/sparql";
 const MAX_BATCH = 25; // safer for WDQS; will auto-split further on 400/413/414/431
 const USER_AGENT = "StrumOTD/1.0 (+https://github.com/66fishmarket-droid/STRUMOTDSeedGen)";
-const DEFAULT_FETCH_TIMEOUT_MS = 15000; // hard timeout per WDQS call
+// replace the DEFAULT_FETCH_TIMEOUT_MS line
+const DEFAULT_FETCH_TIMEOUT_MS = Number(process.env.WDQS_TIMEOUT_MS || 45000); // 45s default
+
 
 // ------------------------ CLI / ENV ------------------------
 
@@ -121,46 +123,61 @@ function extractCandidateQIDs(items) {
 // - GET for tiny batches (<=3 QIDs), POST (form) otherwise.
 // - Retries on 429/502/503/504.
 // - On failure with DEBUG, logs status, query head, and body head.
+// replace the whole runSparql function with this
 async function runSparql(query, headers, { preferGet = false } = {}, attempt = 1) {
-  const maxAttempts = 5;
+  const maxAttempts = 6;
 
-  const backoffFor = (res, attempt) => {
-    const hdr = res.headers?.get?.("retry-after");
+  const backoffFor = (resOrErr, attempt) => {
+    // honor Retry-After for HTTP responses
+    const hdr = resOrErr?.headers?.get?.("retry-after");
     if (hdr) {
       const secs = Number(hdr);
       if (!Number.isNaN(secs) && secs > 0) return secs * 1000;
     }
-    return Math.min(2000 * attempt + Math.floor(Math.random() * 300), 10000);
+    // jittered exponential
+    return Math.min(2000 * attempt + Math.floor(Math.random() * 500), 12000);
   };
 
   let res;
-  const signal = AbortSignal.timeout(DEFAULT_FETCH_TIMEOUT_MS);
+  try {
+    const signal = AbortSignal.timeout(DEFAULT_FETCH_TIMEOUT_MS);
 
-  if (preferGet) {
-    const url = `${WD_SPARQL}?format=json&query=${encodeURIComponent(query)}`;
-    res = await fetch(url, {
-      method: "GET",
-      signal,
-      headers: {
-        ...headers,
-        "User-Agent": USER_AGENT,
-        "Accept": "application/sparql-results+json",
-        "Cache-Control": "no-cache"
-      }
-    });
-  } else {
-    res = await fetch(WD_SPARQL, {
-      method: "POST",
-      signal,
-      headers: {
-        ...headers,
-        "User-Agent": USER_AGENT,
-        "Accept": "application/sparql-results+json",
-        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-        "Cache-Control": "no-cache"
-      },
-      body: `query=${encodeURIComponent(query)}&format=json`
-    });
+    if (preferGet) {
+      const url = `${WD_SPARQL}?format=json&query=${encodeURIComponent(query)}`;
+      res = await fetch(url, {
+        method: "GET",
+        signal,
+        headers: {
+          ...headers,
+          "User-Agent": USER_AGENT,
+          "Accept": "application/sparql-results+json",
+          "Cache-Control": "no-cache"
+        }
+      });
+    } else {
+      res = await fetch(WD_SPARQL, {
+        method: "POST",
+        signal,
+        headers: {
+          ...headers,
+          "User-Agent": USER_AGENT,
+          "Accept": "application/sparql-results+json",
+          "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+          "Cache-Control": "no-cache"
+        },
+        body: `query=${encodeURIComponent(query)}&format=json`
+      });
+    }
+  } catch (err) {
+    // Timeout/Abort: retry with backoff
+    const isAbort = err?.name === "TimeoutError" || err?.name === "AbortError" || /aborted due to timeout/i.test(err?.message || "");
+    if (isAbort && attempt < maxAttempts) {
+      const wait = backoffFor(err, attempt);
+      logDebug(`[WDQS] Timeout; retrying in ${wait}ms (attempt ${attempt + 1})`);
+      await sleep(wait);
+      return runSparql(query, headers, { preferGet }, attempt + 1);
+    }
+    throw err;
   }
 
   if ([429, 502, 503, 504].includes(res.status) && attempt < maxAttempts) {
@@ -188,6 +205,7 @@ async function runSparql(query, headers, { preferGet = false } = {}, attempt = 1
   return res.json();
 }
 
+
 // BROAD arts classifier: works/events + human occupations (music, film/TV/theatre, books, visual/performance)
 async function filterArts(qids) {
   if (!qids || qids.length === 0) return { keep: new Set(), categoryMap: new Map() };
@@ -203,11 +221,14 @@ async function filterArts(qids) {
   for (const batch of chunk(qids, Math.min(MAX_BATCH, 25))) {
     const VALUES = batch.map(q => `wd:${q}`).join(" ");
 
-    const query = `
+const query = `
 PREFIX wd:  <http://www.wikidata.org/entity/>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX hint: <http://www.bigdata.com/queryHints#>
 
 SELECT ?item (SAMPLE(?cat) AS ?category) WHERE {
+  hint:Query hint:timeout "${Math.max(10000, DEFAULT_FETCH_TIMEOUT_MS - 5000)}" .
+
   VALUES ?item { ${VALUES} }
 
   # force materialization (helps with some singleton oddities)
@@ -254,6 +275,7 @@ SELECT ?item (SAMPLE(?cat) AS ?category) WHERE {
 GROUP BY ?item
 `.trim();
 
+
     let j;
     try {
       // Use GET for tiny batches to avoid rare POST 400s on singletons
@@ -267,7 +289,7 @@ GROUP BY ?item
           r.keep.forEach(q => keep.add(q));
           for (const [k, v] of r.categoryMap.entries()) categoryMap.set(k, v);
         }
-        await sleep(600);
+        await sleep(800);
         continue;
       }
       throw e;
@@ -280,7 +302,7 @@ GROUP BY ?item
     }
 
     // be polite to WDQS
-    await sleep(600);
+    await sleep(800);
   }
 
   return { keep, categoryMap };

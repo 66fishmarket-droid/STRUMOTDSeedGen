@@ -2,7 +2,7 @@ name: Build Births & Deaths (manual + nightly)
 
 on:
   schedule:
-    - cron: "15 3 * * *"    # nightly UTC
+    - cron: "15 3 * * *"
   workflow_dispatch:
     inputs:
       mm:
@@ -15,7 +15,7 @@ on:
         default: ""
 
 permissions:
-  contents: write   # allow the bot to push CSV changes
+  contents: write
 
 jobs:
   build:
@@ -31,9 +31,13 @@ jobs:
         run: pip install requests
 
       - name: Run births/deaths script
+        env:
+          USER_AGENT_CONTACT: ${{ github.server_url }}/${{ github.repository }}/issues
         run: |
-          if [ -n "${{ github.event.inputs.mm }}" ] && [ -n "${{ github.event.inputs.dd }}" ]; then
-            python scripts/pull_births_deaths.py "${{ github.event.inputs.mm }}" "${{ github.event.inputs.dd }}"
+          mm="${{ github.event.inputs.mm }}"
+          dd="${{ github.event.inputs.dd }}"
+          if [ -n "$mm" ] && [ -n "$dd" ]; then
+            python scripts/pull_births_deaths.py "$mm" "$dd"
           else
             python scripts/pull_births_deaths.py
           fi

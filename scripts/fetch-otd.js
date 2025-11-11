@@ -119,7 +119,7 @@ function extractCandidateQIDs(items) {
 // Robust WDQS runner: POST the SPARQL in the body (prevents 431 due to long URLs).
 // Retries on 429/503 with exponential backoff, honors Retry-After when present.
 // Falls back to form-POST if application/sparql-query is rejected by some proxy.
-async function runSparql(query, headers, attempt = 1) {
+async function runSparql(query, headers, { preferGet = false } = {}, attempt = 1) {
   const maxAttempts = 5;
 
   const backoffFor = (res, attempt) => {
@@ -131,25 +131,38 @@ async function runSparql(query, headers, attempt = 1) {
     return Math.min(2000 * attempt + Math.floor(Math.random() * 300), 10000);
   };
 
-  const common = {
-    method: "POST",
-    headers: {
-      ...headers,
-      "User-Agent": USER_AGENT,
-      "Accept": "application/sparql-results+json",
-      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-      "Cache-Control": "no-cache"
-    },
-    body: `query=${encodeURIComponent(query)}&format=json`
-  };
-
-  const res = await fetch(WD_SPARQL, common);
+  // Try GET when requested (small batches), else POST form
+  let res;
+  if (preferGet) {
+    const url = `${WD_SPARQL}?format=json&query=${encodeURIComponent(query)}`;
+    res = await fetch(url, {
+      method: "GET",
+      headers: {
+        ...headers,
+        "User-Agent": USER_AGENT,
+        "Accept": "application/sparql-results+json",
+        "Cache-Control": "no-cache"
+      }
+    });
+  } else {
+    res = await fetch(WD_SPARQL, {
+      method: "POST",
+      headers: {
+        ...headers,
+        "User-Agent": USER_AGENT,
+        "Accept": "application/sparql-results+json",
+        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "Cache-Control": "no-cache"
+      },
+      body: `query=${encodeURIComponent(query)}&format=json`
+    });
+  }
 
   if ([429, 502, 503, 504].includes(res.status) && attempt < maxAttempts) {
     const wait = backoffFor(res, attempt);
     logDebug(`[WDQS] ${res.status} ${res.statusText}; retrying in ${wait}ms (attempt ${attempt + 1})`);
     await sleep(wait);
-    return runSparql(query, headers, attempt + 1);
+    return runSparql(query, headers, { preferGet }, attempt + 1);
   }
 
   if (!res.ok) {
@@ -162,6 +175,7 @@ async function runSparql(query, headers, attempt = 1) {
 
   return res.json();
 }
+
 
 
 // BROAD arts classifier: works/events + human occupations (music, film/TV/theatre, books, visual/performance)
@@ -177,93 +191,62 @@ async function filterArts(qids) {
   const categoryMap = new Map();
   const maxBatch = Math.min(MAX_BATCH, 35);
 
-  for (const batch of chunk(qids, maxBatch)) {
+for (const batch of chunk(qids, Math.min(MAX_BATCH, 25))) {
   const VALUES = batch.map(q => `wd:${q}`).join(" ");
 
-const query = `
+  const query = `
 PREFIX wd:  <http://www.wikidata.org/entity/>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 
-SELECT ?item ?category WHERE {
+SELECT ?item (SAMPLE(?cat) AS ?category) WHERE {
   VALUES ?item { ${VALUES} }
 
-  BIND(COALESCE(
-
-    IF(EXISTS {
-      ?item wdt:P31/wdt:P279* ?c1 .
-      FILTER(?c1 IN (
-        wd:Q482994, wd:Q134556, wd:Q7366, wd:Q179415, wd:Q1263612, wd:Q34508, wd:Q182832, wd:Q222634, wd:Q17489659
-      ))
-    },"music", UNDEF),
-
-    IF(EXISTS {
-      ?item wdt:P31/wdt:P279* ?c2 .
-      FILTER(?c2 IN (
-        wd:Q11424, wd:Q5398426, wd:Q21191270, wd:Q24862, wd:Q226730, wd:Q41298
-      ))
-    },"film_tv", UNDEF),
-
-    IF(EXISTS {
-      ?item wdt:P31/wdt:P279* ?c3 .
-      FILTER(?c3 IN (
-        wd:Q7725634, wd:Q571, wd:Q8261, wd:Q25379, wd:Q5185279
-      ))
-    },"books", UNDEF),
-
-    IF(EXISTS {
-      ?item wdt:P31/wdt:P279* ?c4 .
-      FILTER(?c4 IN (
-        wd:Q3305213, wd:Q179700, wd:Q22669, wd:Q207694, wd:Q2431196, wd:Q2743, wd:Q860861
-      ))
-    },"visual_or_performance", UNDEF),
-
-    IF(EXISTS {
-      ?item wdt:P31/wdt:P279* ?c5 .
-      FILTER(?c5 IN (
-        wd:Q215380, wd:Q2088357, wd:Q16887380, wd:Q18127
-      ))
-    },"music", UNDEF),
-
-    IF(EXISTS {
-      ?item wdt:P31 wd:Q5 ; wdt:P106/wdt:P279* ?o1 .
-      FILTER(?o1 IN (
-        wd:Q639669, wd:Q177220, wd:Q36834, wd:Q130857, wd:Q155309, wd:Q161251, wd:Q488111, wd:Q1128996, wd:Q753110, wd:Q158852, wd:Q820232, wd:Q186360, wd:Q14623646
-      ))
-    },"music", UNDEF),
-
-    IF(EXISTS {
-      ?item wdt:P31 wd:Q5 ; wdt:P106/wdt:P279* ?o2 .
-      FILTER(?o2 IN (
-        wd:Q33999, wd:Q2526255, wd:Q10798782, wd:Q28389, wd:Q2500638, wd:Q48820545, wd:Q36180
-      ))
-    },"film_tv", UNDEF),
-
-    IF(EXISTS {
-      ?item wdt:P31 wd:Q5 ; wdt:P106/wdt:P279* ?o3 .
-      FILTER(?o3 IN (
-        wd:Q36180, wd:Q482980, wd:Q11774202, wd:Q49757
-      ))
-    },"books", UNDEF),
-
-    IF(EXISTS {
-      ?item wdt:P31 wd:Q5 ; wdt:P106/wdt:P279* ?o4 .
-      FILTER(?o4 IN (
-        wd:Q1028181, wd:Q33231, wd:Q42973, wd:Q245068, wd:Q256145, wd:Q1281618, wd:Q245341
-      ))
-    },"visual_or_performance", UNDEF)
-
-  ) AS ?category)
-
-  FILTER(BOUND(?category))
+  {
+    ?item wdt:P31/wdt:P279* ?c1 .
+    VALUES ?c1 { wd:Q482994 wd:Q134556 wd:Q7366 wd:Q179415 wd:Q1263612 wd:Q34508 wd:Q182832 wd:Q222634 wd:Q17489659 }
+    BIND("music" AS ?cat)
+  } UNION {
+    ?item wdt:P31/wdt:P279* ?c2 .
+    VALUES ?c2 { wd:Q11424 wd:Q5398426 wd:Q21191270 wd:Q24862 wd:Q226730 wd:Q41298 }
+    BIND("film_tv" AS ?cat)
+  } UNION {
+    ?item wdt:P31/wdt:P279* ?c3 .
+    VALUES ?c3 { wd:Q7725634 wd:Q571 wd:Q8261 wd:Q25379 wd:Q5185279 }
+    BIND("books" AS ?cat)
+  } UNION {
+    ?item wdt:P31/wdt:P279* ?c4 .
+    VALUES ?c4 { wd:Q3305213 wd:Q179700 wd:Q22669 wd:Q207694 wd:Q2431196 wd:Q2743 wd:Q860861 }
+    BIND("visual_or_performance" AS ?cat)
+  } UNION {
+    ?item wdt:P31/wdt:P279* ?c5 .
+    VALUES ?c5 { wd:Q215380 wd:Q2088357 wd:Q16887380 wd:Q18127 }
+    BIND("music" AS ?cat)
+  } UNION {
+    ?item wdt:P31 wd:Q5 ; wdt:P106/wdt:P279* ?o1 .
+    VALUES ?o1 { wd:Q639669 wd:Q177220 wd:Q36834 wd:Q130857 wd:Q155309 wd:Q161251 wd:Q488111 wd:Q1128996 wd:Q753110 wd:Q158852 wd:Q820232 wd:Q186360 wd:Q14623646 }
+    BIND("music" AS ?cat)
+  } UNION {
+    ?item wdt:P31 wd:Q5 ; wdt:P106/wdt:P279* ?o2 .
+    VALUES ?o2 { wd:Q33999 wd:Q2526255 wd:Q10798782 wd:Q28389 wd:Q2500638 wd:Q48820545 wd:Q36180 }
+    BIND("film_tv" AS ?cat)
+  } UNION {
+    ?item wdt:P31 wd:Q5 ; wdt:P106/wdt:P279* ?o3 .
+    VALUES ?o3 { wd:Q36180 wd:Q482980 wd:Q11774202 wd:Q49757 }
+    BIND("books" AS ?cat)
+  } UNION {
+    ?item wdt:P31 wd:Q5 ; wdt:P106/wdt:P279* ?o4 .
+    VALUES ?o4 { wd:Q1028181 wd:Q33231 wd:Q42973 wd:Q245068 wd:Q256145 wd:Q1281618 wd:Q245341 }
+    BIND("visual_or_performance" AS ?cat)
+  }
 }
+GROUP BY ?item
 `.trim();
-
 
   let j;
   try {
-    j = await runSparql(query, headers);
+    // Use GET for tiny batches to avoid rare POST 400s on singletons
+    j = await runSparql(query, headers, { preferGet: batch.length <= 3 });
   } catch (e) {
-    // If the endpoint complains about request size or bad request on this VALUES set, split and recurse.
     if ([400, 413, 414, 431].includes(e.status || 0) && batch.length > 1) {
       logDebug(`[WDQS] ${e.status} on batch of ${batch.length}; splitting and retrying...`);
       const halves = chunk(batch, Math.ceil(batch.length / 2));
@@ -273,9 +256,9 @@ SELECT ?item ?category WHERE {
         for (const [k, v] of r.categoryMap.entries()) categoryMap.set(k, v);
       }
       await sleep(250);
-      continue; // proceed to next outer batch
+      continue;
     }
-    throw e; // rethrow unexpected errors
+    throw e;
   }
 
   for (const b of (j?.results?.bindings || [])) {
@@ -286,6 +269,7 @@ SELECT ?item ?category WHERE {
 
   await sleep(250);
 }
+
 
 
   return { keep, categoryMap };

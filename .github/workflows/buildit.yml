@@ -1,8 +1,6 @@
 name: Build OTD + Arts
 
 on:
-  schedule:
-    - cron: "15 3 * * *"   # daily UTC
   workflow_dispatch:
     inputs:
       mm:
@@ -13,6 +11,8 @@ on:
         description: Day (DD). Leave blank to use today Europe/London.
         required: false
         default: ""
+  schedule:
+    - cron: "15 3 * * *"   # daily UTC
 
 permissions:
   contents: write
@@ -42,7 +42,7 @@ jobs:
             python scripts/pull_births_deaths.py
           fi
 
-      - name: Build arts (scaffold for now)
+      - name: Build arts (scaffold now)
         env:
           USER_AGENT_CONTACT: ${{ github.server_url }}/${{ github.repository }}/issues
           OMDB_API_KEY: ${{ secrets.OMDB_API_KEY }}
@@ -51,4 +51,12 @@ jobs:
       - name: Build calendar index
         env:
           USER_AGENT_CONTACT: ${{ github.server_url }}/${{ github.repository }}/issues
-        run
+        run: python scripts/build_calendar_index.py
+
+      - name: Commit CSV updates
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/*.csv
+          git commit -m "Auto-update OTD + Arts CSVs" || echo "No changes"
+          git push

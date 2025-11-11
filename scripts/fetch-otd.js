@@ -14,6 +14,7 @@ const KEY_SLASH = `${MM}/${DD}`;
 // Helpers
 function uniq(arr) { return [...new Set(arr)]; }
 function safe(val, d = "") { return val ?? d; }
+function chunk(arr, n) { const out = []; for (let i = 0; i < arr.length; i += n) out.push(arr.slice(i, i + n)); return out; }
 
 async function onThisDay(kind) {
   const r = await fetch(`${WIKI}/feed/onthisday/${kind}/${MM}/${DD}`, {
@@ -38,8 +39,18 @@ function collectQids(items) {
 async function filterArts(qids) {
   if (qids.length === 0) return { keep: new Set(), categoryMap: new Map() };
 
-  const VALUES = qids.map(q => `wd:${q}`).join(" ");
-  const query = `
+  const headers = {
+    "User-Agent": "StrumOTD/1.0 (+https://github.com/66fishmarket-droid/STRUMOTDSeedGen)",
+    "Accept": "application/sparql-results+json",
+    "Content-Type": "application/sparql-query"
+  };
+
+  const keep = new Set();
+  const categoryMap = new Map();
+
+  for (const batch of chunk(qids, 100)) {
+    const VALUES = batch.map(q => `wd:${q}`).join(" ");
+    const query = `
 SELECT ?item (SAMPLE(?cat) AS ?category)
 WHERE {
   VALUES ?item { ${VALUES} }
@@ -57,44 +68,39 @@ GROUP BY ?item
 HAVING(?category != "other")
 `;
 
-  const headers = {
-    "User-Agent": "StrumOTD/1.0 (+https://github.com/66fishmarket-droid/STRUMOTDSeedGen)",
-    "Accept": "application/sparql-results+json",
-    "Content-Type": "application/sparql-query"
-  };
+    // POST with small retry; parse defensively
+    for (let attempt = 1; attempt <= 3; attempt++) {
+      const r = await fetch(WD_SPARQL, { method: "POST", headers, body: query });
+      const ct = (r.headers.get("content-type") || "").toLowerCase();
+      const text = await r.text();
 
-  // POST to avoid URL length limits and handle transient errors
-  for (let attempt = 1; attempt <= 3; attempt++) {
-    const r = await fetch(WD_SPARQL, { method: "POST", headers, body: query });
-    const ct = (r.headers.get("content-type") || "").toLowerCase();
-    const text = await r.text(); // always read as text first
-
-    // Retry on 429/5xx
-    if (!r.ok && (r.status === 429 || r.status >= 500)) {
-      if (attempt < 3) {
-        await new Promise(res => setTimeout(res, 1000 * attempt));
-        continue;
+      if (!r.ok && (r.status === 429 || r.status >= 500)) {
+        if (attempt < 3) {
+          await new Promise(res => setTimeout(res, 1000 * attempt));
+          continue;
+        }
       }
-    }
 
-    // Must be JSON
-    if (!r.ok || !ct.includes("application/sparql-results+json")) {
-      throw new Error(`SPARQL error status=${r.status} ct=${ct} snippet=${text.slice(0,200)}`);
-    }
+      if (!r.ok || !ct.includes("application/sparql-results+json")) {
+        throw new Error(`SPARQL error status=${r.status} ct=${ct} snippet=${text.slice(0,200)}`);
+      }
 
-    // Parse JSON safely
-    let j;
-    try {
-      j = JSON.parse(text);
-    } catch (e) {
-      throw new Error(`SPARQL parse error ct=${ct} status=${r.status} snippet=${text.slice(0,200)}`);
-    }
+      let j;
+      try { j = JSON.parse(text); }
+      catch { throw new Error(`SPARQL parse error ct=${ct} status=${r.status} snippet=${text.slice(0,200)}`); }
 
-    const rows = j?.results?.bindings || [];
-    const keep = new Set(rows.map(b => b.item.value.split("/").pop()));
-    const categoryMap = new Map(rows.map(b => [b.item.value.split("/").pop(), b.category.value]));
-    return { keep, categoryMap };
+      const rows = j?.results?.bindings || [];
+      for (const b of rows) {
+        const qid = b.item.value.split("/").pop();
+        keep.add(qid);
+        categoryMap.set(qid, b.category.value);
+      }
+      break; // batch succeeded; move on
+    }
   }
+
+  return { keep, categoryMap };
+}
 
 function flatten(items) {
   const out = new Map();
@@ -140,7 +146,9 @@ function flatten(items) {
     title: x.title,
     summary: x.summary,
     url: x.url,
-    category: (categoryMap.get(x.qid) === "visual_or_performance") ? "performance" : categoryMap.get(x.qid),
+    category: (categoryMap.get(x.qid) === "visual_or_performance")
+      ? "performance"
+      : categoryMap.get(x.qid),
     year: x.year,
     event_mmdd: x.event_mmdd,
     times_seen: 0
@@ -151,4 +159,3 @@ function flatten(items) {
   fs.writeFileSync(`data/otd/${KEY}.json`, JSON.stringify(cleaned, null, 2));
   console.log(`Wrote data/otd/${KEY}.json with ${cleaned.length} items`);
 })();
-

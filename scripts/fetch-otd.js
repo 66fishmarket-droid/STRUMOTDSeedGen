@@ -4,12 +4,14 @@ import fetch from "node-fetch";
 const WIKI = "https://en.wikipedia.org/api/rest_v1";
 const WD_SPARQL = "https://query.wikidata.org/sparql";
 
-// Today (UTC) for filename and key
-const now = new Date();
-const MM = String(now.getUTCMonth() + 1).padStart(2, "0");
-const DD = String(now.getUTCDate()).padStart(2, "0");
+// Today (UTC) or an override via --date=YYYY-MM-DD or env TARGET_DATE
+const argDate = process.argv.find(a => a.startsWith("--date="))?.split("=")[1] || process.env.TARGET_DATE;
+const base = argDate ? new Date(argDate + "T00:00:00Z") : new Date();
+const MM = String(base.getUTCMonth() + 1).padStart(2, "0");
+const DD = String(base.getUTCDate()).padStart(2, "0");
 const KEY = `${MM}-${DD}`;
 const KEY_SLASH = `${MM}/${DD}`;
+
 
 // Helpers
 function uniq(arr) { return [...new Set(arr)]; }

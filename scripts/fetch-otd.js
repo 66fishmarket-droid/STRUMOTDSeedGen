@@ -7,6 +7,8 @@
 //   node fetch-otd.js --stdout --kinds=events,births --debug-sparql
 
 import fetch from "node-fetch";
+import path from "path";
+        
 
 // Endpoints
 const WIKI = "https://en.wikipedia.org/api/rest_v1";
@@ -42,37 +44,52 @@ const safe = (val, d = "") => (val ?? d);
 function chunk(arr, n) { const out = []; for (let i = 0; i < arr.length; i += n) out.push(arr.slice(i, i + n)); return out; }
 
 // Fetch helpers
-async function runSparql(query, headers) {
-  // 1) Try GET
-  const url = `${WD_SPARQL}?query=${encodeURIComponent(query)}`;
-  const getRes = await fetch(url, { method: "GET", headers });
-  const getCT = (getRes.headers.get("content-type") || "").toLowerCase();
-  const getText = await getRes.text();
+async function runSparql(query, headers, retries = 3) {
+  let lastErr;
+  for (let i = 1; i <= retries; i++) {
+    // Try GET first
+    const url = `${WD_SPARQL}?query=${encodeURIComponent(query)}`;
+    const getRes = await fetch(url, { method: "GET", headers });
+    const getCT = (getRes.headers.get("content-type") || "").toLowerCase();
+    const getText = await getRes.text();
 
-  if (getRes.ok && getCT.includes("application/sparql-results+json")) {
-    return JSON.parse(getText);
-  }
-
-  // If parser complains or server rejects GET, try POST (form-encoded)
-  if (!getRes.ok && (getRes.status === 400 || getRes.status === 415)) {
-    const postRes = await fetch(WD_SPARQL, {
-      method: "POST",
-      headers: {
-        ...headers,
-        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
-      },
-      body: `query=${encodeURIComponent(query)}`
-    });
-    const postCT = (postRes.headers.get("content-type") || "").toLowerCase();
-    const postText = await postRes.text();
-    if (!postRes.ok || !postCT.includes("application/sparql-results+json")) {
-      throw new Error(`SPARQL error (POST) status=${postRes.status} ct=${postCT} snippet=${postText.slice(0,200)}`);
+    if (getRes.ok && getCT.includes("application/sparql-results+json")) {
+      return JSON.parse(getText);
     }
-    return JSON.parse(postText);
-  }
 
-  throw new Error(`SPARQL error (GET) status=${getRes.status} ct=${getCT} snippet=${getText.slice(0,200)}`);
+    // Retry GET on 429/5xx
+    if (!getRes.ok && (getRes.status === 429 || getRes.status >= 500)) {
+      lastErr = new Error(`SPARQL GET ${getRes.status} :: ${getText.slice(0,200)}`);
+      if (i < retries) { await sleep(1000 * i); continue; }
+    }
+
+    // Fallback to POST (form-encoded) on parser-ish errors (400/415)
+    if (!getRes.ok && (getRes.status === 400 || getRes.status === 415)) {
+      const postRes = await fetch(WD_SPARQL, {
+        method: "POST",
+        headers: { ...headers, "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8" },
+        body: `query=${encodeURIComponent(query)}`
+      });
+      const postCT = (postRes.headers.get("content-type") || "").toLowerCase();
+      const postText = await postRes.text();
+
+      if (postRes.ok && postCT.includes("application/sparql-results+json")) {
+        return JSON.parse(postText);
+      }
+
+      lastErr = new Error(`SPARQL POST ${postRes.status} :: ${postText.slice(0,200)}`);
+      if (i < retries && (postRes.status === 429 || postRes.status >= 500)) {
+        await sleep(1000 * i); continue;
+      }
+      throw lastErr;
+    }
+
+    // Non-retryable GET error
+    throw new Error(`SPARQL GET ${getRes.status} ct=${getCT} :: ${getText.slice(0,200)}`);
+  }
+  throw lastErr || new Error("runSparql failed");
 }
+
 
 async function fetchTextWithRetry(url, opts = {}, retries = 3) {
   let lastErr;
@@ -304,12 +321,13 @@ function flatten(items) {
       return;
     }
 
-    const fs = await import("fs");
-    fs.mkdirSync(OUT_DIR, { recursive: true });
-    const outName = OUT_FILE || `${KEY}.json`;
-    const fullPath = `${OUT_DIR.replace(/\\+$|\\(?=\/)/g,"")}/${outName}`;
-    fs.writeFileSync(fullPath, JSON.stringify(cleaned, null, 2));
-    console.log(`Wrote ${fullPath} with ${cleaned.length} items`);
+ const fs = await import("fs");
+fs.mkdirSync(OUT_DIR, { recursive: true });
+const outName = OUT_FILE || `${KEY}.json`;
+const fullPath = path.join(OUT_DIR, outName);
+fs.writeFileSync(fullPath, JSON.stringify(cleaned, null, 2));
+console.log(`Wrote ${fullPath} with ${cleaned.length} items`);
+
   } catch (err) {
     console.error("OTD job failed:", err?.message || err);
     process.exit(1);

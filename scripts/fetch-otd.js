@@ -4,21 +4,19 @@
 //
 // Node 20+ required (uses global fetch).
 //
-// Usage examples:
+// Usage:
 //   node scripts/fetch-otd.js
 //   node scripts/fetch-otd.js --date=2025-11-11 --debug --stdout
 //
-// Also respects env vars:
+// Env:
 //   TARGET_DATE=YYYY-MM-DD  DEBUG=1  STDOUT=1
 
 // ------------------------ Config ------------------------
 
-const WD_SPARQL = "https://query.wikidata.org/sparql";
-const MAX_BATCH = 15; // safer for WDQS; will auto-split further on 400/413/414/431
+const WD_API = "https://www.wikidata.org/w/api.php";
+const MAX_ENTITY_BATCH = 50; // wbgetentities supports up to 50 ids per request
 const USER_AGENT = "StrumOTD/1.0 (+https://github.com/66fishmarket-droid/STRUMOTDSeedGen)";
-// replace the DEFAULT_FETCH_TIMEOUT_MS line
-const DEFAULT_FETCH_TIMEOUT_MS = Number(process.env.WDQS_TIMEOUT_MS || 45000); // 45s default
-
+const DEFAULT_FETCH_TIMEOUT_MS = Number(process.env.WDQS_TIMEOUT_MS || 45000); // just reused name
 
 // ------------------------ CLI / ENV ------------------------
 
@@ -75,23 +73,27 @@ function logDebug(...args) {
   if (DEBUG) console.log(...args);
 }
 
+async function fetchJSON(url, init) {
+  const signal = AbortSignal.timeout(DEFAULT_FETCH_TIMEOUT_MS);
+  const res = await fetch(url, { ...init, signal });
+  if (!res.ok) {
+    const body = await res.text().catch(() => "");
+    throw new Error(`HTTP ${res.status} ${res.statusText} :: ${body.slice(0, 300)}`);
+  }
+  return res.json();
+}
+
 // ------------------------ Fetch Wikipedia OTD ------------------------
 
 async function fetchOtdAll(mm, dd) {
   const url = `https://en.wikipedia.org/api/rest_v1/feed/onthisday/all/${mm}/${dd}`;
   const res = await fetch(url, {
-    headers: {
-      "User-Agent": USER_AGENT,
-      "Accept": "application/json"
-    }
+    headers: { "User-Agent": USER_AGENT, "Accept": "application/json" }
   });
-  if (!res.ok) {
-    throw new Error(`OTD fetch failed ${res.status} ${res.statusText}`);
-  }
+  if (!res.ok) throw new Error(`OTD fetch failed ${res.status} ${res.statusText}`);
   return res.json();
 }
 
-// Collect items from the REST payload (events, births, deaths, selected, holidays)
 function collectAllItems(payload) {
   const buckets = ["events", "births", "deaths", "selected", "holidays"];
   const items = [];
@@ -103,204 +105,116 @@ function collectAllItems(payload) {
   return items;
 }
 
-// Extract unique QIDs from the items' pages
 function extractCandidateQIDs(items) {
   const qids = new Set();
   for (const it of items) {
     const pages = Array.isArray(it.pages) ? it.pages : [];
     for (const p of pages) {
-      if (p && typeof p.wikibase_item === "string") {
-        qids.add(p.wikibase_item);
-      }
+      if (p && typeof p.wikibase_item === "string") qids.add(p.wikibase_item);
     }
   }
   return Array.from(qids);
 }
 
-// ------------------------ SPARQL (Arts filter) ------------------------
+// ------------------------ Wikidata API classifier (no SPARQL) ------------------------
 
-// Robust WDQS runner with timeout.
-// - GET for tiny batches (<=3 QIDs), POST (form) otherwise.
-// - Retries on 429/502/503/504.
-// - On failure with DEBUG, logs status, query head, and body head.
-// replace the whole runSparql function with this
-async function runSparql(query, headers, { preferGet = false } = {}, attempt = 1) {
-  const maxAttempts = 6;
+// Curated sets for quick membership checks (non-transitive).
+const P31_ALLOWED = new Set([
+  // music works/events/orgs
+  "Q482994","Q134556","Q7366","Q179415","Q1263612","Q34508","Q182832","Q222634","Q17489659","Q215380","Q2088357","Q16887380","Q18127",
+  // film/tv
+  "Q11424","Q5398426","Q21191270","Q24862","Q226730","Q41298",
+  // books/writing/lit works
+  "Q7725634","Q571","Q8261","Q25379","Q5185279",
+  // visual/performance arts
+  "Q3305213","Q179700","Q22669","Q207694","Q2431196","Q2743","Q860861"
+]);
 
-  const backoffFor = (resOrErr, attempt) => {
-    // honor Retry-After for HTTP responses
-    const hdr = resOrErr?.headers?.get?.("retry-after");
-    if (hdr) {
-      const secs = Number(hdr);
-      if (!Number.isNaN(secs) && secs > 0) return secs * 1000;
-    }
-    // jittered exponential
-    return Math.min(2000 * attempt + Math.floor(Math.random() * 500), 12000);
-  };
+const P106_ALLOWED = new Set([
+  // music occupations
+  "Q639669","Q177220","Q36834","Q130857","Q155309","Q161251","Q488111","Q1128996","Q753110","Q158852","Q820232","Q186360","Q14623646",
+  // film/tv/theatre
+  "Q33999","Q2526255","Q10798782","Q28389","Q2500638","Q48820545","Q36180",
+  // literature
+  "Q36180","Q482980","Q11774202","Q49757",
+  // visual/performance
+  "Q1028181","Q33231","Q42973","Q245068","Q256145","Q1281618","Q245341"
+]);
 
-  let res;
-  try {
-    const signal = AbortSignal.timeout(DEFAULT_FETCH_TIMEOUT_MS);
-
-    if (preferGet) {
-      const url = `${WD_SPARQL}?format=json&query=${encodeURIComponent(query)}`;
-      res = await fetch(url, {
-        method: "GET",
-        signal,
-        headers: {
-          ...headers,
-          "User-Agent": USER_AGENT,
-          "Accept": "application/sparql-results+json",
-          "Cache-Control": "no-cache"
-        }
-      });
-    } else {
-      res = await fetch(WD_SPARQL, {
-        method: "POST",
-        signal,
-        headers: {
-          ...headers,
-          "User-Agent": USER_AGENT,
-          "Accept": "application/sparql-results+json",
-          "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-          "Cache-Control": "no-cache"
-        },
-        body: `query=${encodeURIComponent(query)}&format=json`
-      });
-    }
-  } catch (err) {
-    // Timeout/Abort: retry with backoff
-    const isAbort = err?.name === "TimeoutError" || err?.name === "AbortError" || /aborted due to timeout/i.test(err?.message || "");
-    if (isAbort && attempt < maxAttempts) {
-      const wait = backoffFor(err, attempt);
-      logDebug(`[WDQS] Timeout; retrying in ${wait}ms (attempt ${attempt + 1})`);
-      await sleep(wait);
-      return runSparql(query, headers, { preferGet }, attempt + 1);
-    }
-    throw err;
-  }
-
-  if ([429, 500, 502, 503, 504].includes(res.status) && attempt < maxAttempts) {
-    const wait = backoffFor(res, attempt);
-    logDebug(`[WDQS] ${res.status} ${res.statusText}; retrying in ${wait}ms (attempt ${attempt + 1})`);
-    await sleep(wait);
-    return runSparql(query, headers, { preferGet }, attempt + 1);
-  }
-
-  if (!res.ok) {
-    const text = await res.text().catch(() => "");
-    if (DEBUG) {
-      console.error("[WDQS][DEBUG] Status:", res.status, res.statusText);
-      console.error("[WDQS][DEBUG] First 200 chars of query:");
-      console.error(query.slice(0, 200));
-      console.error("[WDQS][DEBUG] First 300 chars of body:");
-      console.error(text.slice(0, 300));
-    }
-    const err = new Error(`WDQS failed ${res.status} ${res.statusText} :: ${text.slice(0, 300)}`);
-    err.status = res.status;
-    err.detail = text;
-    throw err;
-  }
-
-  return res.json();
+function mapCategoryFromP31(qid) {
+  if (["Q482994","Q134556","Q7366","Q179415","Q1263612","Q34508","Q182832","Q222634","Q17489659","Q215380","Q2088357","Q16887380","Q18127"].includes(qid)) return "music";
+  if (["Q11424","Q5398426","Q21191270","Q24862","Q226730","Q41298"].includes(qid)) return "film_tv";
+  if (["Q7725634","Q571","Q8261","Q25379","Q5185279"].includes(qid)) return "books";
+  if (["Q3305213","Q179700","Q22669","Q207694","Q2431196","Q2743","Q860861"].includes(qid)) return "performance";
+  return null;
 }
 
+function mapCategoryFromP106(qid) {
+  if (["Q639669","Q177220","Q36834","Q130857","Q155309","Q161251","Q488111","Q1128996","Q753110","Q158852","Q820232","Q186360","Q14623646"].includes(qid)) return "music";
+  if (["Q33999","Q2526255","Q10798782","Q28389","Q2500638","Q48820545","Q36180"].includes(qid)) return "film_tv";
+  if (["Q36180","Q482980","Q11774202","Q49757"].includes(qid)) return "books";
+  if (["Q1028181","Q33231","Q42973","Q245068","Q256145","Q1281618","Q245341"].includes(qid)) return "performance";
+  return null;
+}
 
-// BROAD arts classifier: works/events + human occupations (music, film/TV/theatre, books, visual/performance)
-async function filterArts(qids) {
-  if (!qids || qids.length === 0) return { keep: new Set(), categoryMap: new Map() };
-
-  const headers = {
-    "User-Agent": USER_AGENT,
-    "Accept": "application/sparql-results+json"
-  };
-
+// Hit Wikidata API for up to 50 ids; return map QID -> category or null.
+async function classifyViaWikidataAPI(qids) {
   const keep = new Set();
   const categoryMap = new Map();
 
-  for (const batch of chunk(qids, Math.min(MAX_BATCH, 25))) {
-    const VALUES = batch.map(q => `wd:${q}`).join(" ");
+  for (const batch of chunk(qids, MAX_ENTITY_BATCH)) {
+    // wbgetentities supports POST or GET; we use POST form to be safe.
+    const body = new URLSearchParams({
+      action: "wbgetentities",
+      ids: batch.join("|"),
+      props: "claims",
+      format: "json",
+      origin: "*"
+    }).toString();
 
-const query = `
-PREFIX wd:  <http://www.wikidata.org/entity/>
-PREFIX wdt: <http://www.wikidata.org/prop/direct/>
-PREFIX hint: <http://www.bigdata.com/queryHints#>
+    const data = await fetchJSON(WD_API, {
+      method: "POST",
+      headers: {
+        "User-Agent": USER_AGENT,
+        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "Accept": "application/json"
+      },
+      body
+    });
 
-SELECT ?item (SAMPLE(?cat) AS ?category) WHERE {
-  hint:Query hint:timeout "${Math.max(10000, DEFAULT_FETCH_TIMEOUT_MS - 5000)}" .
+    const entities = data?.entities || {};
+    for (const qid of batch) {
+      const ent = entities[qid];
+      if (!ent || ent.missing === "") continue;
 
-  VALUES ?item { ${VALUES} }
+      const claims = ent.claims || {};
+      const p31 = (claims.P31 || []).map(s => safeGet(s, "mainsnak.datavalue.value.id")).filter(Boolean);
+      const p106 = (claims.P106 || []).map(s => safeGet(s, "mainsnak.datavalue.value.id")).filter(Boolean);
 
- 
-  {
-    ?item wdt:P31/wdt:P279* ?c1 .
-    VALUES ?c1 { wd:Q482994 wd:Q134556 wd:Q7366 wd:Q179415 wd:Q1263612 wd:Q34508 wd:Q182832 wd:Q222634 wd:Q17489659 }
-    BIND("music" AS ?cat)
-  } UNION {
-    ?item wdt:P31/wdt:P279* ?c2 .
-    VALUES ?c2 { wd:Q11424 wd:Q5398426 wd:Q21191270 wd:Q24862 wd:Q226730 wd:Q41298 }
-    BIND("film_tv" AS ?cat)
-  } UNION {
-    ?item wdt:P31/wdt:P279* ?c3 .
-    VALUES ?c3 { wd:Q7725634 wd:Q571 wd:Q8261 wd:Q25379 wd:Q5185279 }
-    BIND("books" AS ?cat)
-  } UNION {
-    ?item wdt:P31/wdt:P279* ?c4 .
-    VALUES ?c4 { wd:Q3305213 wd:Q179700 wd:Q22669 wd:Q207694 wd:Q2431196 wd:Q2743 wd:Q860861 }
-    BIND("visual_or_performance" AS ?cat)
-  } UNION {
-    ?item wdt:P31/wdt:P279* ?c5 .
-    VALUES ?c5 { wd:Q215380 wd:Q2088357 wd:Q16887380 wd:Q18127 }
-    BIND("music" AS ?cat)
-  } UNION {
-    ?item wdt:P31 wd:Q5 ; wdt:P106/wdt:P279* ?o1 .
-    VALUES ?o1 { wd:Q639669 wd:Q177220 wd:Q36834 wd:Q130857 wd:Q155309 wd:Q161251 wd:Q488111 wd:Q1128996 wd:Q753110 wd:Q158852 wd:Q820232 wd:Q186360 wd:Q14623646 }
-    BIND("music" AS ?cat)
-  } UNION {
-    ?item wdt:P31 wd:Q5 ; wdt:P106/wdt:P279* ?o2 .
-    VALUES ?o2 { wd:Q33999 wd:Q2526255 wd:Q10798782 wd:Q28389 wd:Q2500638 wd:Q48820545 wd:Q36180 }
-    BIND("film_tv" AS ?cat)
-  } UNION {
-    ?item wdt:P31 wd:Q5 ; wdt:P106/wdt:P279* ?o3 .
-    VALUES ?o3 { wd:Q36180 wd:Q482980 wd:Q11774202 wd:Q49757 }
-    BIND("books" AS ?cat)
-  } UNION {
-    ?item wdt:P31 wd:Q5 ; wdt:P106/wdt:P279* ?o4 .
-    VALUES ?o4 { wd:Q1028181 wd:Q33231 wd:Q42973 wd:Q245068 wd:Q256145 wd:Q1281618 wd:Q245341 }
-    BIND("visual_or_performance" AS ?cat)
-  }
-}
-GROUP BY ?item
-`.trim();
+      let category = null;
 
-
-    let j;
-    try {
-      // Use GET for tiny batches to avoid rare POST 400s on singletons
-      j = await runSparql(query, headers, { preferGet: batch.length <= 3 });
-    } catch (e) {
-      if ([400, 413, 414, 431, 500].includes(e.status || 0) && batch.length > 1) {
-        logDebug(`[WDQS] ${e.status} on batch of ${batch.length}; splitting and retrying...`);
-        const halves = chunk(batch, Math.ceil(batch.length / 2));
-        const parts = await Promise.all(halves.map(h => filterArts(h)));
-        for (const r of parts) {
-          r.keep.forEach(q => keep.add(q));
-          for (const [k, v] of r.categoryMap.entries()) categoryMap.set(k, v);
-        }
-        await sleep(800);
-        continue;
+      // Prefer works/orgs (P31) first, then occupations (P106)
+      for (const t of p31) {
+        if (!P31_ALLOWED.has(t)) continue;
+        category = mapCategoryFromP31(t);
+        if (category) break;
       }
-      throw e;
+      if (!category) {
+        for (const o of p106) {
+          if (!P106_ALLOWED.has(o)) continue;
+          category = mapCategoryFromP106(o);
+          if (category) break;
+        }
+      }
+
+      if (category) {
+        keep.add(qid);
+        categoryMap.set(qid, category);
+      }
     }
 
-    for (const b of (j?.results?.bindings || [])) {
-      const qid = b.item.value.split("/").pop();
-      keep.add(qid);
-      categoryMap.set(qid, b.category.value);
-    }
-
-    // be polite to WDQS
-    await sleep(800);
+    // be polite
+    await sleep(300);
   }
 
   return { keep, categoryMap };
@@ -338,24 +252,20 @@ async function main() {
 
     console.log(`Collected ${candidateQIDs.length} candidate QIDs for ${KEY_SLASH}`);
 
-    if (candidateQIDs.length === 0) {
-      logDebug("[warn] No QIDs in REST payload. Will attempt keyword fallback later.");
-    }
-
-    // 3) WDQS filter for arts
+    // 3) Classify via Wikidata API (no SPARQL)
     let kept = new Set();
     let categoryMap = new Map();
 
     if (candidateQIDs.length > 0) {
-      const { keep, categoryMap: cMap } = await filterArts(candidateQIDs);
+      const { keep, categoryMap: cMap } = await classifyViaWikidataAPI(candidateQIDs);
       kept = keep;
       categoryMap = cMap;
-      console.log(`SPARQL kept ${kept.size} QIDs`);
+      console.log(`Wikidata API kept ${kept.size} QIDs`);
     } else {
-      console.log("SPARQL kept 0 QIDs");
+      console.log("Classifier kept 0 QIDs");
     }
 
-    // 4) Build preliminary list from SPARQL results
+    // 4) Build preliminary list from entity classifications
     const flat = [];
     for (const it of allItems) {
       const pages = Array.isArray(it.pages) ? it.pages : [];
@@ -363,11 +273,7 @@ async function main() {
       if (!page) continue;
 
       const qid = page.wikibase_item;
-      const categoryRaw = categoryMap.get(qid) || null;
-      const category =
-        categoryRaw === "visual_or_performance"
-          ? "performance"
-          : categoryRaw;
+      const category = categoryMap.get(qid) || null;
 
       const title =
         safeGet(page, "titles.normalized") ||
@@ -398,7 +304,7 @@ async function main() {
       });
     }
 
-    // 5) Normalize & (if empty) use keyword fallback
+    // 5) If nothing via entities, try keyword fallback
     const cleaned = flat.map(x => ({
       qid: x.qid,
       key_mmdd: x.key_mmdd,
@@ -465,7 +371,7 @@ async function main() {
       }
     }
 
-    // 6) Sort for consistency (optional): by category then title
+    // 6) Sort for consistency: by category then title
     cleaned.sort((a, b) => {
       const ca = a.category || "";
       const cb = b.category || "";

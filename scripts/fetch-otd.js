@@ -14,7 +14,7 @@
 // ------------------------ Config ------------------------
 
 const WD_SPARQL = "https://query.wikidata.org/sparql";
-const MAX_BATCH = 35; // batch size for QIDs per WDQS call
+const MAX_BATCH = 25; // safer for WDQS; will auto-split further on 400/413/414/431
 const USER_AGENT = "StrumOTD/1.0 (+https://github.com/66fishmarket-droid/STRUMOTDSeedGen)";
 
 // ------------------------ CLI / ENV ------------------------
@@ -122,47 +122,30 @@ function extractCandidateQIDs(items) {
 async function runSparql(query, headers, attempt = 1) {
   const maxAttempts = 5;
 
-  // Helper to compute backoff
   const backoffFor = (res, attempt) => {
-    const hdr = res.headers.get("retry-after");
+    const hdr = res.headers?.get?.("retry-after");
     if (hdr) {
       const secs = Number(hdr);
       if (!Number.isNaN(secs) && secs > 0) return secs * 1000;
     }
-    // jittered exponential backoff
     return Math.min(2000 * attempt + Math.floor(Math.random() * 300), 10000);
   };
 
-  // Try application/sparql-query POST first
   const common = {
     method: "POST",
     headers: {
       ...headers,
       "User-Agent": USER_AGENT,
       "Accept": "application/sparql-results+json",
+      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
       "Cache-Control": "no-cache"
-    }
+    },
+    body: `query=${encodeURIComponent(query)}&format=json`
   };
 
-  // Attempt 1: raw SPARQL body
-  let res = await fetch(WD_SPARQL, {
-    ...common,
-    headers: { ...common.headers, "Content-Type": "application/sparql-query" },
-    body: query
-  });
+  const res = await fetch(WD_SPARQL, common);
 
-  // If that fails with 415/400/405, try form-POST body
-  if (!res.ok && [400, 405, 415, 411].includes(res.status)) {
-    logDebug(`[WDQS] Falling back to x-www-form-urlencoded (status ${res.status})`);
-    res = await fetch(WD_SPARQL, {
-      ...common,
-      headers: { ...common.headers, "Content-Type": "application/x-www-form-urlencoded" },
-      body: `query=${encodeURIComponent(query)}`
-    });
-  }
-
-  // Handle rate limiting and transient errors with retry
-  if ([429, 503, 502, 504].includes(res.status) && attempt < maxAttempts) {
+  if ([429, 502, 503, 504].includes(res.status) && attempt < maxAttempts) {
     const wait = backoffFor(res, attempt);
     logDebug(`[WDQS] ${res.status} ${res.statusText}; retrying in ${wait}ms (attempt ${attempt + 1})`);
     await sleep(wait);
@@ -171,11 +154,15 @@ async function runSparql(query, headers, attempt = 1) {
 
   if (!res.ok) {
     const text = await res.text().catch(() => "");
-    throw new Error(`WDQS failed ${res.status} ${res.statusText} :: ${text.slice(0, 300)}`);
+    const err = new Error(`WDQS failed ${res.status} ${res.statusText} :: ${text.slice(0, 300)}`);
+    err.status = res.status;
+    err.detail = text;
+    throw err;
   }
 
   return res.json();
 }
+
 
 // BROAD arts classifier: works/events + human occupations (music, film/TV/theatre, books, visual/performance)
 async function filterArts(qids) {
@@ -191,9 +178,9 @@ async function filterArts(qids) {
   const maxBatch = Math.min(MAX_BATCH, 35);
 
   for (const batch of chunk(qids, maxBatch)) {
-    const VALUES = batch.map(q => `wd:${q}`).join(" ");
+  const VALUES = batch.map(q => `wd:${q}`).join(" ");
 
-    const query = `
+  const query = `
 PREFIX wd:  <http://www.wikidata.org/entity/>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 
@@ -201,157 +188,85 @@ SELECT ?item ?category WHERE {
   VALUES ?item { ${VALUES} }
 
   BIND(COALESCE(
-
-    # =========================
-    # WORKS / EVENTS
-    # =========================
-
-    # Music works & events
+    /* works/events: music */
     IF(EXISTS {
       ?item wdt:P31/wdt:P279* ?c1 .
-      FILTER(?c1 IN (
-        wd:Q482994,   # album
-        wd:Q134556,   # single
-        wd:Q7366,     # song
-        wd:Q179415,   # EP
-        wd:Q1263612,  # mixtape
-        wd:Q34508,    # music video
-        wd:Q182832,   # concert tour
-        wd:Q222634,   # music award
-        wd:Q17489659  # music festival
-      ))
+      FILTER(?c1 IN (wd:Q482994, wd:Q134556, wd:Q7366, wd:Q179415, wd:Q1263612, wd:Q34508, wd:Q182832, wd:Q222634, wd:Q17489659))
     },"music", UNDEF),
-
-    # Film/TV works & events
+    /* film/tv */
     IF(EXISTS {
       ?item wdt:P31/wdt:P279* ?c2 .
-      FILTER(?c2 IN (
-        wd:Q11424,     # film
-        wd:Q5398426,   # television series
-        wd:Q21191270,  # television episode
-        wd:Q24862,     # documentary film
-        wd:Q226730,    # film festival
-        wd:Q41298      # award ceremony
-      ))
+      FILTER(?c2 IN (wd:Q11424, wd:Q5398426, wd:Q21191270, wd:Q24862, wd:Q226730, wd:Q41298))
     },"film_tv", UNDEF),
-
-    # Books / writing
+    /* books */
     IF(EXISTS {
       ?item wdt:P31/wdt:P279* ?c3 .
-      FILTER(?c3 IN (
-        wd:Q7725634,   # literary work
-        wd:Q571,       # book
-        wd:Q8261,      # novel
-        wd:Q25379,     # play
-        wd:Q5185279    # poetry collection
-      ))
+      FILTER(?c3 IN (wd:Q7725634, wd:Q571, wd:Q8261, wd:Q25379, wd:Q5185279))
     },"books", UNDEF),
-
-    # Visual / performance arts
+    /* visual/performance works */
     IF(EXISTS {
       ?item wdt:P31/wdt:P279* ?c4 .
-      FILTER(?c4 IN (
-        wd:Q3305213,   # work of art
-        wd:Q179700,    # painting
-        wd:Q22669,     # sculpture
-        wd:Q207694,    # photograph
-        wd:Q2431196,   # art exhibition
-        wd:Q2743,      # ballet
-        wd:Q860861     # performance art
-      ))
+      FILTER(?c4 IN (wd:Q3305213, wd:Q179700, wd:Q22669, wd:Q207694, wd:Q2431196, wd:Q2743, wd:Q860861))
     },"visual_or_performance", UNDEF),
-
-    # Orgs tied to arts output
+    /* orgs tied to arts */
     IF(EXISTS {
       ?item wdt:P31/wdt:P279* ?c5 .
-      FILTER(?c5 IN (
-        wd:Q215380,    # band
-        wd:Q2088357,   # musical ensemble
-        wd:Q16887380,  # orchestra
-        wd:Q18127      # record label
-      ))
+      FILTER(?c5 IN (wd:Q215380, wd:Q2088357, wd:Q16887380, wd:Q18127))
     },"music", UNDEF),
-
-    # =========================
-    # HUMANS (broad occupations)
-    # =========================
-
-    # Music occupations
+    /* human occupations: music */
     IF(EXISTS {
       ?item wdt:P31 wd:Q5 ; wdt:P106/wdt:P279* ?o1 .
-      FILTER(?o1 IN (
-        wd:Q639669,   # musician
-        wd:Q177220,   # singer
-        wd:Q36834,    # composer
-        wd:Q130857,   # guitarist
-        wd:Q155309,   # bassist
-        wd:Q161251,   # drummer
-        wd:Q488111,   # pianist
-        wd:Q1128996,  # record producer
-        wd:Q753110,   # songwriter
-        wd:Q158852,   # DJ
-        wd:Q820232,   # rapper
-        wd:Q186360,   # conductor
-        wd:Q14623646  # music arranger
-      ))
+      FILTER(?o1 IN (wd:Q639669, wd:Q177220, wd:Q36834, wd:Q130857, wd:Q155309, wd:Q161251, wd:Q488111, wd:Q1128996, wd:Q753110, wd:Q158852, wd:Q820232, wd:Q186360, wd:Q14623646))
     },"music", UNDEF),
-
-    # Film / TV / theatre occupations
+    /* film/tv/theatre occupations */
     IF(EXISTS {
       ?item wdt:P31 wd:Q5 ; wdt:P106/wdt:P279* ?o2 .
-      FILTER(?o2 IN (
-        wd:Q33999,    # actor
-        wd:Q2526255,  # television actor
-        wd:Q10798782, # film director
-        wd:Q28389,    # screenwriter
-        wd:Q2500638,  # film producer
-        wd:Q48820545, # cinematographer
-        wd:Q36180     # playwright
-      ))
+      FILTER(?o2 IN (wd:Q33999, wd:Q2526255, wd:Q10798782, wd:Q28389, wd:Q2500638, wd:Q48820545, wd:Q36180))
     },"film_tv", UNDEF),
-
-    # Literature occupations
+    /* literature occupations */
     IF(EXISTS {
       ?item wdt:P31 wd:Q5 ; wdt:P106/wdt:P279* ?o3 .
-      FILTER(?o3 IN (
-        wd:Q36180,    # writer
-        wd:Q482980,   # author
-        wd:Q11774202, # novelist
-        wd:Q49757     # poet
-      ))
+      FILTER(?o3 IN (wd:Q36180, wd:Q482980, wd:Q11774202, wd:Q49757))
     },"books", UNDEF),
-
-    # Visual / performance arts occupations
+    /* visual/performance occupations */
     IF(EXISTS {
       ?item wdt:P31 wd:Q5 ; wdt:P106/wdt:P279* ?o4 .
-      FILTER(?o4 IN (
-        wd:Q1028181,  # photographer
-        wd:Q33231,    # painter
-        wd:Q42973,    # sculptor
-        wd:Q245068,   # dancer
-        wd:Q256145,   # choreographer
-        wd:Q1281618,  # performance artist
-        wd:Q245341    # comedian
-      ))
+      FILTER(?o4 IN (wd:Q1028181, wd:Q33231, wd:Q42973, wd:Q245068, wd:Q256145, wd:Q1281618, wd:Q245341))
     },"visual_or_performance", UNDEF)
-
   ) AS ?category)
 
   FILTER(BOUND(?category))
 }
 `.trim();
 
-    // POST body, so no URL-length issues; still be polite between calls
-    const j = await runSparql(query, headers);
-
-    for (const b of (j?.results?.bindings || [])) {
-      const qid = b.item.value.split("/").pop();
-      keep.add(qid);
-      categoryMap.set(qid, b.category.value);
+  let j;
+  try {
+    j = await runSparql(query, headers);
+  } catch (e) {
+    // If the endpoint complains about request size or bad request on this VALUES set, split and recurse.
+    if ([400, 413, 414, 431].includes(e.status || 0) && batch.length > 1) {
+      logDebug(`[WDQS] ${e.status} on batch of ${batch.length}; splitting and retrying...`);
+      const halves = chunk(batch, Math.ceil(batch.length / 2));
+      const parts = await Promise.all(halves.map(h => filterArts(h)));
+      for (const r of parts) {
+        r.keep.forEach(q => keep.add(q));
+        for (const [k, v] of r.categoryMap.entries()) categoryMap.set(k, v);
+      }
+      await sleep(250);
+      continue; // proceed to next outer batch
     }
-
-    await sleep(250);
+    throw e; // rethrow unexpected errors
   }
+
+  for (const b of (j?.results?.bindings || [])) {
+    const qid = b.item.value.split("/").pop();
+    keep.add(qid);
+    categoryMap.set(qid, b.category.value);
+  }
+
+  await sleep(250);
+}
+
 
   return { keep, categoryMap };
 }

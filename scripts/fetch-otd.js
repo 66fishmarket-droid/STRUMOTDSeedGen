@@ -14,7 +14,7 @@
 // ------------------------ Config ------------------------
 
 const WD_SPARQL = "https://query.wikidata.org/sparql";
-const MAX_BATCH = 35; // WDQS URL length guard
+const MAX_BATCH = 35; // batch size for QIDs per WDQS call
 const USER_AGENT = "StrumOTD/1.0 (+https://github.com/66fishmarket-droid/STRUMOTDSeedGen)";
 
 // ------------------------ CLI / ENV ------------------------
@@ -77,7 +77,10 @@ function logDebug(...args) {
 async function fetchOtdAll(mm, dd) {
   const url = `https://en.wikipedia.org/api/rest_v1/feed/onthisday/all/${mm}/${dd}`;
   const res = await fetch(url, {
-    headers: { "User-Agent": USER_AGENT, "Accept": "application/json" }
+    headers: {
+      "User-Agent": USER_AGENT,
+      "Accept": "application/json"
+    }
   });
   if (!res.ok) {
     throw new Error(`OTD fetch failed ${res.status} ${res.statusText}`);
@@ -85,17 +88,14 @@ async function fetchOtdAll(mm, dd) {
   return res.json();
 }
 
-// Collect items from the REST payload (events, births, deaths, selected...)
-// Each record looks like { text, pages:[{wikibase_item, titles, ...}], year }
+// Collect items from the REST payload (events, births, deaths, selected, holidays)
 function collectAllItems(payload) {
-  const buckets = ["events", "births", "deaths", "selected", "holidays"]; // holidays rarely have QIDs, but harmless
+  const buckets = ["events", "births", "deaths", "selected", "holidays"];
   const items = [];
   for (const b of buckets) {
     const arr = payload[b];
     if (!Array.isArray(arr)) continue;
-    for (const it of arr) {
-      items.push(it);
-    }
+    for (const it of arr) items.push(it);
   }
   return items;
 }
@@ -116,26 +116,64 @@ function extractCandidateQIDs(items) {
 
 // ------------------------ SPARQL (Arts filter) ------------------------
 
+// Robust WDQS runner: POST the SPARQL in the body (prevents 431 due to long URLs).
+// Retries on 429/503 with exponential backoff, honors Retry-After when present.
+// Falls back to form-POST if application/sparql-query is rejected by some proxy.
 async function runSparql(query, headers, attempt = 1) {
-  const url = `${WD_SPARQL}?query=${encodeURIComponent(query)}`;
-  const res = await fetch(url, {
-    method: "GET",
+  const maxAttempts = 5;
+
+  // Helper to compute backoff
+  const backoffFor = (res, attempt) => {
+    const hdr = res.headers.get("retry-after");
+    if (hdr) {
+      const secs = Number(hdr);
+      if (!Number.isNaN(secs) && secs > 0) return secs * 1000;
+    }
+    // jittered exponential backoff
+    return Math.min(2000 * attempt + Math.floor(Math.random() * 300), 10000);
+  };
+
+  // Try application/sparql-query POST first
+  const common = {
+    method: "POST",
     headers: {
       ...headers,
       "User-Agent": USER_AGENT,
-      "Accept": "application/sparql-results+json"
+      "Accept": "application/sparql-results+json",
+      "Cache-Control": "no-cache"
     }
+  };
+
+  // Attempt 1: raw SPARQL body
+  let res = await fetch(WD_SPARQL, {
+    ...common,
+    headers: { ...common.headers, "Content-Type": "application/sparql-query" },
+    body: query
   });
-  if (res.status === 429 && attempt <= 4) {
-    const backoff = 400 * attempt;
-    logDebug(`[WDQS] 429 rate limited, retrying in ${backoff}ms (attempt ${attempt})`);
-    await sleep(backoff);
+
+  // If that fails with 415/400/405, try form-POST body
+  if (!res.ok && [400, 405, 415, 411].includes(res.status)) {
+    logDebug(`[WDQS] Falling back to x-www-form-urlencoded (status ${res.status})`);
+    res = await fetch(WD_SPARQL, {
+      ...common,
+      headers: { ...common.headers, "Content-Type": "application/x-www-form-urlencoded" },
+      body: `query=${encodeURIComponent(query)}`
+    });
+  }
+
+  // Handle rate limiting and transient errors with retry
+  if ([429, 503, 502, 504].includes(res.status) && attempt < maxAttempts) {
+    const wait = backoffFor(res, attempt);
+    logDebug(`[WDQS] ${res.status} ${res.statusText}; retrying in ${wait}ms (attempt ${attempt + 1})`);
+    await sleep(wait);
     return runSparql(query, headers, attempt + 1);
   }
+
   if (!res.ok) {
     const text = await res.text().catch(() => "");
     throw new Error(`WDQS failed ${res.status} ${res.statusText} :: ${text.slice(0, 300)}`);
   }
+
   return res.json();
 }
 
@@ -303,18 +341,7 @@ SELECT ?item ?category WHERE {
 }
 `.trim();
 
-    const testUrl = `${WD_SPARQL}?query=${encodeURIComponent(query)}`;
-    if (testUrl.length > 7000 && batch.length > 10) {
-      // Split recursively if the URL is too long
-      const halves = chunk(batch, Math.ceil(batch.length / 2));
-      const parts = await Promise.all(halves.map(h => filterArts(h)));
-      for (const r of parts) {
-        r.keep.forEach(q => keep.add(q));
-        for (const [k, v] of r.categoryMap.entries()) categoryMap.set(k, v);
-      }
-      continue;
-    }
-
+    // POST body, so no URL-length issues; still be polite between calls
     const j = await runSparql(query, headers);
 
     for (const b of (j?.results?.bindings || [])) {
@@ -323,7 +350,6 @@ SELECT ?item ?category WHERE {
       categoryMap.set(qid, b.category.value);
     }
 
-    // be polite
     await sleep(250);
   }
 

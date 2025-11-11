@@ -1,0 +1,10 @@
+{
+  "name": "strum-otd",
+  "type": "module",
+  "dependencies": {
+    "node-fetch": "^3.3.2"
+  },
+  "scripts": {
+    "build-day": "node scripts/fetch-otd.js"
+  }
+}

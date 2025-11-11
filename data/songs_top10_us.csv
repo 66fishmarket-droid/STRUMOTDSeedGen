@@ -1,1 +1,62 @@
-
+work_type,title,byline,release_date,month,day,extra,source_url,entry_date,peak_date,peak_position
+song,"As It Was""",Harry Styles,2023-04-16,04,16,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2023,2023-04-16,2023-04-16,1
+song,"You Proof""",Morgan Wallen,2023-05-28,05,28,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2023,2023-05-28,2023-10-22,5
+song,Bad Habit,Steve Lacy,2023-08-13,08,13,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2023,2023-08-13,2023-10-08,1
+song,"Unholy""",Sam Smith and Kim Petras,2023-10-08,10,08,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2023,2023-10-08,2023-10-29,1
+song,"Anti-Hero"" (#4)",Taylor Swift,2023-11-05,11,05,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2023,2023-11-05,2023-11-05,1
+song,"Rich Flex""",Drake and 21 Savage,2023-11-19,11,19,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2023,2023-11-19,2023-11-19,2
+song,Greedy,Tate McRae,2023-11-25,11,25,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2023,2023-11-25,2023-01-13,3
+song,Water,Tyla,2023-12-02,12,02,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2023,2023-12-02,2023-01-13,7
+song,10.0,Drake,2023-12-31,12,31,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2023,2023-12-31,,
+song,11.0,Taylor Swift,2023-12-31,12,31,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2023,2023-12-31,,
+song,2.0,J. Cole,2023-12-31,12,31,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2023,2023-12-31,,
+song,2.0,Jack Harlow,2023-12-31,12,31,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2023,2023-12-31,,
+song,2.0,Miley Cyrus,2023-12-31,12,31,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2023,2023-12-31,,
+song,2.0,Nicki Minaj,2023-12-31,12,31,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2023,2023-12-31,,
+song,2.0,Shakira,2023-12-31,12,31,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2023,2023-12-31,,
+song,2.0,Zach Bryan,2023-12-31,12,31,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2023,2023-12-31,,
+song,3.0,Jung Kook,2023-12-31,12,31,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2023,2023-12-31,,
+song,3.0,SZA,2023-12-31,12,31,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2023,2023-12-31,,
+song,3.0,Travis Scott,2023-12-31,12,31,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2023,2023-12-31,,
+song,3.0,The Weeknd,2023-12-31,12,31,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2023,2023-12-31,,
+song,3.0,21 Savage,2023-12-31,12,31,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2023,2023-12-31,,
+song,4.0,Bad Bunny,2023-12-31,12,31,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2023,2023-12-31,,
+song,4.0,Ice Spice,2023-12-31,12,31,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2023,2023-12-31,,
+song,5.0,Morgan Wallen,2023-12-31,12,31,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2023,2023-12-31,,
+song,A Holly Jolly Christmas,Burl Ives,2023-12-31,12,31,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2023,2023-12-31,,4
+song,All I Want for Christmas Is You,Mariah Carey,2023-12-31,12,31,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2023,2023-12-31,,1
+song,Feliz Navidad,José Feliciano,2023-12-31,12,31,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2023,2023-12-31,,6
+song,It's the Most Wonderful Time of the Year,Andy Williams,2023-12-31,12,31,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2023,2023-12-31,,5
+song,Jingle Bell Rock,Bobby Helms,2023-12-31,12,31,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2023,2023-12-31,,3
+song,Last Christmas,Wham!,2023-12-31,12,31,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2023,2023-12-31,,3
+song,"Let It Snow, Let It Snow, Let It Snow",Dean Martin,2023-12-31,12,31,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2023,2023-12-31,,7
+song,nan,2,2023-12-31,12,31,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2023,2023-12-31,,
+song,Rockin' Around the Christmas Tree,Brenda Lee,2023-12-31,12,31,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2023,2023-12-31,,1
+song,Sleigh Ride,The Ronettes,2023-12-31,12,31,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2023,2023-12-31,,8
+song,The Christmas Song (Merry Christmas to You),Nat King Cole,2023-12-31,12,31,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2023,2023-12-31,,9
+song,"Flowers""",Miley Cyrus,2024-01-28,01,28,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2024,2024-01-28,2024-01-28,1
+song,Last Night,Morgan Wallen,2024-02-18,02,18,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2024,2024-02-18,2024-03-18,1
+song,Fast Car,Luke Combs,2024-05-27,05,27,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2024,2024-05-27,2024-07-01,2
+song,Cruel Summer,Taylor Swift,2024-07-15,07,15,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2024,2024-07-15,2024-10-28,1
+song,Snooze,SZA,2024-08-19,08,19,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2024,2024-08-19,2024-10-07,2
+song,"Die with a Smile""",Lady Gaga and Bruno Mars,2024-08-31,08,31,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2024,2024-08-31,2024-01-11,1
+song,Paint the Town Red,Doja Cat,2024-09-02,09,02,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2024,2024-09-02,2024-09-16,1
+song,"I Remember Everything"" (#9)",Zach Bryan featuring Kacey Musgraves,2024-09-09,09,09,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2024,2024-09-09,2024-09-09,1
+song,"Apt.""",Rosé and Bruno Mars,2024-11-02,11,02,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2024,2024-11-02,2024-02-01,3
+song,"Lovin on Me"" (#5)",Jack Harlow,2024-11-25,11,25,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2024,2024-11-25,2024-12-02,1
+song,"Luther""",Kendrick Lamar and SZA,2024-12-07,12,07,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2024,2024-12-07,2024-03-01,1
+song,Santa Tell Me,Ariana Grande,2024-12-31,12,31,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2024,2024-12-31,,5
+song,Underneath the Tree,Kelly Clarkson,2024-12-31,12,31,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2024,2024-12-31,,9
+song,Lose Control,Teddy Swims,2025-01-20,01,20,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2025,2025-01-20,2025-03-30,1
+song,Beautiful Things,Benson Boone,2025-02-10,02,10,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2025,2025-02-10,2025-03-30,2
+song,"Espresso""",Sabrina Carpenter,2025-04-27,04,27,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2025,2025-04-27,2025-06-22,3
+song,A Bar Song (Tipsy),Shaboozey,2025-05-11,05,11,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2025,2025-05-11,2025-07-13,1
+song,"Not Like Us""",Kendrick Lamar,2025-05-18,05,18,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2025,2025-05-18,2025-05-18,1
+song,"I Had Some Help""",Post Malone featuring Morgan Wallen,2025-05-25,05,25,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2025,2025-05-25,2025-05-25,1
+song,Birds of a Feather,Billie Eilish,2025-06-22,06,22,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2025,2025-06-22,2025-10-12,2
+song,"Taste""",Sabrina Carpenter,2025-09-07,09,07,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2025,2025-09-07,2025-09-07,2
+song,"Timeless""",The Weeknd and Playboi Carti,2025-10-12,10,12,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2025,2025-10-12,2025-10-12,3
+song,"Love Somebody""",Morgan Wallen,2025-11-02,11,02,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2025,2025-11-02,2025-11-02,1
+song,That's So True,Gracie Abrams,2025-11-23,11,23,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2025,2025-11-23,2025-11-23,6
+song,"Squabble Up""",Kendrick Lamar,2025-12-07,12,07,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2025,2025-12-07,2025-12-07,1
+song,"TV Off""",Kendrick Lamar featuring Lefty Gunplay,2025-12-07,12,07,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2025,2025-12-07,2025-12-07,2

@@ -50,13 +50,21 @@ async function filterArts(qids) {
   const keep = new Set();
   const categoryMap = new Map();
 
-  for (const batch of chunk(qids, 100)) {
+  // smaller batches are friendlier to WDQS
+  for (const batch of chunk(qids, 50)) {
     const VALUES = batch.map(q => `wd:${q}`).join(" ");
 
+    // Important: declare prefixes explicitly
+    const PREFIX = `
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+`;
+
     // Expanded SPARQL:
-    // 1) Keep works/events in arts (albums, songs, films, books, artworks, awards).
-    // 2) Keep humans (Q5) whose occupation (P106) is an arts occupation (via subclass traversal).
+    // 1) Works/events in arts (albums, songs, films, books, artworks, awards).
+    // 2) Humans (Q5) whose occupation (P106) is an arts occupation (via subclass traversal).
     const query = `
+${PREFIX}
 SELECT ?item ?category WHERE {
   VALUES ?item { ${VALUES} }
 
@@ -265,4 +273,3 @@ function flatten(items) {
   fs.writeFileSync(`data/otd/${KEY}.json`, JSON.stringify(cleaned, null, 2));
   console.log(`Wrote data/otd/${KEY}.json with ${cleaned.length} items`);
 })();
-

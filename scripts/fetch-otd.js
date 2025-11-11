@@ -57,23 +57,23 @@ GROUP BY ?item
 HAVING(?category != "other")
 `;
 
-  const url = `${WD_SPARQL}?query=${encodeURIComponent(query)}&format=json`;
   const headers = {
     "User-Agent": "StrumOTD/1.0 (+https://github.com/66fishmarket-droid/STRUMOTDSeedGen)",
-    "Accept": "application/sparql-results+json"
+    "Accept": "application/sparql-results+json",
+    "Content-Type": "application/sparql-query"
   };
 
-  // minimal retry for transient 429/5xx
+  // POST to avoid URL length limits and handle transient errors
   for (let attempt = 1; attempt <= 3; attempt++) {
-    const r = await fetch(url, { headers });
+    const r = await fetch(WD_SPARQL, { method: "POST", headers, body: query });
     const ct = r.headers.get("content-type") || "";
     if (!r.ok || !ct.includes("application/sparql-results+json")) {
       if (attempt < 3 && (r.status === 429 || r.status >= 500)) {
         await new Promise(res => setTimeout(res, 1000 * attempt));
         continue;
       }
-      const body = await r.text();
-      throw new Error(`SPARQL error ${r.status} ${r.statusText} | ct=${ct} | body=${body.slice(0,200)}`);
+      const bodyText = await r.text();
+      throw new Error(`SPARQL error ${r.status} ${r.statusText} | ct=${ct} | snippet=${bodyText.slice(0,200)}`);
     }
     const j = await r.json();
     const rows = j?.results?.bindings || [];
@@ -82,7 +82,6 @@ HAVING(?category != "other")
     return { keep, categoryMap };
   }
 
-  // Should not reach here
   return { keep: new Set(), categoryMap: new Map() };
 }
 

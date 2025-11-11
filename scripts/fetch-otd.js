@@ -231,9 +231,7 @@ SELECT ?item (SAMPLE(?cat) AS ?category) WHERE {
 
   VALUES ?item { ${VALUES} }
 
-  # force materialization (helps with some singleton oddities)
-  ?item ?p_any ?o_any .
-
+ 
   {
     ?item wdt:P31/wdt:P279* ?c1 .
     VALUES ?c1 { wd:Q482994 wd:Q134556 wd:Q7366 wd:Q179415 wd:Q1263612 wd:Q34508 wd:Q182832 wd:Q222634 wd:Q17489659 }

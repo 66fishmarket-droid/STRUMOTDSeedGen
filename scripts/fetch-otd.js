@@ -66,25 +66,35 @@ HAVING(?category != "other")
   // POST to avoid URL length limits and handle transient errors
   for (let attempt = 1; attempt <= 3; attempt++) {
     const r = await fetch(WD_SPARQL, { method: "POST", headers, body: query });
-    const ct = r.headers.get("content-type") || "";
-    if (!r.ok || !ct.includes("application/sparql-results+json")) {
-      if (attempt < 3 && (r.status === 429 || r.status >= 500)) {
+    const ct = (r.headers.get("content-type") || "").toLowerCase();
+    const text = await r.text(); // always read as text first
+
+    // Retry on 429/5xx
+    if (!r.ok && (r.status === 429 || r.status >= 500)) {
+      if (attempt < 3) {
         await new Promise(res => setTimeout(res, 1000 * attempt));
         continue;
       }
-      const bodyText = await r.text();
-      throw new Error(`SPARQL error ${r.status} ${r.statusText} | ct=${ct} | snippet=${bodyText.slice(0,200)}`);
     }
-    const j = await r.json();
+
+    // Must be JSON
+    if (!r.ok || !ct.includes("application/sparql-results+json")) {
+      throw new Error(`SPARQL error status=${r.status} ct=${ct} snippet=${text.slice(0,200)}`);
+    }
+
+    // Parse JSON safely
+    let j;
+    try {
+      j = JSON.parse(text);
+    } catch (e) {
+      throw new Error(`SPARQL parse error ct=${ct} status=${r.status} snippet=${text.slice(0,200)}`);
+    }
+
     const rows = j?.results?.bindings || [];
     const keep = new Set(rows.map(b => b.item.value.split("/").pop()));
     const categoryMap = new Map(rows.map(b => [b.item.value.split("/").pop(), b.category.value]));
     return { keep, categoryMap };
   }
-
-  return { keep: new Set(), categoryMap: new Map() };
-}
-
 
 function flatten(items) {
   const out = new Map();

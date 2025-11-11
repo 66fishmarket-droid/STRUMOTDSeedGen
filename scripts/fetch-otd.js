@@ -321,12 +321,13 @@ function flatten(items) {
       return;
     }
 
- const fs = await import("fs");
-fs.mkdirSync(OUT_DIR, { recursive: true });
-const outName = OUT_FILE || `${KEY}.json`;
-const fullPath = path.join(OUT_DIR, outName);
-fs.writeFileSync(fullPath, JSON.stringify(cleaned, null, 2));
-console.log(`Wrote ${fullPath} with ${cleaned.length} items`);
+    const fs = await import("fs");
+    fs.mkdirSync(OUT_DIR, { recursive: true });
+    const outName = OUT_FILE || `${KEY}.json`;
+    const fullPath = path.join(OUT_DIR, outName);
+    fs.writeFileSync(fullPath, JSON.stringify(cleaned, null, 2));
+    console.log(`Wrote ${fullPath} with ${cleaned.length} items`);
+
 
   } catch (err) {
     console.error("OTD job failed:", err?.message || err);

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # scripts/build_arts_on_this_day.py
-# Songs: Billboard Hot 100 Top-10 incremental harvest with clean parsing.
+# Songs: Billboard Hot 100 Top-10 incremental harvest (robust lxml parser).
 # Albums (RIAA) and Movies (OMDb) remain placeholders for now.
 
 import csv
@@ -12,7 +12,7 @@ from typing import List, Dict, Tuple, Optional
 from datetime import datetime
 
 import requests
-import pandas as pd
+from lxml import html
 
 # Standard calendar fields (used by calendar_index.csv)
 FIELDS = [
@@ -24,13 +24,13 @@ FIELDS = [
 SONG_FIELDS = FIELDS + ["entry_date","peak_date","peak_position"]
 
 OUT_SONGS  = "data/songs_top10_us.csv"
-OUT_ALBUMS = "data/albums_us_1m.csv"   # placeholder
-OUT_MOVIES = "data/movies_rt80.csv"    # placeholder
+OUT_ALBUMS = "data/albums_us_1m.csv"    # placeholder
+OUT_MOVIES = "data/movies_rt80.csv"     # placeholder
 STATE_SONGS = "data/state_songs.json"
 
 WIKI_PAGE_TPL = "https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_{year}"
 
-# -------- HTTP helpers --------
+# ---------- HTTP helpers ----------
 
 def ua_contact() -> str:
     return os.getenv("USER_AGENT_CONTACT", "https://github.com/OWNER/REPO/issues")
@@ -44,7 +44,6 @@ def session() -> requests.Session:
     return s
 
 def http_get_conditional(s: requests.Session, url: str, ims: Optional[str], max_retries: int = 5, backoff: float = 1.5) -> Optional[requests.Response]:
-    # Returns Response(200) if fresh content, None if 304 Not Modified.
     headers = {}
     if ims:
         headers["If-Modified-Since"] = ims
@@ -62,7 +61,7 @@ def http_get_conditional(s: requests.Session, url: str, ims: Optional[str], max_
         r.raise_for_status()
     return None
 
-# -------- date helpers --------
+# ---------- date helpers ----------
 
 def parse_first_date(text: str, year_hint: int) -> str:
     if not text:
@@ -75,7 +74,7 @@ def parse_first_date(text: str, year_hint: int) -> str:
             return dt.strftime("%Y-%m-%d")
     except Exception:
         pass
-    # Try common "Month Day" formats with nearby years
+    # Try common formats around year_hint
     candidates = [f"{t} {year_hint}", f"{t} {year_hint-1}", f"{t} {year_hint+1}"]
     fmts = ["%B %d %Y", "%b %d %Y", "%d %B %Y", "%Y %B %d", "%B %Y %d"]
     for c in candidates:
@@ -92,7 +91,7 @@ def month_day(date_str: str) -> Tuple[str,str]:
         return date_str[5:7], date_str[8:10]
     return "",""
 
-# -------- state + IO --------
+# ---------- state + IO ----------
 
 def load_state() -> Dict[str,str]:
     if os.path.exists(STATE_SONGS):
@@ -115,7 +114,6 @@ def read_existing_songs() -> List[Dict]:
     with open(OUT_SONGS, encoding="utf-8") as f:
         r = csv.DictReader(f)
         for row in r:
-            # normalize keys into SONG_FIELDS superset
             norm = {k: row.get(k, "") for k in SONG_FIELDS}
             rows.append(norm)
     return rows
@@ -134,116 +132,159 @@ def write_empty_standard(path: str) -> None:
         w = csv.DictWriter(f, fieldnames=FIELDS)
         w.writeheader()
 
-# -------- parsing helpers (robust column mapping + cleaning) --------
+# ---------- parsing helpers ----------
 
-MONTHS_RX = r"(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)"
-BRACKET_RX = re.compile(r"\[[^\]]*\]")     # [A], [27], etc.
-SUPMARK_RX = re.compile(r"[↑↓*†‡]")        # markers
-QUOTES_RX  = re.compile(r'^[\'"]+|[\'"]+$')# leading/trailing quotes
+BRACKET_RX = re.compile(r"\[[^\]]*\]")         # [A], [27], etc.
+SUPMARK_RX = re.compile(r"[↑↓*†‡]")            # arrows, asterisks, daggers
+QUOTES_RX  = re.compile(r'^[\'"]+|[\'"]+$')    # leading/trailing quotes
+WS_RX      = re.compile(r"\s+")
 
-def norm_cell(x: str) -> str:
-    s = str(x or "").strip()
+def clean_text(s: str) -> str:
+    s = (s or "").strip()
     s = BRACKET_RX.sub("", s)
     s = SUPMARK_RX.sub("", s)
     s = QUOTES_RX.sub("", s)
-    s = re.sub(r"\s+", " ", s).strip()
+    s = WS_RX.sub(" ", s).strip()
     return s
 
-def is_dateish(s: str) -> bool:
-    if not s:
-        return False
-    t = s.lower().strip()
-    if re.search(MONTHS_RX, t):
-        return True
-    return bool(re.match(r"\d{4}-\d{2}-\d{2}$", t)) or bool(re.match(r"^[a-z]{3}\s+\d{1,2}$", t))
+def cell_text(td) -> str:
+    # Prefer anchor text for title; else the full cell text
+    a = td.xpath(".//a[1]/text()")
+    if a:
+        return clean_text(a[0])
+    return clean_text("".join(td.itertext()))
 
-def map_columns(cols_original) -> Dict[str, Optional[str]]:
-    cols = [str(c) for c in cols_original]
-    low  = [c.lower().strip() for c in cols]
+def cell_num(td) -> str:
+    t = clean_text("".join(td.itertext()))
+    m = re.search(r"\d+", t)
+    return m.group(0) if m else ""
 
-    def pick(cands: List[str]) -> Optional[str]:
-        for cand in cands:
-            for i,name in enumerate(low):
-                if cand in name:
-                    return cols[i]
-        return None
-
-    title_col  = pick(["single", "song", "title", "track"])
-    artist_col = pick(["artist", "artists", "performer"])
-    entry_col  = pick([
-        "entry date", "debut", "first week in top ten", "first week", "top ten entry",
-        "top-ten entry", "top ten debut", "top-ten debut", "first top ten", "first top-ten"
-    ])
-    week_col   = pick(["week of", "date"])  # fallback
-    peak_col   = pick(["peak", "peak pos", "peak position", "highest pos"])
-    peak_date_col = pick(["peak date", "date peaked"])
-
-    return {
-        "title": title_col,
-        "artist": artist_col,
-        "entry": entry_col,
-        "week": week_col,
-        "peak": peak_col,
-        "peak_date": peak_date_col
-    }
+def looks_like_proper_table(header_cells: List[str]) -> bool:
+    h = [clean_text(x).lower() for x in header_cells]
+    has_title  = any(k in " ".join(h) for k in ["single", "song", "title"])
+    has_artist = any("artist" in x for x in h)
+    has_peak   = any("peak" in x for x in h)
+    has_date   = any(("entry" in x) or ("week of" in x) or (x.strip() == "date") for x in h)
+    return has_title and has_artist and has_peak and has_date
 
 def parse_year_page(resp_text: str, year: int, url: str) -> List[Dict]:
     out: List[Dict] = []
-    try:
-        tables = pd.read_html(resp_text)
-    except Exception:
-        return out
+    tree = html.fromstring(resp_text)
+    tables = tree.xpath('//table[contains(@class,"wikitable")]')
 
-    got_rows = False
-    for df in tables:
-        cols = map_columns(df.columns)
-        if not cols["title"] or not cols["artist"]:
+    for tbl in tables:
+        # header cells
+        ths = tbl.xpath(".//tr[1]/th")
+        if not ths:
+            continue
+        header_texts = ["".join(th.itertext()).strip() for th in ths]
+
+        # ensure this is one of the main data tables (has title, artist, date, peak)
+        if not looks_like_proper_table(header_texts):
             continue
 
-        for _, row in df.iterrows():
-            raw_title  = norm_cell(row.get(cols["title"], ""))
-            raw_artist = norm_cell(row.get(cols["artist"], ""))
-            raw_entry  = norm_cell(row.get(cols["entry"], "")) if cols["entry"] else ""
-            raw_week   = norm_cell(row.get(cols["week"], ""))  if cols["week"]  else ""
-            raw_peak   = norm_cell(row.get(cols["peak"], ""))  if cols["peak"]  else ""
-            raw_peak_d = norm_cell(row.get(cols["peak_date"], "")) if cols["peak_date"] else ""
+        ncols = len(ths)
+        col_names = [clean_text("".join(th.itertext())).lower() for th in ths]
 
-            # skip header-like and junk rows
-            if not raw_title or raw_title.lower() in ("single", "song", "title"):
-                continue
-            if not raw_artist or raw_artist.lower() in ("artist", "artists"):
-                continue
-            if is_dateish(raw_title) or re.fullmatch(r"\d+", raw_title):
+        def idx(options: List[str]) -> Optional[int]:
+            for opt in options:
+                for i, name in enumerate(col_names):
+                    if opt in name:
+                        return i
+            return None
+
+        i_title = idx(["single","song","title","track"])
+        i_artist = idx(["artist"])
+        i_entry = idx([
+            "entry date","debut","first week in top ten","first week",
+            "top ten entry","top-ten entry","top ten debut","top-ten debut",
+            "first top ten","first top-ten"
+        ])
+        i_week = idx(["week of","date"])  # fallback if no explicit entry col
+        i_peak = idx(["peak","peak pos","peak position","highest pos"])
+        i_peak_date = idx(["peak date","date peaked"])
+
+        if i_title is None or i_artist is None or (i_entry is None and i_week is None) or i_peak is None:
+            continue
+
+        last_entry_text = ""  # forward-fill entry date when the first column uses rowspan
+
+        # iterate body rows
+        for tr in tbl.xpath(".//tr[position()>1]"):
+            # Skip section header rows like "Singles from 2024/2025"
+            # Those are usually all <th> or a single <td> with colspan across the table.
+            tr_ths = tr.xpath("./th")
+            tr_tds = tr.xpath("./td")
+            if (tr_ths and not tr_tds) or (len(tr_tds) == 1 and tr_tds[0].get("colspan")):
+                # example: 'Singles from 2025' section header
                 continue
 
-            entry_date = parse_first_date(raw_entry, year) or parse_first_date(raw_week, year) or f"{year}-12-31"
-            peak_date  = parse_first_date(raw_peak_d, year) if raw_peak_d else ""
+            if not tr_tds:
+                continue
+
+            # Detect rowspan deficit (entry date missing in this row -> columns shift left by 1)
+            deficit = ncols - len(tr_tds) if len(tr_tds) < ncols else 0
+
+            def td_at(col_idx: Optional[int]):
+                if col_idx is None:
+                    return None
+                if deficit == 0:
+                    return tr_tds[col_idx] if col_idx < len(tr_tds) else None
+                # If a previous row is rowspanning the first column, everything after col 0 shifts left by 1
+                if col_idx == 0:
+                    return None  # not present in this row; rely on forward fill
+                adj = col_idx - 1
+                return tr_tds[adj] if 0 <= adj < len(tr_tds) else None
+
+            title_td  = td_at(i_title)
+            artist_td = td_at(i_artist)
+            entry_td  = td_at(i_entry) if i_entry is not None else None
+            week_td   = td_at(i_week)  if i_week  is not None else None
+            peak_td   = td_at(i_peak)
+            peakd_td  = td_at(i_peak_date) if i_peak_date is not None else None
+
+            title  = cell_text(title_td) if title_td is not None else ""
+            artist = clean_text("".join(artist_td.itertext())) if artist_td is not None else ""
+
+            # guard against junk
+            if not title or not artist:
+                continue
+            if re.fullmatch(r"\d+(\.\d+)?", title) or re.fullmatch(r"\d+(\.\d+)?", artist):
+                continue
+
+            # Resolve entry date with forward fill
+            entry_raw = cell_text(entry_td) if entry_td is not None else ""
+            if not entry_raw and i_entry is not None:
+                entry_raw = last_entry_text
+            elif entry_raw:
+                last_entry_text = entry_raw
+
+            week_raw  = cell_text(week_td)  if week_td  is not None else ""
+            peak_raw  = cell_num(peak_td)   if peak_td  is not None else ""
+            peakd_raw = cell_text(peakd_td) if peakd_td is not None else ""
+
+            entry_date = parse_first_date(entry_raw, year) or parse_first_date(week_raw, year) or f"{year}-12-31"
+            peak_date  = parse_first_date(peakd_raw, year) if peakd_raw else ""
 
             mm, dd = month_day(entry_date)
 
             out.append({
-                # standard columns
                 "work_type": "song",
-                "title": raw_title,
-                "byline": raw_artist,
-                "release_date": entry_date,   # true release will be enriched later
+                "title": title,
+                "byline": artist,
+                "release_date": entry_date,  # true release will be enriched later
                 "month": mm,
                 "day": dd,
                 "extra": "US Top 10",
                 "source_url": url,
-                # extended fields
                 "entry_date": entry_date,
                 "peak_date": peak_date,
-                "peak_position": raw_peak
+                "peak_position": peak_raw
             })
-            got_rows = True
-
-    if not got_rows:
-        print(f"Note: no matching tables used for {url}")
 
     return out
 
-# -------- combine/dedupe/incremental --------
+# ---------- combine/dedupe/incremental ----------
 
 def dedupe_keep_earliest(rows: List[Dict]) -> List[Dict]:
     # dedupe by (title, byline) keeping earliest entry_date
@@ -253,8 +294,7 @@ def dedupe_keep_earliest(rows: List[Dict]) -> List[Dict]:
         if key not in dedup:
             dedup[key] = r
         else:
-            old = dedup[key]
-            a = old.get("entry_date","")
+            a = dedup[key].get("entry_date","")
             b = r.get("entry_date","")
             if a and b and b < a:
                 dedup[key] = r
@@ -269,7 +309,6 @@ def years_to_fetch(full_build: bool) -> List[int]:
     return [y for y in [cy, cy-1, cy-2] if y >= 1958]
 
 def year_from_url(u: str) -> Optional[int]:
-    # .../in_YYYY
     try:
         return int(u.rsplit("_", 1)[-1])
     except Exception:
@@ -293,7 +332,6 @@ def harvest_songs_incremental(full_build: bool) -> List[Dict]:
             continue
 
         if resp is None:
-            # 304: reuse existing rows from this year
             reused = [r for r in existing if year_from_url(r.get("source_url","")) == year]
             fresh_rows.extend(reused)
             print(f"{year}: not modified, reused {len(reused)} rows")
@@ -307,7 +345,6 @@ def harvest_songs_incremental(full_build: bool) -> List[Dict]:
         print(f"{year}: parsed {len(parsed)} rows")
         time.sleep(0.4)
 
-    # Keep rows from years we didn't touch
     keep_years = set(target_years)
     untouched = [r for r in existing if (year_from_url(r.get("source_url","")) or 0) not in keep_years]
 
@@ -315,12 +352,11 @@ def harvest_songs_incremental(full_build: bool) -> List[Dict]:
     save_state(state)
     return combined
 
-# -------- main --------
+# ---------- main ----------
 
 def main():
     full_build = os.getenv("FULL_BUILD", "false").lower() == "true"
 
-    # Songs dataset
     songs = harvest_songs_incremental(full_build=full_build)
     write_songs(songs)
 

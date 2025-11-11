@@ -39,77 +39,157 @@ function collectQids(items) {
 }
 
 async function filterArts(qids) {
-  if (qids.length === 0) return { keep: new Set(), categoryMap: new Map() };
+  if (!qids || qids.length === 0) return { keep: new Set(), categoryMap: new Map() };
 
   const headers = {
     "User-Agent": "StrumOTD/1.0 (+https://github.com/66fishmarket-droid/STRUMOTDSeedGen)",
-    "Accept": "application/sparql-results+json",
-    "Content-Type": "application/sparql-query"
+    "Accept": "application/sparql-results+json"
   };
 
   const keep = new Set();
   const categoryMap = new Map();
 
-  function chunk(arr, n) { const out = []; for (let i = 0; i < arr.length; i += n) out.push(arr.slice(i, i + n)); return out; }
+  function chunk(arr, n) {
+    const out = [];
+    for (let i = 0; i < arr.length; i += n) out.push(arr.slice(i, i + n));
+    return out;
+  }
 
-  for (const batch of chunk(qids, 50)) {
+  for (const batch of chunk(qids, 40)) {
     const VALUES = batch.map(q => `wd:${q}`).join(" ");
 
     const PREFIX = `
-PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wd:  <http://www.wikidata.org/entity/>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 `;
 
+    // Strategy:
+    // 1) Try typed works (music, film_tv, books, visual_or_performance, awards)
+    // 2) If not a work, try humans with occupations mapped to the same buckets
+    // 3) Use COALESCE with UNDEF so the first match wins
     const query = `
 ${PREFIX}
 SELECT ?item ?category WHERE {
   VALUES ?item { ${VALUES} }
 
-  BIND(
-    IF(
-      EXISTS { ?item wdt:P31/wdt:P279* ?c .
-               FILTER(?c IN (wd:Q482994, wd:Q134556, wd:Q7366, wd:Q182832, wd:Q222634)) }, "music",
-    IF(
-      EXISTS { ?item wdt:P31/wdt:P279* ?c .
-               FILTER(?c IN (wd:Q11424, wd:Q5398426, wd:Q21191270, wd:Q226730)) }, "film_tv",
-    IF(
-      EXISTS { ?item wdt:P31/wdt:P279* ?c .
-               FILTER(?c IN (wd:Q7725634, wd:Q571)) }, "books",
-    IF(
-      EXISTS { ?item wdt:P31/wdt:P279* ?c .
-               FILTER(?c IN (wd:Q4502142, wd:Q3305213, wd:Q860861, wd:Q2798201, wd:Q2743)) }, "visual_or_performance",
-    IF(
-      EXISTS { ?item wdt:P31/wdt:P279* ?c .
-               FILTER(?c IN (wd:Q618779, wd:Q132241)) }, "awards",
-    IF(
-      EXISTS { ?item wdt:P31 wd:Q5; wdt:P106/wdt:P279* ?occ .
-               FILTER(?occ IN (wd:Q639669, wd:Q177220, wd:Q753110, wd:Q36834, wd:Q183945, wd:Q1128996, wd:Q1320489, wd:Q155309, wd:Q488205, wd:Q130857)) }, "music",
-    IF(
-      EXISTS { ?item wdt:P31 wd:Q5; wdt:P106/wdt:P279* ?occ .
-               FILTER(?occ IN (wd:Q33999, wd:Q2526255, wd:Q28389, wd:Q3455803, wd:Q1373334)) }, "film_tv",
-    IF(
-      EXISTS { ?item wdt:P31 wd:Q5; wdt:P106/wdt:P279* ?occ .
-               FILTER(?occ IN (wd:Q36180, wd:Q49757, wd:Q6625963, wd:Q214917, wd:Q482980)) }, "books",
-    IF(
-      EXISTS { ?item wdt:P31 wd:Q5; wdt:P106/wdt:P279* ?occ .
-               FILTER(?occ IN (wd:Q1028181, wd:Q1281618, wd:Q33231, wd:Q18394549, wd:Q12299841, wd:Q42973)) }, "visual_or_performance",
-    IF(
-      EXISTS { ?item wdt:P31 wd:Q5; wdt:P106/wdt:P279* ?occ .
-               FILTER(?occ IN (wd:Q245068, wd:Q571668, wd:Q3282637, wd:Q1267013, wd:Q82955)) }, "visual_or_performance",
-      "other"
-    )))))))))) AS ?category)
+  BIND(COALESCE(
+    # Works: Music
+    IF(EXISTS {
+      ?item wdt:P31/wdt:P279* ?c1 .
+      FILTER(?c1 IN (wd:Q482994,   # album
+                     wd:Q134556,   # single
+                     wd:Q7366,     # song
+                     wd:Q182832,   # concert tour
+                     wd:Q222634))  # music award
+    },"music", UNDEF),
 
-  FILTER(?category != "other")
+    # Works: Film / TV
+    IF(EXISTS {
+      ?item wdt:P31/wdt:P279* ?c2 .
+      FILTER(?c2 IN (wd:Q11424,     # film
+                     wd:Q5398426,   # TV series
+                     wd:Q21191270,  # TV episode
+                     wd:Q226730))   # film festival
+    },"film_tv", UNDEF),
+
+    # Works: Books / Literature
+    IF(EXISTS {
+      ?item wdt:P31/wdt:P279* ?c3 .
+      FILTER(?c3 IN (wd:Q7725634,   # literary work
+                     wd:Q571))      # book
+    },"books", UNDEF),
+
+    # Works: Visual / Performance arts
+    IF(EXISTS {
+      ?item wdt:P31/wdt:P279* ?c4 .
+      FILTER(?c4 IN (wd:Q3305213,   # painting
+                     wd:Q860861,    # sculpture
+                     wd:Q2798201,   # ballet
+                     wd:Q2743,      # theater production
+                     wd:Q25379))    # play
+    },"visual_or_performance", UNDEF),
+
+    # Works: Awards (general)
+    IF(EXISTS {
+      ?item wdt:P31/wdt:P279* ?c5 .
+      FILTER(?c5 IN (wd:Q618779,    # award
+                     wd:Q132241))   # award ceremony
+    },"awards", UNDEF),
+
+    # Humans with relevant occupations
+    IF(EXISTS {
+      ?item wdt:P31 wd:Q5 ;
+            wdt:P106/wdt:P279* ?o1 .
+      FILTER(?o1 IN (
+        # music people
+        wd:Q639669,   # musician
+        wd:Q177220,   # singer
+        wd:Q488205,   # singer-songwriter
+        wd:Q36834,    # composer
+        wd:Q1128996,  # rapper
+        wd:Q130857,   # DJ
+        wd:Q155309    # record producer
+      ))
+    },"music", UNDEF),
+
+    IF(EXISTS {
+      ?item wdt:P31 wd:Q5 ;
+            wdt:P106/wdt:P279* ?o2 .
+      FILTER(?o2 IN (
+        # film/tv people
+        wd:Q33999,    # actor
+        wd:Q2526255,  # film director
+        wd:Q28389,    # screenwriter
+        wd:Q3455803   # cinematographer
+      ))
+    },"film_tv", UNDEF),
+
+    IF(EXISTS {
+      ?item wdt:P31 wd:Q5 ;
+            wdt:P106/wdt:P279* ?o3 .
+      FILTER(?o3 IN (
+        # books people
+        wd:Q36180,    # writer
+        wd:Q482980,   # author
+        wd:Q49757,    # poet
+        wd:Q214917,   # playwright
+        wd:Q6625963   # novelist
+      ))
+    },"books", UNDEF),
+
+    IF(EXISTS {
+      ?item wdt:P31 wd:Q5 ;
+            wdt:P106/wdt:P279* ?o4 .
+      FILTER(?o4 IN (
+        # visual/performance people
+        wd:Q33231,    # painter
+        wd:Q42973,    # performance artist
+        wd:Q571668,   # dancer
+        wd:Q245068,   # comedian
+        wd:Q256145    # entertainer
+      ))
+    },"visual_or_performance", UNDEF)
+  ) AS ?category)
+
+  FILTER(BOUND(?category))
 }
 `;
 
+    // Use GET with URL-encoded query to avoid 400s from WDQS
+    const url = `${WD_SPARQL}?query=${encodeURIComponent(query)}`;
+
+    let ok = false;
     for (let attempt = 1; attempt <= 3; attempt++) {
-      const r = await fetch("https://query.wikidata.org/sparql", { method: "POST", headers, body: query });
+      const r = await fetch(url, { method: "GET", headers });
       const ct = (r.headers.get("content-type") || "").toLowerCase();
       const text = await r.text();
 
+      // Retry on 429/5xx
       if (!r.ok && (r.status === 429 || r.status >= 500)) {
-        if (attempt < 3) { await new Promise(res => setTimeout(res, 1000 * attempt)); continue; }
+        if (attempt < 3) {
+          await new Promise(res => setTimeout(res, 1000 * attempt));
+          continue;
+        }
       }
       if (!r.ok || !ct.includes("application/sparql-results+json")) {
         throw new Error(`SPARQL error status=${r.status} ct=${ct} snippet=${text.slice(0,200)}`);
@@ -117,7 +197,9 @@ SELECT ?item ?category WHERE {
 
       let j;
       try { j = JSON.parse(text); }
-      catch { throw new Error(`SPARQL parse error ct=${ct} status=${r.status} snippet=${text.slice(0,200)}`); }
+      catch {
+        throw new Error(`SPARQL parse error ct=${ct} status=${r.status} snippet=${text.slice(0,200)}`);
+      }
 
       const rows = j?.results?.bindings || [];
       for (const b of rows) {
@@ -125,12 +207,16 @@ SELECT ?item ?category WHERE {
         keep.add(qid);
         categoryMap.set(qid, b.category.value);
       }
-      break; // batch OK
+      ok = true;
+      break;
     }
+
+    if (!ok) throw new Error("SPARQL batch failed after retries");
   }
 
   return { keep, categoryMap };
 }
+
 
 
 function flatten(items) {

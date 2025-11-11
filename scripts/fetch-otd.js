@@ -14,7 +14,7 @@
 // ------------------------ Config ------------------------
 
 const WD_SPARQL = "https://query.wikidata.org/sparql";
-const MAX_BATCH = 25; // safer for WDQS; will auto-split further on 400/413/414/431
+const MAX_BATCH = 15; // safer for WDQS; will auto-split further on 400/413/414/431
 const USER_AGENT = "StrumOTD/1.0 (+https://github.com/66fishmarket-droid/STRUMOTDSeedGen)";
 // replace the DEFAULT_FETCH_TIMEOUT_MS line
 const DEFAULT_FETCH_TIMEOUT_MS = Number(process.env.WDQS_TIMEOUT_MS || 45000); // 45s default
@@ -180,7 +180,7 @@ async function runSparql(query, headers, { preferGet = false } = {}, attempt = 1
     throw err;
   }
 
-  if ([429, 502, 503, 504].includes(res.status) && attempt < maxAttempts) {
+  if ([429, 500, 502, 503, 504].includes(res.status) && attempt < maxAttempts) {
     const wait = backoffFor(res, attempt);
     logDebug(`[WDQS] ${res.status} ${res.statusText}; retrying in ${wait}ms (attempt ${attempt + 1})`);
     await sleep(wait);
@@ -281,7 +281,7 @@ GROUP BY ?item
       // Use GET for tiny batches to avoid rare POST 400s on singletons
       j = await runSparql(query, headers, { preferGet: batch.length <= 3 });
     } catch (e) {
-      if ([400, 413, 414, 431].includes(e.status || 0) && batch.length > 1) {
+      if ([400, 413, 414, 431, 500].includes(e.status || 0) && batch.length > 1) {
         logDebug(`[WDQS] ${e.status} on batch of ${batch.length}; splitting and retrying...`);
         const halves = chunk(batch, Math.ceil(batch.length / 2));
         const parts = await Promise.all(halves.map(h => filterArts(h)));

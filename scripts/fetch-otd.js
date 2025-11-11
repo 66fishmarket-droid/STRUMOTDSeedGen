@@ -38,7 +38,6 @@ function collectQids(items) {
 async function filterArts(qids) {
   if (qids.length === 0) return { keep: new Set(), categoryMap: new Map() };
 
-  // Map QID -> high-level category using instance-of chains
   const VALUES = qids.map(q => `wd:${q}`).join(" ");
   const query = `
 SELECT ?item (SAMPLE(?cat) AS ?category)
@@ -57,16 +56,36 @@ WHERE {
 GROUP BY ?item
 HAVING(?category != "other")
 `;
-  const url = `${WD_SPARQL}?query=` + encodeURIComponent(query) + `&format=json`;
-  const r = await fetch(url, {
-    headers: { "User-Agent": "StrumOTD/1.0 (GitHub Actions)" }
-  });
-  const j = await r.json();
-  const rows = j?.results?.bindings || [];
-  const keep = new Set(rows.map(b => b.item.value.split("/").pop()));
-  const categoryMap = new Map(rows.map(b => [b.item.value.split("/").pop(), b.category.value]));
-  return { keep, categoryMap };
+
+  const url = `${WD_SPARQL}?query=${encodeURIComponent(query)}&format=json`;
+  const headers = {
+    "User-Agent": "StrumOTD/1.0 (+https://github.com/66fishmarket-droid/STRUMOTDSeedGen)",
+    "Accept": "application/sparql-results+json"
+  };
+
+  // minimal retry for transient 429/5xx
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    const r = await fetch(url, { headers });
+    const ct = r.headers.get("content-type") || "";
+    if (!r.ok || !ct.includes("application/sparql-results+json")) {
+      if (attempt < 3 && (r.status === 429 || r.status >= 500)) {
+        await new Promise(res => setTimeout(res, 1000 * attempt));
+        continue;
+      }
+      const body = await r.text();
+      throw new Error(`SPARQL error ${r.status} ${r.statusText} | ct=${ct} | body=${body.slice(0,200)}`);
+    }
+    const j = await r.json();
+    const rows = j?.results?.bindings || [];
+    const keep = new Set(rows.map(b => b.item.value.split("/").pop()));
+    const categoryMap = new Map(rows.map(b => [b.item.value.split("/").pop(), b.category.value]));
+    return { keep, categoryMap };
+  }
+
+  // Should not reach here
+  return { keep: new Set(), categoryMap: new Map() };
 }
+
 
 function flatten(items) {
   const out = new Map();

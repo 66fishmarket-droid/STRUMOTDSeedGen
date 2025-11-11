@@ -180,7 +180,7 @@ async function filterArts(qids) {
   for (const batch of chunk(qids, maxBatch)) {
   const VALUES = batch.map(q => `wd:${q}`).join(" ");
 
-  const query = `
+const query = `
 PREFIX wd:  <http://www.wikidata.org/entity/>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 
@@ -188,56 +188,76 @@ SELECT ?item ?category WHERE {
   VALUES ?item { ${VALUES} }
 
   BIND(COALESCE(
-    /* works/events: music */
+
     IF(EXISTS {
       ?item wdt:P31/wdt:P279* ?c1 .
-      FILTER(?c1 IN (wd:Q482994, wd:Q134556, wd:Q7366, wd:Q179415, wd:Q1263612, wd:Q34508, wd:Q182832, wd:Q222634, wd:Q17489659))
+      FILTER(?c1 IN (
+        wd:Q482994, wd:Q134556, wd:Q7366, wd:Q179415, wd:Q1263612, wd:Q34508, wd:Q182832, wd:Q222634, wd:Q17489659
+      ))
     },"music", UNDEF),
-    /* film/tv */
+
     IF(EXISTS {
       ?item wdt:P31/wdt:P279* ?c2 .
-      FILTER(?c2 IN (wd:Q11424, wd:Q5398426, wd:Q21191270, wd:Q24862, wd:Q226730, wd:Q41298))
+      FILTER(?c2 IN (
+        wd:Q11424, wd:Q5398426, wd:Q21191270, wd:Q24862, wd:Q226730, wd:Q41298
+      ))
     },"film_tv", UNDEF),
-    /* books */
+
     IF(EXISTS {
       ?item wdt:P31/wdt:P279* ?c3 .
-      FILTER(?c3 IN (wd:Q7725634, wd:Q571, wd:Q8261, wd:Q25379, wd:Q5185279))
+      FILTER(?c3 IN (
+        wd:Q7725634, wd:Q571, wd:Q8261, wd:Q25379, wd:Q5185279
+      ))
     },"books", UNDEF),
-    /* visual/performance works */
+
     IF(EXISTS {
       ?item wdt:P31/wdt:P279* ?c4 .
-      FILTER(?c4 IN (wd:Q3305213, wd:Q179700, wd:Q22669, wd:Q207694, wd:Q2431196, wd:Q2743, wd:Q860861))
+      FILTER(?c4 IN (
+        wd:Q3305213, wd:Q179700, wd:Q22669, wd:Q207694, wd:Q2431196, wd:Q2743, wd:Q860861
+      ))
     },"visual_or_performance", UNDEF),
-    /* orgs tied to arts */
+
     IF(EXISTS {
       ?item wdt:P31/wdt:P279* ?c5 .
-      FILTER(?c5 IN (wd:Q215380, wd:Q2088357, wd:Q16887380, wd:Q18127))
+      FILTER(?c5 IN (
+        wd:Q215380, wd:Q2088357, wd:Q16887380, wd:Q18127
+      ))
     },"music", UNDEF),
-    /* human occupations: music */
+
     IF(EXISTS {
       ?item wdt:P31 wd:Q5 ; wdt:P106/wdt:P279* ?o1 .
-      FILTER(?o1 IN (wd:Q639669, wd:Q177220, wd:Q36834, wd:Q130857, wd:Q155309, wd:Q161251, wd:Q488111, wd:Q1128996, wd:Q753110, wd:Q158852, wd:Q820232, wd:Q186360, wd:Q14623646))
+      FILTER(?o1 IN (
+        wd:Q639669, wd:Q177220, wd:Q36834, wd:Q130857, wd:Q155309, wd:Q161251, wd:Q488111, wd:Q1128996, wd:Q753110, wd:Q158852, wd:Q820232, wd:Q186360, wd:Q14623646
+      ))
     },"music", UNDEF),
-    /* film/tv/theatre occupations */
+
     IF(EXISTS {
       ?item wdt:P31 wd:Q5 ; wdt:P106/wdt:P279* ?o2 .
-      FILTER(?o2 IN (wd:Q33999, wd:Q2526255, wd:Q10798782, wd:Q28389, wd:Q2500638, wd:Q48820545, wd:Q36180))
+      FILTER(?o2 IN (
+        wd:Q33999, wd:Q2526255, wd:Q10798782, wd:Q28389, wd:Q2500638, wd:Q48820545, wd:Q36180
+      ))
     },"film_tv", UNDEF),
-    /* literature occupations */
+
     IF(EXISTS {
       ?item wdt:P31 wd:Q5 ; wdt:P106/wdt:P279* ?o3 .
-      FILTER(?o3 IN (wd:Q36180, wd:Q482980, wd:Q11774202, wd:Q49757))
+      FILTER(?o3 IN (
+        wd:Q36180, wd:Q482980, wd:Q11774202, wd:Q49757
+      ))
     },"books", UNDEF),
-    /* visual/performance occupations */
+
     IF(EXISTS {
       ?item wdt:P31 wd:Q5 ; wdt:P106/wdt:P279* ?o4 .
-      FILTER(?o4 IN (wd:Q1028181, wd:Q33231, wd:Q42973, wd:Q245068, wd:Q256145, wd:Q1281618, wd:Q245341))
+      FILTER(?o4 IN (
+        wd:Q1028181, wd:Q33231, wd:Q42973, wd:Q245068, wd:Q256145, wd:Q1281618, wd:Q245341
+      ))
     },"visual_or_performance", UNDEF)
+
   ) AS ?category)
 
   FILTER(BOUND(?category))
 }
 `.trim();
+
 
   let j;
   try {

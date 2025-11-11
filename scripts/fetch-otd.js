@@ -1,22 +1,25 @@
 // File: scripts/fetch-otd.js
-// Purpose: Fetch Wikipedia "On This Day" for a given date, keep only arts-related items,
-//          and write JSON to data/otd/MM-DD.json (or print to stdout if --stdout).
+// Purpose: Build a "births & deaths (arts-only)" factoid list for a given date.
+//          Output file name: data/otd/BDMM-DD.json
 //
 // Node 20+ required (uses global fetch).
 //
-// Usage:
+// Usage examples:
 //   node scripts/fetch-otd.js
-//   node scripts/fetch-otd.js --date=2025-11-11 --debug --stdout
+//   node scripts/fetch-otd.js --date=2025-12-13 --debug --stdout
 //
-// Env:
+// Env vars (optional):
 //   TARGET_DATE=YYYY-MM-DD  DEBUG=1  STDOUT=1
-
-// ------------------------ Config ------------------------
+//
+// Notes:
+// - Only births/deaths buckets are considered.
+// - Classification: humans via P106 (occupations); non-humans via P31 (type).
+// - No SPARQL is used; we call Wikidata wbgetentities in batches.
 
 const WD_API = "https://www.wikidata.org/w/api.php";
-const MAX_ENTITY_BATCH = 50; // wbgetentities supports up to 50 ids per request
 const USER_AGENT = "StrumOTD/1.0 (+https://github.com/66fishmarket-droid/STRUMOTDSeedGen)";
-const DEFAULT_FETCH_TIMEOUT_MS = Number(process.env.WDQS_TIMEOUT_MS || 45000); // just reused name
+const MAX_WB_BATCH = 45; // safe batch size for wbgetentities
+const DEBUG_DEFAULT = false;
 
 // ------------------------ CLI / ENV ------------------------
 
@@ -30,7 +33,7 @@ const argMap = Object.fromEntries(
     })
 );
 
-const DEBUG = !!(process.env.DEBUG || argMap.debug);
+const DEBUG = !!(process.env.DEBUG || argMap.debug || DEBUG_DEFAULT);
 const TO_STDOUT = !!(process.env.STDOUT || argMap.stdout);
 
 // Resolve date: --date=YYYY-MM-DD | TARGET_DATE | today (UTC)
@@ -73,72 +76,132 @@ function logDebug(...args) {
   if (DEBUG) console.log(...args);
 }
 
-async function fetchJSON(url, init) {
-  const signal = AbortSignal.timeout(DEFAULT_FETCH_TIMEOUT_MS);
-  const res = await fetch(url, { ...init, signal });
-  if (!res.ok) {
-    const body = await res.text().catch(() => "");
-    throw new Error(`HTTP ${res.status} ${res.statusText} :: ${body.slice(0, 300)}`);
-  }
-  return res.json();
-}
-
-// ------------------------ Fetch Wikipedia OTD ------------------------
+// ------------------------ Wikipedia OTD ------------------------
 
 async function fetchOtdAll(mm, dd) {
   const url = `https://en.wikipedia.org/api/rest_v1/feed/onthisday/all/${mm}/${dd}`;
   const res = await fetch(url, {
-    headers: { "User-Agent": USER_AGENT, "Accept": "application/json" }
+    headers: {
+      "User-Agent": USER_AGENT,
+      "Accept": "application/json"
+    }
   });
-  if (!res.ok) throw new Error(`OTD fetch failed ${res.status} ${res.statusText}`);
+  if (!res.ok) {
+    throw new Error(`OTD fetch failed ${res.status} ${res.statusText}`);
+  }
   return res.json();
 }
 
+// Collect items and tag with bucket for filtering later
 function collectAllItems(payload) {
   const buckets = ["events", "births", "deaths", "selected", "holidays"];
   const items = [];
   for (const b of buckets) {
     const arr = payload[b];
     if (!Array.isArray(arr)) continue;
-    for (const it of arr) items.push(it);
+    for (const it of arr) items.push({ ...it, __bucket: b });
   }
   return items;
 }
 
+const ALLOWED_BUCKETS = new Set(["births", "deaths"]);
+
+// Extract unique QIDs from the items' pages
 function extractCandidateQIDs(items) {
   const qids = new Set();
   for (const it of items) {
+    if (!ALLOWED_BUCKETS.has(it.__bucket)) continue;
     const pages = Array.isArray(it.pages) ? it.pages : [];
     for (const p of pages) {
-      if (p && typeof p.wikibase_item === "string") qids.add(p.wikibase_item);
+      if (p && typeof p.wikibase_item === "string") {
+        qids.add(p.wikibase_item);
+      }
     }
   }
   return Array.from(qids);
 }
 
-// ------------------------ Wikidata API classifier (no SPARQL) ------------------------
+// ------------------------ Wikidata Entities (no SPARQL) ------------------------
 
-// Curated sets for quick membership checks (non-transitive).
+// Robust POST to wbgetentities with retries/backoff
+async function wbgetentities(ids) {
+  const body = new URLSearchParams({
+    action: "wbgetentities",
+    ids: ids.join("|"),
+    props: "claims|sitelinks|labels",
+    format: "json",
+    origin: "*"
+  });
+
+  let attempt = 1;
+  while (true) {
+    const res = await fetch(WD_API, {
+      method: "POST",
+      headers: {
+        "User-Agent": USER_AGENT,
+        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "Accept": "application/json"
+      },
+      body: body.toString()
+    });
+
+    if ([429, 502, 503, 504].includes(res.status) && attempt < 6) {
+      const wait = Math.min(2000 * attempt + Math.floor(Math.random() * 300), 10000);
+      logDebug(`[WD] ${res.status} ${res.statusText}; retry in ${wait}ms (attempt ${attempt + 1})`);
+      await sleep(wait);
+      attempt += 1;
+      continue;
+    }
+
+    if (!res.ok) {
+      const txt = await res.text().catch(() => "");
+      throw new Error(`wbgetentities failed ${res.status} ${res.statusText} :: ${txt.slice(0, 300)}`);
+    }
+
+    const json = await res.json();
+    return json;
+  }
+}
+
+async function fetchEntitiesMap(qids) {
+  const out = new Map();
+  for (const batch of chunk(qids, MAX_WB_BATCH)) {
+    const j = await wbgetentities(batch);
+    const ents = j && j.entities ? j.entities : {};
+    for (const [qid, entity] of Object.entries(ents)) {
+      if (entity && !entity.missing) out.set(qid, entity);
+    }
+    await sleep(200); // be polite
+  }
+  return out;
+}
+
+// Helpers to pull P-values from claims
+function getIdsFromClaims(entity, prop) {
+  const claims = safeGet(entity, "claims", {});
+  const arr = claims[prop] || [];
+  const ids = [];
+  for (const c of arr) {
+    const id = safeGet(c, "mainsnak.datavalue.value.id");
+    if (id) ids.push(id);
+  }
+  return ids;
+}
+
+// ------------------------ Category Logic ------------------------
+
+// Non-human works/orgs via P31 (instance of)
 const P31_ALLOWED = new Set([
-  // music works/events/orgs
-  "Q482994","Q134556","Q7366","Q179415","Q1263612","Q34508","Q182832","Q222634","Q17489659","Q215380","Q2088357","Q16887380","Q18127",
-  // film/tv
+  // Music works/events
+  "Q482994","Q134556","Q7366","Q179415","Q1263612","Q34508","Q182832","Q222634","Q17489659",
+  // Film/TV/theatre works/events
   "Q11424","Q5398426","Q21191270","Q24862","Q226730","Q41298",
-  // books/writing/lit works
+  // Books/writing works
   "Q7725634","Q571","Q8261","Q25379","Q5185279",
-  // visual/performance arts
-  "Q3305213","Q179700","Q22669","Q207694","Q2431196","Q2743","Q860861"
-]);
-
-const P106_ALLOWED = new Set([
-  // music occupations
-  "Q639669","Q177220","Q36834","Q130857","Q155309","Q161251","Q488111","Q1128996","Q753110","Q158852","Q820232","Q186360","Q14623646",
-  // film/tv/theatre
-  "Q33999","Q2526255","Q10798782","Q28389","Q2500638","Q48820545","Q36180",
-  // literature
-  "Q36180","Q482980","Q11774202","Q49757",
-  // visual/performance
-  "Q1028181","Q33231","Q42973","Q245068","Q256145","Q1281618","Q245341"
+  // Visual/performance arts
+  "Q3305213","Q179700","Q22669","Q207694","Q2431196","Q2743","Q860861",
+  // Music orgs
+  "Q215380","Q2088357","Q16887380","Q18127"
 ]);
 
 function mapCategoryFromP31(qid) {
@@ -149,140 +212,99 @@ function mapCategoryFromP31(qid) {
   return null;
 }
 
+// Humans via P106 (occupation)
+const P106_ALLOWED = new Set([
+  // music
+  "Q639669","Q177220","Q36834","Q130857","Q155309","Q161251","Q488111","Q1128996","Q753110","Q158852","Q820232","Q186360","Q14623646",
+  // film/tv/theatre (no generic "writer" here)
+  "Q33999","Q2526255","Q10798782","Q28389","Q2500638","Q48820545",
+  // literature
+  "Q482980","Q11774202","Q49757","Q36180",
+  // visual/performance
+  "Q1028181","Q33231","Q42973","Q245068","Q256145","Q1281618","Q245341"
+]);
+
 function mapCategoryFromP106(qid) {
   if (["Q639669","Q177220","Q36834","Q130857","Q155309","Q161251","Q488111","Q1128996","Q753110","Q158852","Q820232","Q186360","Q14623646"].includes(qid)) return "music";
-  if (["Q33999","Q2526255","Q10798782","Q28389","Q2500638","Q48820545","Q36180"].includes(qid)) return "film_tv";
-  if (["Q36180","Q482980","Q11774202","Q49757"].includes(qid)) return "books";
+  if (["Q33999","Q2526255","Q10798782","Q28389","Q2500638","Q48820545"].includes(qid)) return "film_tv";
+  if (["Q482980","Q11774202","Q49757","Q36180"].includes(qid)) return "books";
   if (["Q1028181","Q33231","Q42973","Q245068","Q256145","Q1281618","Q245341"].includes(qid)) return "performance";
   return null;
 }
 
-// Hit Wikidata API for up to 50 ids; return map QID -> category or null.
-async function classifyViaWikidataAPI(qids) {
-  const keep = new Set();
-  const categoryMap = new Map();
+function categorizeEntity(entity) {
+  const p31 = getIdsFromClaims(entity, "P31");
+  const p106 = getIdsFromClaims(entity, "P106");
+  const isHuman = p31.includes("Q5");
 
-  for (const batch of chunk(qids, MAX_ENTITY_BATCH)) {
-    // wbgetentities supports POST or GET; we use POST form to be safe.
-    const body = new URLSearchParams({
-      action: "wbgetentities",
-      ids: batch.join("|"),
-      props: "claims",
-      format: "json",
-      origin: "*"
-    }).toString();
-
-    const data = await fetchJSON(WD_API, {
-      method: "POST",
-      headers: {
-        "User-Agent": USER_AGENT,
-        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-        "Accept": "application/json"
-      },
-      body
-    });
-
-    const entities = data?.entities || {};
-    for (const qid of batch) {
-      const ent = entities[qid];
-      if (!ent || ent.missing === "") continue;
-
-      const claims = ent.claims || {};
-      const p31 = (claims.P31 || []).map(s => safeGet(s, "mainsnak.datavalue.value.id")).filter(Boolean);
-      const p106 = (claims.P106 || []).map(s => safeGet(s, "mainsnak.datavalue.value.id")).filter(Boolean);
-
-      let category = null;
-
-      // Prefer works/orgs (P31) first, then occupations (P106)
-      for (const t of p31) {
-        if (!P31_ALLOWED.has(t)) continue;
-        category = mapCategoryFromP31(t);
-        if (category) break;
-      }
-      if (!category) {
-        for (const o of p106) {
-          if (!P106_ALLOWED.has(o)) continue;
-          category = mapCategoryFromP106(o);
-          if (category) break;
-        }
-      }
-
-      if (category) {
-        keep.add(qid);
-        categoryMap.set(qid, category);
-      }
+  if (isHuman) {
+    for (const o of p106) {
+      if (!P106_ALLOWED.has(o)) continue;
+      const cat = mapCategoryFromP106(o);
+      if (cat) return cat;
     }
-
-    // be polite
-    await sleep(300);
+    return null; // human but not an arts occupation
+  } else {
+    for (const t of p31) {
+      if (!P31_ALLOWED.has(t)) continue;
+      const cat = mapCategoryFromP31(t);
+      if (cat) return cat;
+    }
+    return null;
   }
-
-  return { keep, categoryMap };
-}
-
-// ------------------------ Keyword Heuristic Fallback ------------------------
-
-function looksArtsByText(pages = []) {
-  const hay = (pages
-    .map(p => `${p?.title || ""} ${p?.displaytitle || ""} ${p?.description || ""} ${p?.extract || ""}`)
-    .join(" ") || "").toLowerCase();
-
-  const music = /(album|single|song|ep|mixtape|music video|band|musician|singer|rapper|guitarist|drummer|bassist|pianist|composer|conductor|orchestra|ensemble|label)\b/;
-  const film  = /\b(film|movie|television|tv series|episode|director|screenwriter|cinematograph|actor|actress|producer|festival|award)\b/;
-  const books = /\b(book|novel|poem|poetry|play|playwright|author|writer|literary|publication)\b/;
-  const perf  = /\b(painter|sculptor|photograph|photographer|ballet|dance|choreograph|performance art|exhibition|museum|gallery|artist|comedian)\b/;
-
-  if (music.test(hay)) return "music";
-  if (film.test(hay)) return "film_tv";
-  if (books.test(hay)) return "books";
-  if (perf.test(hay)) return "performance";
-  return null;
 }
 
 // ------------------------ Main ------------------------
 
 async function main() {
   try {
-    // 1) Fetch OTD REST
+    // 1) Fetch OTD (all buckets)
     const payload = await fetchOtdAll(MM, DD);
 
-    // 2) Gather all items and candidate QIDs
+    // 2) Gather items and candidate QIDs (births/deaths only)
     const allItems = collectAllItems(payload);
     const candidateQIDs = extractCandidateQIDs(allItems);
 
     console.log(`Collected ${candidateQIDs.length} candidate QIDs for ${KEY_SLASH}`);
 
-    // 3) Classify via Wikidata API (no SPARQL)
-    let kept = new Set();
-    let categoryMap = new Map();
+    // 3) Fetch Wikidata entities for candidates
+    const entities = await fetchEntitiesMap(candidateQIDs);
 
-    if (candidateQIDs.length > 0) {
-      const { keep, categoryMap: cMap } = await classifyViaWikidataAPI(candidateQIDs);
-      kept = keep;
-      categoryMap = cMap;
-      console.log(`Wikidata API kept ${kept.size} QIDs`);
-    } else {
-      console.log("Classifier kept 0 QIDs");
-    }
-
-    // 4) Build preliminary list from entity classifications
-    const flat = [];
+    // 4) Build list constrained to births/deaths and arts categories
+    const results = [];
     for (const it of allItems) {
+      if (!ALLOWED_BUCKETS.has(it.__bucket)) continue;
+
       const pages = Array.isArray(it.pages) ? it.pages : [];
-      const page = pages.find(p => p && typeof p.wikibase_item === "string" && kept.has(p.wikibase_item));
-      if (!page) continue;
+      // Find first page with a QID we can categorize
+      let chosen = null;
+      let chosenCat = null;
 
-      const qid = page.wikibase_item;
-      const category = categoryMap.get(qid) || null;
+      for (const p of pages) {
+        const qid = p && p.wikibase_item;
+        if (!qid) continue;
+        const ent = entities.get(qid);
+        if (!ent) continue;
 
+        const cat = categorizeEntity(ent);
+        if (!cat) continue;
+
+        chosen = p;
+        chosenCat = cat;
+        break;
+      }
+
+      if (!chosen) continue; // skip non-arts or unclassifiable
+
+      const qid = chosen.wikibase_item;
       const title =
-        safeGet(page, "titles.normalized") ||
-        page.title ||
+        safeGet(chosen, "titles.normalized") ||
+        chosen.title ||
         "Untitled";
 
       const url =
-        safeGet(page, "content_urls.desktop.page") ||
-        (page.title ? `https://en.wikipedia.org/wiki/${encodeURIComponent(page.title)}` : null);
+        safeGet(chosen, "content_urls.desktop.page") ||
+        (chosen.title ? `https://en.wikipedia.org/wiki/${encodeURIComponent(chosen.title)}` : null);
 
       const summary = typeof it.text === "string" ? it.text : "";
 
@@ -291,88 +313,31 @@ async function main() {
           ? it.year
           : (summary.match(/\b(\d{3,4})\b/)?.[1] ? Number(summary.match(/\b(\d{3,4})\b/)[1]) : null);
 
-      flat.push({
+      // Tag the category with birth/death (e.g., music_birth)
+      const categoryTagged = `${chosenCat}_${it.__bucket}`;
+
+      results.push({
         qid,
         key_mmdd: KEY_SLASH,
         title,
         summary,
         url,
-        category,
+        category: categoryTagged,
         year,
         event_mmdd: KEY_SLASH,
         times_seen: 0
       });
     }
 
-    // 5) If nothing via entities, try keyword fallback
-    const cleaned = flat.map(x => ({
-      qid: x.qid,
-      key_mmdd: x.key_mmdd,
-      title: x.title,
-      summary: x.summary,
-      url: x.url,
-      category: x.category,
-      year: x.year,
-      event_mmdd: x.event_mmdd,
-      times_seen: 0
-    }));
-
-    if (cleaned.length === 0) {
-      const heur = [];
-      for (const it of allItems) {
-        const pages = Array.isArray(it.pages) ? it.pages : [];
-        const pageWithQid = pages.find(p => p?.wikibase_item);
-        if (!pageWithQid) continue;
-
-        const cat = looksArtsByText(pages);
-        if (!cat) continue;
-
-        const title =
-          safeGet(pageWithQid, "titles.normalized") ||
-          pageWithQid.title ||
-          "Untitled";
-
-        const url =
-          safeGet(pageWithQid, "content_urls.desktop.page") ||
-          (pageWithQid.title ? `https://en.wikipedia.org/wiki/${encodeURIComponent(pageWithQid.title)}` : null);
-
-        const summary = typeof it.text === "string" ? it.text : "";
-
-        const year =
-          typeof it.year === "number"
-            ? it.year
-            : (summary.match(/\b(\d{3,4})\b/)?.[1] ? Number(summary.match(/\b(\d{3,4})\b/)[1]) : null);
-
-        heur.push({
-          qid: pageWithQid.wikibase_item,
-          key_mmdd: KEY_SLASH,
-          title,
-          summary,
-          url,
-          category: cat,
-          year,
-          event_mmdd: KEY_SLASH,
-          times_seen: 0
-        });
-      }
-      // Dedup on QID, keep first
-      const seen = new Set();
-      const dedup = [];
-      for (const x of heur) {
-        if (seen.has(x.qid)) continue;
-        seen.add(x.qid);
-        dedup.push(x);
-      }
-      if (dedup.length > 0) {
-        console.log(`[fallback] Using ${dedup.length} keyword-matched arts items.`);
-        cleaned.push(...dedup);
-      } else {
-        console.log("[fallback] No keyword matches either.");
-      }
+    // 5) Dedupe by QID
+    const dedupMap = new Map();
+    for (const x of results) {
+      if (!dedupMap.has(x.qid)) dedupMap.set(x.qid, x);
     }
+    const deduped = Array.from(dedupMap.values());
 
     // 6) Sort for consistency: by category then title
-    cleaned.sort((a, b) => {
+    deduped.sort((a, b) => {
       const ca = a.category || "";
       const cb = b.category || "";
       if (ca !== cb) return ca.localeCompare(cb);
@@ -381,19 +346,19 @@ async function main() {
 
     // 7) Output
     if (TO_STDOUT) {
-      console.log(JSON.stringify(cleaned, null, 2));
+      console.log(JSON.stringify(deduped, null, 2));
       return;
     }
 
     const fs = await import("node:fs/promises");
     const path = await import("node:path");
     const outDir = path.resolve(process.cwd(), "data", "otd");
-    const outFile = path.join(outDir, `${KEY_SLASH}.json`);
+    const outFile = path.join(outDir, `BD${KEY_SLASH}.json`); // e.g., BD12-13.json
 
     await fs.mkdir(outDir, { recursive: true });
-    await fs.writeFile(outFile, JSON.stringify(cleaned, null, 2) + "\n", "utf8");
+    await fs.writeFile(outFile, JSON.stringify(deduped, null, 2) + "\n", "utf8");
 
-    console.log(`Wrote ${outFile} with ${cleaned.length} items`);
+    console.log(`Wrote ${outFile} with ${deduped.length} items`);
   } catch (err) {
     console.error(`[fetch-otd] ERROR: ${err.message || err}`);
     if (DEBUG) console.error(err.stack);

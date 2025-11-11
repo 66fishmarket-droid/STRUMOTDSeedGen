@@ -25,8 +25,12 @@ jobs:
       - name: Install deps
         run: npm install --no-audit --no-fund
 
-      - name: Build OTD JSON for today
-        run: npm run build-day
+      - name: Build OTD JSON for buffer date (+32 days)
+        run: |
+          BUFFER_DATE=$(date -u -d "+32 days" +%Y-%m-%d)
+          echo "Building buffer for ${BUFFER_DATE}"
+          TARGET_DATE="${BUFFER_DATE}" npm run build-day
+
 
       - name: Commit JSON
         run: |

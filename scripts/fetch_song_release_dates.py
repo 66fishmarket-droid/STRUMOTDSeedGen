@@ -413,7 +413,14 @@ def main():
     s = http_session()
 
     rows = read_csv(args.in_path)
+
+    # Only process rows missing a release_date
+    rows = [r for r in rows if not (r.get("release_date") or "").strip()]
+
     n = len(rows)
+    if n == 0:
+        print("No missing release dates found — nothing to do.")
+        return
     if args.start_index < 0 or args.start_index >= n:
         start = 0
     else:

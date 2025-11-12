@@ -22,8 +22,9 @@ from urllib.parse import urlparse, unquote
 
 import requests
 
-IN_PATH_DEFAULT = "data/songs.csv"
-OUT_PATH_DEFAULT = "data/songs_with_dates.csv"
+IN_PATH_DEFAULT = "data/songs_top10_us_with_dates.csv"
+OUT_PATH_DEFAULT = "data/songs_top10_us_with_dates.csv"
+SEED_FROM = "data/songs_top10_us.csv"  # used only if the with_dates file is missing
 
 WIKIPEDIA_API = "https://en.wikipedia.org/w/api.php"
 WIKIDATA_ENTITY = "https://www.wikidata.org/wiki/Special:EntityData/{qid}.json"
@@ -403,54 +404,58 @@ def write_csv(path: str, rows: List[Dict]) -> None:
 
 def main():
     ap = argparse.ArgumentParser(description="Fetch release dates for Wikipedia song pages.")
-    ap.add_argument("--in", dest="in_path", default=IN_PATH_DEFAULT, help="Input CSV path (default data/songs.csv)")
-    ap.add_argument("--out", dest="out_path", default=OUT_PATH_DEFAULT, help="Output CSV path (default data/songs_with_dates.csv)")
-    ap.add_argument("--start", dest="start_index", type=int, default=0, help="Start row index (0-based) for resuming")
-    ap.add_argument("--limit", dest="limit", type=int, default=0, help="Process at most N rows (0 = all)")
-    ap.add_argument("--throttle", type=float, default=0.25, help="Seconds sleep between items")
+    ap.add_argument("--in", dest="in_path", default=IN_PATH_DEFAULT, help="Input CSV path")
+    ap.add_argument("--out", dest="out_path", default=OUT_PATH_DEFAULT, help="Output CSV path")
+    ap.add_argument("--throttle", type=float, default=0.3, help="Seconds sleep between items")
     args = ap.parse_args()
+
+    # Auto-seed: if the with_dates file doesn't exist, copy from the raw Top 10 file
+    if not os.path.exists(args.in_path):
+        if os.path.exists(SEED_FROM):
+            os.makedirs(os.path.dirname(args.in_path), exist_ok=True)
+            with open(SEED_FROM, "r", encoding="utf-8") as src, open(args.in_path, "w", encoding="utf-8") as dst:
+                dst.write(src.read())
+            print(f"Seeded {args.in_path} from {SEED_FROM}")
+        else:
+            print(f"Input file not found: {args.in_path}")
+            return
 
     s = http_session()
 
-    rows = read_csv(args.in_path)
+    # Read ALL rows; we will update only the missing ones and write the full file back
+    all_rows = read_csv(args.in_path)
 
-    # Only process rows missing a release_date
-    rows = [r for r in rows if not (r.get("release_date") or "").strip()]
+    # Safety: ensure required columns exist
+    required = ["work_type","title","byline","release_date","month","day","extra","source_url","entry_date","peak_date","peak_position","date_source"]
+    if all_rows and any(k not in all_rows[0] for k in required):
+        # Normalize structure by adding any missing keys
+        for r in all_rows:
+            for k in required:
+                r.setdefault(k, "")
 
-    n = len(rows)
-    if n == 0:
+    # Figure out which rows actually need work (missing release_date)
+    target_idxs = [i for i, r in enumerate(all_rows) if not (r.get("release_date") or "").strip()]
+    if not target_idxs:
         print("No missing release dates found — nothing to do.")
         return
-    if args.start_index < 0 or args.start_index >= n:
-        start = 0
-    else:
-        start = args.start_index
 
-    if args.limit and args.limit > 0:
-        end = min(n, start + args.limit)
-    else:
-        end = n
+    print(f"Processing {len(target_idxs)} rows missing release_date out of {len(all_rows)} total...")
 
-    out_rows: List[Dict] = []
-    for i, row in enumerate(rows):
-        if i < start or i >= end:
-            # pass-through unaffected rows
-            out_rows.append(dict(row))
-            continue
+    # Process only the needed rows, updating in place
+    for count, i in enumerate(target_idxs, start=1):
         try:
-            out_row = process_row(s, row, throttle=args.throttle)
+            updated = process_row(s, all_rows[i], throttle=args.throttle)
+            all_rows[i] = updated
         except Exception as e:
-            out_row = dict(row)
-            out_row["release_date"] = ""
-            out_row["month"] = ""
-            out_row["day"] = ""
-            out_row["date_source"] = f"error:{type(e).__name__}"
-        out_rows.append(out_row)
-        if (i - start + 1) % 25 == 0:
-            print(f"Processed {i - start + 1} rows...")
+            # Preserve row and mark the error so we can inspect later
+            all_rows[i]["date_source"] = f"error:{type(e).__name__}"
+        if count % 25 == 0:
+            print(f"Processed {count}/{len(target_idxs)} rows...")
 
-    write_csv(args.out_path, out_rows)
-    print(f"Wrote {args.out_path} rows={len(out_rows)} (processed {end-start} rows)")
+    # Write the full file back out (all rows, with updated dates where found)
+    write_csv(args.out_path, all_rows)
+    print(f"Wrote {args.out_path} rows={len(all_rows)} (updated {len(target_idxs)})")
+
 
 if __name__ == "__main__":
     main()

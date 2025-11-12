@@ -21,9 +21,12 @@ OUT_DEATHS = "data/deaths.csv"
 FIELDS = ["work_type","title","byline","release_date","month","day","extra","source_url"]
 
 API_TPL = "https://en.wikipedia.org/api/rest_v1/feed/onthisday/{kind}/{mm}/{dd}"
+VALID_KINDS = ("births", "deaths")
+
 
 def ua_contact() -> str:
     return os.getenv("USER_AGENT_CONTACT", "https://github.com/OWNER/REPO/issues")
+
 
 def session() -> requests.Session:
     s = requests.Session()
@@ -33,13 +36,18 @@ def session() -> requests.Session:
     })
     return s
 
+
 def backoff_get(s: requests.Session, url: str, max_retries: int = 6, base_sleep: float = 1.0):
     sleep = base_sleep
     for attempt in range(1, max_retries + 1):
         r = s.get(url, timeout=30)
         if r.status_code == 200:
             return r
-        if r.status_code in (403, 429, 500, 502, 503, 504):
+        # Treat 4xx except 429 as terminal
+        if r.status_code in (400, 401, 402, 403, 404, 405, 406, 410):
+            r.raise_for_status()
+        # Retryable
+        if r.status_code in (429, 500, 502, 503, 504):
             if attempt == max_retries:
                 r.raise_for_status()
             time.sleep(sleep)
@@ -48,35 +56,64 @@ def backoff_get(s: requests.Session, url: str, max_retries: int = 6, base_sleep:
         r.raise_for_status()
     return None
 
+
+def normalize_kind(kind: str) -> str:
+    k = (kind or "").strip().lower()
+    # tolerate singulars
+    if k == "birth":
+        return "births"
+    if k == "death":
+        return "deaths"
+    return k
+
+
 def fetch_day(kind: str, mm: int, dd: int, s: requests.Session) -> Dict:
-    url = API_TPL.format(kind=kind, mm=f"{mm:02d}", dd=f"{dd:02d}")
+    k = normalize_kind(kind)
+    if k not in VALID_KINDS:
+        raise ValueError(f"Invalid kind: {kind}. Expected one of {VALID_KINDS}")
+    url = API_TPL.format(kind=k, mm=f"{mm:02d}", dd=f"{dd:02d}")
     r = backoff_get(s, url)
     return r.json()
+
 
 def norm_text(x) -> str:
     t = str(x or "").strip()
     return " ".join(t.split())
 
+
 def rows_from_payload(kind: str, payload: Dict, mm: int, dd: int) -> List[Dict]:
     out: List[Dict] = []
-    key = f"{kind}s"  # births / deaths
-    items = payload.get(key, [])
+    k = normalize_kind(kind)  # "births" or "deaths"
+    items = payload.get(k, [])
     for it in items:
         year = it.get("year")
         pages = it.get("pages") or []
-        page = pages[0] if pages else {}
-        title = page.get("titles", {}).get("normalized") or page.get("title") or it.get("text") or ""
+        page = pages[1-1] if pages else {}
+        # Prefer normalized title; fall back sensibly
+        title = (
+            get_nested(page, ["titles","normalized"])
+            or page.get("title")
+            or it.get("text")
+            or ""
+        )
         desc = page.get("description") or ""
-        href = page.get("content_urls", {}).get("desktop", {}).get("page") or page.get("extract_html") or ""
+        href = (
+            get_nested(page, ["content_urls","desktop","page"])
+            or get_nested(page, ["content_urls","mobile","page"])
+            or page.get("content_urls")  # rare structures
+            or page.get("extract_html")  # last-resort crumb
+            or ""
+        )
         title = norm_text(title)
         desc = norm_text(desc)
         try:
             dt = datetime(year=int(year), month=mm, day=dd)
             date_str = dt.strftime("%Y-%m-%d")
         except Exception:
-            date_str = f"{year or '0000'}-{mm:02d}-{dd:02d}"
+            # keep something sortable even if "year" is missing or weird
+            date_str = f"{(year or '0000')}-{mm:02d}-{dd:02d}"
         out.append({
-            "work_type": "birth" if kind == "birth" else "death",
+            "work_type": "birth" if k == "births" else "death",
             "title": title,
             "byline": desc,
             "release_date": date_str,
@@ -87,6 +124,16 @@ def rows_from_payload(kind: str, payload: Dict, mm: int, dd: int) -> List[Dict]:
         })
     return out
 
+
+def get_nested(d: Dict, path: List[str], default=None):
+    cur = d
+    for p in path:
+        if not isinstance(cur, dict) or p not in cur:
+            return default
+        cur = cur[p]
+    return cur
+
+
 def write_csv(path: str, rows: List[Dict]) -> None:
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "w", encoding="utf-8", newline="") as f:
@@ -95,12 +142,14 @@ def write_csv(path: str, rows: List[Dict]) -> None:
         for r in rows:
             w.writerow({k: r.get(k, "") for k in FIELDS})
 
+
 def rolling_dates(start_dt: datetime, days: int) -> List[Tuple[int,int]]:
     v = []
     for i in range(days):
         d = start_dt + timedelta(days=i)
         v.append((d.month, d.day))
     return v
+
 
 def dedupe(rows: List[Dict]) -> List[Dict]:
     seen = set()
@@ -112,6 +161,7 @@ def dedupe(rows: List[Dict]) -> List[Dict]:
         seen.add(key)
         out.append(r)
     return out
+
 
 def main():
     parser = argparse.ArgumentParser(description="Fetch Wikipedia births/deaths for a day, rolling window, or append-next-day.")
@@ -142,8 +192,8 @@ def main():
         mm, dd = next_day.month, next_day.day
         print(f"Appending births/deaths for next day: {mm:02d}-{dd:02d}")
 
-        births_new = rows_from_payload("birth", fetch_day("birth", mm, dd, s), mm, dd)
-        deaths_new = rows_from_payload("death", fetch_day("death", mm, dd, s), mm, dd)
+        births_new = rows_from_payload("births", fetch_day("births", mm, dd, s), mm, dd)
+        deaths_new = rows_from_payload("deaths", fetch_day("deaths", mm, dd, s), mm, dd)
 
         # Append + dedupe
         if os.path.exists(OUT_BIRTHS):
@@ -171,10 +221,10 @@ def main():
 
     if args.mm and args.dd:
         mm = int(args.mm); dd = int(args.dd)
-        for kind in ("birth", "death"):
+        for kind in ("births", "deaths"):
             payload = fetch_day(kind, mm, dd, s)
             rows = rows_from_payload(kind, payload, mm, dd)
-            if kind == "birth":
+            if kind == "births":
                 births_all.extend(rows)
             else:
                 deaths_all.extend(rows)
@@ -185,14 +235,15 @@ def main():
             start = datetime.now(ZoneInfo("Europe/London")).replace(hour=0, minute=0, second=0, microsecond=0)
         dates = rolling_dates(start, args.days)
         for (mm, dd) in dates:
-            for kind in ("birth", "death"):
+            for kind in ("births", "deaths"):
                 try:
                     payload = fetch_day(kind, mm, dd, s)
                 except Exception as e:
-                    print(f"Warn: {kind} {mm:02d}-{dd:02d} fetch error: {e}")
+                    singular = "birth" if kind == "births" else "death"
+                    print(f"Warn: {singular} {mm:02d}-{dd:02d} fetch error: {e}")
                     continue
                 rows = rows_from_payload(kind, payload, mm, dd)
-                if kind == "birth":
+                if kind == "births":
                     births_all.extend(rows)
                 else:
                     deaths_all.extend(rows)
@@ -206,6 +257,7 @@ def main():
 
     print(f"Wrote {OUT_BIRTHS} rows={len(births_all)}")
     print(f"Wrote {OUT_DEATHS} rows={len(deaths_all)}")
+
 
 if __name__ == "__main__":
     main()

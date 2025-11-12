@@ -37,18 +37,21 @@ jobs:
 
       - name: Install dependencies
         run: pip install requests pandas lxml SPARQLWrapper
-
-      - name: Pull births/deaths
+     
+      - name: Pull births/deaths (rolling buffer)
         env:
           USER_AGENT_CONTACT: ${{ github.server_url }}/${{ github.repository }}/issues
+          BIRTHS_DEATHS_DAYS: "32"   # default lookahead
         run: |
           mm="${{ github.event.inputs.mm }}"
           dd="${{ github.event.inputs.dd }}"
           if [ -n "$mm" ] && [ -n "$dd" ]; then
             python scripts/pull_births_deaths.py "$mm" "$dd"
           else
-            python scripts/pull_births_deaths.py
+            # rolling mode starting today Europe/London
+            python scripts/pull_births_deaths.py --days "${BIRTHS_DEATHS_DAYS}"
           fi
+
 
       - name: Build arts datasets
         env:

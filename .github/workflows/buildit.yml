@@ -42,23 +42,19 @@ jobs:
       - name: Install dependencies
         run: pip install requests pandas lxml SPARQLWrapper
 
-            - name: Pull births/deaths (rolling or daily append)
+      - name: Pull births/deaths (rolling or daily append)
         env:
           USER_AGENT_CONTACT: ${{ github.server_url }}/${{ github.repository }}/issues
         run: |
           mm="${{ github.event.inputs.mm }}"
           dd="${{ github.event.inputs.dd }}"
           rebuild="${{ github.event.inputs.build_buffer_births_deaths }}"
-
           if [ -n "$mm" ] && [ -n "$dd" ]; then
-            # Manual single-day mode
             python scripts/pull_births_deaths.py "$mm" "$dd"
           else
             if [ "$rebuild" = "true" ]; then
-              echo "Rebuilding full 31-day buffer..."
               python scripts/pull_births_deaths.py --days 31
             else
-              echo "Appending only next day (32nd day from last record)..."
               python scripts/pull_births_deaths.py --append-next-day
             fi
           fi

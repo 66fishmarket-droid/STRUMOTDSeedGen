@@ -167,6 +167,10 @@ def looks_like_proper_table(header_cells: List[str]) -> bool:
     has_date   = any(("entry" in x) or ("week of" in x) or (x.strip() == "date") for x in h)
     return has_title and has_artist and has_peak and has_date
 
+def text_without_sup(el) -> str:
+    # join all text nodes that are NOT inside <sup>
+    return clean_text("".join(el.xpath('.//text()[not(ancestor::sup)]')))
+
 def parse_year_page(resp_text: str, year: int, url: str) -> List[Dict]:
     out: List[Dict] = []
     tree = html.fromstring(resp_text)
@@ -244,7 +248,7 @@ def parse_year_page(resp_text: str, year: int, url: str) -> List[Dict]:
             peakd_td  = td_at(i_peak_date) if i_peak_date is not None else None
 
             title  = cell_text(title_td) if title_td is not None else ""
-            artist = clean_text("".join(artist_td.itertext())) if artist_td is not None else ""
+            artist = text_without_sup(artist_td) if artist_td is not None else ""
 
             # guard against junk
             if not title or not artist:

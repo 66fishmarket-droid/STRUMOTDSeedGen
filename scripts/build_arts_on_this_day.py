@@ -21,7 +21,8 @@ FIELDS = [
 ]
 
 # Songs file carries extended chart context
-SONG_FIELDS = FIELDS + ["entry_date","peak_date","peak_position"]
+# NOTE: We do NOT infer release_date from chart dates. Leave release_date/month/day blank.
+SONG_FIELDS = FIELDS + ["entry_date","peak_date","peak_position","date_source"]
 
 OUT_SONGS  = "data/songs_top10_us.csv"
 OUT_ALBUMS = "data/albums_us_1m.csv"    # placeholder
@@ -61,7 +62,7 @@ def http_get_conditional(s: requests.Session, url: str, ims: Optional[str], max_
         r.raise_for_status()
     return None
 
-# ---------- date helpers ----------
+# ---------- date helpers (chart dates ONLY) ----------
 
 def parse_first_date(text: str, year_hint: int) -> str:
     if not text:
@@ -86,11 +87,6 @@ def parse_first_date(text: str, year_hint: int) -> str:
                 continue
     return ""
 
-def month_day(date_str: str) -> Tuple[str,str]:
-    if len(date_str) >= 10 and date_str[4] == '-' and date_str[7] == '-':
-        return date_str[5:7], date_str[8:10]
-    return "",""
-
 # ---------- state + IO ----------
 
 def load_state() -> Dict[str,str]:
@@ -114,6 +110,7 @@ def read_existing_songs() -> List[Dict]:
     with open(OUT_SONGS, encoding="utf-8") as f:
         r = csv.DictReader(f)
         for row in r:
+            # Normalize and ensure all fields exist
             norm = {k: row.get(k, "") for k in SONG_FIELDS}
             rows.append(norm)
     return rows
@@ -149,13 +146,13 @@ def clean_text(s: str) -> str:
 
 def cell_text(td) -> str:
     # Prefer anchor text for title; else the full cell text
-    a = td.xpath(".//a[1]/text()")
+    a = td.xpath(".//a[1]/text()") if td is not None else []
     if a:
         return clean_text(a[0])
-    return clean_text("".join(td.itertext()))
+    return clean_text("".join(td.itertext())) if td is not None else ""
 
 def cell_num(td) -> str:
-    t = clean_text("".join(td.itertext()))
+    t = clean_text("".join(td.itertext())) if td is not None else ""
     m = re.search(r"\d+", t)
     return m.group(0) if m else ""
 
@@ -169,7 +166,7 @@ def looks_like_proper_table(header_cells: List[str]) -> bool:
 
 def text_without_sup(el) -> str:
     # join all text nodes that are NOT inside <sup>
-    return clean_text("".join(el.xpath('.//text()[not(ancestor::sup)]')))
+    return clean_text("".join(el.xpath('.//text()[not(ancestor::sup)]'))) if el is not None else ""
 
 def parse_year_page(resp_text: str, year: int, url: str) -> List[Dict]:
     out: List[Dict] = []
@@ -216,11 +213,9 @@ def parse_year_page(resp_text: str, year: int, url: str) -> List[Dict]:
         # iterate body rows
         for tr in tbl.xpath(".//tr[position()>1]"):
             # Skip section header rows like "Singles from 2024/2025"
-            # Those are usually all <th> or a single <td> with colspan across the table.
             tr_ths = tr.xpath("./th")
             tr_tds = tr.xpath("./td")
             if (tr_ths and not tr_tds) or (len(tr_tds) == 1 and tr_tds[0].get("colspan")):
-                # example: 'Singles from 2025' section header
                 continue
 
             if not tr_tds:
@@ -247,8 +242,8 @@ def parse_year_page(resp_text: str, year: int, url: str) -> List[Dict]:
             peak_td   = td_at(i_peak)
             peakd_td  = td_at(i_peak_date) if i_peak_date is not None else None
 
-            title  = cell_text(title_td) if title_td is not None else ""
-            artist = text_without_sup(artist_td) if artist_td is not None else ""
+            title  = cell_text(title_td)
+            artist = text_without_sup(artist_td)
 
             # guard against junk
             if not title or not artist:
@@ -270,20 +265,20 @@ def parse_year_page(resp_text: str, year: int, url: str) -> List[Dict]:
             entry_date = parse_first_date(entry_raw, year) or parse_first_date(week_raw, year) or f"{year}-12-31"
             peak_date  = parse_first_date(peakd_raw, year) if peakd_raw else ""
 
-            mm, dd = month_day(entry_date)
-
+            # IMPORTANT: Do NOT set release_date/month/day here. That is filled later by the date fetcher.
             out.append({
                 "work_type": "song",
                 "title": title,
                 "byline": artist,
-                "release_date": entry_date,  # true release will be enriched later
-                "month": mm,
-                "day": dd,
+                "release_date": "",         # leave blank (real release date fetched later)
+                "month": "",                # derived from release_date later
+                "day": "",                  # derived from release_date later
                 "extra": "US Top 10",
                 "source_url": url,
                 "entry_date": entry_date,
                 "peak_date": peak_date,
-                "peak_position": peak_raw
+                "peak_position": peak_raw,
+                "date_source": ""           # set later by date fetcher (wikidata/wikitext)
             })
 
     return out

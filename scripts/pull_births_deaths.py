@@ -129,6 +129,43 @@ def dedupe(rows: List[Dict]) -> List[Dict]:
     return out
 
 def main():
+    s = requests.Session()
+
+    # Detect append-next-day mode
+    if "--append-next-day" in sys.argv:
+        import pandas as pd
+        from datetime import datetime, timedelta
+        from zoneinfo import ZoneInfo
+
+        # read last known date from births.csv
+        if os.path.exists(OUT_BIRTHS):
+            df = pd.read_csv(OUT_BIRTHS)
+            if not df.empty:
+                last = pd.to_datetime(df["release_date"], errors="coerce").max()
+            else:
+                last = datetime.now(ZoneInfo("Europe/London"))
+        else:
+            last = datetime.now(ZoneInfo("Europe/London"))
+
+        next_day = last + timedelta(days=1)
+        mm, dd = next_day.month, next_day.day
+        print(f"Fetching births/deaths for next day: {mm:02d}-{dd:02d}")
+
+        births_all = rows_from_payload("birth", fetch_day("birth", mm, dd, s), mm, dd)
+        deaths_all = rows_from_payload("death", fetch_day("death", mm, dd, s), mm, dd)
+
+        import pandas as pd
+        if os.path.exists(OUT_BIRTHS):
+            pd.concat([pd.read_csv(OUT_BIRTHS), pd.DataFrame(births_all)]) \
+                .drop_duplicates().to_csv(OUT_BIRTHS, index=False)
+            pd.concat([pd.read_csv(OUT_DEATHS), pd.DataFrame(deaths_all)]) \
+                .drop_duplicates().to_csv(OUT_DEATHS, index=False)
+        else:
+            write_csv(OUT_BIRTHS, births_all)
+            write_csv(OUT_DEATHS, deaths_all)
+        print("Appended new day to births/deaths.")
+        return
+
     parser = argparse.ArgumentParser(description="Fetch Wikipedia births/deaths for a day or rolling window.")
     parser.add_argument("mm", nargs="?", help="Month (MM) for single-day mode")
     parser.add_argument("dd", nargs="?", help="Day (DD) for single-day mode")

@@ -44,6 +44,7 @@ jobs:
 
       - name: Build arts (scaffold now)
         env:
+          FULL_BUILD: "true"  
           USER_AGENT_CONTACT: ${{ github.server_url }}/${{ github.repository }}/issues
           OMDB_API_KEY: ${{ secrets.OMDB_API_KEY }}
         run: python scripts/build_arts_on_this_day.py

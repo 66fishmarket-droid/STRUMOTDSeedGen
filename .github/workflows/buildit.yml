@@ -12,7 +12,11 @@ on:
         required: false
         default: ""
       full_build:
-        description: Set to true to rebuild all years (one-time seeding).
+        description: Set to true to rebuild all years (songs) for a one-time seed.
+        required: false
+        default: "false"
+      build_buffer_births_deaths:
+        description: If true, fetch the next 31 days (buffer rebuild). Otherwise use 32 days.
         required: false
         default: "false"
   schedule:
@@ -37,25 +41,30 @@ jobs:
 
       - name: Install dependencies
         run: pip install requests pandas lxml SPARQLWrapper
-     
-      - name: Pull births/deaths (rolling buffer)
+
+            - name: Pull births/deaths (rolling or daily append)
         env:
           USER_AGENT_CONTACT: ${{ github.server_url }}/${{ github.repository }}/issues
-          BIRTHS_DEATHS_DAYS: "32"   # default lookahead
         run: |
           mm="${{ github.event.inputs.mm }}"
           dd="${{ github.event.inputs.dd }}"
+          rebuild="${{ github.event.inputs.build_buffer_births_deaths }}"
+
           if [ -n "$mm" ] && [ -n "$dd" ]; then
+            # Manual single-day mode
             python scripts/pull_births_deaths.py "$mm" "$dd"
           else
-            # rolling mode starting today Europe/London
-            python scripts/pull_births_deaths.py --days "${BIRTHS_DEATHS_DAYS}"
+            if [ "$rebuild" = "true" ]; then
+              echo "Rebuilding full 31-day buffer..."
+              python scripts/pull_births_deaths.py --days 31
+            else
+              echo "Appending only next day (32nd day from last record)..."
+              python scripts/pull_births_deaths.py --append-next-day
+            fi
           fi
-
 
       - name: Build arts datasets
         env:
-          # Toggle full build via dispatch input; default false on schedule.
           FULL_BUILD: ${{ github.event.inputs.full_build }}
           USER_AGENT_CONTACT: ${{ github.server_url }}/${{ github.repository }}/issues
           OMDB_API_KEY: ${{ secrets.OMDB_API_KEY }}

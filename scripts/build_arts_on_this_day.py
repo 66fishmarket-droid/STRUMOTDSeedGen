@@ -318,12 +318,18 @@ def harvest_songs_incremental(full_build: bool) -> List[Dict]:
     state = load_state()  # { "YYYY": "Last-Modified" }
     existing = read_existing_songs()
 
+    # Cold start if nothing exists yet
+    cold_start = len(existing) == 0
+
     target_years = years_to_fetch(full_build)
     fresh_rows: List[Dict] = []
 
     for year in target_years:
         url = WIKI_PAGE_TPL.format(year=year)
-        ims = state.get(str(year))
+
+        # On full builds or cold starts, ignore conditional requests (force fetch)
+        ims = None if (full_build or cold_start) else state.get(str(year))
+
         try:
             resp = http_get_conditional(s, url, ims)
         except Exception as e:
@@ -331,11 +337,23 @@ def harvest_songs_incremental(full_build: bool) -> List[Dict]:
             continue
 
         if resp is None:
+            # 304 Not Modified. Try to reuse cached rows for this year.
             reused = [r for r in existing if year_from_url(r.get("source_url","")) == year]
-            fresh_rows.extend(reused)
-            print(f"{year}: not modified, reused {len(reused)} rows")
-            continue
+            if reused:
+                fresh_rows.extend(reused)
+                print(f"{year}: not modified, reused {len(reused)} rows")
+                continue
 
+            # No cached rows to reuse -> force a non-conditional fetch now.
+            try:
+                print(f"{year}: not modified but no cache, forcing fresh fetch")
+                resp = s.get(url, timeout=30)
+                resp.raise_for_status()
+            except Exception as e:
+                print(f"Warning: forced fetch error for {url}: {e}")
+                continue
+
+        # We have a 200 response here
         parsed = parse_year_page(resp.text, year, url)
         fresh_rows.extend(parsed)
         lm = resp.headers.get("Last-Modified")
@@ -350,6 +368,7 @@ def harvest_songs_incremental(full_build: bool) -> List[Dict]:
     combined = dedupe_keep_earliest(fresh_rows + untouched)
     save_state(state)
     return combined
+
 
 # ---------- main ----------
 

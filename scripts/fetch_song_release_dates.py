@@ -420,11 +420,18 @@ def main():
 
     s = http_session()
 
-    # Read full file; update only blanks, then write full file back
+    # Read full file; if it has no data rows, reseed from the raw file
     all_rows = read_csv(args.in_path)
 
+    if not all_rows and os.path.exists(SEED_FROM):
+        print(f"{args.in_path} has no data rows, reseeding from {SEED_FROM}")
+        with open(SEED_FROM, "r", encoding="utf-8") as src, open(args.in_path, "w", encoding="utf-8") as dst:
+            dst.write(src.read())
+        all_rows = read_csv(args.in_path)
+
     # Ensure expected columns exist
-    required = ["work_type","title","byline","release_date","month","day","extra","source_url","entry_date","peak_date","peak_position","date_source"]
+    required = ["work_type","title","byline","release_date","month","day",
+                "extra","source_url","entry_date","peak_date","peak_position","date_source"]
     if all_rows:
         for r in all_rows:
             for k in required:
@@ -449,6 +456,7 @@ def main():
 
     write_csv(args.out_path, all_rows)
     print(f"Wrote {args.out_path} rows={len(all_rows)} (updated {len(target_idxs)})")
+
 
 if __name__ == "__main__":
     main()

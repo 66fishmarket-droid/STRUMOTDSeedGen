@@ -200,19 +200,88 @@ def mw_get_wikitext(s: requests.Session, title: str) -> Optional[str]:
 
 # ---------- Wikitext parsing ----------
 
+def extract_infobox_block(wikitext: str) -> Optional[str]:
+    """
+    Return the wikitext of the first Infobox template using simple brace depth.
+    """
+    m = re.search(r"\{\{\s*Infobox", wikitext, flags=re.IGNORECASE)
+    if not m:
+        return None
+
+    start = m.start()
+    depth = 0
+    i = start
+    n = len(wikitext)
+
+    while i < n - 1:
+        two = wikitext[i : i + 2]
+        if two == "{{":
+            depth += 1
+            i += 2
+            continue
+        if two == "}}":
+            depth -= 1
+            i += 2
+            if depth <= 0:
+                return wikitext[start:i]
+            continue
+        i += 1
+
+    # Fallback: if we never closed, just grab a slice
+    return wikitext[start : min(start + 4000, n)]
+
 def parse_release_from_wikitext(wikitext: str) -> Optional[str]:
+    """
+    Prefer infobox 'released' (or similar) field, looking first for a start date
+    template on that line. As a last resort, fall back to any start date
+    template elsewhere in the article.
+    """
     if not wikitext:
         return None
 
-    infobox_start = re.search(r"\{\{\s*Infobox[^}]*\n", wikitext, flags=re.IGNORECASE)
-    block = wikitext
-    if infobox_start:
-        start = infobox_start.start()
-        block = wikitext[start:start+2000]
+    block = extract_infobox_block(wikitext)
+    if not block:
+        block = wikitext  # weird page, just fall back to whole text
 
-    m = STARTDATE_TMPL_RX.search(block)
-    if m:
-        y = m.group("y"); mm = m.group("m"); dd = m.group("d")
+    # 1) Look for a line like:
+    #    | released = {{start date|1958|10|21}}
+    keys_pattern = "|".join([re.escape(k) for k in RELEASE_KEYS])
+    line_rx = re.compile(
+        r"^\s*\|\s*(?:%s)\s*=\s*(.+)$" % keys_pattern,
+        flags=re.IGNORECASE | re.MULTILINE,
+    )
+    m_line = line_rx.search(block)
+    if m_line:
+        raw_line = m_line.group(1)
+
+        # Strip comments early
+        raw_line = re.sub(r"<!--.*?-->", " ", raw_line, flags=re.DOTALL)
+
+        # First try to pull a start date template from that line
+        m_sd = STARTDATE_TMPL_RX.search(raw_line)
+        if m_sd:
+            y = m_sd.group("y")
+            mm = m_sd.group("m")
+            dd = m_sd.group("d")
+            if y and mm and dd:
+                return f"{int(y):04d}-{int(mm):02d}-{int(dd):02d}"
+            if y and mm:
+                return f"{int(y):04d}-{int(mm):02d}"
+            if y:
+                return f"{int(y):04d}"
+
+        # Otherwise, clean markup and try human date parsing
+        cleaned = clean_markup(raw_line)
+        iso = sniff_human_date_to_iso(cleaned)
+        if iso:
+            return iso
+
+    # 2) As a weak fallback, allow any start date in the infobox
+    m_any = STARTDATE_TMPL_RX.search(block)
+    if m_any:
+        y = m_any.group("y")
+        mm = m_any.group("m")
+        dd = m_any.group("d")
         if y and mm and dd:
             return f"{int(y):04d}-{int(mm):02d}-{int(dd):02d}"
         if y and mm:
@@ -220,20 +289,12 @@ def parse_release_from_wikitext(wikitext: str) -> Optional[str]:
         if y:
             return f"{int(y):04d}"
 
-    line_rx = re.compile(
-        r"^\s*\|\s*(?:%s)\s*=\s*(.+)$" % "|".join([re.escape(k) for k in RELEASE_KEYS]),
-        flags=re.IGNORECASE | re.MULTILINE,
-    )
-    m2 = line_rx.search(block)
-    if m2:
-        raw = clean_markup(m2.group(1))
-        iso = sniff_human_date_to_iso(raw)
-        if iso:
-            return iso
-
-    m3 = STARTDATE_TMPL_RX.search(wikitext)
-    if m3:
-        y = m3.group("y"); mm = m3.group("m"); dd = m3.group("d")
+    # 3) Absolute last resort: any start date template anywhere in article
+    m_global = STARTDATE_TMPL_RX.search(wikitext)
+    if m_global:
+        y = m_global.group("y")
+        mm = m_global.group("m")
+        dd = m_global.group("d")
         if y and mm and dd:
             return f"{int(y):04d}-{int(mm):02d}-{int(dd):02d}"
         if y and mm:
@@ -245,15 +306,20 @@ def parse_release_from_wikitext(wikitext: str) -> Optional[str]:
 
 def clean_markup(text: str) -> str:
     t = text or ""
-    t = re.sub(r"<ref[^>]*>.*?</ref>", " ", t, flags=re.DOTALL|re.IGNORECASE)
+    # Remove refs
+    t = re.sub(r"<ref[^>]*>.*?</ref>", " ", t, flags=re.DOTALL | re.IGNORECASE)
     t = re.sub(r"<ref[^/>]*/>", " ", t, flags=re.IGNORECASE)
+    # Remove templates
     t = re.sub(r"\{\{.*?\}\}", " ", t)
+    # Replace [[link|text]] or [[text]] with text
     t = re.sub(r"\[\[(?:[^|\]]*\|)?([^\]]+)\]\]", r"\1", t)
+    # Collapse whitespace / stray punctuation
     t = " ".join(t.split())
     return t.strip(" ,;")
 
 def sniff_human_date_to_iso(text: str) -> Optional[str]:
     t = text.strip()
+    # Already ISO-like
     m = DATE_RX_ISO.match(t)
     if m:
         y, mm, dd = m.groups()
@@ -263,6 +329,7 @@ def sniff_human_date_to_iso(text: str) -> Optional[str]:
             return f"{y}-{mm}"
         return y
 
+    # 21 October 1958
     m = re.match(r"^(\d{1,2})\s+([A-Za-z]+)\s+(\d{4})$", t)
     if m:
         d, mon, y = m.groups()
@@ -270,6 +337,7 @@ def sniff_human_date_to_iso(text: str) -> Optional[str]:
         if mm:
             return f"{int(y):04d}-{mm:02d}-{int(d):02d}"
 
+    # October 1958
     m = re.match(r"^([A-Za-z]+)\s+(\d{4})$", t)
     if m:
         mon, y = m.groups()
@@ -277,6 +345,7 @@ def sniff_human_date_to_iso(text: str) -> Optional[str]:
         if mm:
             return f"{int(y):04d}-{mm:02d}"
 
+    # Year only
     m = re.match(r"^(\d{4})$", t)
     if m:
         return m.group(1)
@@ -286,37 +355,37 @@ def sniff_human_date_to_iso(text: str) -> Optional[str]:
 def month_to_num(mon: str) -> Optional[int]:
     mon = mon.strip().lower()
     months = {
-        "january":1,"jan":1,
-        "february":2,"feb":2,
-        "march":3,"mar":3,
-        "april":4,"apr":4,
-        "may":5,
-        "june":6,"jun":6,
-        "july":7,"jul":7,
-        "august":8,"aug":8,
-        "september":9,"sep":9,"sept":9,
-        "october":10,"oct":10,
-        "november":11,"nov":11,
-        "december":12,"dec":12,
+        "january": 1, "jan": 1,
+        "february": 2, "feb": 2,
+        "march": 3, "mar": 3,
+        "april": 4, "apr": 4,
+        "may": 5,
+        "june": 6, "jun": 6,
+        "july": 7, "jul": 7,
+        "august": 8, "aug": 8,
+        "september": 9, "sep": 9, "sept": 9,
+        "october": 10, "oct": 10,
+        "november": 11, "nov": 11,
+        "december": 12, "dec": 12,
     }
     return months.get(mon)
 
 def add_md_columns(iso: Optional[str]) -> Tuple[str, str]:
     if not iso:
-        return ("","")
+        return ("", "")
     m = DATE_RX_ISO.match(iso)
     if not m:
         parts = iso.split("-")
         if len(parts) == 2:
             return (parts[1].zfill(2), "")
-        return ("","")
+        return ("", "")
     _, mm, dd = m.groups()
     return (mm or "", dd or "")
 
 # ---------- Row processor ----------
 
 def process_row(s: requests.Session, row: Dict, throttle: float) -> Dict:
-    src_url = row.get("source_url","").strip()
+    src_url = row.get("source_url", "").strip()
     title = (row.get("title") or "").strip()
     artist = (row.get("byline") or "").strip()
 
@@ -325,7 +394,7 @@ def process_row(s: requests.Session, row: Dict, throttle: float) -> Dict:
         if t_from_url:
             title = t_from_url
 
-    release_date = None
+    release_date: Optional[str] = None
     date_source = ""
 
     # Try QID for the given or derived title
@@ -357,14 +426,14 @@ def process_row(s: requests.Session, row: Dict, throttle: float) -> Dict:
     except Exception:
         pass
 
-    # Wikitext fallback
+    # Wikitext / infobox fallback
     if not release_date and title:
         try:
             wikitext = mw_get_wikitext(s, title)
-            wt_date = parse_release_from_wikitext(wikitext)
+            wt_date = parse_release_from_wikitext(wikitext or "")
             if wt_date:
                 release_date = wt_date
-                date_source = "wikitext:released"
+                date_source = "infobox:released"
         except Exception:
             pass
 
@@ -387,8 +456,8 @@ def read_csv(path: str) -> List[Dict]:
 
 def write_csv(path: str, rows: List[Dict]) -> None:
     fieldnames = [
-        "work_type","title","byline","release_date","month","day",
-        "extra","source_url","entry_date","peak_date","peak_position","date_source"
+        "work_type", "title", "byline", "release_date", "month", "day",
+        "extra", "source_url", "entry_date", "peak_date", "peak_position", "date_source"
     ]
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "w", encoding="utf-8", newline="") as f:
@@ -407,7 +476,7 @@ def main():
     ap.add_argument("--throttle", type=float, default=0.3, help="Seconds sleep between items")
     args = ap.parse_args()
 
-    # Auto-seed: if the with_dates file doesn't exist, copy from the raw Top 10 file
+    # Auto-seed: if the with_dates file does not exist, copy from the raw Top 10 file
     if not os.path.exists(args.in_path):
         if os.path.exists(SEED_FROM):
             os.makedirs(os.path.dirname(args.in_path), exist_ok=True)
@@ -430,8 +499,10 @@ def main():
         all_rows = read_csv(args.in_path)
 
     # Ensure expected columns exist
-    required = ["work_type","title","byline","release_date","month","day",
-                "extra","source_url","entry_date","peak_date","peak_position","date_source"]
+    required = [
+        "work_type", "title", "byline", "release_date", "month", "day",
+        "extra", "source_url", "entry_date", "peak_date", "peak_position", "date_source"
+    ]
     if all_rows:
         for r in all_rows:
             for k in required:
@@ -456,7 +527,6 @@ def main():
 
     write_csv(args.out_path, all_rows)
     print(f"Wrote {args.out_path} rows={len(all_rows)} (updated {len(target_idxs)})")
-
 
 if __name__ == "__main__":
     main()

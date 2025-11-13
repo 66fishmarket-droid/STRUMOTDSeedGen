@@ -1,20 +1,24 @@
 #!/usr/bin/env python3
 # scripts/fetch_song_release_dates.py
 # For each Wikipedia song page, extract a release date.
+#
 # Strategy:
-#   1) Get QID from pageprops; query Wikidata P577.
-#   2) Fallback: fetch page wikitext and parse infobox "released" field.
-#   3) Normalize to YYYY-MM-DD when possible; else YYYY-MM or YYYY.
+#   1) Derive the exact Wikipedia page title from source_url when possible.
+#   2) Get QID from pageprops; query Wikidata P577.
+#   3) Fallback/augment: fetch page wikitext and parse infobox "released" field.
+#   4) Normalize to YYYY-MM-DD when possible; else YYYY-MM or YYYY.
 #
 # Input CSV: Top 10 songs with columns
 #   work_type,title,byline,release_date,month,day,extra,source_url,
 #   entry_date,peak_date,peak_position,date_source
-# Output CSV: same file, with release_date/month/day/date_source filled or refined.
+#
+# Output CSV: same file, with release_date/month/day/date_source filled for:
+#   - rows where release_date is blank, or
+#   - rows where release_date is just a 4-digit year.
 #
 # Delta-safe:
 # - If data/songs_top10_us_with_dates.csv is missing, seed from data/songs_top10_us.csv.
-# - Processes only rows where we either have no release_date, only a year,
-#   or a "suspicious" year compared to the chart year.
+# - Processes only target rows, then writes the full file back.
 
 import os
 import re
@@ -34,7 +38,6 @@ WIKIPEDIA_API = "https://en.wikipedia.org/w/api.php"
 WIKIDATA_ENTITY = "https://www.wikidata.org/wiki/Special:EntityData/{qid}.json"
 
 DATE_RX_ISO = re.compile(r"^\s*(\d{4})(?:-(\d{2}))?(?:-(\d{2}))?\s*$")
-YEAR_ONLY_RX = re.compile(r"^\s*(\d{4})\s*$")
 
 STARTDATE_TMPL_RX = re.compile(
     r"\{\{\s*start[- _]?date(?:[^|}]*)\|(?P<y>\d{3,4})(?:\|(?P<m>\d{1,2}))?(?:\|(?P<d>\d{1,2}))?",
@@ -45,6 +48,8 @@ STARTDATE_TMPL_RX = re.compile(
 RELEASE_KEYS = (
     "released", "release_date", "released_date", "date", "release"
 )
+
+YEAR_ONLY_RX = re.compile(r"^\s*\d{4}\s*$")
 
 # ---------- HTTP/session ----------
 
@@ -85,6 +90,11 @@ def backoff_get(
 # ---------- Wikipedia utilities ----------
 
 def derive_title_from_url(url: str) -> Optional[str]:
+    """
+    Given a Wikipedia URL like:
+      https://en.wikipedia.org/wiki/Pink_Pony_Club
+    return the article title portion: 'Pink_Pony_Club'.
+    """
     try:
         p = urlparse(url)
         parts = p.path.split("/")
@@ -115,38 +125,6 @@ def mw_get_qid_for_title(s: requests.Session, title: str) -> Optional[str]:
     page = pages[0]
     if "pageprops" in page and "wikibase_item" in page["pageprops"]:
         return page["pageprops"]["wikibase_item"]
-    return None
-
-def mw_search_best_title(
-    s: requests.Session,
-    song_title: str,
-    artist: str = "",
-) -> Optional[str]:
-    if not song_title:
-        return None
-    query_variants = [
-        f'"{song_title}" {artist} song',
-        f'"{song_title} (song)"',
-        f'{song_title} song {artist}',
-    ]
-    for q in query_variants:
-        params = {
-            "action": "query",
-            "format": "json",
-            "list": "search",
-            "srsearch": q,
-            "srlimit": 5,
-            "srwhat": "text",
-            "srprop": "",
-        }
-        try:
-            r = backoff_get(s, WIKIPEDIA_API, params=params)
-            data = r.json()
-            hits = data.get("query", {}).get("search", [])
-            if hits:
-                return hits[0].get("title")
-        except Exception:
-            continue
     return None
 
 def wd_get_p577_date(s: requests.Session, qid: str) -> Optional[str]:
@@ -213,88 +191,25 @@ def mw_get_wikitext(s: requests.Session, title: str) -> Optional[str]:
 
 # ---------- Wikitext parsing ----------
 
-def extract_infobox_block(wikitext: str) -> Optional[str]:
-    """
-    Return the wikitext of the first Infobox template using simple brace depth.
-    """
-    m = re.search(r"\{\{\s*Infobox", wikitext, flags=re.IGNORECASE)
-    if not m:
-        return None
-
-    start = m.start()
-    depth = 0
-    i = start
-    n = len(wikitext)
-
-    while i < n - 1:
-        two = wikitext[i : i + 2]
-        if two == "{{":
-            depth += 1
-            i += 2
-            continue
-        if two == "}}":
-            depth -= 1
-            i += 2
-            if depth <= 0:
-                return wikitext[start:i]
-            continue
-        i += 1
-
-    # Fallback: if we never closed, just grab a slice
-    return wikitext[start : min(start + 4000, n)]
-
 def parse_release_from_wikitext(wikitext: str) -> Optional[str]:
     """
-    Prefer infobox 'released' (or similar) field, looking first for a start date
-    template on that line. As a last resort, fall back to any start date
-    template elsewhere in the article.
+    Look inside the infobox first (preferred), then the wider article,
+    for either a {{start date|...}} template or a 'released =' line.
     """
     if not wikitext:
         return None
 
-    block = extract_infobox_block(wikitext)
-    if not block:
-        block = wikitext  # weird page, just fall back to whole text
+    # Try to limit to the Infobox block first
+    infobox_start = re.search(r"\{\{\s*Infobox[^}]*\n", wikitext, flags=re.IGNORECASE)
+    block = wikitext
+    if infobox_start:
+        start = infobox_start.start()
+        block = wikitext[start:start + 2000]
 
-    # 1) Look for a line like:
-    #    | released = {{start date|1958|10|21}}
-    keys_pattern = "|".join([re.escape(k) for k in RELEASE_KEYS])
-    line_rx = re.compile(
-        r"^\s*\|\s*(?:%s)\s*=\s*(.+)$" % keys_pattern,
-        flags=re.IGNORECASE | re.MULTILINE,
-    )
-    m_line = line_rx.search(block)
-    if m_line:
-        raw_line = m_line.group(1)
-
-        # Strip comments early
-        raw_line = re.sub(r"<!--.*?-->", " ", raw_line, flags=re.DOTALL)
-
-        # First try to pull a start date template from that line
-        m_sd = STARTDATE_TMPL_RX.search(raw_line)
-        if m_sd:
-            y = m_sd.group("y")
-            mm = m_sd.group("m")
-            dd = m_sd.group("d")
-            if y and mm and dd:
-                return f"{int(y):04d}-{int(mm):02d}-{int(dd):02d}"
-            if y and mm:
-                return f"{int(y):04d}-{int(mm):02d}"
-            if y:
-                return f"{int(y):04d}"
-
-        # Otherwise, clean markup and try human date parsing
-        cleaned = clean_markup(raw_line)
-        iso = sniff_human_date_to_iso(cleaned)
-        if iso:
-            return iso
-
-    # 2) As a weak fallback, allow any start date in the infobox
-    m_any = STARTDATE_TMPL_RX.search(block)
-    if m_any:
-        y = m_any.group("y")
-        mm = m_any.group("m")
-        dd = m_any.group("d")
+    # 1) Look for a start date template in the infobox
+    m = STARTDATE_TMPL_RX.search(block)
+    if m:
+        y = m.group("y"); mm = m.group("m"); dd = m.group("d")
         if y and mm and dd:
             return f"{int(y):04d}-{int(mm):02d}-{int(dd):02d}"
         if y and mm:
@@ -302,12 +217,22 @@ def parse_release_from_wikitext(wikitext: str) -> Optional[str]:
         if y:
             return f"{int(y):04d}"
 
-    # 3) Absolute last resort: any start date template anywhere in article
-    m_global = STARTDATE_TMPL_RX.search(wikitext)
-    if m_global:
-        y = m_global.group("y")
-        mm = m_global.group("m")
-        dd = m_global.group("d")
+    # 2) Look for a "| released = ..." line (or similar keys)
+    line_rx = re.compile(
+        r"^\s*\|\s*(?:%s)\s*=\s*(.+)$" % "|".join([re.escape(k) for k in RELEASE_KEYS]),
+        flags=re.IGNORECASE | re.MULTILINE,
+    )
+    m2 = line_rx.search(block)
+    if m2:
+        raw = clean_markup(m2.group(1))
+        iso = sniff_human_date_to_iso(raw)
+        if iso:
+            return iso
+
+    # 3) As a last resort, look for a start date template anywhere
+    m3 = STARTDATE_TMPL_RX.search(wikitext)
+    if m3:
+        y = m3.group("y"); mm = m3.group("m"); dd = m3.group("d")
         if y and mm and dd:
             return f"{int(y):04d}-{int(mm):02d}-{int(dd):02d}"
         if y and mm:
@@ -319,20 +244,21 @@ def parse_release_from_wikitext(wikitext: str) -> Optional[str]:
 
 def clean_markup(text: str) -> str:
     t = text or ""
-    # Remove refs
+    # Strip <ref>...</ref> and self-closing refs
     t = re.sub(r"<ref[^>]*>.*?</ref>", " ", t, flags=re.DOTALL | re.IGNORECASE)
     t = re.sub(r"<ref[^/>]*/>", " ", t, flags=re.IGNORECASE)
-    # Remove templates
+    # Remove simple templates
     t = re.sub(r"\{\{.*?\}\}", " ", t)
-    # Replace [[link|text]] or [[text]] with text
+    # Replace [[link|text]] / [[text]] with 'text'
     t = re.sub(r"\[\[(?:[^|\]]*\|)?([^\]]+)\]\]", r"\1", t)
-    # Collapse whitespace / stray punctuation
+    # Collapse whitespace and trim punctuation
     t = " ".join(t.split())
     return t.strip(" ,;")
 
 def sniff_human_date_to_iso(text: str) -> Optional[str]:
     t = text.strip()
-    # Already ISO-like
+
+    # Already ISO-ish
     m = DATE_RX_ISO.match(t)
     if m:
         y, mm, dd = m.groups()
@@ -342,7 +268,7 @@ def sniff_human_date_to_iso(text: str) -> Optional[str]:
             return f"{y}-{mm}"
         return y
 
-    # 21 October 1958
+    # Formats like "21 October 1985"
     m = re.match(r"^(\d{1,2})\s+([A-Za-z]+)\s+(\d{4})$", t)
     if m:
         d, mon, y = m.groups()
@@ -350,15 +276,15 @@ def sniff_human_date_to_iso(text: str) -> Optional[str]:
         if mm:
             return f"{int(y):04d}-{mm:02d}-{int(d):02d}"
 
-    # October 1958
+    # Formats like "October 1985"
     m = re.match(r"^([A-Za-z]+)\s+(\d{4})$", t)
     if m:
         mon, y = m.groups()
         mm = month_to_num(mon)
         if mm:
-            return f"{int(y):04d}-{int(mm):02d}"
+            return f"{int(y):04d}-{mm:02d}"
 
-    # Year only
+    # Just a year "1985"
     m = re.match(r"^(\d{4})$", t)
     if m:
         return m.group(1)
@@ -395,88 +321,43 @@ def add_md_columns(iso: Optional[str]) -> Tuple[str, str]:
     _, mm, dd = m.groups()
     return (mm or "", dd or "")
 
-def extract_year_from_iso(iso: str) -> Optional[int]:
-    if not iso:
-        return None
-    m = DATE_RX_ISO.match(iso.strip())
+def iso_precision_level(iso: str) -> int:
+    """
+    Rough precision: 3 = YYYY-MM-DD, 2 = YYYY-MM, 1 = YYYY, 0 = unknown.
+    """
+    m = DATE_RX_ISO.match(iso or "")
     if not m:
-        return None
-    y = m.group(1)
-    try:
-        return int(y)
-    except Exception:
-        return None
+        return 0
+    y, mm, dd = m.groups()
+    if dd:
+        return 3
+    if mm:
+        return 2
+    if y:
+        return 1
+    return 0
 
-def get_chart_year_month(row: Dict) -> Tuple[Optional[int], Optional[int]]:
-    """
-    Use peak_date first, then entry_date, to infer chart year/month.
-    """
-    date_txt = (row.get("peak_date") or row.get("entry_date") or "").strip()
-    if not date_txt:
-        return (None, None)
-    m = DATE_RX_ISO.match(date_txt)
-    if not m:
-        return (None, None)
-    y, mm, _ = m.groups()
-    try:
-        year = int(y)
-    except Exception:
-        year = None
-    month = int(mm) if mm else None
-    return (year, month)
-
-def should_process_row(row: Dict) -> bool:
-    """
-    Decide whether this row needs work:
-      - release_date empty
-      - release_date is just YYYY
-      - release_year > chart_year (and chart month != December)
-    """
-    rd = (row.get("release_date") or "").strip()
-    if not rd:
-        return True
-
-    # Year-only dates: try to refine using Wikidata / infobox
-    if YEAR_ONLY_RX.match(rd):
-        return True
-
-    # Suspicious year: release after chart year (except December charts)
-    release_year = extract_year_from_iso(rd)
-    chart_year, chart_month = get_chart_year_month(row)
-    if release_year is None or chart_year is None:
-        return False
-
-    # Ignore this heuristic for December (Christmas re-entries etc.)
-    if chart_month == 12:
-        return False
-
-    if release_year > chart_year:
-        return True
-
-    return False
+def is_more_precise(new_iso: str, old_iso: str) -> bool:
+    return iso_precision_level(new_iso) > iso_precision_level(old_iso)
 
 # ---------- Row processor ----------
 
 def process_row(s: requests.Session, row: Dict, throttle: float) -> Dict:
     src_url = row.get("source_url", "").strip()
-    title = (row.get("title") or "").strip()
-    artist = (row.get("byline") or "").strip()
+    csv_title = (row.get("title") or "").strip()
+    artist = (row.get("byline") or "").strip()  # unused for now, but kept for possible future logic
 
-    if not title:
-        t_from_url = derive_title_from_url(src_url)
-        if t_from_url:
-            title = t_from_url
+    # Prefer the exact article title derived from the URL
+    page_title = derive_title_from_url(src_url)
+    if page_title:
+        title = page_title
+    else:
+        title = csv_title
 
-    # Keep originals so we do not make things worse if lookup fails
-    original_release_date = (row.get("release_date") or "").strip()
-    original_month = (row.get("month") or "").strip()
-    original_day = (row.get("day") or "").strip()
-    original_date_source = (row.get("date_source") or "").strip()
+    release_date = None
+    date_source = ""
 
-    new_release_date: Optional[str] = None
-    new_date_source = ""
-
-    # Try QID for the given or derived title
+    # Try Wikidata P577 via QID for the specific page title
     qid = None
     try:
         if title:
@@ -484,55 +365,35 @@ def process_row(s: requests.Session, row: Dict, throttle: float) -> Dict:
     except Exception:
         qid = None
 
-    # If not found, search for a likely song page (handles "(song)" etc.)
-    if not qid:
-        try:
-            guess = mw_search_best_title(s, song_title=title, artist=artist)
-            if guess:
-                qid = mw_get_qid_for_title(s, guess)
-                if qid:
-                    title = guess
-        except Exception:
-            pass
-
-    # Wikidata P577
     try:
         if qid:
             wd_date = wd_get_p577_date(s, qid)
             if wd_date:
-                new_release_date = wd_date
-                new_date_source = "wikidata:P577"
+                release_date = wd_date
+                date_source = "wikidata:P577"
     except Exception:
         pass
 
-    # Wikitext / infobox fallback
-    if not new_release_date and title:
+    # Wikitext fallback (or refinement: get more precise than just a year/month)
+    need_wikitext = (not release_date) or iso_precision_level(release_date) < 3
+    if title and need_wikitext:
         try:
             wikitext = mw_get_wikitext(s, title)
-            wt_date = parse_release_from_wikitext(wikitext or "")
+            wt_date = parse_release_from_wikitext(wikitext)
             if wt_date:
-                new_release_date = wt_date
-                new_date_source = "infobox:released"
+                if (not release_date) or is_more_precise(wt_date, release_date):
+                    release_date = wt_date
+                    date_source = "wikitext:released"
         except Exception:
             pass
 
-    # Decide what to write back
-    if new_release_date:
-        release_date = new_release_date
-        date_source = new_date_source
-        month, day = add_md_columns(release_date)
-    else:
-        # No better info; keep what we had
-        release_date = original_release_date
-        month = original_month
-        day = original_day
-        date_source = original_date_source
+    mm, dd = add_md_columns(release_date)
 
     out = dict(row)
-    out["release_date"] = release_date
-    out["month"] = month
-    out["day"] = day
-    out["date_source"] = date_source
+    out["release_date"] = release_date or row.get("release_date", "") or ""
+    out["month"] = mm or row.get("month", "") or ""
+    out["day"] = dd or row.get("day", "") or ""
+    out["date_source"] = date_source or row.get("date_source", "") or ""
     time.sleep(throttle)
     return out
 
@@ -545,18 +406,9 @@ def read_csv(path: str) -> List[Dict]:
 
 def write_csv(path: str, rows: List[Dict]) -> None:
     fieldnames = [
-        "work_type",
-        "title",
-        "byline",
-        "release_date",
-        "month",
-        "day",
-        "extra",
-        "source_url",
-        "entry_date",
-        "peak_date",
-        "peak_position",
-        "date_source",
+        "work_type", "title", "byline", "release_date", "month", "day",
+        "extra", "source_url", "entry_date", "peak_date",
+        "peak_position", "date_source",
     ]
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "w", encoding="utf-8", newline="") as f:
@@ -570,7 +422,7 @@ def write_csv(path: str, rows: List[Dict]) -> None:
 
 def main():
     ap = argparse.ArgumentParser(
-        description="Fetch/refine release dates for Wikipedia song pages (delta mode)."
+        description="Fetch release dates for Wikipedia song pages (delta mode)."
     )
     ap.add_argument("--in", dest="in_path", default=IN_PATH_DEFAULT, help="Input CSV path")
     ap.add_argument("--out", dest="out_path", default=OUT_PATH_DEFAULT, help="Output CSV path")
@@ -581,9 +433,7 @@ def main():
     if not os.path.exists(args.in_path):
         if os.path.exists(SEED_FROM):
             os.makedirs(os.path.dirname(args.in_path), exist_ok=True)
-            with open(SEED_FROM, "r", encoding="utf-8") as src, open(
-                args.in_path, "w", encoding="utf-8"
-            ) as dst:
+            with open(SEED_FROM, "r", encoding="utf-8") as src, open(args.in_path, "w", encoding="utf-8") as dst:
                 dst.write(src.read())
             print(f"Seeded {args.in_path} from {SEED_FROM}")
         else:
@@ -597,39 +447,37 @@ def main():
 
     if not all_rows and os.path.exists(SEED_FROM):
         print(f"{args.in_path} has no data rows, reseeding from {SEED_FROM}")
-        with open(SEED_FROM, "r", encoding="utf-8") as src, open(
-            args.in_path, "w", encoding="utf-8"
-        ) as dst:
+        with open(SEED_FROM, "r", encoding="utf-8") as src, open(args.in_path, "w", encoding="utf-8") as dst:
             dst.write(src.read())
         all_rows = read_csv(args.in_path)
 
     # Ensure expected columns exist
     required = [
-        "work_type",
-        "title",
-        "byline",
-        "release_date",
-        "month",
-        "day",
-        "extra",
-        "source_url",
-        "entry_date",
-        "peak_date",
-        "peak_position",
-        "date_source",
+        "work_type", "title", "byline", "release_date", "month", "day",
+        "extra", "source_url", "entry_date", "peak_date",
+        "peak_position", "date_source",
     ]
     if all_rows:
         for r in all_rows:
             for k in required:
                 r.setdefault(k, "")
 
-    # Target rows that need work
-    target_idxs = [i for i, r in enumerate(all_rows) if should_process_row(r)]
+    # Target rows:
+    #   - missing release_date entirely; or
+    #   - release_date is just a plain 4-digit year.
+    target_idxs: List[int] = []
+    for i, r in enumerate(all_rows):
+        rd = (r.get("release_date") or "").strip()
+        if not rd or YEAR_ONLY_RX.match(rd):
+            target_idxs.append(i)
+
     if not target_idxs:
-        print("No rows need release_date updates — nothing to do.")
+        print("No missing or year-only release dates found — nothing to do.")
         return
 
-    print(f"Processing {len(target_idxs)} rows needing release_date work out of {len(all_rows)} total...")
+    print(
+        f"Processing {len(target_idxs)} rows needing release_date out of {len(all_rows)} total..."
+    )
 
     for count, i in enumerate(target_idxs, start=1):
         try:
@@ -642,6 +490,7 @@ def main():
 
     write_csv(args.out_path, all_rows)
     print(f"Wrote {args.out_path} rows={len(all_rows)} (updated {len(target_idxs)})")
+
 
 if __name__ == "__main__":
     main()

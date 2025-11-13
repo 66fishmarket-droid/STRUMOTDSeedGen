@@ -45,7 +45,6 @@ jobs:
           python scripts/fetch_song_release_dates.py \
             --in "$IN" \
             --out data/songs_top10_us_with_dates.csv \
-            --limit 0 \
             --throttle 0.3
 
       - name: Commit and push if changed

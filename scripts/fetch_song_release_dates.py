@@ -7,12 +7,14 @@
 #   3) Normalize to YYYY-MM-DD when possible; else YYYY-MM or YYYY.
 #
 # Input CSV: Top 10 songs with columns
-#   work_type,title,byline,release_date,month,day,extra,source_url,entry_date,peak_date,peak_position,date_source
-# Output CSV: same file, with release_date/month/day/date_source filled for missing rows.
+#   work_type,title,byline,release_date,month,day,extra,source_url,
+#   entry_date,peak_date,peak_position,date_source
+# Output CSV: same file, with release_date/month/day/date_source filled or refined.
 #
 # Delta-safe:
 # - If data/songs_top10_us_with_dates.csv is missing, seed from data/songs_top10_us.csv.
-# - Processes only rows where release_date is blank, then writes the full file back.
+# - Processes only rows where we either have no release_date, only a year,
+#   or a "suspicious" year compared to the chart year.
 
 import os
 import re
@@ -32,6 +34,7 @@ WIKIPEDIA_API = "https://en.wikipedia.org/w/api.php"
 WIKIDATA_ENTITY = "https://www.wikidata.org/wiki/Special:EntityData/{qid}.json"
 
 DATE_RX_ISO = re.compile(r"^\s*(\d{4})(?:-(\d{2}))?(?:-(\d{2}))?\s*$")
+YEAR_ONLY_RX = re.compile(r"^\s*(\d{4})\s*$")
 
 STARTDATE_TMPL_RX = re.compile(
     r"\{\{\s*start[- _]?date(?:[^|}]*)\|(?P<y>\d{3,4})(?:\|(?P<m>\d{1,2}))?(?:\|(?P<d>\d{1,2}))?",
@@ -56,7 +59,13 @@ def http_session() -> requests.Session:
     })
     return s
 
-def backoff_get(s: requests.Session, url: str, params: Dict = None, max_retries: int = 6, base_sleep: float = 0.8):
+def backoff_get(
+    s: requests.Session,
+    url: str,
+    params: Dict = None,
+    max_retries: int = 6,
+    base_sleep: float = 0.8,
+):
     sleep = base_sleep
     for attempt in range(1, max_retries + 1):
         r = s.get(url, params=params, timeout=30)
@@ -108,7 +117,11 @@ def mw_get_qid_for_title(s: requests.Session, title: str) -> Optional[str]:
         return page["pageprops"]["wikibase_item"]
     return None
 
-def mw_search_best_title(s: requests.Session, song_title: str, artist: str = "") -> Optional[str]:
+def mw_search_best_title(
+    s: requests.Session,
+    song_title: str,
+    artist: str = "",
+) -> Optional[str]:
     if not song_title:
         return None
     query_variants = [
@@ -343,7 +356,7 @@ def sniff_human_date_to_iso(text: str) -> Optional[str]:
         mon, y = m.groups()
         mm = month_to_num(mon)
         if mm:
-            return f"{int(y):04d}-{mm:02d}"
+            return f"{int(y):04d}-{int(mm):02d}"
 
     # Year only
     m = re.match(r"^(\d{4})$", t)
@@ -382,6 +395,66 @@ def add_md_columns(iso: Optional[str]) -> Tuple[str, str]:
     _, mm, dd = m.groups()
     return (mm or "", dd or "")
 
+def extract_year_from_iso(iso: str) -> Optional[int]:
+    if not iso:
+        return None
+    m = DATE_RX_ISO.match(iso.strip())
+    if not m:
+        return None
+    y = m.group(1)
+    try:
+        return int(y)
+    except Exception:
+        return None
+
+def get_chart_year_month(row: Dict) -> Tuple[Optional[int], Optional[int]]:
+    """
+    Use peak_date first, then entry_date, to infer chart year/month.
+    """
+    date_txt = (row.get("peak_date") or row.get("entry_date") or "").strip()
+    if not date_txt:
+        return (None, None)
+    m = DATE_RX_ISO.match(date_txt)
+    if not m:
+        return (None, None)
+    y, mm, _ = m.groups()
+    try:
+        year = int(y)
+    except Exception:
+        year = None
+    month = int(mm) if mm else None
+    return (year, month)
+
+def should_process_row(row: Dict) -> bool:
+    """
+    Decide whether this row needs work:
+      - release_date empty
+      - release_date is just YYYY
+      - release_year > chart_year (and chart month != December)
+    """
+    rd = (row.get("release_date") or "").strip()
+    if not rd:
+        return True
+
+    # Year-only dates: try to refine using Wikidata / infobox
+    if YEAR_ONLY_RX.match(rd):
+        return True
+
+    # Suspicious year: release after chart year (except December charts)
+    release_year = extract_year_from_iso(rd)
+    chart_year, chart_month = get_chart_year_month(row)
+    if release_year is None or chart_year is None:
+        return False
+
+    # Ignore this heuristic for December (Christmas re-entries etc.)
+    if chart_month == 12:
+        return False
+
+    if release_year > chart_year:
+        return True
+
+    return False
+
 # ---------- Row processor ----------
 
 def process_row(s: requests.Session, row: Dict, throttle: float) -> Dict:
@@ -394,8 +467,14 @@ def process_row(s: requests.Session, row: Dict, throttle: float) -> Dict:
         if t_from_url:
             title = t_from_url
 
-    release_date: Optional[str] = None
-    date_source = ""
+    # Keep originals so we do not make things worse if lookup fails
+    original_release_date = (row.get("release_date") or "").strip()
+    original_month = (row.get("month") or "").strip()
+    original_day = (row.get("day") or "").strip()
+    original_date_source = (row.get("date_source") or "").strip()
+
+    new_release_date: Optional[str] = None
+    new_date_source = ""
 
     # Try QID for the given or derived title
     qid = None
@@ -421,28 +500,38 @@ def process_row(s: requests.Session, row: Dict, throttle: float) -> Dict:
         if qid:
             wd_date = wd_get_p577_date(s, qid)
             if wd_date:
-                release_date = wd_date
-                date_source = "wikidata:P577"
+                new_release_date = wd_date
+                new_date_source = "wikidata:P577"
     except Exception:
         pass
 
     # Wikitext / infobox fallback
-    if not release_date and title:
+    if not new_release_date and title:
         try:
             wikitext = mw_get_wikitext(s, title)
             wt_date = parse_release_from_wikitext(wikitext or "")
             if wt_date:
-                release_date = wt_date
-                date_source = "infobox:released"
+                new_release_date = wt_date
+                new_date_source = "infobox:released"
         except Exception:
             pass
 
-    mm, dd = add_md_columns(release_date)
+    # Decide what to write back
+    if new_release_date:
+        release_date = new_release_date
+        date_source = new_date_source
+        month, day = add_md_columns(release_date)
+    else:
+        # No better info; keep what we had
+        release_date = original_release_date
+        month = original_month
+        day = original_day
+        date_source = original_date_source
 
     out = dict(row)
-    out["release_date"] = release_date or ""
-    out["month"] = mm
-    out["day"] = dd
+    out["release_date"] = release_date
+    out["month"] = month
+    out["day"] = day
     out["date_source"] = date_source
     time.sleep(throttle)
     return out
@@ -456,8 +545,18 @@ def read_csv(path: str) -> List[Dict]:
 
 def write_csv(path: str, rows: List[Dict]) -> None:
     fieldnames = [
-        "work_type", "title", "byline", "release_date", "month", "day",
-        "extra", "source_url", "entry_date", "peak_date", "peak_position", "date_source"
+        "work_type",
+        "title",
+        "byline",
+        "release_date",
+        "month",
+        "day",
+        "extra",
+        "source_url",
+        "entry_date",
+        "peak_date",
+        "peak_position",
+        "date_source",
     ]
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "w", encoding="utf-8", newline="") as f:
@@ -470,7 +569,9 @@ def write_csv(path: str, rows: List[Dict]) -> None:
 # ---------- Main ----------
 
 def main():
-    ap = argparse.ArgumentParser(description="Fetch release dates for Wikipedia song pages (delta mode).")
+    ap = argparse.ArgumentParser(
+        description="Fetch/refine release dates for Wikipedia song pages (delta mode)."
+    )
     ap.add_argument("--in", dest="in_path", default=IN_PATH_DEFAULT, help="Input CSV path")
     ap.add_argument("--out", dest="out_path", default=OUT_PATH_DEFAULT, help="Output CSV path")
     ap.add_argument("--throttle", type=float, default=0.3, help="Seconds sleep between items")
@@ -480,7 +581,9 @@ def main():
     if not os.path.exists(args.in_path):
         if os.path.exists(SEED_FROM):
             os.makedirs(os.path.dirname(args.in_path), exist_ok=True)
-            with open(SEED_FROM, "r", encoding="utf-8") as src, open(args.in_path, "w", encoding="utf-8") as dst:
+            with open(SEED_FROM, "r", encoding="utf-8") as src, open(
+                args.in_path, "w", encoding="utf-8"
+            ) as dst:
                 dst.write(src.read())
             print(f"Seeded {args.in_path} from {SEED_FROM}")
         else:
@@ -494,27 +597,39 @@ def main():
 
     if not all_rows and os.path.exists(SEED_FROM):
         print(f"{args.in_path} has no data rows, reseeding from {SEED_FROM}")
-        with open(SEED_FROM, "r", encoding="utf-8") as src, open(args.in_path, "w", encoding="utf-8") as dst:
+        with open(SEED_FROM, "r", encoding="utf-8") as src, open(
+            args.in_path, "w", encoding="utf-8"
+        ) as dst:
             dst.write(src.read())
         all_rows = read_csv(args.in_path)
 
     # Ensure expected columns exist
     required = [
-        "work_type", "title", "byline", "release_date", "month", "day",
-        "extra", "source_url", "entry_date", "peak_date", "peak_position", "date_source"
+        "work_type",
+        "title",
+        "byline",
+        "release_date",
+        "month",
+        "day",
+        "extra",
+        "source_url",
+        "entry_date",
+        "peak_date",
+        "peak_position",
+        "date_source",
     ]
     if all_rows:
         for r in all_rows:
             for k in required:
                 r.setdefault(k, "")
 
-    # Target only rows missing release_date
-    target_idxs = [i for i, r in enumerate(all_rows) if not (r.get("release_date") or "").strip()]
+    # Target rows that need work
+    target_idxs = [i for i, r in enumerate(all_rows) if should_process_row(r)]
     if not target_idxs:
-        print("No missing release dates found — nothing to do.")
+        print("No rows need release_date updates — nothing to do.")
         return
 
-    print(f"Processing {len(target_idxs)} rows missing release_date out of {len(all_rows)} total...")
+    print(f"Processing {len(target_idxs)} rows needing release_date work out of {len(all_rows)} total...")
 
     for count, i in enumerate(target_idxs, start=1):
         try:

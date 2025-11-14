@@ -21,6 +21,8 @@ import re
 import time
 import argparse
 from typing import Dict, Tuple, Optional
+from io import StringIO
+
 
 import requests
 import pandas as pd
@@ -100,7 +102,7 @@ def fetch_album_tables(sess: requests.Session) -> pd.DataFrame:
     resp.raise_for_status()
     html = resp.text
 
-    tables = pd.read_html(html)
+    tables = pd.read_html(StringIO(html))
     frames = []
 
     for raw in tables:

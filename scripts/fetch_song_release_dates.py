@@ -21,6 +21,7 @@ WIKIPEDIA_API = "https://en.wikipedia.org/w/api.php"
 WIKIDATA_ENTITY = "https://www.wikidata.org/wiki/Special:EntityData/{qid}.json"
 
 DATE_RX_ISO = re.compile(r"^\s*(\d{4})(?:-(\d{2}))?(?:-(\d{2}))?\s*$")
+FULL_DATE_RX = re.compile(r"^\s*\d{4}-\d{2}-\d{2}\s*$")
 
 STARTDATE_TMPL_RX = re.compile(
     r"\{\{\s*start[- _]?date(?:[^|}]*)\|(?P<y>\d{3,4})(?:\|(?P<m>\d{1,2}))?(?:\|(?P<d>\d{1,2}))?",
@@ -30,8 +31,6 @@ STARTDATE_TMPL_RX = re.compile(
 RELEASE_KEYS = (
     "released", "release_date", "released_date", "date", "release"
 )
-
-YEAR_ONLY_RX = re.compile(r"^\s*\d{4}\s*$")
 
 # ---------------- HTTP helpers --------------------
 
@@ -469,10 +468,11 @@ def main():
         for k in required:
             r.setdefault(k, "")
 
+    # Only treat full YYYY-MM-DD dates as "already OK"
     target = []
     for i, r in enumerate(all_rows):
         rd = (r.get("release_date") or "").strip()
-        if not rd or YEAR_ONLY_RX.match(rd):
+        if not FULL_DATE_RX.match(rd):
             target.append(i)
 
     if not target:
@@ -482,8 +482,8 @@ def main():
     print(f"Total rows in file: {len(all_rows)}")
 
     already_had_dates = len(all_rows) - len(target)
-    print(f"Rows already containing release dates: {already_had_dates}")
-    print(f"Rows needing update (missing or year-only): {len(target)}")
+    print(f"Rows already containing full release dates (YYYY-MM-DD): {already_had_dates}")
+    print(f"Rows needing update (missing or partial): {len(target)}")
 
     updated_count = 0
     error_count = 0
@@ -511,15 +511,16 @@ def main():
     print("")
     print("==== Release Date Update Summary ====")
     print(f"Total rows: {len(all_rows)}")
-    print(f"Already had valid release_date: {already_had_dates}")
+    print(f"Already had full release_date (YYYY-MM-DD): {already_had_dates}")
     print(f"Rows requiring update: {len(target)}")
     print(f"Successfully updated release_date: {updated_count}")
     print(f"Failed/error rows: {error_count}")
 
     remaining_missing = sum(
-        1 for r in all_rows if not r.get("release_date", "").strip()
+        1 for r in all_rows
+        if not FULL_DATE_RX.match((r.get("release_date") or "").strip())
     )
-    print(f"Remaining missing after run: {remaining_missing}")
+    print(f"Remaining without full YYYY-MM-DD after run: {remaining_missing}")
     print("====================================")
     print("")
 
@@ -529,4 +530,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

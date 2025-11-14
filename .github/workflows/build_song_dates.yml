@@ -49,23 +49,22 @@ jobs:
             --out data/songs_top10_us_with_dates.csv \
             --throttle 0.3
 
-          - name: Commit and push if changed
-            run: |
-              git config user.name "Strum Bot"
-              git config user.email "bot@users.noreply.github.com"
-    
-              # Make sure we are up to date with origin/main
-              git fetch origin main
-              git rebase origin/main
-    
-              # Stage the updated CSV
-              git add data/songs_top10_us_with_dates.csv
-    
-              # Only commit if there is a staged change
-              if ! git diff --cached --quiet; then
-                git commit -m "Auto-update Top10 song release dates (delta)"
-                git push origin HEAD:main
-              else
-                echo "No changes to commit."
-              fi
+      - name: Commit and push if changed
+        run: |
+          git config user.name "Strum Bot"
+          git config user.email "bot@users.noreply.github.com"
 
+          # Make sure we are up to date with origin/main
+          git fetch origin main
+          git rebase origin/main
+
+          # Stage the updated CSV
+          git add data/songs_top10_us_with_dates.csv
+
+          # Only commit if there is a staged change
+          if ! git diff --cached --quiet; then
+            git commit -m "Auto-update Top10 song release dates (delta)"
+            git push origin HEAD:main
+          else
+            echo "No changes to commit."
+          fi

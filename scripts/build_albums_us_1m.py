@@ -31,7 +31,7 @@ WIKI_URL = "https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_Uni
 MB_SEARCH_BASE = "https://musicbrainz.org/ws/2/release-group"
 MB_RG_BASE = "https://musicbrainz.org/ws/2/release-group/{mbid}"
 
-OUT_PATH_DEFAULT = "otd/albums_us_1m.csv"
+OUT_PATH_DEFAULT = "data/albums_us_1m.csv"
 
 # --------------------------------------------------------------------
 # HTTP helpers

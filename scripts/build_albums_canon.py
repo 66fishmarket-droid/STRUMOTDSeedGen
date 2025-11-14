@@ -35,7 +35,7 @@ WIKI_ALBUM_URLS = [
     "https://en.wikipedia.org/wiki/List_of_best-selling_albums",
     # US-specific and diamond albums
     "https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States",
-    "https://en.wikipedia.org/wiki/List_of_Diamond_certified_albums_in_the_United_States",
+    "https://en.wikipedia.org/wiki/List_of_Diamond-certified_albums_in_the_United_States",
     # Best-selling by decade
     "https://en.wikipedia.org/wiki/List_of_best-selling_albums_of_the_1970s",
     "https://en.wikipedia.org/wiki/List_of_best-selling_albums_of_the_1980s",
@@ -141,10 +141,27 @@ def fetch_album_tables_for_url(sess: requests.Session, url: str, list_label: str
     found on that page.
     """
     print(f"Fetching tables from {url} ...")
-    resp = sess.get(url, timeout=30)
-    resp.raise_for_status()
-    html = resp.text
+    try:
+        resp = sess.get(url, timeout=30)
+        resp.raise_for_status()
+    except requests.HTTPError as e:
+        print(f"  Skipping {url} due to HTTP error: {e}")
+        return pd.DataFrame(
+            columns=[
+                "year",
+                "artist",
+                "album",
+                "label",
+                "sales_raw",
+                "certification",
+                "country",
+                "shipments_units",
+                "list_source",
+                "source_url",
+            ]
+        )
 
+    html = resp.text
     tables = pd.read_html(StringIO(html))
     frames: List[pd.DataFrame] = []
 
@@ -176,7 +193,7 @@ def fetch_album_tables_for_url(sess: requests.Session, url: str, list_label: str
 
         df = df.rename(columns=col_map)
 
-        # IMPORTANT: drop duplicate columns after renaming
+        # Drop duplicate columns after renaming
         df = df.loc[:, ~pd.Index(df.columns).duplicated()]
 
         # Ensure standard columns exist
@@ -242,7 +259,6 @@ def fetch_all_wiki_albums(sess: requests.Session) -> pd.DataFrame:
     combined = pd.concat(frames, ignore_index=True)
     print(f"Total raw Wikipedia album rows (pre-dedup): {len(combined)}")
     return combined
-
 
 # --------------------------------------------------------------------
 # Existing file loading + merging
@@ -585,8 +601,18 @@ def main():
     ap = argparse.ArgumentParser(
         description="Build albums_canon.csv from multiple Wikipedia album lists and enrich with MusicBrainz data."
     )
-    ap.add_argument("--out", dest="out_path", default=OUT_PATH_DEFAULT, help="Output CSV path (default: data/albums_canon.csv)")
-    ap.add_argument("--mb-throttle", type=float, default=1.1, help="Seconds sleep between MusicBrainz calls (default: 1.1)")
+    ap.add_argument(
+        "--out",
+        dest="out_path",
+        default=OUT_PATH_DEFAULT,
+        help="Output CSV path (default: data/albums_canon.csv)",
+    )
+    ap.add_argument(
+        "--mb-throttle",
+        type=float,
+        default=1.1,
+        help="Seconds sleep between MusicBrainz calls (default: 1.1)",
+    )
     args = ap.parse_args()
 
     sess = http_session()

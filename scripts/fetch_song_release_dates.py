@@ -479,7 +479,7 @@ def main():
         print("Nothing to do.")
         return
 
-       print(f"Total rows in file: {len(all_rows)}")
+    print(f"Total rows in file: {len(all_rows)}")
 
     already_had_dates = len(all_rows) - len(target)
     print(f"Rows already containing release dates: {already_had_dates}")
@@ -508,7 +508,6 @@ def main():
         if count % 25 == 0:
             print(f"Processed {count}/{len(target)} rows...")
 
-    # Summary
     print("")
     print("==== Release Date Update Summary ====")
     print(f"Total rows: {len(all_rows)}")
@@ -518,7 +517,7 @@ def main():
     print(f"Failed/error rows: {error_count}")
 
     remaining_missing = sum(
-        1 for r in all_rows if not r.get('release_date', '').strip()
+        1 for r in all_rows if not r.get("release_date", "").strip()
     )
     print(f"Remaining missing after run: {remaining_missing}")
     print("====================================")
@@ -527,5 +526,7 @@ def main():
     write_csv(args.out_path, all_rows)
     print(f"Wrote {args.out_path} rows={len(all_rows)} updated={len(target)}")
 
+
 if __name__ == "__main__":
     main()
+

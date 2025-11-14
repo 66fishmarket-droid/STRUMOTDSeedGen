@@ -149,4 +149,216 @@ Every dataset is:
 - Clearly separated in purpose  
 
 If you make changes to any of the scripts under `scripts/`, the corresponding workflow will pick them up automatically on the next scheduled run.
+# STRUM OTD Arts Canon Datasets  
+## Overview of Current CSV Files and Planned Expansion
+
+The `otd/` directory contains seed datasets representing culturally significant works across multiple art forms. These datasets act as *canonical pools* from which daily “On This Day” entries can be drawn and enriched.
+
+This document outlines what each CSV represents, the criteria used to populate it, and how each data source will be expanded over time with richer metadata (IMDb, sales, awards, certifications, etc).
+
+---
+
+# albums_us_1m.csv  
+### Purpose  
+Albums that have sold **over 1 million copies in the United States**, forming a list of high-impact releases.
+
+### Current Criteria  
+- RIAA-certified 1x Platinum or higher.
+
+### Planned Enhancements  
+- Add global sales (IFPI)  
+- Add chart performance (Billboard)  
+- Add critical score (Metacritic)  
+- Add award flags (Grammy wins, nominations)  
+- Add MusicBrainz + Discogs IDs  
+- Add canonical release date with ISO precision  
+- Add anniversary flags (10y, 20y, 25y, 30y, 50y)
+
+---
+
+# births.csv / deaths.csv  
+(Generated nightly; part of the OTD pipeline)
+
+No changes required here.
+
+---
+
+# calendar_index.csv  
+(Generated nightly; merged index of all daily events)
+
+This will eventually integrate enriched metadata from all arts canon files.
+
+---
+
+# literature_canon.csv  
+### Purpose  
+Key works of literature used for OTD content.
+
+### Current Criteria (seed)  
+- Major award winners (Pulitzer, Booker, Nobel Literature)  
+- Culturally significant novels and non-fiction  
+- Public domain classics
+
+### Planned Enhancements  
+- Goodreads rating + rating count  
+- Awards field (Booker/Pulitzer/etc)  
+- Language, genre, page count  
+- Author nationality  
+- Adaptations (film, TV)  
+- Anniversary flags  
+
+---
+
+# movies_rt80.csv  
+### Purpose  
+Films with **Rotten Tomatoes score >= 80%**, used as a high-quality film canon.
+
+### Current Criteria  
+- RT >= 80%  
+- IMDb score optionally included
+
+### Planned Enhancements  
+- Add IMDb rating + vote count  
+- Add OMDb metadata (runtime, genre, cast, plot)  
+- Add box office data (BoxOfficeMojo)  
+- Add Oscars/BAFTA wins  
+- Add production year and exact release ISO  
+- Add TMDb ID for richer artwork/posters  
+- Separate films vs documentaries vs animation  
+
+---
+
+# paintings_canon.csv  
+### Purpose  
+Major artworks spanning Renaissance → modern era.
+
+### Current Criteria  
+- Museum significance (MoMA, Tate, Louvre, Rijksmuseum)  
+- Known auction record holders  
+- Works with established historical importance
+
+### Planned Enhancements  
+- Artist biography links  
+- Art movement/style  
+- Museum of origin  
+- Auction high sale price  
+- Creation year ISO normalization  
+- Exhibition/retrospective anniversaries  
+
+---
+
+# sculpture_canon.csv  
+### Purpose  
+Sculptures of high historical or cultural importance.
+
+### Current Criteria  
+- Major works recognized by authoritative art history sources
+
+### Planned Enhancements  
+- Museum metadata  
+- Material (bronze, marble, forged steel, etc)  
+- Dimensions  
+- Restoration/rediscovery events  
+- Anniversary flags  
+
+---
+
+# songs_top10_us.csv / songs_top10_us_with_dates.csv  
+### Purpose  
+Top 10 US chart entries matched with release date metadata.
+
+### Current Criteria  
+- Billboard Hot 100 Top 10 entries  
+- Release date extracted from Wikipedia/Wikidata
+
+### Planned Enhancements  
+- Add audio features (Spotify API)  
+- Add certifications (RIAA)  
+- Add global chart peak positions  
+- Add genre and producer metadata  
+- Add anniversary flags  
+
+---
+
+# state_songs.json  
+### Purpose  
+Official state songs of U.S. states.
+
+### Planned Enhancements  
+- Release dates  
+- Songwriters/composers  
+- Replace JSON with CSV for consistency  
+- Add cross-links to songs_top10_us_with_dates.csv (if overlapping)
+
+---
+
+# theatre_canon.csv  
+### Purpose  
+Canonical list of major theatre works and musicals.
+
+### Current Criteria  
+- Broadway/West End classics  
+- Tony Award winners  
+- Olivier Award winners  
+- Shakespeare canonical works
+
+### Planned Enhancements  
+- Opening dates (ISO)  
+- Number of performances / run length  
+- Revival data  
+- Major cast members  
+- Award metadata  
+- Adaptations (film/musical versions)
+
+---
+
+# tv_canon.csv  
+### Purpose  
+Significant TV shows and episodes.
+
+### Current Criteria  
+- Highly rated shows  
+- Culturally important episodes  
+- Critically acclaimed series
+
+### Planned Enhancements  
+- IMDb rating and vote count  
+- Rotten Tomatoes season scores  
+- Awards (Emmys, Golden Globes)  
+- Premiere/season finale dates  
+- Episode-level metadata for major milestones  
+- Viewer numbers / Nielsen ratings  
+
+---
+
+# Planned General Enhancements (All Canon Files)
+
+All arts canon datasets will eventually support the following metadata fields:
+
+- `title`  
+- `creator/artist/author`  
+- `release_date_iso`  
+- `genre / style / medium`  
+- `country`  
+- `awards`  
+- `rating` (IMDb, Goodreads, Metacritic, RT etc)  
+- `popularity_metric` (sales, views, box office, certifications)  
+- `external_ids` (Wikidata QID, MusicBrainz, Discogs, IMDb, TMDb, Goodreads)  
+- `anniversary_flag` (is_today_10th / 20th / 25th / 30th etc)  
+- `otd_relevance_score` (calculated signal strength for daily posting)
+
+---
+
+# End Goal
+
+The goal is to turn the `otd/` directory into a set of **high-quality, curated cultural datasets**, enabling:
+
+- daily automated Strum arts posts  
+- trivia questions  
+- timeline visualisations  
+- anniversary highlights  
+- cross-referenced cultural insights  
+
+All fed by a single unified pipeline with nightly updates.
+
 

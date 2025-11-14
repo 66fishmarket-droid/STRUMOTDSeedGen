@@ -1,24 +1,7 @@
 #!/usr/bin/env python3
 # scripts/fetch_song_release_dates.py
-# For each Wikipedia song page, extract a release date.
-#
-# Strategy:
-#   1) Derive the exact Wikipedia page title from source_url when possible.
-#   2) Get QID from pageprops; query Wikidata P577.
-#   3) Fallback/augment: fetch page wikitext and parse infobox "released" field.
-#   4) Normalize to YYYY-MM-DD when possible; else YYYY-MM or YYYY.
-#
-# Input CSV: Top 10 songs with columns
-#   work_type,title,byline,release_date,month,day,extra,source_url,
-#   entry_date,peak_date,peak_position,date_source
-#
-# Output CSV: same file, with release_date/month/day/date_source filled for:
-#   - rows where release_date is blank, or
-#   - rows where release_date is just a 4-digit year.
-#
-# Delta-safe:
-# - If data/songs_top10_us_with_dates.csv is missing, seed from data/songs_top10_us.csv.
-# - Processes only target rows, then writes the full file back.
+# Improved: adds Wikipedia search, encoding, and title disambiguation.
+# Much higher accuracy for release date detection.
 
 import os
 import re
@@ -26,13 +9,13 @@ import csv
 import time
 import argparse
 from typing import Dict, List, Optional, Tuple
-from urllib.parse import urlparse, unquote
+from urllib.parse import urlparse, unquote, quote
 
 import requests
 
 IN_PATH_DEFAULT = "data/songs_top10_us_with_dates.csv"
 OUT_PATH_DEFAULT = "data/songs_top10_us_with_dates.csv"
-SEED_FROM = "data/songs_top10_us.csv"  # used only if the with_dates file is missing
+SEED_FROM = "data/songs_top10_us.csv"
 
 WIKIPEDIA_API = "https://en.wikipedia.org/w/api.php"
 WIKIDATA_ENTITY = "https://www.wikidata.org/wiki/Special:EntityData/{qid}.json"
@@ -44,14 +27,13 @@ STARTDATE_TMPL_RX = re.compile(
     flags=re.IGNORECASE,
 )
 
-# Typical infobox key names that hold release values
 RELEASE_KEYS = (
     "released", "release_date", "released_date", "date", "release"
 )
 
 YEAR_ONLY_RX = re.compile(r"^\s*\d{4}\s*$")
 
-# ---------- HTTP/session ----------
+# ---------------- HTTP helpers --------------------
 
 def ua_contact() -> str:
     return os.getenv("USER_AGENT_CONTACT", "https://github.com/OWNER/REPO/issues")
@@ -87,14 +69,9 @@ def backoff_get(
         r.raise_for_status()
     return None
 
-# ---------- Wikipedia utilities ----------
+# ---------------- Wikipedia utilities --------------------
 
 def derive_title_from_url(url: str) -> Optional[str]:
-    """
-    Given a Wikipedia URL like:
-      https://en.wikipedia.org/wiki/Pink_Pony_Club
-    return the article title portion: 'Pink_Pony_Club'.
-    """
     try:
         p = urlparse(url)
         parts = p.path.split("/")
@@ -108,7 +85,12 @@ def derive_title_from_url(url: str) -> Optional[str]:
     except Exception:
         return None
 
-def mw_get_qid_for_title(s: requests.Session, title: str) -> Optional[str]:
+def encode_title(title: str) -> str:
+    # Replace spaces with underscores and encode special chars
+    return quote(title.replace(" ", "_"), safe="/")
+
+def mw_get_qid_for_title(s: requests.Session, raw_title: str) -> Optional[str]:
+    title = encode_title(raw_title)
     params = {
         "action": "query",
         "format": "json",
@@ -123,9 +105,40 @@ def mw_get_qid_for_title(s: requests.Session, title: str) -> Optional[str]:
     if not pages:
         return None
     page = pages[0]
-    if "pageprops" in page and "wikibase_item" in page["pageprops"]:
-        return page["pageprops"]["wikibase_item"]
-    return None
+    if "missing" in page:
+        return None
+    props = page.get("pageprops", {})
+    return props.get("wikibase_item")
+
+def mw_page_exists(s: requests.Session, raw_title: str) -> bool:
+    title = encode_title(raw_title)
+    params = {
+        "action": "query",
+        "format": "json",
+        "titles": title,
+        "redirects": 1,
+        "formatversion": 2,
+    }
+    r = backoff_get(s, WIKIPEDIA_API, params=params)
+    pages = r.json().get("query", {}).get("pages", [])
+    if not pages:
+        return False
+    return "missing" not in pages[0]
+
+def mw_search_best_title(s: requests.Session, song: str, artist: str) -> Optional[str]:
+    query = f"{song} {artist} song"
+    params = {
+        "action": "query",
+        "list": "search",
+        "format": "json",
+        "srsearch": query,
+        "srlimit": 1,
+    }
+    r = backoff_get(s, WIKIPEDIA_API, params=params)
+    hits = r.json().get("query", {}).get("search", [])
+    if not hits:
+        return None
+    return hits[0]["title"]
 
 def wd_get_p577_date(s: requests.Session, qid: str) -> Optional[str]:
     url = WIKIDATA_ENTITY.format(qid=qid)
@@ -134,22 +147,25 @@ def wd_get_p577_date(s: requests.Session, qid: str) -> Optional[str]:
     ent = data.get("entities", {}).get(qid)
     if not ent:
         return None
-    p577 = ent.get("claims", {}).get("P577")
+    claims = ent.get("claims", {})
+    p577 = claims.get("P577")
     if not p577:
         return None
-    best_iso = None
+
+    best = None
     for st in p577:
-        v = st.get("mainsnak", {}).get("datavalue", {})
-        if v.get("type") != "time":
+        dv = st.get("mainsnak", {}).get("datavalue", {})
+        if dv.get("type") != "time":
             continue
-        t = v.get("value", {}).get("time")  # like "+1991-05-20T00:00:00Z"
-        precision = v.get("value", {}).get("precision")  # 9=year, 10=month, 11=day
+        v = dv.get("value", {})
+        t = v.get("time")
+        precision = v.get("precision")
         if not t:
             continue
         iso = normalize_wikidata_time(t, precision)
-        if iso and (best_iso is None or iso < best_iso):
-            best_iso = iso
-    return best_iso
+        if iso and (best is None or iso < best):
+            best = iso
+    return best
 
 def normalize_wikidata_time(time_str: str, precision: int) -> Optional[str]:
     t = time_str.lstrip("+")
@@ -167,7 +183,8 @@ def normalize_wikidata_time(time_str: str, precision: int) -> Optional[str]:
         return y
     return t
 
-def mw_get_wikitext(s: requests.Session, title: str) -> Optional[str]:
+def mw_get_wikitext(s: requests.Session, raw_title: str) -> Optional[str]:
+    title = encode_title(raw_title)
     params = {
         "action": "query",
         "format": "json",
@@ -189,24 +206,17 @@ def mw_get_wikitext(s: requests.Session, title: str) -> Optional[str]:
     slot = revs[0].get("slots", {}).get("main", {})
     return slot.get("content")
 
-# ---------- Wikitext parsing ----------
+# --------- Wikitext parsing --------------
 
 def parse_release_from_wikitext(wikitext: str) -> Optional[str]:
-    """
-    Look inside the infobox first (preferred), then the wider article,
-    for either a {{start date|...}} template or a 'released =' line.
-    """
     if not wikitext:
         return None
 
-    # Try to limit to the Infobox block first
     infobox_start = re.search(r"\{\{\s*Infobox[^}]*\n", wikitext, flags=re.IGNORECASE)
     block = wikitext
     if infobox_start:
-        start = infobox_start.start()
-        block = wikitext[start:start + 2000]
+        block = wikitext[infobox_start.start():infobox_start.start() + 2000]
 
-    # 1) Look for a start date template in the infobox
     m = STARTDATE_TMPL_RX.search(block)
     if m:
         y = m.group("y"); mm = m.group("m"); dd = m.group("d")
@@ -217,7 +227,6 @@ def parse_release_from_wikitext(wikitext: str) -> Optional[str]:
         if y:
             return f"{int(y):04d}"
 
-    # 2) Look for a "| released = ..." line (or similar keys)
     line_rx = re.compile(
         r"^\s*\|\s*(?:%s)\s*=\s*(.+)$" % "|".join([re.escape(k) for k in RELEASE_KEYS]),
         flags=re.IGNORECASE | re.MULTILINE,
@@ -229,7 +238,6 @@ def parse_release_from_wikitext(wikitext: str) -> Optional[str]:
         if iso:
             return iso
 
-    # 3) As a last resort, look for a start date template anywhere
     m3 = STARTDATE_TMPL_RX.search(wikitext)
     if m3:
         y = m3.group("y"); mm = m3.group("m"); dd = m3.group("d")
@@ -244,21 +252,15 @@ def parse_release_from_wikitext(wikitext: str) -> Optional[str]:
 
 def clean_markup(text: str) -> str:
     t = text or ""
-    # Strip <ref>...</ref> and self-closing refs
     t = re.sub(r"<ref[^>]*>.*?</ref>", " ", t, flags=re.DOTALL | re.IGNORECASE)
     t = re.sub(r"<ref[^/>]*/>", " ", t, flags=re.IGNORECASE)
-    # Remove simple templates
     t = re.sub(r"\{\{.*?\}\}", " ", t)
-    # Replace [[link|text]] / [[text]] with 'text'
     t = re.sub(r"\[\[(?:[^|\]]*\|)?([^\]]+)\]\]", r"\1", t)
-    # Collapse whitespace and trim punctuation
     t = " ".join(t.split())
     return t.strip(" ,;")
 
 def sniff_human_date_to_iso(text: str) -> Optional[str]:
     t = text.strip()
-
-    # Already ISO-ish
     m = DATE_RX_ISO.match(t)
     if m:
         y, mm, dd = m.groups()
@@ -268,7 +270,6 @@ def sniff_human_date_to_iso(text: str) -> Optional[str]:
             return f"{y}-{mm}"
         return y
 
-    # Formats like "21 October 1985"
     m = re.match(r"^(\d{1,2})\s+([A-Za-z]+)\s+(\d{4})$", t)
     if m:
         d, mon, y = m.groups()
@@ -276,7 +277,6 @@ def sniff_human_date_to_iso(text: str) -> Optional[str]:
         if mm:
             return f"{int(y):04d}-{mm:02d}-{int(d):02d}"
 
-    # Formats like "October 1985"
     m = re.match(r"^([A-Za-z]+)\s+(\d{4})$", t)
     if m:
         mon, y = m.groups()
@@ -284,7 +284,6 @@ def sniff_human_date_to_iso(text: str) -> Optional[str]:
         if mm:
             return f"{int(y):04d}-{mm:02d}"
 
-    # Just a year "1985"
     m = re.match(r"^(\d{4})$", t)
     if m:
         return m.group(1)
@@ -322,9 +321,6 @@ def add_md_columns(iso: Optional[str]) -> Tuple[str, str]:
     return (mm or "", dd or "")
 
 def iso_precision_level(iso: str) -> int:
-    """
-    Rough precision: 3 = YYYY-MM-DD, 2 = YYYY-MM, 1 = YYYY, 0 = unknown.
-    """
     m = DATE_RX_ISO.match(iso or "")
     if not m:
         return 0
@@ -340,30 +336,52 @@ def iso_precision_level(iso: str) -> int:
 def is_more_precise(new_iso: str, old_iso: str) -> bool:
     return iso_precision_level(new_iso) > iso_precision_level(old_iso)
 
-# ---------- Row processor ----------
+# ---------------- Row logic --------------------
+
+def try_title_variants(s: requests.Session, base_title: str, artist: str) -> Optional[str]:
+    variants = [
+        base_title,
+        base_title.replace(" ", "_"),
+        f"{base_title}_(song)",
+        f"{base_title.replace(' ', '_')}_(song)",
+        f"{base_title}_(single)",
+        f"{base_title}_(track)",
+        f"{base_title}_(artist_song)",
+        f"{base_title.replace(' ', '_')}_(artist_song)",
+    ]
+
+    for t in variants:
+        if mw_page_exists(s, t):
+            return t
+
+    search_hit = mw_search_best_title(s, base_title, artist)
+    if search_hit and mw_page_exists(s, search_hit):
+        return search_hit
+
+    return None
 
 def process_row(s: requests.Session, row: Dict, throttle: float) -> Dict:
     src_url = row.get("source_url", "").strip()
     csv_title = (row.get("title") or "").strip()
-    artist = (row.get("byline") or "").strip()  # unused for now, but kept for possible future logic
+    artist = (row.get("byline") or "").strip()
 
-    # Prefer the exact article title derived from the URL
-    page_title = derive_title_from_url(src_url)
-    if page_title:
-        title = page_title
-    else:
-        title = csv_title
+    derived = derive_title_from_url(src_url)
+    base_title = derived if derived else csv_title
+
+    title = try_title_variants(s, base_title, artist)
+    if not title:
+        out = dict(row)
+        out["date_source"] = "error:no_title_found"
+        return out
 
     release_date = None
     date_source = ""
 
-    # Try Wikidata P577 via QID for the specific page title
     qid = None
     try:
-        if title:
-            qid = mw_get_qid_for_title(s, title)
+        qid = mw_get_qid_for_title(s, title)
     except Exception:
-        qid = None
+        pass
 
     try:
         if qid:
@@ -374,16 +392,14 @@ def process_row(s: requests.Session, row: Dict, throttle: float) -> Dict:
     except Exception:
         pass
 
-    # Wikitext fallback (or refinement: get more precise than just a year/month)
     need_wikitext = (not release_date) or iso_precision_level(release_date) < 3
-    if title and need_wikitext:
+    if need_wikitext:
         try:
             wikitext = mw_get_wikitext(s, title)
             wt_date = parse_release_from_wikitext(wikitext)
-            if wt_date:
-                if (not release_date) or is_more_precise(wt_date, release_date):
-                    release_date = wt_date
-                    date_source = "wikitext:released"
+            if wt_date and is_more_precise(wt_date, release_date or ""):
+                release_date = wt_date
+                date_source = "wikitext:released"
         except Exception:
             pass
 
@@ -397,12 +413,11 @@ def process_row(s: requests.Session, row: Dict, throttle: float) -> Dict:
     time.sleep(throttle)
     return out
 
-# ---------- CSV IO ----------
+# ---------------- CSV IO --------------------
 
 def read_csv(path: str) -> List[Dict]:
     with open(path, "r", encoding="utf-8") as f:
-        r = csv.DictReader(f)
-        return list(r)
+        return list(csv.DictReader(f))
 
 def write_csv(path: str, rows: List[Dict]) -> None:
     fieldnames = [
@@ -414,22 +429,18 @@ def write_csv(path: str, rows: List[Dict]) -> None:
     with open(path, "w", encoding="utf-8", newline="") as f:
         w = csv.DictWriter(f, fieldnames=fieldnames)
         w.writeheader()
-        for row in rows:
-            out = {k: row.get(k, "") for k in fieldnames}
-            w.writerow(out)
+        for r in rows:
+            w.writerow({k: r.get(k, "") for k in fieldnames})
 
-# ---------- Main ----------
+# ---------------- Main --------------------
 
 def main():
-    ap = argparse.ArgumentParser(
-        description="Fetch release dates for Wikipedia song pages (delta mode)."
-    )
+    ap = argparse.ArgumentParser(description="Fetch release dates for Wikipedia song pages (improved).")
     ap.add_argument("--in", dest="in_path", default=IN_PATH_DEFAULT, help="Input CSV path")
     ap.add_argument("--out", dest="out_path", default=OUT_PATH_DEFAULT, help="Output CSV path")
-    ap.add_argument("--throttle", type=float, default=0.3, help="Seconds sleep between items")
+    ap.add_argument("--throttle", type=float, default=0.3, help="Seconds sleep per row")
     args = ap.parse_args()
 
-    # Auto-seed: if the with_dates file does not exist, copy from the raw Top 10 file
     if not os.path.exists(args.in_path):
         if os.path.exists(SEED_FROM):
             os.makedirs(os.path.dirname(args.in_path), exist_ok=True)
@@ -437,60 +448,49 @@ def main():
                 dst.write(src.read())
             print(f"Seeded {args.in_path} from {SEED_FROM}")
         else:
-            print(f"Input file not found: {args.in_path}")
+            print(f"Missing input file: {args.in_path}")
             return
 
     s = http_session()
-
-    # Read full file; if it has no data rows, reseed from the raw file
     all_rows = read_csv(args.in_path)
 
     if not all_rows and os.path.exists(SEED_FROM):
-        print(f"{args.in_path} has no data rows, reseeding from {SEED_FROM}")
+        print(f"{args.in_path} empty, reseeding from {SEED_FROM}")
         with open(SEED_FROM, "r", encoding="utf-8") as src, open(args.in_path, "w", encoding="utf-8") as dst:
             dst.write(src.read())
         all_rows = read_csv(args.in_path)
 
-    # Ensure expected columns exist
     required = [
         "work_type", "title", "byline", "release_date", "month", "day",
         "extra", "source_url", "entry_date", "peak_date",
         "peak_position", "date_source",
     ]
-    if all_rows:
-        for r in all_rows:
-            for k in required:
-                r.setdefault(k, "")
+    for r in all_rows:
+        for k in required:
+            r.setdefault(k, "")
 
-    # Target rows:
-    #   - missing release_date entirely; or
-    #   - release_date is just a plain 4-digit year.
-    target_idxs: List[int] = []
+    target = []
     for i, r in enumerate(all_rows):
         rd = (r.get("release_date") or "").strip()
         if not rd or YEAR_ONLY_RX.match(rd):
-            target_idxs.append(i)
+            target.append(i)
 
-    if not target_idxs:
-        print("No missing or year-only release dates found — nothing to do.")
+    if not target:
+        print("Nothing to do.")
         return
 
-    print(
-        f"Processing {len(target_idxs)} rows needing release_date out of {len(all_rows)} total..."
-    )
+    print(f"Processing {len(target)} missing/partial release dates...")
 
-    for count, i in enumerate(target_idxs, start=1):
+    for count, i in enumerate(target, start=1):
         try:
-            updated = process_row(s, all_rows[i], throttle=args.throttle)
-            all_rows[i] = updated
+            all_rows[i] = process_row(s, all_rows[i], throttle=args.throttle)
         except Exception as e:
             all_rows[i]["date_source"] = f"error:{type(e).__name__}"
         if count % 25 == 0:
-            print(f"Processed {count}/{len(target_idxs)} rows...")
+            print(f"Processed {count}/{len(target)} rows...")
 
     write_csv(args.out_path, all_rows)
-    print(f"Wrote {args.out_path} rows={len(all_rows)} (updated {len(target_idxs)})")
-
+    print(f"Wrote {args.out_path} rows={len(all_rows)} updated={len(target)}")
 
 if __name__ == "__main__":
     main()

@@ -34,7 +34,15 @@ jobs:
           USER_AGENT_CONTACT: ${{ github.server_url }}/${{ github.repository }}/issues
         run: |
           python scripts/build_albums_us_1m.py \
-            --out otd/albums_us_1m.csv
+            --out data/albums_us_1m.csv
+
+      - name: Commit changes (if any)
+        run: |
+          git config user.name "strum-bot"
+          git config user.email "bot@users.noreply.github.com"
+
+          git add data/albums_us_1m.csv || true
+
 
       - name: Commit changes (if any)
         run: |

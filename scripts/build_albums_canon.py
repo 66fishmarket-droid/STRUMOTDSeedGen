@@ -225,6 +225,24 @@ def fetch_album_tables_for_url(sess: requests.Session, url: str, list_label: str
     print(f"  Found {len(combined)} album rows on {url}")
     return combined
 
+def fetch_all_wiki_albums(sess: requests.Session) -> pd.DataFrame:
+    """
+    Fetch album tables from all configured Wikipedia URLs and combine them.
+    """
+    frames: List[pd.DataFrame] = []
+    for url in WIKI_ALBUM_URLS:
+        label = url.split("/wiki/")[-1]
+        df = fetch_album_tables_for_url(sess, url, list_label=label)
+        if not df.empty:
+            frames.append(df)
+
+    if not frames:
+        raise RuntimeError("No album rows found on any configured Wikipedia URLs")
+
+    combined = pd.concat(frames, ignore_index=True)
+    print(f"Total raw Wikipedia album rows (pre-dedup): {len(combined)}")
+    return combined
+
 
 # --------------------------------------------------------------------
 # Existing file loading + merging

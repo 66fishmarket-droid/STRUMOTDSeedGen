@@ -479,15 +479,50 @@ def main():
         print("Nothing to do.")
         return
 
-    print(f"Processing {len(target)} missing/partial release dates...")
+       print(f"Total rows in file: {len(all_rows)}")
+
+    already_had_dates = len(all_rows) - len(target)
+    print(f"Rows already containing release dates: {already_had_dates}")
+    print(f"Rows needing update (missing or year-only): {len(target)}")
+
+    updated_count = 0
+    error_count = 0
+
+    print(f"Processing {len(target)} rows...")
 
     for count, i in enumerate(target, start=1):
         try:
-            all_rows[i] = process_row(s, all_rows[i], throttle=args.throttle)
+            before = all_rows[i].get("release_date", "").strip()
+            updated_row = process_row(s, all_rows[i], throttle=args.throttle)
+            after = updated_row.get("release_date", "").strip()
+
+            all_rows[i] = updated_row
+
+            if after and after != before:
+                updated_count += 1
+
         except Exception as e:
+            error_count += 1
             all_rows[i]["date_source"] = f"error:{type(e).__name__}"
+
         if count % 25 == 0:
             print(f"Processed {count}/{len(target)} rows...")
+
+    # Summary
+    print("")
+    print("==== Release Date Update Summary ====")
+    print(f"Total rows: {len(all_rows)}")
+    print(f"Already had valid release_date: {already_had_dates}")
+    print(f"Rows requiring update: {len(target)}")
+    print(f"Successfully updated release_date: {updated_count}")
+    print(f"Failed/error rows: {error_count}")
+
+    remaining_missing = sum(
+        1 for r in all_rows if not r.get('release_date', '').strip()
+    )
+    print(f"Remaining missing after run: {remaining_missing}")
+    print("====================================")
+    print("")
 
     write_csv(args.out_path, all_rows)
     print(f"Wrote {args.out_path} rows={len(all_rows)} updated={len(target)}")

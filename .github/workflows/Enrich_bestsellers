@@ -1,0 +1,5 @@
+- name: Enrich best-selling albums
+  env:
+    USER_AGENT_CONTACT: ${{ github.server_url }}/${{ github.repository }}/issues
+  run: |
+    python scripts/enrich_best_selling_albums.py

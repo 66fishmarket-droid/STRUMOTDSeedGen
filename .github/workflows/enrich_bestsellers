@@ -1,5 +1,35 @@
-- name: Enrich best-selling albums
-  env:
-    USER_AGENT_CONTACT: ${{ github.server_url }}/${{ github.repository }}/issues
-  run: |
-    python scripts/enrich_best_selling_albums.py
+# .github/workflows/enrich_best_selling_albums.yml
+
+name: Enrich best-selling albums
+
+on:
+  workflow_dispatch: {}
+  # Optional: also run on push if you want
+  # push:
+  #   paths:
+  #     - "scripts/enrich_best_selling_albums.py"
+  #     - ".github/workflows/enrich_best_selling_albums.yml"
+
+jobs:
+  enrich:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Enrich best-selling albums
+        env:
+          USER_AGENT_CONTACT: ${{ github.server_url }}/${{ github.repository }}/issues
+        run: |
+          python scripts/enrich_best_selling_albums.py

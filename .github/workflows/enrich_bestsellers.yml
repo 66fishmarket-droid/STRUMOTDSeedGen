@@ -4,11 +4,6 @@ name: Enrich best-selling albums
 
 on:
   workflow_dispatch: {}
-  # Optional: also run on push if you want
-  # push:
-  #   paths:
-  #     - "scripts/enrich_best_selling_albums.py"
-  #     - ".github/workflows/enrich_best_selling_albums.yml"
 
 jobs:
   enrich:
@@ -26,7 +21,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          pip install pandas requests openpyxl
 
       - name: Enrich best-selling albums
         env:

@@ -1,11 +1,10 @@
-# .github/workflows/enrich_best_selling_albums.yml
 name: Enrich best-selling albums
 
 on:
   workflow_dispatch: {}
 
 permissions:
-  contents: write   # allow this workflow to push back to the repo
+  contents: write  # allow the workflow to push back to the repo
 
 jobs:
   enrich:
@@ -15,7 +14,8 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
         with:
-          persist-credentials: true   # needed so we can push
+          fetch-depth: 0            # need full history so rebase works
+          persist-credentials: true # use the GITHUB_TOKEN for push
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -33,10 +33,17 @@ jobs:
         run: |
           python scripts/enrich_best_selling_albums.py
 
-      - name: Commit updated CSV
+      - name: Commit and push updated CSV (rebase onto main)
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Stage CSV and commit if there are changes
           git add data/best_selling_albums_enriched.csv
           git commit -m "Update best-selling albums enriched data [skip ci]" || echo "No changes to commit"
-          git push
+
+          # Rebase our commit(s) onto the latest main
+          git pull --rebase origin main
+
+          # Push rebased history back to main
+          git push origin HEAD:main

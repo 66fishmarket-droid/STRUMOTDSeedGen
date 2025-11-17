@@ -1,9 +1,11 @@
 # .github/workflows/enrich_best_selling_albums.yml
-
 name: Enrich best-selling albums
 
 on:
   workflow_dispatch: {}
+
+permissions:
+  contents: write   # allow this workflow to push back to the repo
 
 jobs:
   enrich:
@@ -12,6 +14,8 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
+        with:
+          persist-credentials: true   # needed so we can push
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -28,3 +32,11 @@ jobs:
           USER_AGENT_CONTACT: ${{ github.server_url }}/${{ github.repository }}/issues
         run: |
           python scripts/enrich_best_selling_albums.py
+
+      - name: Commit updated CSV
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/best_selling_albums_enriched.csv
+          git commit -m "Update best-selling albums enriched data [skip ci]" || echo "No changes to commit"
+          git push

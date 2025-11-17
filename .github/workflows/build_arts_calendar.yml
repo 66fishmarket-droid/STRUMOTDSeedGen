@@ -42,19 +42,24 @@ jobs:
         run: |
           python scripts/build_arts_on_this_day.py
 
-      # 5. Build the core calendar index (births/deaths + canon lists)
+      # 5. Build the core calendar index (from arts datasets)
       - name: Build calendar index (core)
         env:
           USER_AGENT_CONTACT: ${{ github.server_url }}/${{ github.repository }}/issues
         run: |
           python scripts/build_calendar_index.py
 
-      # 6. Overlay song facts (release / chart_entry / no1) into calendar_index.csv
+      # 6. Add births & deaths into calendar_index.csv
+      - name: Build calendar index (births & deaths)
+        run: |
+          python scripts/build_calendar_index_births_deaths.py
+
+      # 7. Overlay song facts (release / chart_entry / no1) into calendar_index.csv
       - name: Build calendar index (songs)
         run: |
           python scripts/build_calendar_index_songs.py
 
-      # 7. Commit and push any changes to data/*.csv
+      # 8. Commit and push any changes to data/*.csv
       - name: Commit and push changes
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

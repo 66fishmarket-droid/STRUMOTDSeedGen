@@ -2,7 +2,7 @@ name: Build Song Release Dates (Delta)
 
 on:
   schedule:
-    - cron: "15 1 * * *"   # 01:15 UTC nightly
+    - cron: "15 0 * * *"   # 00:15 UTC nightly
   workflow_dispatch: {}
 
 permissions:

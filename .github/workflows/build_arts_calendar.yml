@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Checkout full repo history
+      # 1. Checkout full repo history (so we can commit back)
       - name: Checkout repo
         uses: actions/checkout@v4
         with:
@@ -31,10 +31,10 @@ jobs:
       # 3. Install dependencies
       - name: Install dependencies
         run: |
-          pip install --upgrade pip
+          python -m pip install --upgrade pip
           pip install requests pandas lxml SPARQLWrapper
 
-      # 4. Build Arts datasets
+      # 4. Build Arts datasets (albums, literature, movies, etc.)
       - name: Build arts datasets
         env:
           USER_AGENT_CONTACT: ${{ github.server_url }}/${{ github.repository }}/issues
@@ -42,11 +42,31 @@ jobs:
         run: |
           python scripts/build_arts_on_this_day.py
 
-      # 5. Build the calendar index (summary JSON/CSV per day)
-      - name: Build calendar index
+      # 5. Build the core calendar index (births/deaths + canon lists)
+      - name: Build calendar index (core)
         env:
           USER_AGENT_CONTACT: ${{ github.server_url }}/${{ github.repository }}/issues
         run: |
           python scripts/build_calendar_index.py
 
-      # 6. Ensure no stale Gi
+      # 6. Overlay song facts (release / chart_entry / no1) into calendar_index.csv
+      - name: Build calendar index (songs)
+        run: |
+          python scripts/build_calendar_index_songs.py
+
+      # 7. Commit and push any changes to data/*.csv
+      - name: Commit and push changes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          if [[ -n "$(git status --porcelain)" ]]; then
+            echo "Changes detected; committing."
+            git add data
+            git commit -m "chore: rebuild arts datasets and calendar index"
+            git push
+          else
+            echo "No changes to commit."
+          fi

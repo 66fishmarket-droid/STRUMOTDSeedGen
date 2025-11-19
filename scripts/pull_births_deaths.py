@@ -18,10 +18,75 @@ import requests
 OUT_BIRTHS = "data/births.csv"
 OUT_DEATHS = "data/deaths.csv"
 
-FIELDS = ["work_type","title","byline","release_date","month","day","extra","source_url"]
+FIELDS = ["work_type", "title", "byline", "release_date", "month", "day", "extra", "source_url"]
 
 API_TPL = "https://en.wikipedia.org/api/rest_v1/feed/onthisday/{kind}/{mm}/{dd}"
 VALID_KINDS = ("births", "deaths")
+
+# Keywords to identify arts-related people.
+# Match is done case-insensitively against title + byline/description.
+ART_KEYWORDS = [
+    # Music
+    "singer",
+    "musician",
+    "composer",
+    "songwriter",
+    "lyricist",
+    "rapper",
+    "dj",
+    "disc jockey",
+    "pianist",
+    "guitarist",
+    "bassist",
+    "drummer",
+    "violinist",
+    "cellist",
+    "conductor",
+    "trumpeter",
+    "saxophonist",
+    "oboist",
+    "clarinetist",
+    "organist",
+    "harpist",
+    "vocalist",
+    "opera singer",
+    "soprano",
+    "tenor",
+    "baritone",
+    "mezzo-soprano",
+
+    # Acting / film / theatre / comedy
+    "actor",
+    "actress",
+    "film director",
+    "movie director",
+    "television director",
+    "screenwriter",
+    "playwright",
+    "stage director",
+    "theatre director",
+    "comedian",
+    "comic",
+    "stand-up comedian",
+
+    # Visual arts / design / photography
+    "artist",
+    "painter",
+    "sculptor",
+    "illustrator",
+    "cartoonist",
+    "photographer",
+    "graphic designer",
+    "fashion designer",
+
+    # Writing / literature / poetry
+    "author",
+    "writer",
+    "novelist",
+    "poet",
+    "dramatist",
+    "essayist",
+]
 
 
 def ua_contact() -> str:
@@ -81,6 +146,27 @@ def norm_text(x) -> str:
     return " ".join(t.split())
 
 
+def get_nested(d: Dict, path: List[str], default=None):
+    cur = d
+    for p in path:
+        if not isinstance(cur, dict) or p not in cur:
+            return default
+        cur = cur[p]
+    return cur
+
+
+def is_arts_related(title: str, byline: str) -> bool:
+    """
+    Return True if the combined text suggests the person is arts-related
+    based on simple keyword OR matching.
+    """
+    text = (f"{title} {byline}").lower()
+    for kw in ART_KEYWORDS:
+        if kw in text:
+            return True
+    return False
+
+
 def rows_from_payload(kind: str, payload: Dict, mm: int, dd: int) -> List[Dict]:
     out: List[Dict] = []
     k = normalize_kind(kind)  # "births" or "deaths"
@@ -88,30 +174,38 @@ def rows_from_payload(kind: str, payload: Dict, mm: int, dd: int) -> List[Dict]:
     for it in items:
         year = it.get("year")
         pages = it.get("pages") or []
-        page = pages[1-1] if pages else {}
+        page = pages[0] if pages else {}
+
         # Prefer normalized title; fall back sensibly
         title = (
-            get_nested(page, ["titles","normalized"])
+            get_nested(page, ["titles", "normalized"])
             or page.get("title")
             or it.get("text")
             or ""
         )
         desc = page.get("description") or ""
         href = (
-            get_nested(page, ["content_urls","desktop","page"])
-            or get_nested(page, ["content_urls","mobile","page"])
+            get_nested(page, ["content_urls", "desktop", "page"])
+            or get_nested(page, ["content_urls", "mobile", "page"])
             or page.get("content_urls")  # rare structures
             or page.get("extract_html")  # last-resort crumb
             or ""
         )
+
         title = norm_text(title)
         desc = norm_text(desc)
+
+        # Only keep arts-related people
+        if not is_arts_related(title, desc):
+            continue
+
         try:
             dt = datetime(year=int(year), month=mm, day=dd)
             date_str = dt.strftime("%Y-%m-%d")
         except Exception:
             # keep something sortable even if "year" is missing or weird
             date_str = f"{(year or '0000')}-{mm:02d}-{dd:02d}"
+
         out.append({
             "work_type": "birth" if k == "births" else "death",
             "title": title,
@@ -120,18 +214,9 @@ def rows_from_payload(kind: str, payload: Dict, mm: int, dd: int) -> List[Dict]:
             "month": f"{mm:02d}",
             "day": f"{dd:02d}",
             "extra": "",
-            "source_url": href
+            "source_url": href,
         })
     return out
-
-
-def get_nested(d: Dict, path: List[str], default=None):
-    cur = d
-    for p in path:
-        if not isinstance(cur, dict) or p not in cur:
-            return default
-        cur = cur[p]
-    return cur
 
 
 def write_csv(path: str, rows: List[Dict]) -> None:
@@ -143,7 +228,7 @@ def write_csv(path: str, rows: List[Dict]) -> None:
             w.writerow({k: r.get(k, "") for k in FIELDS})
 
 
-def rolling_dates(start_dt: datetime, days: int) -> List[Tuple[int,int]]:
+def rolling_dates(start_dt: datetime, days: int) -> List[Tuple[int, int]]:
     v = []
     for i in range(days):
         d = start_dt + timedelta(days=i)
@@ -164,14 +249,27 @@ def dedupe(rows: List[Dict]) -> List[Dict]:
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Fetch Wikipedia births/deaths for a day, rolling window, or append-next-day.")
+    parser = argparse.ArgumentParser(
+        description="Fetch Wikipedia births/deaths for a day, rolling window, or append-next-day."
+    )
     parser.add_argument("mm", nargs="?", help="Month (MM) for single-day mode")
     parser.add_argument("dd", nargs="?", help="Day (DD) for single-day mode")
-    parser.add_argument("--start-date", help="YYYY-MM-DD start for rolling mode (defaults to today in Europe/London)")
-    parser.add_argument("--days", type=int, default=int(os.getenv("BIRTHS_DEATHS_DAYS", "32")),
-                        help="Number of days forward to fetch in rolling mode (default 32)")
+    parser.add_argument(
+        "--start-date",
+        help="YYYY-MM-DD start for rolling mode (defaults to today in Europe/London)",
+    )
+    parser.add_argument(
+        "--days",
+        type=int,
+        default=int(os.getenv("BIRTHS_DEATHS_DAYS", "32")),
+        help="Number of days forward to fetch in rolling mode (default 32)",
+    )
     # special lightweight mode used by CI nightly
-    parser.add_argument("--append-next-day", action="store_true", help="Append only the next single day based on latest release_date in CSV")
+    parser.add_argument(
+        "--append-next-day",
+        action="store_true",
+        help="Append only the next single day based on latest release_date in CSV",
+    )
     args = parser.parse_args()
 
     s = session()
@@ -179,6 +277,7 @@ def main():
     # Lightweight daily append mode: append the next single day only
     if args.append_next_day:
         import pandas as pd
+
         if os.path.exists(OUT_BIRTHS):
             df = pd.read_csv(OUT_BIRTHS)
             if not df.empty and "release_date" in df.columns:
@@ -195,19 +294,20 @@ def main():
         births_new = rows_from_payload("births", fetch_day("births", mm, dd, s), mm, dd)
         deaths_new = rows_from_payload("deaths", fetch_day("deaths", mm, dd, s), mm, dd)
 
-        # Append + dedupe
+        # Append + dedupe for births
         if os.path.exists(OUT_BIRTHS):
             births_df = pd.read_csv(OUT_BIRTHS)
             births_out = pd.concat([births_df, pd.DataFrame(births_new)], ignore_index=True)
-            births_out.drop_duplicates(subset=["work_type","title","release_date"], inplace=True)
+            births_out.drop_duplicates(subset=["work_type", "title", "release_date"], inplace=True)
             births_out.to_csv(OUT_BIRTHS, index=False)
         else:
             write_csv(OUT_BIRTHS, births_new)
 
+        # Append + dedupe for deaths
         if os.path.exists(OUT_DEATHS):
             deaths_df = pd.read_csv(OUT_DEATHS)
             deaths_out = pd.concat([deaths_df, pd.DataFrame(deaths_new)], ignore_index=True)
-            deaths_out.drop_duplicates(subset=["work_type","title","release_date"], inplace=True)
+            deaths_out.drop_duplicates(subset=["work_type", "title", "release_date"], inplace=True)
             deaths_out.to_csv(OUT_DEATHS, index=False)
         else:
             write_csv(OUT_DEATHS, deaths_new)
@@ -220,7 +320,8 @@ def main():
     deaths_all: List[Dict] = []
 
     if args.mm and args.dd:
-        mm = int(args.mm); dd = int(args.dd)
+        mm = int(args.mm)
+        dd = int(args.dd)
         for kind in ("births", "deaths"):
             payload = fetch_day(kind, mm, dd, s)
             rows = rows_from_payload(kind, payload, mm, dd)
@@ -232,7 +333,9 @@ def main():
         if args.start_date:
             start = datetime.strptime(args.start_date, "%Y-%m-%d")
         else:
-            start = datetime.now(ZoneInfo("Europe/London")).replace(hour=0, minute=0, second=0, microsecond=0)
+            start = datetime.now(ZoneInfo("Europe/London")).replace(
+                hour=0, minute=0, second=0, microsecond=0
+            )
         dates = rolling_dates(start, args.days)
         for (mm, dd) in dates:
             for kind in ("births", "deaths"):

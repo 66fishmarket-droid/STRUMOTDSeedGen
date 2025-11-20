@@ -15,7 +15,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0   # get full history so rebase is possible
+          fetch-depth: 0   # fine to keep, but not strictly needed
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -29,8 +29,6 @@ jobs:
 
       - name: Prepare input for delta run
         run: |
-          # If enriched file exists, use it as input (delta update).
-          # Else, seed from the raw Top 10 file for the first run.
           if [ -f data/songs_top10_us_with_dates.csv ]; then
             echo "Using existing with_dates file as input (delta)."
             echo "IN=data/songs_top10_us_with_dates.csv" >> $GITHUB_ENV
@@ -50,18 +48,14 @@ jobs:
             --throttle 0.3
 
       - name: Commit and push if changed
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config user.name "Strum Bot"
           git config user.email "bot@users.noreply.github.com"
 
-          # Make sure we are up to date with origin/main
-          git fetch origin main
-          git rebase origin/main
+          git add data/songs_top10_us_with_dates.csv || true
 
-          # Stage the updated CSV
-          git add data/songs_top10_us_with_dates.csv
-
-          # Only commit if there is a staged change
           if ! git diff --cached --quiet; then
             git commit -m "Auto-update Top10 song release dates (delta)"
             git push origin HEAD:main

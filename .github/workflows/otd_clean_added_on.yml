@@ -1,0 +1,48 @@
+name: OTD data cleanup and added_on backfill
+
+on:
+  workflow_dispatch:
+
+jobs:
+  clean-and-backfill:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pandas
+
+      - name: Run one-off cleaners
+        run: |
+          python scripts/clean_births_deaths_sources.py
+          python scripts/add_added_on_to_calendar_index.py
+
+      - name: Show git status
+        run: git status
+
+      - name: Commit and push changes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Only commit if there are changes
+          if git status --porcelain | grep .; then
+            git add data/births.csv data/deaths.csv data/calendar_index.csv
+            git commit -m "One-off: clean births/deaths and backfill added_on"
+            git push
+          else
+            echo "No changes to commit."
+          fi

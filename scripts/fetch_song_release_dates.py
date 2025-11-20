@@ -2,6 +2,7 @@
 # scripts/fetch_song_release_dates.py
 # Improved: adds Wikipedia search, encoding, and title disambiguation.
 # Much higher accuracy for release date detection.
+# Now also preserves/sets added_on for source rows.
 
 import os
 import re
@@ -10,6 +11,7 @@ import time
 import argparse
 from typing import Dict, List, Optional, Tuple
 from urllib.parse import urlparse, unquote, quote
+from datetime import datetime  # NEW
 
 import requests
 
@@ -34,8 +36,10 @@ RELEASE_KEYS = (
 
 # ---------------- HTTP helpers --------------------
 
+
 def ua_contact() -> str:
     return os.getenv("USER_AGENT_CONTACT", "https://github.com/OWNER/REPO/issues")
+
 
 def http_session() -> requests.Session:
     s = requests.Session()
@@ -44,6 +48,7 @@ def http_session() -> requests.Session:
         "Accept": "application/json",
     })
     return s
+
 
 def backoff_get(
     s: requests.Session,
@@ -68,7 +73,9 @@ def backoff_get(
         r.raise_for_status()
     return None
 
+
 # ---------------- Wikipedia utilities --------------------
+
 
 def derive_title_from_url(url: str) -> Optional[str]:
     try:
@@ -84,9 +91,11 @@ def derive_title_from_url(url: str) -> Optional[str]:
     except Exception:
         return None
 
+
 def encode_title(title: str) -> str:
     # Replace spaces with underscores and encode special chars
     return quote(title.replace(" ", "_"), safe="/")
+
 
 def mw_get_qid_for_title(s: requests.Session, raw_title: str) -> Optional[str]:
     title = encode_title(raw_title)
@@ -109,6 +118,7 @@ def mw_get_qid_for_title(s: requests.Session, raw_title: str) -> Optional[str]:
     props = page.get("pageprops", {})
     return props.get("wikibase_item")
 
+
 def mw_page_exists(s: requests.Session, raw_title: str) -> bool:
     title = encode_title(raw_title)
     params = {
@@ -124,6 +134,7 @@ def mw_page_exists(s: requests.Session, raw_title: str) -> bool:
         return False
     return "missing" not in pages[0]
 
+
 def mw_search_best_title(s: requests.Session, song: str, artist: str) -> Optional[str]:
     query = f"{song} {artist} song"
     params = {
@@ -138,6 +149,7 @@ def mw_search_best_title(s: requests.Session, song: str, artist: str) -> Optiona
     if not hits:
         return None
     return hits[0]["title"]
+
 
 def wd_get_p577_date(s: requests.Session, qid: str) -> Optional[str]:
     url = WIKIDATA_ENTITY.format(qid=qid)
@@ -166,6 +178,7 @@ def wd_get_p577_date(s: requests.Session, qid: str) -> Optional[str]:
             best = iso
     return best
 
+
 def normalize_wikidata_time(time_str: str, precision: int) -> Optional[str]:
     t = time_str.lstrip("+")
     if "T" in t:
@@ -181,6 +194,7 @@ def normalize_wikidata_time(time_str: str, precision: int) -> Optional[str]:
     if precision == 9:
         return y
     return t
+
 
 def mw_get_wikitext(s: requests.Session, raw_title: str) -> Optional[str]:
     title = encode_title(raw_title)
@@ -205,7 +219,9 @@ def mw_get_wikitext(s: requests.Session, raw_title: str) -> Optional[str]:
     slot = revs[0].get("slots", {}).get("main", {})
     return slot.get("content")
 
+
 # --------- Wikitext parsing --------------
+
 
 def parse_release_from_wikitext(wikitext: str) -> Optional[str]:
     if not wikitext:
@@ -218,7 +234,9 @@ def parse_release_from_wikitext(wikitext: str) -> Optional[str]:
 
     m = STARTDATE_TMPL_RX.search(block)
     if m:
-        y = m.group("y"); mm = m.group("m"); dd = m.group("d")
+        y = m.group("y")
+        mm = m.group("m")
+        dd = m.group("d")
         if y and mm and dd:
             return f"{int(y):04d}-{int(mm):02d}-{int(dd):02d}"
         if y and mm:
@@ -239,7 +257,9 @@ def parse_release_from_wikitext(wikitext: str) -> Optional[str]:
 
     m3 = STARTDATE_TMPL_RX.search(wikitext)
     if m3:
-        y = m3.group("y"); mm = m3.group("m"); dd = m3.group("d")
+        y = m3.group("y")
+        mm = m3.group("m")
+        dd = m3.group("d")
         if y and mm and dd:
             return f"{int(y):04d}-{int(mm):02d}-{int(dd):02d}"
         if y and mm:
@@ -249,6 +269,7 @@ def parse_release_from_wikitext(wikitext: str) -> Optional[str]:
 
     return None
 
+
 def clean_markup(text: str) -> str:
     t = text or ""
     t = re.sub(r"<ref[^>]*>.*?</ref>", " ", t, flags=re.DOTALL | re.IGNORECASE)
@@ -257,6 +278,7 @@ def clean_markup(text: str) -> str:
     t = re.sub(r"\[\[(?:[^|\]]*\|)?([^\]]+)\]\]", r"\1", t)
     t = " ".join(t.split())
     return t.strip(" ,;")
+
 
 def sniff_human_date_to_iso(text: str) -> Optional[str]:
     t = text.strip()
@@ -289,6 +311,7 @@ def sniff_human_date_to_iso(text: str) -> Optional[str]:
 
     return None
 
+
 def month_to_num(mon: str) -> Optional[int]:
     mon = mon.strip().lower()
     months = {
@@ -307,6 +330,7 @@ def month_to_num(mon: str) -> Optional[int]:
     }
     return months.get(mon)
 
+
 def add_md_columns(iso: Optional[str]) -> Tuple[str, str]:
     if not iso:
         return ("", "")
@@ -318,6 +342,7 @@ def add_md_columns(iso: Optional[str]) -> Tuple[str, str]:
         return ("", "")
     _, mm, dd = m.groups()
     return (mm or "", dd or "")
+
 
 def iso_precision_level(iso: str) -> int:
     m = DATE_RX_ISO.match(iso or "")
@@ -332,10 +357,13 @@ def iso_precision_level(iso: str) -> int:
         return 1
     return 0
 
+
 def is_more_precise(new_iso: str, old_iso: str) -> bool:
     return iso_precision_level(new_iso) > iso_precision_level(old_iso)
 
+
 # ---------------- Row logic --------------------
+
 
 def try_title_variants(s: requests.Session, base_title: str, artist: str) -> Optional[str]:
     variants = [
@@ -359,6 +387,7 @@ def try_title_variants(s: requests.Session, base_title: str, artist: str) -> Opt
 
     return None
 
+
 def process_row(s: requests.Session, row: Dict, throttle: float) -> Dict:
     src_url = row.get("source_url", "").strip()
     csv_title = (row.get("title") or "").strip()
@@ -371,6 +400,7 @@ def process_row(s: requests.Session, row: Dict, throttle: float) -> Dict:
     if not title:
         out = dict(row)
         out["date_source"] = "error:no_title_found"
+        time.sleep(throttle)
         return out
 
     release_date = None
@@ -409,20 +439,26 @@ def process_row(s: requests.Session, row: Dict, throttle: float) -> Dict:
     out["month"] = mm or row.get("month", "") or ""
     out["day"] = dd or row.get("day", "") or ""
     out["date_source"] = date_source or row.get("date_source", "") or ""
+    # Do not touch added_on here; we manage it at read time
     time.sleep(throttle)
     return out
 
+
 # ---------------- CSV IO --------------------
+
 
 def read_csv(path: str) -> List[Dict]:
     with open(path, "r", encoding="utf-8") as f:
         return list(csv.DictReader(f))
 
+
 def write_csv(path: str, rows: List[Dict]) -> None:
+    # NOTE: added_on included so we persist it
     fieldnames = [
         "work_type", "title", "byline", "release_date", "month", "day",
         "extra", "source_url", "entry_date", "peak_date",
         "peak_position", "date_source",
+        "added_on",
     ]
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "w", encoding="utf-8", newline="") as f:
@@ -431,7 +467,9 @@ def write_csv(path: str, rows: List[Dict]) -> None:
         for r in rows:
             w.writerow({k: r.get(k, "") for k in fieldnames})
 
+
 # ---------------- Main --------------------
+
 
 def main():
     ap = argparse.ArgumentParser(description="Fetch release dates for Wikipedia song pages (improved).")
@@ -468,6 +506,12 @@ def main():
         for k in required:
             r.setdefault(k, "")
 
+    # Ensure added_on exists and is populated; preserve existing values
+    today = datetime.now().strftime("%Y-%m-%d")
+    for r in all_rows:
+        if "added_on" not in r or not str(r["added_on"]).strip():
+            r["added_on"] = today
+
     # Only treat full YYYY-MM-DD dates as "already OK"
     target = []
     for i, r in enumerate(all_rows):
@@ -477,6 +521,8 @@ def main():
 
     if not target:
         print("Nothing to do.")
+        write_csv(args.out_path, all_rows)
+        print(f"Wrote {args.out_path} rows={len(all_rows)} updated=0")
         return
 
     print(f"Total rows in file: {len(all_rows)}")

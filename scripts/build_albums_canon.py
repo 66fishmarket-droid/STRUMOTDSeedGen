@@ -394,6 +394,9 @@ def merge_with_existing(existing: pd.DataFrame, fresh: pd.DataFrame) -> Tuple[pd
                         changed = True
 
             if changed:
+                # Row has materially changed; bump added_on so downstream
+                # delta scripts / Google Sheets see it as fresh.
+                existing.at[idx, "added_on"] = today_str
                 updated_count += 1
             else:
                 unchanged_count += 1

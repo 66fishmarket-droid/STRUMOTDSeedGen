@@ -46,6 +46,7 @@ CALENDAR_FIELDS = [
     "extra",
     "used_on",
     "use_count",
+    "added_on",
 ]
 
 # ---------- Helpers ----------
@@ -152,6 +153,7 @@ def build_birth_fact(row: Dict) -> Optional[Dict]:
         "extra": extra,
         "used_on": "",
         "use_count": "0",
+        "added_on": date.today().isoformat(),
     }
 
 def build_death_fact(row: Dict) -> Optional[Dict]:
@@ -202,6 +204,7 @@ def build_death_fact(row: Dict) -> Optional[Dict]:
         "extra": extra,
         "used_on": "",
         "use_count": "0",
+        "added_on": date.today().isoformat(),
     }
 
 def build_people_facts(birth_rows: List[Dict], death_rows: List[Dict]) -> List[Dict]:

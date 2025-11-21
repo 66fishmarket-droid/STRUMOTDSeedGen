@@ -93,12 +93,21 @@ def compute_song_labels(row: Dict) -> List[str]:
     release = (row.get("release_date") or "").strip()
     entry   = (row.get("entry_date") or "").strip()
     peak    = (row.get("peak_date") or "").strip()
-    peak_pos = (row.get("peak_position") or "").strip()
+    peak_raw = (row.get("peak_position") or "").strip()
 
     has_full_release = bool(FULL_DATE_RX.match(release))
     has_full_entry   = bool(FULL_DATE_RX.match(entry))
     has_full_peak    = bool(FULL_DATE_RX.match(peak))
-    is_no1           = (peak_pos == "1")
+
+    # Normalise peak position like "1" / "1.0" to an int
+    peak_val = None
+    if peak_raw:
+        try:
+            peak_val = int(float(peak_raw))
+        except ValueError:
+            peak_val = None
+
+    is_no1 = (peak_val == 1)
 
     if has_full_release:
         labels.append("release")

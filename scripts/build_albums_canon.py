@@ -284,147 +284,109 @@ def load_existing(path: str) -> pd.DataFrame:
         "added_on",
     ]
 
-    if not os.path.exists(path):
-        return pd.DataFrame(columns=base_cols)
+    # 1) Load existing albums_canon.csv if it exists
+    if os.path.exists(path):
+        try:
+            existing = pd.read_csv(path, encoding="utf-8")
+        except Exception:
+            existing = pd.DataFrame(columns=base_cols)
 
-    try:
-        df = pd.read_csv(path, encoding="utf-8")
-    except Exception:
-        # If unreadable, reset
-        return pd.DataFrame(columns=base_cols)
+        if existing.empty and len(existing.columns) == 0:
+            existing = pd.DataFrame(columns=base_cols)
+    else:
+        existing = pd.DataFrame(columns=base_cols)
 
-    if df.empty and len(df.columns) == 0:
-        return pd.DataFrame(columns=base_cols)
-
-    # Ensure all expected columns exist
+    # Ensure all expected columns exist in existing
     for col in base_cols:
-        if col not in df.columns:
-            df[col] = ""
-
-    return df
-
-def key_from_row(row: pd.Series) -> Tuple[str, str]:
-    return (str(row.get("artist", "")).strip().lower(), str(row.get("album", "")).strip().lower())
-
-def dedupe_wiki_albums(raw: pd.DataFrame) -> pd.DataFrame:
-    """
-    Deduplicate raw Wikipedia album rows by (artist, album),
-    keeping the row with the highest shipments_units (and roughly
-    most complete data).
-    """
-    if raw.empty:
-        return raw
-
-    raw = raw.copy()
-    raw["_key"] = raw.apply(key_from_row, axis=1)
-
-    groups = []
-    for key, grp in raw.groupby("_key"):
-        if len(grp) == 1:
-            groups.append(grp.iloc[0])
-            continue
-        # Pick row with max shipments_units; if tie, first
-        grp_sorted = grp.sort_values(by=["shipments_units"], ascending=False)
-        groups.append(grp_sorted.iloc[0])
-
-    deduped = pd.DataFrame(groups).reset_index(drop=True)
-    if "_key" in deduped.columns:
-        deduped = deduped.drop(columns=["_key"])
-
-    print(f"Deduped across lists: {len(raw)} -> {len(deduped)} unique (artist, album)")
-    return deduped
-
-def merge_with_existing(existing: pd.DataFrame, fresh: pd.DataFrame) -> Tuple[pd.DataFrame, int, int, int]:
-    """
-    Merge fresh Wikipedia data with existing albums_canon.csv using (artist, album) as key.
-    Prefer fresh values for core fields when they are non-empty / non-zero.
-    Returns (merged_df, new_count, updated_count, unchanged_count).
-    """
-    existing = existing.copy()
-    fresh = fresh.copy()
-
-    # Ensure enrichment columns exist in existing
-    for col in ["musicbrainz_id", "mb_release_date_iso", "mb_release_year", "mb_country", "added_on"]:
         if col not in existing.columns:
             existing[col] = ""
 
-    # We will stamp new albums with today's date in ISO format.
-    today_str = date.today().isoformat()
+    # 2) Try to merge in the manual seed: data/best_selling_albums_enriched.csv
+    seed_path = "data/best_selling_albums_enriched.csv"
+    if os.path.exists(seed_path):
+        seed_raw = pd.read_csv(seed_path, encoding="utf-8")
 
-    existing["_key"] = existing.apply(key_from_row, axis=1)
-    fresh["_key"] = fresh.apply(key_from_row, axis=1)
+        # Expecting columns:
+        # album,artist,release_year_hint,units_sold_raw,musicbrainz_id,
+        # mb_release_date_iso,mb_release_year,mb_country
 
-    existing_map: Dict[Tuple[str, str], int] = {k: i for i, k in enumerate(existing["_key"])}
+        seed = pd.DataFrame()
 
-    new_rows = []
-    updated_count = 0
-    unchanged_count = 0
+        seed["artist"] = seed_raw.get("artist", "").fillna("")
+        seed["album"] = seed_raw.get("album", "").fillna("")
+        seed["year"] = seed_raw.get("release_year_hint", "").fillna("")
+        seed["label"] = ""
+        seed["sales_raw"] = seed_raw.get("units_sold_raw", "").fillna("")
+        seed["certification"] = ""
+        seed["country"] = ""
 
-    for _, row in fresh.iterrows():
-        k = row["_key"]
-        if k in existing_map:
-            idx = existing_map[k]
-            old = existing.loc[idx]
+        # Reuse extract_units to get numeric shipments
+        seed["shipments_units"] = seed["sales_raw"].apply(extract_units)
 
-            changed = False
-            # Update core descriptive fields if new data is better
-            for col in ["year", "label", "sales_raw", "shipments_units", "certification", "country", "list_source", "source_url"]:
-                old_val = old.get(col, "")
-                new_val = row.get(col, "")
-                if pd.isna(old_val):
-                    old_val = ""
-                if pd.isna(new_val):
-                    new_val = ""
-                # For shipments_units, take max
-                if col == "shipments_units":
-                    try:
-                        old_units = int(old_val)
-                    except Exception:
-                        old_units = 0
-                    try:
-                        new_units = int(new_val)
-                    except Exception:
-                        new_units = 0
-                    if new_units > old_units:
-                        existing.at[idx, col] = new_units
-                        changed = True
-                else:
-                    if str(new_val).strip() and str(new_val) != str(old_val):
-                        existing.at[idx, col] = new_val
-                        changed = True
+        seed["list_source"] = "best_selling_seed"
+        seed["source_url"] = ""
 
-            if changed:
-                # Row has materially changed; bump added_on so downstream
-                # delta scripts / Google Sheets see it as fresh.
-                existing.at[idx, "added_on"] = today_str
-                updated_count += 1
-            else:
-                unchanged_count += 1
-        
+        seed["musicbrainz_id"] = seed_raw.get("musicbrainz_id", "").fillna("")
+        seed["mb_release_date_iso"] = seed_raw.get("mb_release_date_iso", "").fillna("")
+        seed["mb_release_year"] = seed_raw.get("mb_release_year", "").fillna("")
+        seed["mb_country"] = seed_raw.get("mb_country", "").fillna("")
+
+        today_str = date.today().isoformat()
+        seed["added_on"] = today_str
+
+        # Ensure all base columns exist on the seed frame
+        for col in base_cols:
+            if col not in seed.columns:
+                seed[col] = ""
+
+        # Merge seed into existing by (artist, album)
+        def key_tuple(artist: str, album: str) -> Tuple[str, str]:
+            return (str(artist).strip().lower(), str(album).strip().lower())
+
+        existing_keys: Dict[Tuple[str, str], int] = {}
+        if not existing.empty:
+            existing["_key"] = existing.apply(
+                lambda r: key_tuple(r.get("artist", ""), r.get("album", "")), axis=1
+            )
+            existing_keys = {k: i for i, k in enumerate(existing["_key"])}
         else:
-            # Brand new album row
-            row = row.copy()
-            for col in ["musicbrainz_id", "mb_release_date_iso", "mb_release_year", "mb_country", "added_on"]:
-                if col not in row:
-                    row[col] = ""
+            existing["_key"] = []
 
-            # Only set added_on if it is empty, so we do not overwrite any preseeded values.
-            if not str(row.get("added_on", "")).strip():
-                row["added_on"] = today_str
+        new_rows = []
 
-            new_rows.append(row)
+        for _, row in seed.iterrows():
+            artist = row.get("artist", "")
+            album = row.get("album", "")
+            if not str(artist).strip() or not str(album).strip():
+                continue
 
+            k = key_tuple(artist, album)
 
-    if new_rows:
-        existing = pd.concat([existing, pd.DataFrame(new_rows)], ignore_index=True)
+            if k in existing_keys:
+                # Album already in canon: optionally fill missing MB data from the seed
+                idx = existing_keys[k]
+                for col in ["musicbrainz_id", "mb_release_date_iso", "mb_release_year", "mb_country"]:
+                    old_val = str(existing.at[idx, col]).strip()
+                    new_val = str(row.get(col, "")).strip()
+                    if not old_val and new_val:
+                        existing.at[idx, col] = new_val
+            else:
+                new_rows.append(row)
 
-    if "_key" in existing.columns:
-        existing = existing.drop(columns=["_key"])
+        if new_rows:
+            # Append seed-only albums to existing
+            existing = pd.concat([existing, pd.DataFrame(new_rows)], ignore_index=True)
 
-    # Sort: maybe by artist then year
-    existing = existing.sort_values(by=["artist", "year", "album"], ascending=[True, True, True], ignore_index=True)
+        if "_key" in existing.columns:
+            existing = existing.drop(columns=["_key"])
 
-    return existing, len(new_rows), updated_count, unchanged_count
+    # Final column ordering / guarantee
+    for col in base_cols:
+        if col not in existing.columns:
+            existing[col] = ""
+
+    return existing[base_cols]
+
 
 # --------------------------------------------------------------------
 # MusicBrainz enrichment

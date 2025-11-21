@@ -44,6 +44,7 @@ CALENDAR_FIELDS = [
     "extra",
     "used_on",
     "use_count",
+    "added_on",
 ]
 
 # ---------- Helpers ----------
@@ -192,6 +193,7 @@ def build_song_facts(rows: List[Dict]) -> List[Dict]:
                 "extra": extra,
                 "used_on": "",
                 "use_count": "0",
+                "added_on": date.today().isoformat(),
             })
 
         # 2) Chart-entry fact (only if labels allow it)
@@ -227,6 +229,7 @@ def build_song_facts(rows: List[Dict]) -> List[Dict]:
                 "extra": extra,
                 "used_on": "",
                 "use_count": "0",
+                "added_on": date.today().isoformat(),
             })
 
         # 3) Number-one fact
@@ -259,6 +262,7 @@ def build_song_facts(rows: List[Dict]) -> List[Dict]:
                 "extra": extra,
                 "used_on": "",
                 "use_count": "0",
+                "added_on": date.today().isoformat(),
             })
 
     return facts

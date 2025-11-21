@@ -344,7 +344,7 @@ def merge_with_existing(existing: pd.DataFrame, fresh: pd.DataFrame) -> Tuple[pd
     fresh = fresh.copy()
 
     # Ensure enrichment columns exist in existing
-    for col in ["musicbrainz_id", "mb_release_date_iso", "mb_release_year", "mb_country"]:
+    for col in ["musicbrainz_id", "mb_release_date_iso", "mb_release_year", "mb_country", "added_on"]:
         if col not in existing.columns:
             existing[col] = ""
 

@@ -24,6 +24,7 @@ import time
 import argparse
 from io import StringIO
 from typing import Dict, Tuple, Optional, List
+from datetime import date
 
 import requests
 import pandas as pd
@@ -280,6 +281,7 @@ def load_existing(path: str) -> pd.DataFrame:
         "mb_release_date_iso",
         "mb_release_year",
         "mb_country",
+        "added_on",
     ]
 
     if not os.path.exists(path):
@@ -346,6 +348,9 @@ def merge_with_existing(existing: pd.DataFrame, fresh: pd.DataFrame) -> Tuple[pd
         if col not in existing.columns:
             existing[col] = ""
 
+    # We will stamp new albums with today's date in ISO format.
+    today_str = date.today().isoformat()
+
     existing["_key"] = existing.apply(key_from_row, axis=1)
     fresh["_key"] = fresh.apply(key_from_row, axis=1)
 
@@ -392,13 +397,20 @@ def merge_with_existing(existing: pd.DataFrame, fresh: pd.DataFrame) -> Tuple[pd
                 updated_count += 1
             else:
                 unchanged_count += 1
+        
         else:
             # Brand new album row
             row = row.copy()
-            for col in ["musicbrainz_id", "mb_release_date_iso", "mb_release_year", "mb_country"]:
+            for col in ["musicbrainz_id", "mb_release_date_iso", "mb_release_year", "mb_country", "added_on"]:
                 if col not in row:
                     row[col] = ""
+
+            # Only set added_on if it is empty, so we do not overwrite any preseeded values.
+            if not str(row.get("added_on", "")).strip():
+                row["added_on"] = today_str
+
             new_rows.append(row)
+
 
     if new_rows:
         existing = pd.concat([existing, pd.DataFrame(new_rows)], ignore_index=True)

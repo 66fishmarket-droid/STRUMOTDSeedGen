@@ -2,18 +2,24 @@
 # scripts/build_albums_canon.py
 #
 # Build/refresh data/albums_canon.csv from multiple Wikipedia
-# "best-selling albums" style lists, then enrich with MusicBrainz
-# release-group IDs, release dates, and countries.
+# "best-selling albums" style lists, plus a manual seed file,
+# then enrich with MusicBrainz release-group IDs, release dates,
+# and countries.
 #
 # Strategy:
+#   - Load existing data/albums_canon.csv (if any).
+#   - Merge in manual seed from data/best_selling_albums_enriched.csv.
 #   - For each Wikipedia URL:
 #       - Fetch HTML
 #       - Extract tables that have Album + Artist columns
 #       - Normalise and keep year/artist/album/label/sales/certification
 #       - Tag each row with list_source + source_url
-#   - Combine all rows into a single DataFrame.
-#   - Deduplicate by (artist, album), keeping row with highest shipments_units.
-#   - Merge with existing data/albums_canon.csv (delta-safe).
+#   - Combine all wiki rows into a single DataFrame and dedupe by (artist, album),
+#     keeping row with highest shipments_units.
+#   - Merge deduped wiki data into existing canon using (artist, album):
+#       - New rows: added_on = today
+#       - Updated rows: bump added_on = today
+#       - Unchanged rows: keep existing added_on
 #   - Enrich missing musicbrainz_id via MusicBrainz search.
 #   - Enrich missing mb_release_date_iso / mb_country via MusicBrainz details.
 #   - Write updated CSV.
@@ -55,8 +61,10 @@ OUT_PATH_DEFAULT = "data/albums_canon.csv"
 # HTTP helpers
 # --------------------------------------------------------------------
 
+
 def ua_contact() -> str:
     return os.getenv("USER_AGENT_CONTACT", "https://github.com/OWNER/REPO/issues")
+
 
 def http_session() -> requests.Session:
     s = requests.Session()
@@ -68,9 +76,11 @@ def http_session() -> requests.Session:
     )
     return s
 
+
 # --------------------------------------------------------------------
 # Parsing helpers
 # --------------------------------------------------------------------
+
 
 def extract_units(text: str) -> int:
     """
@@ -117,6 +127,7 @@ def extract_units(text: str) -> int:
 
     return units
 
+
 def normalise_colnames(cols):
     """
     Normalise column names to lowercase with simple tokens.
@@ -128,15 +139,22 @@ def normalise_colnames(cols):
         norm.append(c_str)
     return norm
 
+
 def looks_like_album_table(df: pd.DataFrame) -> bool:
     cols = normalise_colnames(df.columns)
-    return ("album" in cols or "title" in cols) and ("artist" in cols or "singer" in cols or "performer" in cols)
+    return ("album" in cols or "title" in cols) and (
+        "artist" in cols or "singer" in cols or "performer" in cols
+    )
+
 
 # --------------------------------------------------------------------
 # Core builder: Wikipedia
 # --------------------------------------------------------------------
 
-def fetch_album_tables_for_url(sess: requests.Session, url: str, list_label: str) -> pd.DataFrame:
+
+def fetch_album_tables_for_url(
+    sess: requests.Session, url: str, list_label: str
+) -> pd.DataFrame:
     """
     Fetch a single Wikipedia page and return a DataFrame of album rows
     found on that page.
@@ -175,7 +193,7 @@ def fetch_album_tables_for_url(sess: requests.Session, url: str, list_label: str
         df.columns = cols
 
         # Map columns to canonical names
-        col_map = {}
+        col_map: Dict[str, str] = {}
         for c in df.columns:
             if c.startswith("year"):
                 col_map[c] = "year"
@@ -243,6 +261,7 @@ def fetch_album_tables_for_url(sess: requests.Session, url: str, list_label: str
     print(f"  Found {len(combined)} album rows on {url}")
     return combined
 
+
 def fetch_all_wiki_albums(sess: requests.Session) -> pd.DataFrame:
     """
     Fetch album tables from all configured Wikipedia URLs and combine them.
@@ -261,9 +280,11 @@ def fetch_all_wiki_albums(sess: requests.Session) -> pd.DataFrame:
     print(f"Total raw Wikipedia album rows (pre-dedup): {len(combined)}")
     return combined
 
+
 # --------------------------------------------------------------------
-# Existing file loading + merging
+# Existing file loading + seed bootstrap
 # --------------------------------------------------------------------
+
 
 def load_existing(path: str) -> pd.DataFrame:
     base_cols = [
@@ -311,7 +332,6 @@ def load_existing(path: str) -> pd.DataFrame:
         # mb_release_date_iso,mb_release_year,mb_country
 
         seed = pd.DataFrame()
-
         seed["artist"] = seed_raw.get("artist", "").fillna("")
         seed["album"] = seed_raw.get("album", "").fillna("")
         seed["year"] = seed_raw.get("release_year_hint", "").fillna("")
@@ -352,7 +372,7 @@ def load_existing(path: str) -> pd.DataFrame:
         else:
             existing["_key"] = []
 
-        new_rows = []
+        new_rows: List[pd.Series] = []
 
         for _, row in seed.iterrows():
             artist = row.get("artist", "")
@@ -389,8 +409,161 @@ def load_existing(path: str) -> pd.DataFrame:
 
 
 # --------------------------------------------------------------------
+# Dedupe + merge helpers
+# --------------------------------------------------------------------
+
+
+def key_from_row(row: pd.Series) -> Tuple[str, str]:
+    return (
+        str(row.get("artist", "")).strip().lower(),
+        str(row.get("album", "")).strip().lower(),
+    )
+
+
+def dedupe_wiki_albums(raw: pd.DataFrame) -> pd.DataFrame:
+    """
+    Deduplicate raw Wikipedia album rows by (artist, album),
+    keeping the row with the highest shipments_units (and roughly
+    most complete data).
+    """
+    if raw.empty:
+        return raw
+
+    raw = raw.copy()
+    raw["_key"] = raw.apply(key_from_row, axis=1)
+
+    groups: List[pd.Series] = []
+    for key, grp in raw.groupby("_key"):
+        if len(grp) == 1:
+            groups.append(grp.iloc[0])
+            continue
+        # Pick row with max shipments_units; if tie, first
+        grp_sorted = grp.sort_values(by=["shipments_units"], ascending=False)
+        groups.append(grp_sorted.iloc[0])
+
+    deduped = pd.DataFrame(groups).reset_index(drop=True)
+    if "_key" in deduped.columns:
+        deduped = deduped.drop(columns=["_key"])
+
+    print(f"Deduped across lists: {len(raw)} -> {len(deduped)} unique (artist, album)")
+    return deduped
+
+
+def merge_with_existing(
+    existing: pd.DataFrame, fresh: pd.DataFrame
+) -> Tuple[pd.DataFrame, int, int, int]:
+    """
+    Merge fresh Wikipedia data with existing albums_canon.csv using (artist, album) as key.
+    Prefer fresh values for core fields when they are non-empty / non-zero.
+    Returns (merged_df, new_count, updated_count, unchanged_count).
+
+    added_on acts as a last-updated stamp:
+      - New albums get added_on = today.
+      - Existing albums with changes get added_on bumped to today.
+      - Unchanged albums keep their existing added_on.
+    """
+    existing = existing.copy()
+    fresh = fresh.copy()
+
+    # Ensure enrichment / timestamp columns exist in existing
+    for col in ["musicbrainz_id", "mb_release_date_iso", "mb_release_year", "mb_country", "added_on"]:
+        if col not in existing.columns:
+            existing[col] = ""
+
+    today_str = date.today().isoformat()
+
+    existing["_key"] = existing.apply(key_from_row, axis=1)
+    fresh["_key"] = fresh.apply(key_from_row, axis=1)
+
+    existing_map: Dict[Tuple[str, str], int] = {k: i for i, k in enumerate(existing["_key"])}
+
+    new_rows: List[pd.Series] = []
+    updated_count = 0
+    unchanged_count = 0
+
+    for _, row in fresh.iterrows():
+        k = row["_key"]
+        if k in existing_map:
+            idx = existing_map[k]
+            old = existing.loc[idx]
+
+            changed = False
+            # Update core descriptive fields if new data is better
+            for col in [
+                "year",
+                "label",
+                "sales_raw",
+                "shipments_units",
+                "certification",
+                "country",
+                "list_source",
+                "source_url",
+            ]:
+                old_val = old.get(col, "")
+                new_val = row.get(col, "")
+                if pd.isna(old_val):
+                    old_val = ""
+                if pd.isna(new_val):
+                    new_val = ""
+
+                if col == "shipments_units":
+                    # For shipments_units, take max
+                    try:
+                        old_units = int(old_val)
+                    except Exception:
+                        old_units = 0
+                    try:
+                        new_units = int(new_val)
+                    except Exception:
+                        new_units = 0
+                    if new_units > old_units:
+                        existing.at[idx, col] = new_units
+                        changed = True
+                else:
+                    if str(new_val).strip() and str(new_val) != str(old_val):
+                        existing.at[idx, col] = new_val
+                        changed = True
+
+            if changed:
+                # Row has materially changed; bump added_on so downstream
+                # pipelines (e.g. Google Sheets) see it as fresh.
+                existing.at[idx, "added_on"] = today_str
+                updated_count += 1
+            else:
+                unchanged_count += 1
+        else:
+            # Brand new album row
+            row = row.copy()
+            for col in ["musicbrainz_id", "mb_release_date_iso", "mb_release_year", "mb_country", "added_on"]:
+                if col not in row:
+                    row[col] = ""
+
+            # Only set added_on if it is empty, so we do not overwrite any pre-seeded values.
+            if not str(row.get("added_on", "")).strip():
+                row["added_on"] = today_str
+
+            new_rows.append(row)
+
+    if new_rows:
+        existing = pd.concat([existing, pd.DataFrame(new_rows)], ignore_index=True)
+
+    if "_key" in existing.columns:
+        existing = existing.drop(columns=["_key"])
+
+    # Sort: by artist then year then album for stable output
+    existing = existing.sort_values(
+        by=["artist", "year", "album"],
+        ascending=[True, True, True],
+        ignore_index=True,
+    )
+
+    return existing, len(new_rows), updated_count, unchanged_count
+
+
+# --------------------------------------------------------------------
 # MusicBrainz enrichment
 # --------------------------------------------------------------------
+
 
 def mb_search_release_group(sess: requests.Session, album: str, artist: str) -> Optional[str]:
     """
@@ -427,6 +600,7 @@ def mb_search_release_group(sess: requests.Session, album: str, artist: str) -> 
     groups_sorted = sorted(groups, key=score_key, reverse=True)
     best = groups_sorted[0]
     return best.get("id")
+
 
 def mb_get_release_group_details(sess: requests.Session, mbid: str) -> Tuple[Optional[str], Optional[str]]:
     """
@@ -468,6 +642,7 @@ def mb_get_release_group_details(sess: requests.Session, mbid: str) -> Tuple[Opt
 
     release_date_iso = rel_date.strip() or None
     return release_date_iso, country
+
 
 def enrich_mbids(sess: requests.Session, df: pd.DataFrame, throttle: float = 1.1) -> Tuple[pd.DataFrame, int, int]:
     """
@@ -513,6 +688,7 @@ def enrich_mbids(sess: requests.Session, df: pd.DataFrame, throttle: float = 1.1
             print(f"  Filled {filled} MusicBrainz IDs so far...")
 
     return df, filled, failed
+
 
 def enrich_mb_details(sess: requests.Session, df: pd.DataFrame, throttle: float = 1.1) -> Tuple[pd.DataFrame, int, int]:
     """
@@ -570,13 +746,15 @@ def enrich_mb_details(sess: requests.Session, df: pd.DataFrame, throttle: float 
 
     return df, filled, failed
 
+
 # --------------------------------------------------------------------
 # CLI
 # --------------------------------------------------------------------
 
+
 def main():
     ap = argparse.ArgumentParser(
-        description="Build albums_canon.csv from multiple Wikipedia album lists and enrich with MusicBrainz data."
+        description="Build albums_canon.csv from multiple Wikipedia album lists and a seed file, then enrich with MusicBrainz data."
     )
     ap.add_argument(
         "--out",
@@ -600,11 +778,13 @@ def main():
 
     print(f"Deduped Wikipedia albums: {len(wiki_deduped)}")
 
-    # Load existing canon file (if any)
+    # Load existing canon file (if any), including seed bootstrap
     existing = load_existing(args.out_path)
     print(f"Existing rows in {args.out_path}: {len(existing)}")
 
-    merged, new_count, updated_count, unchanged_count = merge_with_existing(existing, wiki_deduped)
+    merged, new_count, updated_count, unchanged_count = merge_with_existing(
+        existing, wiki_deduped
+    )
 
     print("")
     print("==== Albums Canon Merge Summary ====")
@@ -616,7 +796,9 @@ def main():
     print("")
 
     # Enrich MusicBrainz IDs
-    merged, mbid_filled, mbid_failed = enrich_mbids(sess, merged, throttle=args.mb_throttle)
+    merged, mbid_filled, mbid_failed = enrich_mbids(
+        sess, merged, throttle=args.mb_throttle
+    )
 
     print("")
     print("==== MusicBrainz ID Enrichment Summary ====")
@@ -626,7 +808,9 @@ def main():
     print("")
 
     # Enrich MusicBrainz details
-    merged, mbdet_filled, mbdet_failed = enrich_mb_details(sess, merged, throttle=args.mb_throttle)
+    merged, mbdet_filled, mbdet_failed = enrich_mb_details(
+        sess, merged, throttle=args.mb_throttle
+    )
 
     print("")
     print("==== MusicBrainz Detail Enrichment Summary ====")
@@ -641,6 +825,7 @@ def main():
 
     merged.to_csv(args.out_path, index=False, encoding="utf-8")
     print(f"Wrote {args.out_path}")
+
 
 if __name__ == "__main__":
     main()

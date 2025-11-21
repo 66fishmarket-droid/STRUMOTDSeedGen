@@ -49,7 +49,7 @@ jobs:
           git config user.name "strum-bot"
           git config user.email "bot@users.noreply.github.com"
 
-          git add otd/albums_us_1m.csv || true
+          git add data/albums_us_1m.csv || true
 
           if git diff --cached --quiet; then
             echo "No changes to commit."

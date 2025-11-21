@@ -1,0 +1,66 @@
+# .github/workflows/build_albums_release_delta.yml
+
+name: Build Albums Release Delta
+
+on:
+  schedule:
+    # Run nightly after Albums Canon (which is at 03:05 UTC)
+    - cron: "35 3 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pandas
+
+      - name: Build albums_release_delta.csv from albums_canon.csv
+        run: |
+          python scripts/build_albums_release_delta.py \
+            --in data/albums_canon.csv \
+            --out data/albums_release_delta.csv
+
+      - name: Commit changes (if any)
+        run: |
+          git config user.name "strum-bot"
+          git config user.email "bot@users.noreply.github.com"
+
+          git add data/albums_release_delta.csv || true
+
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+
+          git commit -m "Auto-update albums_release_delta.csv"
+
+      - name: Push with retry
+        run: |
+          for i in 1 2 3; do
+            if git push origin HEAD:"${{ github.ref_name }}"; then
+              echo "Push succeeded."
+              exit 0
+            fi
+            echo "Push failed (attempt $i), retrying after rebase..."
+            sleep 3
+            git pull --rebase origin "${{ github.ref_name }}" || true
+          done
+          echo "Final push failed."
+          exit 1

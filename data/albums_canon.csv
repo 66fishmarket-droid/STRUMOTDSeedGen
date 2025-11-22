@@ -3,14 +3,14 @@ year,artist,album,label,sales_raw,certification,country,shipments_units,list_sou
 1991,2Pac,2Pacalypse Now,,1680000.0,,,0,best_selling_seed,,df0a9165-0d95-3541-9479-b3f22b188453,1991-11-12,1991.0,RU,2025-11-21
 1993,2Pac,Strictly 4 My N.I.G.G.A.Z...,,3075000.0,,,0,best_selling_seed,,41667bb1-8357-3c10-b8e0-e9db66aceebc,1993-02-15,1993.0,JP,2025-11-21
 1995,2Pac,Me Against The World,,5675000.0,,,0,best_selling_seed,,cfc98a2a-6aaa-3dda-a01d-e034e56c4fec,1995-03-14,1995.0,AU,2025-11-21
+1996,2Pac,All Eyez On Me,Death Row Records,5000000,10× Platinum(2-disc album),,5000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,e2621417-9236-36b4-9f9e-376c416dc4b0,1996-02-13,1996.0,AU,
 1996,2Pac,The Don Killuminati: The 7 Day Theory,,6195000.0,,,0,best_selling_seed,,,,,,2025-11-21
 1997,2Pac,R U Still Down? (Remember Me),,3600000.0,,,0,best_selling_seed,,1707088d-7938-3b91-995c-9a112a2b4f34,1997-11-25,1997.0,AU,2025-11-21
+1998,2Pac,Greatest Hits,Interscope,"(5,100,000)[43]",10× Platinum(2-disc album),,5100000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,70e2423a-6a30-3ea0-a977-d1a21084f31a,1998-11-24,1998.0,AU,
 2001,2Pac,Until The End Of Time,,3470000.0,,,0,best_selling_seed,,5cb89637-99af-3638-8500-4b3c518d6e95,2001-03-27,2001.0,XE,2025-11-21
 2002,2Pac,Better Dayz,,2775000.0,,,0,best_selling_seed,,8109a8b5-4740-3470-be92-10748c94e090,2002-11-26,2002.0,XE,2025-11-21
 2003,2Pac,Resurrection [OST],,2595000.0,,,0,best_selling_seed,,,,,,2025-11-21
 2004,2Pac,Loyal To The Game,,2150000.0,,,0,best_selling_seed,,2f7ee0ad-05ff-360a-9eb7-b5a05f8fe084,2004-12-14,2004.0,XE,2025-11-21
-1996,2Pac,All Eyez On Me,Death Row Records,5000000,10× Platinum(2-disc album),,5000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,e2621417-9236-36b4-9f9e-376c416dc4b0,1996-02-13,1996.0,AU,
-1998,2Pac,Greatest Hits,Interscope,"(5,100,000)[43]",10× Platinum(2-disc album),,5100000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,70e2423a-6a30-3ea0-a977-d1a21084f31a,1998-11-24,1998.0,AU,
 1999,2Pac & Outlawz,Still I Rise,,2630000.0,,,0,best_selling_seed,,8c974eb5-efaf-4cd8-b96b-833b45ba78f7,2017-04-08,2017.0,XW,2025-11-21
 1973,ABBA,Ring Ring,,1000000.0,,,0,best_selling_seed,,a3d7d8c3-8e29-46b1-b75b-754a0bc04ef1,1998,1998.0,NL,2025-11-21
 1974,ABBA,Waterloo,,2700000.0,,,0,best_selling_seed,,1a382b13-780a-3127-9e54-99b048221496,,,,2025-11-21
@@ -27,6 +27,7 @@ year,artist,album,label,sales_raw,certification,country,shipments_units,list_sou
 1977,AC/DC,Let There Be Rock,,6200000.0,,,0,best_selling_seed,,c9673ff0-15b5-394d-a5ec-3d2a27dfce83,1977-03-21,1977.0,DE,2025-11-21
 1978,AC/DC,Powerage,,5220000.0,,,0,best_selling_seed,,d1b829ec-6112-3562-b38f-26949564e106,1978-05-05,1978.0,DE,2025-11-21
 1979,AC/DC,Highway To Hell,,15150000.0,,,0,best_selling_seed,,f85647ec-a69b-3b0a-ad04-bb6076c4dcf1,1979-07-27,1979.0,DE,2025-11-21
+1980,AC/DC,Back in Black,Atlantic,27000000,27× Platinum‡,,27000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,d3bc1a64-7561-3787-b680-0003aa50f8f1,1980-07-25,1980.0,CA,
 1981,AC/DC,For Those About To Rock (We Salute You),,10040000.0,,,0,best_selling_seed,,331084ff-497b-3e3a-958e-0fefdae80cb6,1981-11-23,1981.0,DE,2025-11-21
 1983,AC/DC,Flick Of The Switch,,3900000.0,,,0,best_selling_seed,,91a288b8-8404-3d1e-991c-cdc837cf915d,1983-08-15,1983.0,PT,2025-11-21
 1985,AC/DC,Fly On The Wall,,3510000.0,,,0,best_selling_seed,,af8a0f91-5326-3acb-b6e1-03a9b22d30e6,1985-06-28,1985.0,CA,2025-11-21
@@ -36,7 +37,6 @@ year,artist,album,label,sales_raw,certification,country,shipments_units,list_sou
 2000,AC/DC,Stiff Upper Lip,,4160000.0,,,0,best_selling_seed,,c8dcd7b4-d104-3559-bc18-a62f559e912e,2000-02-25,2000.0,CA,2025-11-21
 2008,AC/DC,Black Ice,,7000000.0,,,0,best_selling_seed,,afca53c1-c5b3-3f91-8590-281b0aa12722,2008-10-17,2008.0,XE,2025-11-21
 2014,AC/DC,Rock Or Bust,,3010000.0,,,0,best_selling_seed,,8bc8ca25-77ae-43a6-a242-038093dbcb08,2014-11-28,2014.0,RU,2025-11-21
-1980,AC/DC,Back in Black,Atlantic,27000000,27× Platinum‡,,27000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,d3bc1a64-7561-3787-b680-0003aa50f8f1,1980-07-25,1980.0,CA,
 2010,AKB48,Kamikyokutachi (神曲たち),,645000.0,,,0,best_selling_seed,,,,,,2025-11-21
 2011,AKB48,Koko Ni Ita Koto (ここにいたこと),,1060000.0,,,0,best_selling_seed,,,,,,2025-11-21
 2012,AKB48,1830m,,1145000.0,,,0,best_selling_seed,,70d96e5b-664d-4292-81a6-1a5ff3fd9c07,2012-08-15,2012.0,JP,2025-11-21
@@ -52,29 +52,29 @@ year,artist,album,label,sales_raw,certification,country,shipments_units,list_sou
 1998,Ace of Base,Flowers,,1005000.0,,,0,best_selling_seed,,cae8429a-2db5-3189-af89-45d10f6fa4ae,1998-06-15,1998.0,AU,2025-11-21
 ,Ace of Base,Happy Nation/The Sign,,"14.4 US: 9 million[8] JPN: 600,000[9] UK: 600,000[10] GER: 1.5 million[11] FRA: 1 million[53] CAN: 1 million[13] AUS: 70,000[14] BRA: 100,000[36] NLD: 200,000[16] SPA: 100,000[43] SWI: 100,000[20] AUT: 75,000[21] FIN: 82,715[22] NZ: 15,000[23]",,,14,List_of_best-selling_albums,https://en.wikipedia.org/wiki/List_of_best-selling_albums,,,,,
 2008,Adele,19,,8821000.0,,,0,best_selling_seed,,9796da06-2d59-3176-8598-2105f31ee54a,2008-01-27,2008.0,ZA,2025-11-21
-2021,Adele,30,,3746000.0,,,0,best_selling_seed,,d8a99910-33c2-481d-9b96-085ece5545f6,2021-11-19,2021.0,XE,2025-11-21
 2011,Adele,21,Columbia/XL,"(12,100,000)[13]",17× Platinum‡,,12100000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,e4174758-d333-4a8e-a31f-dd0edd51518e,2011-01-19,2011.0,BR,
 2015,Adele,25,Columbia/XL,"(9,600,000)[13]",12× Platinum‡,,9600000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,5537624c-3d2f-4f5c-8099-df916082c85c,2015-11-20,2015.0,ZA,
+2021,Adele,30,,3746000.0,,,0,best_selling_seed,,d8a99910-33c2-481d-9b96-085ece5545f6,2021-11-19,2021.0,XE,2025-11-21
 1973,Aerosmith,Aerosmith,,3540000.0,,,0,best_selling_seed,,f8730c41-fc59-42f4-8262-033de1b55d32,1996,1996.0,DE,2025-11-21
 1974,Aerosmith,Get Your Wings,,3880000.0,,,0,best_selling_seed,,29346fb6-69c8-3f12-90c3-9d6cbce18259,1974-03-01,1974.0,US,2025-11-21
 1975,Aerosmith,Toys In The Attic,,10180000.0,,,0,best_selling_seed,,d03bb6b1-d7b4-38ea-974e-847cbb31dca4,1975-04-08,1975.0,JP,2025-11-21
 1976,Aerosmith,Rocks,,5350000.0,,,0,best_selling_seed,,775d9a2d-effc-35c8-b80a-f9a4e4206d27,1976-05-03,1976.0,GB,2025-11-21
 1977,Aerosmith,Draw The Line,,2740000.0,,,0,best_selling_seed,,8c064b13-6668-3d6c-a508-1e5d671a207d,1977-12-01,1977.0,US,2025-11-21
+1980,Aerosmith,Greatest Hits,Columbia,12000000,12× Platinum‡,,12000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,fecf840e-ea5e-4867-bfac-6ff1e2109a64,2008,2008.0,RU,
 1987,Aerosmith,Permanent Vacation,,7590000.0,,,0,best_selling_seed,,c522e905-3986-3f09-89f3-5d8bb09cc93e,1987-03-25,1987.0,CA,2025-11-21
 1989,Aerosmith,Pump,,10520000.0,,,0,best_selling_seed,,8f174877-ffc4-39b9-b247-a39fff4097a1,1989-09-12,1989.0,AU,2025-11-21
 1993,Aerosmith,Get A Grip,,13360000.0,,,0,best_selling_seed,,73c6a7b0-1dc2-3ddc-a720-c29505271711,1993-04-20,1993.0,CA,2025-11-21
 1997,Aerosmith,Nine Lives,,6110000.0,,,0,best_selling_seed,,7b30dd01-ee8f-392c-862d-4598e46b83f8,1997-03-12,1997.0,CA,2025-11-21
 2001,Aerosmith,Just Push Play,,3120000.0,,,0,best_selling_seed,,2fb275a3-1cd9-33b6-95e4-70fe3f092649,2001-03-06,2001.0,CA,2025-11-21
-1980,Aerosmith,Greatest Hits,Columbia,12000000,12× Platinum‡,,12000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,fecf840e-ea5e-4867-bfac-6ff1e2109a64,2008,2008.0,RU,
 2022,Aespa,Girls,,1885000.0,,,0,best_selling_seed,,,,,,2025-11-21
 2023,Aespa,Drama,,1395000.0,,,0,best_selling_seed,,,,,,2025-11-21
 2023,Aespa,My World,,2180000.0,,,0,best_selling_seed,,,,,,2025-11-21
 2024,Aespa,Armageddon,,1455000.0,,,0,best_selling_seed,,3f5eba8d-4dc1-4599-a936-21f501787f8e,2024-05-27,2024.0,JP,2025-11-21
 2024,Aespa,Whiplash,,1155000.0,,,0,best_selling_seed,,,,,,2025-11-21
 After 1946,Al Jolson,The Jolson Story,,1,,,1,List_of_best-selling_albums,https://en.wikipedia.org/wiki/List_of_best-selling_albums,3a74c978-d8aa-4de2-9d36-39dd71e84f8b,1997-12-08,1997.0,,
+1995,Alanis Morissette,Jagged Little Pill,Maverick,"(15,550,000)[5][7]",17× Platinum‡,,15550000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,ee3d18ed-d6a8-37c7-a964-41bbdb6d59f1,1995-06-09,1995.0,AU,
 1998,Alanis Morissette,Supposed Former Infatuation Junkie,,7430000.0,,,0,best_selling_seed,,d0d7a3a4-b419-3e50-b032-3255c830765e,1998-11-02,1998.0,AU,2025-11-21
 2002,Alanis Morissette,Under Rug Swept,,3230000.0,,,0,best_selling_seed,,ffa5355a-6bbb-37c8-bc34-3d76fac6c555,2001,2001.0,GB,2025-11-21
-1995,Alanis Morissette,Jagged Little Pill,Maverick,"(15,550,000)[5][7]",17× Platinum‡,,15550000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,ee3d18ed-d6a8-37c7-a964-41bbdb6d59f1,1995-06-09,1995.0,AU,
 2001,Alicia Keys,Songs In A Minor,,12600000.0,,,0,best_selling_seed,,5701e04b-efc2-3429-b8af-c6596f1d08cf,2001-06-05,2001.0,AU,2025-11-21
 2003,Alicia Keys,The Diary Of Alicia Keys,,8000000.0,,,0,best_selling_seed,,e53e291f-9a9c-38a0-96e0-86a9b63b776d,2003-12-01,2003.0,AU,2025-11-21
 2007,Alicia Keys,As I Am,,6400000.0,,,0,best_selling_seed,,b8387dc6-5576-3984-abea-8f54f7c53489,2007-11-09,2007.0,NL,2025-11-21
@@ -132,11 +132,11 @@ After 1946,Al Jolson,The Jolson Story,,1,,,1,List_of_best-selling_albums,https:/
 2019,BTS,Map Of The Soul: Persona,,4990000.0,,,0,best_selling_seed,,,,,,2025-11-21
 2020,BTS,Be,,3965000.0,,,0,best_selling_seed,,7917fe48-906d-464f-9909-0e4d18d59192,2020-11-20,2020.0,GB,2025-11-21
 2020,BTS,Map Of The Soul: 7,,5155000.0,,,0,best_selling_seed,,728f288b-eb1c-4ce1-98a1-d4124c897aaf,2020-02-21,2020.0,CN,2025-11-21
+1997,Backstreet Boys,Backstreet Boys,Jive,"(11,920,000)[5][10]",14× Platinum,,11920000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,738af50b-010e-4473-8f42-caa642bd5a8a,1997-08-12,1997.0,US,
 1997,Backstreet Boys,Backstreet's Back,,10800000.0,,,0,best_selling_seed,,92ca640f-9098-3d39-a348-9f1f307c4043,1997-08-11,1997.0,CA,2025-11-21
+1999,Backstreet Boys,Millennium,Jive,"(13,890,000)[5][10]",13× Platinum,,13890000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,a8fb6ac6-a659-320f-8736-87b52ad65e3a,1999-04-28,1999.0,CA,
 2000,Backstreet Boys,Black & Blue,,11500000.0,,,0,best_selling_seed,,4c137629-3890-3e9a-a533-72c237036c37,2000-11-05,2000.0,AU,2025-11-21
 2005,Backstreet Boys,Never Gone,,2650000.0,,,0,best_selling_seed,,acbabee9-5c0e-3dc6-837c-7ed7d63d02f7,2005-06-13,2005.0,CA,2025-11-21
-1997,Backstreet Boys,Backstreet Boys,Jive,"(11,920,000)[5][10]",14× Platinum,,11920000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,738af50b-010e-4473-8f42-caa642bd5a8a,1997-08-12,1997.0,US,
-1999,Backstreet Boys,Millennium,Jive,"(13,890,000)[5][10]",13× Platinum,,13890000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,a8fb6ac6-a659-320f-8736-87b52ad65e3a,1999-04-28,1999.0,CA,
 1964,Barbra Streisand,People,,1260000.0,,,0,best_selling_seed,,6d498c92-0a1f-3680-97cd-23ac2464c75a,1964-09,1964.0,US,2025-11-21
 1965,Barbra Streisand,My Name Is Barbra,,1130000.0,,,0,best_selling_seed,,28798adf-74d4-32df-aeee-46a8da1928ce,1965-05,1965.0,US,2025-11-21
 1965,Barbra Streisand,"My Name Is Barbra, Two...",,1470000.0,,,0,best_selling_seed,,53dc97d1-07b4-3e13-97a8-fc78aacaec1f,1965-10,1965.0,US,2025-11-21
@@ -187,15 +187,15 @@ After 1946,Al Jolson,The Jolson Story,,1,,,1,List_of_best-selling_albums,https:/
 1973,Billy Joel,Piano Man,,6700000.0,,,0,best_selling_seed,,7866f536-a9c7-32eb-8eed-bb49132432fa,1973-11-09,1973.0,US,2025-11-21
 1974,Billy Joel,Streetlife Serenade,,1700000.0,,,0,best_selling_seed,,89ff0095-2ef2-311f-80f2-48b16b85bf56,1974-10-11,1974.0,CA,2025-11-21
 1976,Billy Joel,Turnstiles,,2900000.0,,,0,best_selling_seed,,46a3a9dc-510e-3765-81dd-536ced41819a,1976-05-19,1976.0,XE,2025-11-21
+1977,Billy Joel,The Stranger,Columbia,12000000,12× Platinum‡,,12000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,735bcee6-6be6-3957-af15-d21ba2bd355b,1977-09-29,1977.0,CA,
 1978,Billy Joel,52nd Street,,13300000.0,,,0,best_selling_seed,,54e6b4a1-7a6a-3ead-b032-0912cfd49a1e,1978-10-13,1978.0,CA,2025-11-21
 1980,Billy Joel,Glass Houses,,11000000.0,,,0,best_selling_seed,,12a46ae7-fc7a-3a0e-84f6-8c9e476757ef,1980-03-12,1980.0,CA,2025-11-21
 1982,Billy Joel,The Nylon Curtain,,4900000.0,,,0,best_selling_seed,,b1424104-8403-3bce-8130-2ebee0053ddb,1982-09-23,1982.0,AU,2025-11-21
 1983,Billy Joel,An Innocent Man,,13000000.0,,,0,best_selling_seed,,63424e12-759d-3d3d-a14b-0f06101c0a28,1983-08-08,1983.0,CA,2025-11-21
+1985,Billy Joel,Greatest Hits – Volume I & Volume II,Columbia,11500000,23× Platinum(2-disc album),,11500000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,,,,,
 1986,Billy Joel,The Bridge,,4400000.0,,,0,best_selling_seed,,e09226c5-87f6-3f71-b199-d9d5797e714b,1986-07-09,1986.0,CA,2025-11-21
 1989,Billy Joel,Storm Front,,7900000.0,,,0,best_selling_seed,,2b749a86-14bf-3b42-bdcf-3cc44d9bd338,1989-10-04,1989.0,AU,2025-11-21
 1993,Billy Joel,River Of Dreams,,9000000.0,,,0,best_selling_seed,,166ca278-c030-388d-85d7-f8f963796d7f,1993-08-05,1993.0,CA,2025-11-21
-1977,Billy Joel,The Stranger,Columbia,12000000,12× Platinum‡,,12000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,735bcee6-6be6-3957-af15-d21ba2bd355b,1977-09-29,1977.0,CA,
-1985,Billy Joel,Greatest Hits – Volume I & Volume II,Columbia,11500000,23× Platinum(2-disc album),,11500000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,,,,,
 1945,Bing Crosby,Merry Christmas,,1325000.0,,,0,best_selling_seed,,a82c4b78-9e9a-390c-af1f-3c8a8a44c555,1945,1945.0,US,2025-11-21
 1993,Björk,Debut,,5730000.0,,,0,best_selling_seed,,6891a28c-5865-36e2-9e5f-c9fac1d3595f,1993-07-12,1993.0,CA,2025-11-21
 1995,Björk,Post,,4570000.0,,,0,best_selling_seed,,b2a6e057-087d-3ae5-a6e5-7f5fa39808ff,1995-06-09,1995.0,XE,2025-11-21
@@ -221,7 +221,7 @@ After 1946,Al Jolson,The Jolson Story,,1,,,1,List_of_best-selling_albums,https:/
 1963,Bob Dylan,The Freewheelin' Bob Dylan,,4200000.0,,,0,best_selling_seed,,169b62aa-c3a5-3ed9-bed1-cc47c4bc51ad,1963-05-27,1963.0,US,2025-11-21
 1964,Bob Dylan,Another Side Of Bob Dylan,,1700000.0,,,0,best_selling_seed,,b18ef710-0e47-3c10-ab0b-6631533549ee,1964-08-08,1964.0,US,2025-11-21
 1964,Bob Dylan,The Times They Are A-Changin',,2800000.0,,,0,best_selling_seed,,846f8032-9a85-3f4f-b7f5-28c86573d044,1964-02-10,1964.0,US,2025-11-21
-1965,Bob Dylan,Bringing It All Back Home,,3800000.0,,,0,best_selling_seed,,b4ca3a21-7cb1-44c9-a49f-8ec21c94a2fb,2000,2000,,2025-11-21
+1965,Bob Dylan,Bringing It All Back Home,,3800000.0,,,0,best_selling_seed,,b4ca3a21-7cb1-44c9-a49f-8ec21c94a2fb,2000,2000.0,,2025-11-21
 1965,Bob Dylan,Highway 61 Revisited,,5000000.0,,,0,best_selling_seed,,fb48b1dc-412f-36aa-8820-1023c08c46c6,1965-08-30,1965.0,US,2025-11-21
 1966,Bob Dylan,Blonde On Blonde,,5100000.0,,,0,best_selling_seed,,329fb554-2a81-3d8a-8e22-ec2c66810019,1966-05-16,1966.0,NZ,2025-11-21
 1967,Bob Dylan,John Wesley Harding,,3200000.0,,,0,best_selling_seed,,32981714-597a-32dd-9f29-b2f7566fed89,1967-12-27,1967.0,US,2025-11-21
@@ -238,7 +238,7 @@ After 1946,Al Jolson,The Jolson Story,,1,,,1,List_of_best-selling_albums,https:/
 1983,Bob Dylan,Infidels,,2000000.0,,,0,best_selling_seed,,60f27712-263a-348c-8eda-b5315a67e8c2,1983-10-27,1983.0,AU,2025-11-21
 1997,Bob Dylan,Time Out Of Mind,,2200000.0,,,0,best_selling_seed,,dad1dada-1fda-3186-beb7-3bc80e90f9e0,1997-09-26,1997.0,CA,2025-11-21
 2006,Bob Dylan,Modern Times,,2450000.0,,,0,best_selling_seed,,d300b74b-02b4-33e3-998e-e4405e8e6580,2006-08-06,2006.0,ZA,2025-11-21
-1973,Bob Marley & The Wailers,Burnin',,3200000.0,,,0,best_selling_seed,,19bcffb6-af68-3299-aa3b-ca9da957477d,1973-10,1973,,2025-11-21
+1973,Bob Marley & The Wailers,Burnin',,3200000.0,,,0,best_selling_seed,,19bcffb6-af68-3299-aa3b-ca9da957477d,1973-10,1973.0,,2025-11-21
 1973,Bob Marley & The Wailers,Catch A Fire,,3175000.0,,,0,best_selling_seed,,66ea49f7-10f8-407c-87e6-9634b88abebb,2001-01,2001.0,US,2025-11-21
 1974,Bob Marley & The Wailers,Natty Dread,,3650000.0,,,0,best_selling_seed,,e776533c-4132-3b63-bfaa-94fe901951b5,1974-10-25,1974.0,DK,2025-11-21
 1976,Bob Marley & The Wailers,Rastaman Vibration,,4525000.0,,,0,best_selling_seed,,9e64450d-608d-3d85-b881-9b1de24f9195,1976-04-30,1976.0,CA,2025-11-21
@@ -252,6 +252,7 @@ After 1946,Al Jolson,The Jolson Story,,1,,,1,List_of_best-selling_albums,https:/
 1994,Bob Seger,Greatest Hits,Capitol,"(9,062,000)[24]",10× Platinum‡,,9062000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,4bdb8da2-ed18-3084-918c-0cfd50879504,1994-10-25,1994.0,AU,
 1984,Bon Jovi,Bon Jovi,,3600000.0,,,0,best_selling_seed,,d60113b0-ab11-3c61-b74b-160cb1ed5fc6,1984-01-23,1984.0,NL,2025-11-21
 1985,Bon Jovi,7800º Fahrenheit,,3600000.0,,,0,best_selling_seed,,63d759cc-eec6-3db5-933c-3f210627806a,1985-06-05,1985.0,CA,2025-11-21
+1986,Bon Jovi,Slippery When Wet,Mercury Records,15000000,15× Platinum‡,,15000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,f07346e6-c889-33b8-83c8-ad987d7b14f6,1986-08-10,1986.0,AU,
 1988,Bon Jovi,New Jersey,,13900000.0,,,0,best_selling_seed,,aa1ba758-0a80-3734-9bf8-4f554822b153,1988-09-19,1988.0,CA,2025-11-21
 1992,Bon Jovi,Keep The Faith,,8600000.0,,,0,best_selling_seed,,0e2ccac6-fd7b-3b8e-8dfe-07b56b61cb29,1992-10-30,1992.0,XE,2025-11-21
 1995,Bon Jovi,These Days,,7600000.0,,,0,best_selling_seed,,0dd13464-edfd-3466-bb16-f63ca268ab37,1995-06-02,1995.0,AR,2025-11-21
@@ -260,25 +261,26 @@ After 1946,Al Jolson,The Jolson Story,,1,,,1,List_of_best-selling_albums,https:/
 2005,Bon Jovi,Have A Nice Day,,3600000.0,,,0,best_selling_seed,,e2838c6e-a8b4-3a8e-9877-8d32faf33a9f,2005-09-14,2005.0,AU,2025-11-21
 2007,Bon Jovi,Lost Highway,,3100000.0,,,0,best_selling_seed,,9105c0d4-eeaf-3c7e-9f68-278860b08c01,2007-06-11,2007.0,AU,2025-11-21
 2009,Bon Jovi,The Circle,,1750000.0,,,0,best_selling_seed,,a5651aef-e3bf-46dd-86f1-cf3091e4a388,2009-11-02,2009.0,CA,2025-11-21
-1986,Bon Jovi,Slippery When Wet,Mercury Records,15000000,15× Platinum‡,,15000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,f07346e6-c889-33b8-83c8-ad987d7b14f6,1986-08-10,1986.0,AU,
 ,Bon Jovi,Cross Road,,"15 US: 7 million[8] JPN: 1 million[9] UK: 1.8 million[10] GER: 1 million[11] FRA: 300,000[12] CAN: 1 million[13] AUS: 910,000[14] ITA: 500,000[71] NLD: 200,000[16] SWE: 100,000[18] SPA: 400,000[43] ARG: 240,000[38] BEL: 100,000[44] SWI: 150,000[20] AUT: 150,000[21] POL: 50,000[39] FIN: 123,354[22] NZ: 105,000[24]",,,15,List_of_best-selling_albums,https://en.wikipedia.org/wiki/List_of_best-selling_albums,83ec3494-9cec-3f5f-b5f8-306caf7676f9,1994-10-04,1994.0,AR,
+1976,Boston,Boston,Epic Records,17000000,17× Platinum,,17000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,f0371fc4-3e22-3d8d-8ce3-4af873ea6f1c,1976-09,1976.0,XE,
 1978,Boston,Don't Look Back,,10470000.0,,,0,best_selling_seed,,2033cce4-14e0-3b1f-af8e-3e30ed11f9d3,1978,1978.0,XE,2025-11-21
 1986,Boston,Third Stage,,6590000.0,,,0,best_selling_seed,,abdc4c7e-656e-343b-add2-00a8c6277bbc,1986-09-23,1986.0,CA,2025-11-21
-1976,Boston,Boston,Epic Records,17000000,17× Platinum,,17000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,f0371fc4-3e22-3d8d-8ce3-4af873ea6f1c,1976-09,1976.0,XE,
 1994,Boyz II Men,II,Motown,"(9,890,000)[5][21]",12× Platinum,,9890000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,6eaebb45-8911-3d0b-8ef3-914726356144,1994-08-30,1994.0,AU,
+1999,Britney Spears,...Baby One More Time,Jive,"(12,300,000)[5][10]",14× Platinum [13],,12300000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,faeb8741-2ca0-3ca6-8a1a-70bab1e67c82,1999-01-12,1999.0,BR,
+2000,Britney Spears,Oops!... I Did It Again,Jive,"(10,411,000)[5][10]",10× Platinum,,10411000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,f2708dcf-14e6-31f1-90e0-b3e933a0c8a3,2000-05-11,2000.0,CN,
 2001,Britney Spears,Britney,,10240000.0,,,0,best_selling_seed,,c378d06f-d3d0-45a1-924a-46a39e72a2fd,2013-11-29,2013.0,AR,2025-11-21
 2003,Britney Spears,In The Zone,,7000000.0,,,0,best_selling_seed,,add6cf16-f4c1-3d50-9b28-633b35ca8189,2003-11-13,2003.0,AR,2025-11-21
 2007,Britney Spears,Blackout,,2475000.0,,,0,best_selling_seed,,0b8e14e1-d44d-3770-8617-5c6137a444a8,2007-10-25,2007.0,AR,2025-11-21
 2008,Britney Spears,Circus,,3755000.0,,,0,best_selling_seed,,1e5f92e0-913c-3202-a72c-b068b9f34ce1,2008-11-26,2008.0,AR,2025-11-21
 2011,Britney Spears,Femme Fatale,,1680000.0,,,0,best_selling_seed,,a7e9d7d2-3c60-472f-b2ba-829de5034179,2011-03-25,2011.0,BR,2025-11-21
-1999,Britney Spears,...Baby One More Time,Jive,"(12,300,000)[5][10]",14× Platinum [13],,12300000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,faeb8741-2ca0-3ca6-8a1a-70bab1e67c82,1999-01-12,1999.0,BR,
-2000,Britney Spears,Oops!... I Did It Again,Jive,"(10,411,000)[5][10]",10× Platinum,,10411000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,f2708dcf-14e6-31f1-90e0-b3e933a0c8a3,2000-05-11,2000.0,CN,
 1973,Bruce Springsteen,"Greetings From Asbury Park, N.J.",,3950000.0,,,0,best_selling_seed,,c497fc44-ddaf-3cce-a9b4-bfec958a0f3c,1973-01-05,1973.0,AU,2025-11-21
 1973,Bruce Springsteen,"The Wild, The Innocent & The E Street Shuffle",,3550000.0,,,0,best_selling_seed,,4b443e66-52a7-3cc9-a522-0dc64a6a51dc,1973-11-05,1973.0,AU,2025-11-21
 1975,Bruce Springsteen,Born To Run,,10700000.0,,,0,best_selling_seed,,5acc65aa-f2f7-48bc-9dd1-434655700e53,2011,2011.0,JP,2025-11-21
 1978,Bruce Springsteen,Darkness On The Edge Of Town,,5700000.0,,,0,best_selling_seed,,6d954eab-7389-4dbb-aaca-7037b71e6e22,1992,1992.0,DE,2025-11-21
 1980,Bruce Springsteen,The River,,10050000.0,,,0,best_selling_seed,,8a6f6ede-b60a-3cad-b3b9-cfb57e9e1dbd,1980-10-10,1980.0,AU,2025-11-21
 1982,Bruce Springsteen,Nebraska,,4200000.0,,,0,best_selling_seed,,314ef664-5894-33f3-9026-9ba467a0a828,1984,1984.0,LU,2025-11-21
+1984,Bruce Springsteen,Born in the U.S.A.,Columbia,17000000,17× Platinum‡,,17000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,3c39a076-8e52-38f2-8076-260d0672fb23,1984-05,1984.0,AR,
+1986,Bruce Springsteen,Live/1975–85,Columbia,4333333,13× Platinum(3-disc album),,4333333,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,85206823-9808-3da2-a9d7-2e9b8b0f4e99,1985,1985.0,TH,
 1987,Bruce Springsteen,Tunnel Of Love,,8350000.0,,,0,best_selling_seed,,ddc8e238-0083-4cc9-8ca6-9b5287bf52de,1988,1988.0,NL,2025-11-21
 1992,Bruce Springsteen,Human Touch,,4600000.0,,,0,best_selling_seed,,220de9c6-fa5f-39e3-ae89-1faf8a8bbc67,1992-03-26,1992.0,AR,2025-11-21
 1992,Bruce Springsteen,Lucky Town,,3700000.0,,,0,best_selling_seed,,c0e8b10a-9478-30ea-a299-90ab2b703ab0,1992-03-26,1992.0,AR,2025-11-21
@@ -289,8 +291,6 @@ After 1946,Al Jolson,The Jolson Story,,1,,,1,List_of_best-selling_albums,https:/
 2007,Bruce Springsteen,Magic,,2750000.0,,,0,best_selling_seed,,4b471eba-ee63-44ad-a5fa-c509b8e24940,2007,2007.0,XE,2025-11-21
 2009,Bruce Springsteen,Working On A Dream,,1950000.0,,,0,best_selling_seed,,9cec178a-f785-33c5-8888-63ba27efca4c,2008-12-03,2008.0,BR,2025-11-21
 2012,Bruce Springsteen,Wrecking Ball,,1750000.0,,,0,best_selling_seed,,d875c2f0-27d5-4946-81f9-3ebaf6636ccd,2012-03-02,2012.0,AR,2025-11-21
-1984,Bruce Springsteen,Born in the U.S.A.,Columbia,17000000,17× Platinum‡,,17000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,3c39a076-8e52-38f2-8076-260d0672fb23,1984-05,1984.0,AR,
-1986,Bruce Springsteen,Live/1975–85,Columbia,4333333,13× Platinum(3-disc album),,4333333,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,85206823-9808-3da2-a9d7-2e9b8b0f4e99,1985,1985.0,TH,
 2010,Bruno Mars,Doo-Wops & Hooligans,,8654000.0,,,0,best_selling_seed,,b3d1fbf7-dd1c-4119-a16e-58c2feb5bcb0,2010-10-04,2010.0,AU,2025-11-21
 2012,Bruno Mars,Unorthodox Jukebox,,7117000.0,,,0,best_selling_seed,,978d88db-60ec-41d9-ade7-beea020941b0,2012-12-07,2012.0,AR,2025-11-21
 2016,Bruno Mars,24K Magic,,3415000.0,,,0,best_selling_seed,,80ea43b7-2c32-4a79-9fb0-8ff1761ebe09,2016-11-17,2016.0,AR,2025-11-21
@@ -401,9 +401,9 @@ After 1946,Al Jolson,The Jolson Story,,1,,,1,List_of_best-selling_albums,https:/
 1987,Deep Purple,The House Of Blue Light,,2115000.0,,,0,best_selling_seed,,3627b95b-c892-3c42-bbf6-d203ef6ffe6b,1987-01-25,1987.0,CA,2025-11-21
 1980,Def Leppard,On Through The Night,,2539000.0,,,0,best_selling_seed,,23434a86-e665-3722-8dae-214f0fb97f3a,1980-03-14,1980.0,NL,2025-11-21
 1981,Def Leppard,High 'N' Dry,,4023000.0,,,0,best_selling_seed,,419fa215-3740-3b1c-aa04-a209eab30789,1981-07-11,1981.0,PT,2025-11-21
-1992,Def Leppard,Adrenalize,,6761000.0,,,0,best_selling_seed,,5b930454-b937-3d49-b26c-e82c4eded9bc,1992-03-23,1992.0,AU,2025-11-21
 1983,Def Leppard,Pyromania,Mercury Records,10000000,10× Platinum,,10000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,d77df681-b779-3d6d-b66a-3bfd15985e3e,1983-01-20,1983.0,PT,
 1987,Def Leppard,Hysteria,Mercury Records,12000000,12× Platinum,,12000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,12fa3845-7c62-36e5-a8da-8be137155a72,1987-08-03,1987.0,XE,
+1992,Def Leppard,Adrenalize,,6761000.0,,,0,best_selling_seed,,5b930454-b937-3d49-b26c-e82c4eded9bc,1992-03-23,1992.0,AU,2025-11-21
 2011,Demi Lovato,Unbroken,,770000.0,,,0,best_selling_seed,,1c43f3cb-e590-47e3-a974-b6e92145ef1c,2011-09-19,2011.0,BR,2025-11-21
 2013,Demi Lovato,Demi,,1160000.0,,,0,best_selling_seed,,a0b61c75-910f-4dcf-8a42-0db7567253b9,2013-05-10,2013.0,XE,2025-11-21
 2015,Demi Lovato,Confident,,510000.0,,,0,best_selling_seed,,0df19e51-b297-4721-96b6-43d6874755b9,2015-10-16,2015.0,AU,2025-11-21
@@ -452,12 +452,12 @@ After 1946,Al Jolson,The Jolson Story,,1,,,1,List_of_best-selling_albums,https:/
 1999,Dixie Chicks,Fly,Monument Records,"(8,396,000)[20]",11× Platinum‡,,8396000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,e1fbdc3d-2aa4-345d-ae0e-40bfb1552431,1999-08-27,1999.0,CA,
 2009,Drake,So Far Gone,,960000.0,,,0,best_selling_seed,,29ab0cbf-ee1d-3832-b930-daddcabd8351,2009-02-13,2009.0,XW,2025-11-21
 2010,Drake,Thank Me Later,,2470000.0,,,0,best_selling_seed,,7c0efd43-6023-400d-8d5c-d808b1cb4094,2010-06-14,2010.0,CA,2025-11-21
+2011,Drake,Take Care,Young Money/Cash Money/Republic,"(2,338,000)[48]",10× Platinum‡,,2338000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,47809021-4515-4215-beea-db3f5dfb6267,2011-11-14,2011.0,GB,
 2013,Drake,Nothing Was The Same,,2530000.0,,,0,best_selling_seed,,0b6c2da8-ac60-4663-beae-bd3dc6dea94a,2013-09-19,2013.0,US,2025-11-21
 2015,Drake,If You're Reading This It's Too Late,,1670000.0,,,0,best_selling_seed,,68d79778-aceb-486c-88a7-0abb3665344b,2015-02-12,2015.0,DZ,2025-11-21
 2016,Drake,Views,,2531000.0,,,0,best_selling_seed,,4aaaa715-df17-43b8-987e-04b54ec4a697,2016-04-29,2016.0,XW,2025-11-21
 2017,Drake,More Life,,571000.0,,,0,best_selling_seed,,d039390b-2452-4a5c-9b2b-32e5e80f15e0,2017-03-18,2017.0,AL,2025-11-21
 2018,Drake,Scorpion,,661000.0,,,0,best_selling_seed,,857db798-5c31-4d5f-991a-6667f41d8899,2018-06-29,2018.0,DZ,2025-11-21
-2011,Drake,Take Care,Young Money/Cash Money/Republic,"(2,338,000)[48]",10× Platinum‡,,2338000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,47809021-4515-4215-beea-db3f5dfb6267,2011-11-14,2011.0,GB,
 2015,Drake & Future,What A Time To Be Alive,,751000.0,,,0,best_selling_seed,,a2e3ca75-1e07-457b-973a-069e8d9c6c56,2015-09-20,2015.0,US,2025-11-21
 2017,Dua Lipa,Dua Lipa,,631000.0,,,0,best_selling_seed,,93747376-b698-4610-a023-d256de075460,2017-06-02,2017.0,RU,2025-11-21
 2020,Dua Lipa,Future Nostalgia,,811000.0,,,0,best_selling_seed,,c75fc74b-a0c2-4f7e-a246-b3245b5baf2f,2020-09-11,2020.0,AT,2025-11-21
@@ -470,12 +470,12 @@ After 1946,Al Jolson,The Jolson Story,,1,,,1,List_of_best-selling_albums,https:/
 1972,Eagles,Eagles,,2950000.0,,,0,best_selling_seed,,5d4feb91-14d4-4b92-9524-60fdd6b3b15e,2005-03-15,2005.0,XE,2025-11-21
 1973,Eagles,Desperado,,3800000.0,,,0,best_selling_seed,,9e7b49bb-b4bd-3583-87ba-f516f793eff2,1973-04-17,1973.0,GB,2025-11-21
 1974,Eagles,On The Border,,4275000.0,,,0,best_selling_seed,,425353d2-98b9-35a0-94d1-15f99f125994,1974-03-22,1974.0,FR,2025-11-21
-1975,Eagles,One Of These Nights,,7175000.0,,,0,best_selling_seed,,7f9ea3a4-5c4b-3082-a233-3462540e57e3,1975-06-10,1975,DE,2025-11-21
-1979,Eagles,The Long Run,,11150000.0,,,0,best_selling_seed,,1a265de4-136d-3414-adf5-b0913ca2aa15,1979-09-24,1979.0,CA,2025-11-21
-2007,Eagles,Long Road Out Of Eden,,6025000.0,,,0,best_selling_seed,,82e10fc2-3863-39d8-b91e-8f59f0cb7a03,2007-10-29,2007.0,AU,2025-11-21
+1975,Eagles,One Of These Nights,,7175000.0,,,0,best_selling_seed,,7f9ea3a4-5c4b-3082-a233-3462540e57e3,1975-06-10,1975.0,DE,2025-11-21
 1976,Eagles,Hotel California,Asylum,26000000,26× Platinum‡,,26000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,91bf707c-6c33-4efd-83ca-e4c88f14bcaa,1992,1992.0,DE,
 1976,Eagles,Their Greatest Hits (1971–1975),Asylum,38000000,38× Platinum‡,,38000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,,,,,
+1979,Eagles,The Long Run,,11150000.0,,,0,best_selling_seed,,1a265de4-136d-3414-adf5-b0913ca2aa15,1979-09-24,1979.0,CA,2025-11-21
 1982,Eagles,"Eagles Greatest Hits, Vol. 2",Asylum,11000000,11× Platinum,,11000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,,,,,
+2007,Eagles,Long Road Out Of Eden,,6025000.0,,,0,best_selling_seed,,82e10fc2-3863-39d8-b91e-8f59f0cb7a03,2007-10-29,2007.0,AU,2025-11-21
 1974,"Earth, Wind & Fire",Open Our Eyes,,1786000.0,,,0,best_selling_seed,,9018d41d-1bd7-33f7-a9ab-715c345f6e12,1974-02-22,1974.0,GB,2025-11-21
 1975,"Earth, Wind & Fire",That's The Way Of The World,,4133000.0,,,0,best_selling_seed,,e9845207-8ae3-36db-b0e1-2efcdb46687d,1975-03,1975.0,US,2025-11-21
 1976,"Earth, Wind & Fire",Spirit,,3441000.0,,,0,best_selling_seed,,dc5fbe50-47bc-3687-b4eb-147d5a3b428e,1976,1976.0,JP,2025-11-21
@@ -496,6 +496,7 @@ After 1946,Al Jolson,The Jolson Story,,1,,,1,List_of_best-selling_albums,https:/
 1973,Elton John,Don't Shoot Me I'm Only The Piano Player,,5460000.0,,,0,best_selling_seed,,0293c693-a065-395b-b9be-06a7f69b3e57,1972,1972.0,FR,2025-11-21
 1973,Elton John,Goodbye Yellow Brick Road,,12510000.0,,,0,best_selling_seed,,80df0f1b-4ce7-348a-aa1b-0d31ebff111a,1973-10-05,1973.0,DK,2025-11-21
 1974,Elton John,Caribou,,3760000.0,,,0,best_selling_seed,,5a9e28b6-1a83-3581-82eb-eeedf5673b7f,1974-06-24,1974.0,US,2025-11-21
+1974,Elton John,Greatest Hits,Polydor,17000000,17× Platinum‡,,17000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,0e4463f3-7966-3448-b5d3-b7e36fcda117,,,,
 1975,Elton John,Captain Fantastic And The Brown Dirt Cowboy,,5910000.0,,,0,best_selling_seed,,31edc094-37e7-3b02-b79b-f8442cc3fbdb,1975-05-19,1975.0,XE,2025-11-21
 1975,Elton John,Rock Of The Westies,,2290000.0,,,0,best_selling_seed,,375ad2c5-4fe6-3ede-a899-b7c4d259eea1,1975-10-04,1975.0,XE,2025-11-21
 1976,Elton John,Blue Moves,,2410000.0,,,0,best_selling_seed,,2071430f-44d2-3ed2-a172-dd38d590ccc4,1976-10-22,1976.0,GB,2025-11-21
@@ -512,7 +513,6 @@ After 1946,Al Jolson,The Jolson Story,,1,,,1,List_of_best-selling_albums,https:/
 1995,Elton John,Made In England,,3690000.0,,,0,best_selling_seed,,ebd01e91-117b-30af-b4a5-df18880d125a,1995-03-17,1995.0,AU,2025-11-21
 1997,Elton John,The Big Picture,,3120000.0,,,0,best_selling_seed,,c6cb2ba4-bcaf-39de-b945-3594f5a9ee82,1997-09-22,1997.0,AU,2025-11-21
 2001,Elton John,Songs From The West Coast,,1940000.0,,,0,best_selling_seed,,e5fa9446-4c0e-3eef-afb5-c2c1f67bb0d1,2001-10-02,2001.0,CA,2025-11-21
-1974,Elton John,Greatest Hits,Polydor,17000000,17× Platinum‡,,17000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,0e4463f3-7966-3448-b5d3-b7e36fcda117,,,,
 1956,Elvis Presley,Elvis,,1690000.0,,,0,best_selling_seed,,5334291d-f8f1-39d7-b293-361c0d473191,1973-07-16,1973.0,US,2025-11-21
 1956,Elvis Presley,Elvis Presley,,1510000.0,,,0,best_selling_seed,,755ec54b-8632-4930-930d-0aaab9e55904,2007,2007.0,GB,2025-11-21
 1957,Elvis Presley,Loving You [OST],,1270000.0,,,0,best_selling_seed,,,,,,2025-11-21
@@ -525,23 +525,23 @@ After 1946,Al Jolson,The Jolson Story,,1,,,1,List_of_best-selling_albums,https:/
 1962,Elvis Presley,Pot Luck,,870000.0,,,0,best_selling_seed,,86830b54-b672-3bf6-a9ca-27158f50b1be,1962-06-05,1962.0,GB,2025-11-21
 1967,Elvis Presley,How Great Thou Art,,3510000.0,,,0,best_selling_seed,,84324cfa-4827-30e8-88ef-e432a98de181,1967-02,1967.0,US,2025-11-21
 1969,Elvis Presley,From Elvis in Memphis,,1310000.0,,,0,best_selling_seed,,2a753764-89d5-3b72-8dff-8c599f1ea925,1969-06-17,1969.0,GB,2025-11-21
+1970,Elvis Presley,Elvis' Christmas Album (budget reissue of 1957 LP with altered track listing),RCA Camden/Pickwick,10000000,10× Platinum,,10000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,,,,,
 1970,Elvis Presley,That's The Way It Is,,2420000.0,,,0,best_selling_seed,,99d47a96-4666-3d8f-a613-75561cda1b48,1970-11-11,1970.0,US,2025-11-21
 1971,Elvis Presley,Elvis Sings The Wonderful World Of Christmas,,3900000.0,,,0,best_selling_seed,,,,,,2025-11-21
 1972,Elvis Presley,He Touched Me,,1400000.0,,,0,best_selling_seed,,ac2a98ba-6578-3196-8d8e-7f2ca9687338,1972-04-01,1972.0,US,2025-11-21
 1977,Elvis Presley,Moody Blue,,3820000.0,,,0,best_selling_seed,,a61b9898-0d5c-3850-a655-68dcc1462688,1977,1977.0,DE,2025-11-21
-1970,Elvis Presley,Elvis' Christmas Album (budget reissue of 1957 LP with altered track listing),RCA Camden/Pickwick,10000000,10× Platinum,,10000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,,,,,
 ,Elvis Presley,Elvis' Christmas Album,,"20.8 US: 20 million[192] UK: 440,000[10] CAN: 400,000[13] AUS: 35,000[14]",,,20,List_of_best-selling_albums,https://en.wikipedia.org/wiki/List_of_best-selling_albums,626a3486-a3ef-3cf6-bdda-11c55b529509,1957-10-15,1957.0,US,
 1999,Eminem,The Slim Shady LP,,10390000.0,,,0,best_selling_seed,,be725de4-4633-3c8a-9a03-f2c4392b6e0d,1999-02-23,1999.0,AU,2025-11-21
+2000,Eminem,The Marshall Mathers LP,Aftermath,"(12,940,000)[5][10]",11× Platinum‡(as of 2022),,12940000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,b0fa91c8-0996-38f1-ab84-797f58d7c4eb,2000-05-22,2000.0,AU,
+2002,Eminem,The Eminem Show,Aftermath,"(10,700,000)[10]",12× Platinum‡,,10700000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,e9585ed4-d148-3711-bbee-55a97b58325a,2002-05-27,2002.0,AU,
 2004,Eminem,Encore,,11030000.0,,,0,best_selling_seed,,38a1cae8-d480-3a44-835a-19b0fe768813,2004-11-12,2004.0,XE,2025-11-21
+2005,Eminem,Curtain Call: The Hits,Aftermath,"(3,782,000)[46]",10× Platinum‡,,3782000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,1a18928e-1d32-32f2-a10e-e1f76e86bc8b,2005-12-02,2005.0,AU,
 2009,Eminem,Relapse,,4480000.0,,,0,best_selling_seed,,ea1d0073-b586-3545-8607-f2632d53b0c0,2009-05-15,2009.0,AU,2025-11-21
 2010,Eminem,Recovery,,8362000.0,,,0,best_selling_seed,,a5056c3b-730f-493b-b10e-52f678d72b85,2010-06-18,2010.0,CO,2025-11-21
 2013,Eminem,The Marshall Mathers LP 2,,4770000.0,,,0,best_selling_seed,,b1fdc9cc-8680-44da-abab-59edca6b2ad3,2013-11-05,2013.0,CA,2025-11-21
 2017,Eminem,Revival,,1200000.0,,,0,best_selling_seed,,cfc62e61-686c-46cd-a453-608979646f71,2017-12-15,2017.0,AU,2025-11-21
 2018,Eminem,Kamikaze,,1060000.0,,,0,best_selling_seed,,802d62ee-65c3-4666-8f47-44844321a6a0,2018-08-31,2018.0,US,2025-11-21
 2020,Eminem,Music To Be Murdered By,,690000.0,,,0,best_selling_seed,,bc217c64-db43-4311-9b73-fca6d25c4ac5,2020-01-17,2020.0,DZ,2025-11-21
-2000,Eminem,The Marshall Mathers LP,Aftermath,"(12,940,000)[5][10]",11× Platinum‡(as of 2022),,12940000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,b0fa91c8-0996-38f1-ab84-797f58d7c4eb,2000-05-22,2000.0,AU,
-2002,Eminem,The Eminem Show,Aftermath,"(10,700,000)[10]",12× Platinum‡,,10700000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,e9585ed4-d148-3711-bbee-55a97b58325a,2002-05-27,2002.0,AU,
-2005,Eminem,Curtain Call: The Hits,Aftermath,"(3,782,000)[46]",10× Platinum‡,,3782000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,1a18928e-1d32-32f2-a10e-e1f76e86bc8b,2005-12-02,2005.0,AU,
 2002,Eminem & Various Artists,8 Mile [OST],,10330000.0,,,0,best_selling_seed,,,,,,2025-11-21
 2023,Enhypen,Dark Blood,,2418000.0,,,0,best_selling_seed,,,,,,2025-11-21
 2024,Enhypen,Romance: Untold,,4555000.0,,,0,best_selling_seed,,0c668bdb-328c-4dba-8407-8eddb5373a5d,2024-07-12,2024.0,FR,2025-11-21
@@ -573,12 +573,12 @@ After 1946,Al Jolson,The Jolson Story,,1,,,1,List_of_best-selling_albums,https:/
 1986,Eric Clapton,August,,2780000.0,,,0,best_selling_seed,,b7758489-3a12-3389-b76b-8cf80a105013,1986,1986.0,AU,2025-11-21
 1989,Eric Clapton,Journeyman,,6365000.0,,,0,best_selling_seed,,700072d4-ea59-36fc-bc62-e90b7282aa0c,1989-10-23,1989.0,AU,2025-11-21
 1992,Eric Clapton,Rush [OST],,1800000.0,,,0,best_selling_seed,,,,,,2025-11-21
+1992,Eric Clapton,Unplugged,Reprise Records,"(7,617,000)[36]",10× Platinum,,7617000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,61c4a210-6e90-3d41-b6c1-fd2c7e4fb6ac,1992-08-21,1992.0,AU,
 1994,Eric Clapton,From The Cradle,,7060000.0,,,0,best_selling_seed,,41def3e5-2ae1-3e61-ad60-09fbe8bb8d49,1994-08-12,1994.0,AU,2025-11-21
 1998,Eric Clapton,Pilgrim,,4275000.0,,,0,best_selling_seed,,3af2cda2-6766-33a2-babf-f732745af220,1998-03-09,1998.0,AU,2025-11-21
 2001,Eric Clapton,Reptile,,1990000.0,,,0,best_selling_seed,,5d8bd5cd-86ef-3c39-acc9-02f208f6a36f,2001-03-02,2001.0,CA,2025-11-21
-1992,Eric Clapton,Unplugged,Reprise Records,"(7,617,000)[36]",10× Platinum,,7617000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,61c4a210-6e90-3d41-b6c1-fd2c7e4fb6ac,1992-08-21,1992.0,AU,
-2006,Evanescence,The Open Door,,4560000.0,,,0,best_selling_seed,,e7e5eaa6-baf3-3539-b163-759431597f3a,2006-09-25,2006.0,ZA,2025-11-21
 2003,Evanescence,Fallen,Wind-up,"(8,000,000)[32]",10× Platinum‡,,8000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,2187d248-1a3b-35d0-a4ec-bead586ff547,2003-03-04,2003.0,AU,
+2006,Evanescence,The Open Door,,4560000.0,,,0,best_selling_seed,,e7e5eaa6-baf3-3539-b163-759431597f3a,2006-09-25,2006.0,ZA,2025-11-21
 1971,Faces,A Nod Is As Good As A Wink... To A Blind Horse,,2380000.0,,,0,best_selling_seed,,a2b03b50-18a9-3128-878f-24847392155a,1971-11-23,1971.0,US,2025-11-21
 1973,Faces,Ooh La La,,1380000.0,,,0,best_selling_seed,,286c3192-41b7-3222-b819-28c4b98ebdc8,1973,1973.0,GB,2025-11-21
 2006,Fergie,The Dutchess,,6450000.0,,,0,best_selling_seed,,5a4599e9-7ec3-3346-8997-5d5f33377c78,2006-06-19,2006.0,AU,2025-11-21
@@ -586,11 +586,11 @@ After 1946,Al Jolson,The Jolson Story,,1,,,1,List_of_best-selling_albums,https:/
 1968,Fleetwood Mac,Mr. Wonderful,,1100000.0,,,0,best_selling_seed,,265dda3d-802e-3e21-b133-34ac7e064146,1968-08-23,1968.0,GB,2025-11-21
 1969,Fleetwood Mac,Then Play On,,2000000.0,,,0,best_selling_seed,,f8d4b05b-e5dc-3c67-aed8-13cac163b06c,1969-09,1969.0,DE,2025-11-21
 1975,Fleetwood Mac,Fleetwood Mac,,9400000.0,,,0,best_selling_seed,,71db9dad-4ab3-48d2-bc16-4a7f9c32b10b,2006,2006.0,GB,2025-11-21
+1977,Fleetwood Mac,Rumours,Warner Bros.,21000000,21× Platinum‡,,21000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,416bb5e5-c7d1-3977-8fd7-7c9daf6c2be6,1977-02-04,1977.0,DE,
 1979,Fleetwood Mac,Tusk,,6600000.0,,,0,best_selling_seed,,22deeac8-6009-31ad-a069-26e85d246412,1979-10-19,1979.0,DE,2025-11-21
 1982,Fleetwood Mac,Mirage,,5500000.0,,,0,best_selling_seed,,a0e25b7f-30d4-3e87-b469-df315573bb16,1982-06-28,1982.0,GB,2025-11-21
 1987,Fleetwood Mac,Tango In The Night,,11300000.0,,,0,best_selling_seed,,680b3cd8-426b-3112-bcf3-42cd66f75fa9,1987-04-09,1987.0,AU,2025-11-21
 1990,Fleetwood Mac,Behind The Mask,,2750000.0,,,0,best_selling_seed,,0088f94b-d9f5-37a0-a7ce-499319c6e8ee,1990-04-06,1990.0,CA,2025-11-21
-1977,Fleetwood Mac,Rumours,Warner Bros.,21000000,21× Platinum‡,,21000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,416bb5e5-c7d1-3977-8fd7-7c9daf6c2be6,1977-02-04,1977.0,DE,
 2009,Florence + The Machine,Lungs,,4300000.0,,,0,best_selling_seed,,50fe703f-173e-496a-9155-b2a495d704e5,2009-06-13,2009.0,AR,2025-11-21
 2011,Florence + The Machine,Ceremonials,,3000000.0,,,0,best_selling_seed,,998f1bc8-6703-49fe-8aed-028ec04a14f2,2011-10-28,2011.0,AU,2025-11-21
 1995,Foo Fighters,Foo Fighters,,3350000.0,,,0,best_selling_seed,,440c9ce8-8ce4-3103-a745-0b385ae70a34,1995-06-26,1995.0,AU,2025-11-21
@@ -635,17 +635,17 @@ After 1946,Al Jolson,The Jolson Story,,1,,,1,List_of_best-selling_albums,https:/
 1964,Frank Sinatra & Count Basie,It Might As Well Be Swing,,1016000.0,,,0,best_selling_seed,,,,,,2025-11-21
 1996,Fugees,The Score,,16525000.0,,,0,best_selling_seed,,dd2203dd-a149-316b-ad7f-a303dc4fc459,1996-02-12,1996.0,AU,2025-11-21
 2025,G-Dragon,Übermensch,,607000.0,,,0,best_selling_seed,,af9f66d2-b97f-4c6e-9b99-4fbe48357937,2025-02-25,2025.0,CN,2025-11-21
-1992,Garth Brooks,Beyond The Season,,3660000.0,,,0,best_selling_seed,,22cfbcf0-9f19-3e52-8f16-ccfdd21cdfcf,1992-08-25,1992.0,US,2025-11-21
-1995,Garth Brooks,Fresh Horses,,6090000.0,,,0,best_selling_seed,,36a90be8-0d18-3009-a20a-2dcfd4942ad6,1995-11-21,1995.0,US,2025-11-21
-2001,Garth Brooks,Scarecrow,,3540000.0,,,0,best_selling_seed,,0f190c0b-ebe2-3c86-ab84-5af9f9c55993,2001-11-13,2001.0,US,2025-11-21
 1989,Garth Brooks,Garth Brooks,Capitol,10000000,10× Platinum,,10000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,52bab202-d3af-3f77-9de7-06302791ab80,1989-04-12,1989.0,CA,
 1990,Garth Brooks,No Fences,Capitol Nashville,18000000,18× Platinum‡,,18000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,d4377787-0d92-3902-997a-feb75f4dee2d,1990-08-27,1990.0,CA,
 1991,Garth Brooks,Ropin' the Wind,Capitol Nashville,"(9,600,000)[10]",14× Platinum,,9600000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,0532c91d-e099-3d5c-8fac-4711035f7297,1991-09-10,1991.0,US,
+1992,Garth Brooks,Beyond The Season,,3660000.0,,,0,best_selling_seed,,22cfbcf0-9f19-3e52-8f16-ccfdd21cdfcf,1992-08-25,1992.0,US,2025-11-21
 1992,Garth Brooks,The Chase,Liberty Records,"(5,100,000)[42]",10× Platinum‡,,5100000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,1d1c66cc-84b7-3c72-ac81-84f3e7785c79,1992-09-22,1992.0,CA,
 1993,Garth Brooks,In Pieces,Capitol,10000000,10× Platinum‡,,10000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,3ff6b94c-1765-3d58-a6e0-edc7b552fcba,1993-08-31,1993.0,CA,
 1994,Garth Brooks,The Hits,Liberty Records,"(7,821,000)[35]",10× Platinum,,7821000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,ef17967a-296b-3d3b-a59b-758ff5b1caae,1994-12-12,1994.0,CA,
+1995,Garth Brooks,Fresh Horses,,6090000.0,,,0,best_selling_seed,,36a90be8-0d18-3009-a20a-2dcfd4942ad6,1995-11-21,1995.0,US,2025-11-21
 1997,Garth Brooks,Sevens,Capitol Records,"(5,700,000)[42]",10× Platinum‡,,5700000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,ff2e3f28-9d22-344e-a1bd-723e3d29525c,1997-11-25,1997.0,XE,
 1998,Garth Brooks,Double Live,Capitol Nashville,"(6,017,000)[40]",23× Platinum‡(2-disc album),,6017000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,99cf0080-3cbe-3086-b8c4-2c4964cf3ae0,1998-11-17,1998.0,US,
+2001,Garth Brooks,Scarecrow,,3540000.0,,,0,best_selling_seed,,0f190c0b-ebe2-3c86-ab84-5af9f9c55993,2001-11-13,2001.0,US,2025-11-21
 2007,Garth Brooks,The Ultimate Hits,Pearl Records,5000000,10× Platinum‡(2-disc album),,5000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,aec992a3-da09-3bd8-83e7-9159b86205d5,2007-10-15,2007.0,AU,
 1970,Genesis,Trespass,,2010000.0,,,0,best_selling_seed,,aa86c6bb-d1c7-3a03-bcb4-3c6f0a469328,1970-10,1970.0,DE,2025-11-21
 1971,Genesis,Nursery Cryme,,2930000.0,,,0,best_selling_seed,,863a205e-07c3-3930-8561-a23045719466,1971-11-12,1971.0,DE,2025-11-21
@@ -663,29 +663,29 @@ After 1946,Al Jolson,The Jolson Story,,1,,,1,List_of_best-selling_albums,https:/
 1970,George Harrison,All Things Must Pass,,6492000.0,,,0,best_selling_seed,,d4b0f3e2-e3eb-3531-b305-ed8105cb5be4,1970-11-27,1970.0,US,2025-11-21
 1973,George Harrison,Living In The Material World,,2746000.0,,,0,best_selling_seed,,35f1fade-fc94-3f95-906c-d91935add4d5,1973-05-30,1973.0,JP,2025-11-21
 1987,George Harrison,Cloud Nine,,4594000.0,,,0,best_selling_seed,,024b3f7e-f4b6-3ecd-a104-90a946344492,1987-11-02,1987.0,CA,2025-11-21
+1987,George Michael,Faith,Columbia,10000000,10× Platinum,,10000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,4e61585f-f341-3174-85cf-afad8df46fbe,1987-10-30,1987.0,AU,
 1990,George Michael,Listen Without Prejudice,,7800000.0,,,0,best_selling_seed,,a0467615-94c3-3268-a425-9285273adb24,1990-08-21,1990.0,XE,2025-11-21
 1996,George Michael,Older,,8650000.0,,,0,best_selling_seed,,c49554db-2046-3853-99b5-9527e31d359f,1996-05-06,1996.0,XE,2025-11-21
 1999,George Michael,Songs From The Last Century,,2750000.0,,,0,best_selling_seed,,aaadfaeb-2a19-335a-bdfc-6bf77b89e640,1999-12-06,1999.0,AU,2025-11-21
 2004,George Michael,Patience,,2700000.0,,,0,best_selling_seed,,f86df777-cdd4-3d9e-a90b-5b90af39176a,2004-03-15,2004.0,AU,2025-11-21
-1987,George Michael,Faith,Columbia,10000000,10× Platinum,,10000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,4e61585f-f341-3174-85cf-afad8df46fbe,1987-10-30,1987.0,AU,
 2001,Gorillaz,Gorillaz,,6470000.0,,,0,best_selling_seed,,b0405d2a-5720-340a-bb56-4e135d031cc2,2001-03-24,2001.0,AR,2025-11-21
 2005,Gorillaz,Demon Days,,7656000.0,,,0,best_selling_seed,,f959a46a-a136-3134-9412-6572b23fad95,2005-05-11,2005.0,CA,2025-11-21
 2010,Gorillaz,Plastic Beach,,1859000.0,,,0,best_selling_seed,,5a676824-18cd-4f7f-89f0-df21623e2042,2010-03-03,2010.0,RU,2025-11-21
 2017,Gorillaz,Humanz,,644000.0,,,0,best_selling_seed,,066f840f-e357-436f-bb0a-47ad7cfcd84a,2017-04-28,2017.0,AU,2025-11-21
 2024,Gracie Abrams,The Secret Of Us,,518000.0,,,0,best_selling_seed,,b6923fdb-2f07-49f0-9adc-3dc2275af0da,2024-06-20,2024.0,XE,2025-11-21
 1991,Green Day,Kerplunk,,1950000.0,,,0,best_selling_seed,,a0603694-2422-3a40-b946-d0bcea5e8254,1991-12-17,1991.0,US,2025-11-21
+1994,Green Day,Dookie,Reprise Records,"(10,005,000)[4][5]",20× Platinum‡,,10005000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,314cffd4-daa5-3337-85e5-e54165a96113,1994-01-28,1994.0,BR,
 1995,Green Day,Insomniac,,5800000.0,,,0,best_selling_seed,,061f572e-7660-3c6b-b4cd-cf66d46da93c,1995-10-06,1995.0,AU,2025-11-21
 1997,Green Day,Nimrod,,5200000.0,,,0,best_selling_seed,,4f1d08f2-d4bd-3ef2-ba72-eb348ae4c332,1997-10-10,1997.0,AU,2025-11-21
 2000,Green Day,Warning,,3450000.0,,,0,best_selling_seed,,c1604b20-37b8-3fc7-8726-73f41090b8e2,2000-09-20,2000.0,JP,2025-11-21
 2009,Green Day,21st Century Breakdown,,3800000.0,,,0,best_selling_seed,,37608ff2-3168-3e7c-a77e-04a4b7300c1b,2009-04,2009.0,ZA,2025-11-21
-1994,Green Day,Dookie,Reprise Records,"(10,005,000)[4][5]",20× Platinum‡,,10005000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,314cffd4-daa5-3337-85e5-e54165a96113,1994-01-28,1994.0,BR,
 ,Green Day,American Idiot,,"11.6 US: 6 million[8] JPN: 500,000[9] UK: 2 million[10] GER: 800,000[11] FRA: 300,000[53] CAN: 1 million[13] AUS: 420,000[14] BRA: 93,627[36] NLD: 40,000[16] SWE: 60,000[18] SPA: 50,000[57] MEX: 100,000[15] BEL: 50,000[44] SWI: 80,000[20] AUT: 60,000[21] FIN: 23,133[22] NZ: 60,000[23]",,,11,List_of_best-selling_albums,https://en.wikipedia.org/wiki/List_of_best-selling_albums,de9bf827-a9b0-348b-a7c9-556c03c3fb07,2004-09-20,2004.0,AU,
+1987,Guns N' Roses,Appetite for Destruction,Geffen,18000000,18× Platinum,,18000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,a0b94d0a-210b-4b15-bd1d-93be2196c14a,1987-07-21,1987.0,AU,
 1988,Guns N' Roses,G N' R Lies,,9940000.0,,,0,best_selling_seed,,b1b42d92-bbd0-349d-b2f8-ee4e6ef1bd9c,1988-11-30,1988.0,DE,2025-11-21
 1991,Guns N' Roses,Use Your Illusion I,,18010000.0,,,0,best_selling_seed,,642b183a-3e59-3cb9-9187-aeeefa0d8818,1991-09-16,1991.0,AU,2025-11-21
 1991,Guns N' Roses,Use Your Illusion II,,18800000.0,,,0,best_selling_seed,,617c9f00-9488-3a70-a994-9de312541617,1991-09-17,1991.0,AU,2025-11-21
 1993,Guns N' Roses,The Spaghetti Incident?,,6100000.0,,,0,best_selling_seed,,7ef05688-558a-36a6-97a8-ff4e6174aae6,1993-11-21,1993.0,CA,2025-11-21
 2008,Guns N' Roses,Chinese Democracy,,2740000.0,,,0,best_selling_seed,,cdfb0664-26b5-3475-88f5-dd6ccd4d74ce,2008-06-18,2008.0,AR,2025-11-21
-1987,Guns N' Roses,Appetite for Destruction,Geffen,18000000,18× Platinum,,18000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,a0b94d0a-210b-4b15-bd1d-93be2196c14a,1987-07-21,1987.0,AU,
 2004,Gwen Stefani,Love.Angel.Music.Baby.,,7900000.0,,,0,best_selling_seed,,3873f5a4-e3e2-3e88-ae7e-c2ea5de1a5ba,2004-11-22,2004.0,CA,2025-11-21
 2006,Gwen Stefani,The Sweet Escape,,3620000.0,,,0,best_selling_seed,,e73243e2-8929-371a-ad65-7c7d0f1fad7e,2006-12-01,2006.0,US,2025-11-21
 2017,Harry Styles,Harry Styles,,1625000.0,,,0,best_selling_seed,,05e6b686-b590-472a-9924-e623b223cb6d,2017-05-12,2017.0,AF,2025-11-21
@@ -749,11 +749,11 @@ After 1946,Al Jolson,The Jolson Story,,1,,,1,List_of_best-selling_albums,https:/
 2005,Jennifer Lopez,Rebirth,,1940000.0,,,0,best_selling_seed,,10aee628-fbbd-34bf-bced-7fc745db5582,2005-02-23,2005.0,SA,2025-11-21
 2011,Jennifer Lopez,Love?,,1180000.0,,,0,best_selling_seed,,,,,,2025-11-21
 1995,Jewel,Pieces of You,Atlantic,"(8,800,000)[5][27]",12× Platinum,,8800000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,6429018a-ead6-3071-969e-ebc575ac1765,1994,1994.0,AU,
-1967,Jimi Hendrix,Are You Experienced,,9215000.0,,,0,best_selling_seed,,791fdbb8-b19c-4d33-9ba4-d2d2f35abec6,2010-07-10,2010,,2025-11-21
+1967,Jimi Hendrix,Are You Experienced,,9215000.0,,,0,best_selling_seed,,791fdbb8-b19c-4d33-9ba4-d2d2f35abec6,2010-07-10,2010.0,,2025-11-21
 1967,Jimi Hendrix,Axis: Bold As Love,,4685000.0,,,0,best_selling_seed,,d0b1e21e-cef6-4575-8d92-1afea1894ca3,1967-12-01,1967.0,FR,2025-11-21
-1968,Jimi Hendrix,Electric Ladyland,,7710000.0,,,0,best_selling_seed,,9ecfaa13-cc55-3453-a7e5-e2f25d2fe3ad,2002,2002,,2025-11-21
+1968,Jimi Hendrix,Electric Ladyland,,7710000.0,,,0,best_selling_seed,,9ecfaa13-cc55-3453-a7e5-e2f25d2fe3ad,2002,2002.0,,2025-11-21
 1970,Jimi Hendrix,Band Of Gypsys,,4700000.0,,,0,best_selling_seed,,06eada6a-7bff-34ef-8311-a0435833061f,1970-03-25,1970.0,FR,2025-11-21
-1997,Jimi Hendrix,First Rays Of The New Rising Sun,,925000.0,,,0,best_selling_seed,,7ae02a2b-241b-36a5-b17c-2320dd1c4ca4,1997-04-15,1997,XE,2025-11-21
+1997,Jimi Hendrix,First Rays Of The New Rising Sun,,925000.0,,,0,best_selling_seed,,7ae02a2b-241b-36a5-b17c-2320dd1c4ca4,1997-04-15,1997.0,XE,2025-11-21
 1997,Jimi Hendrix,South Saturn Delta,,665000.0,,,0,best_selling_seed,,89cc7320-4679-3b51-813a-95539f9a6d2a,1997-10-07,1997.0,CA,2025-11-21
 2010,Jimi Hendrix,Valleys Of Neptune,,765000.0,,,0,best_selling_seed,,e86114ba-95e4-4758-8ce6-8db34111d0f8,2010-03-05,2010.0,XE,2025-11-21
 2023,Jimin,Face,,1700000.0,,,0,best_selling_seed,,,,,,2025-11-21
@@ -778,11 +778,11 @@ After 1946,Al Jolson,The Jolson Story,,1,,,1,List_of_best-selling_albums,https:/
 1978,Journey,Infinity,,4420000.0,,,0,best_selling_seed,,0640fc0b-9713-3f17-8d4f-6c0365bfe5ba,1978,1978.0,US,2025-11-21
 1979,Journey,Evolution,,3770000.0,,,0,best_selling_seed,,b94085f5-d3e9-3180-bce3-04707b5c4f42,1979-03-20,1979.0,US,2025-11-21
 1980,Journey,Departure,,3810000.0,,,0,best_selling_seed,,13480680-7ec8-35dd-9c6d-e4278ca6ee6c,1980-02-29,1980.0,JP,2025-11-21
+1981,Journey,Escape,Columbia,10000000,10× Platinum‡,,10000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,89ed7ed6-4292-3892-b0de-c9c27005c08d,1981-07-17,1981.0,XE,
 1983,Journey,Frontiers,,7680000.0,,,0,best_selling_seed,,13902eea-edc0-3399-894f-6a41436fa5d9,1983-02-01,1983.0,JP,2025-11-21
 1986,Journey,Raised On Radio,,3290000.0,,,0,best_selling_seed,,804a2edb-4459-36ae-8620-8eb66bcd6c22,1986-04-21,1986.0,US,2025-11-21
-1996,Journey,Trial By Fire,,1830000.0,,,0,best_selling_seed,,6bfedbb0-34fb-37f2-97cf-b6dd1fcaef09,1996-10-16,1996.0,XE,2025-11-21
-1981,Journey,Escape,Columbia,10000000,10× Platinum‡,,10000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,89ed7ed6-4292-3892-b0de-c9c27005c08d,1981-07-17,1981.0,XE,
 1988,Journey,Greatest Hits,Columbia,18000000,18× Platinum‡,,18000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,1cdc94f2-7011-37ab-a068-75c41e01c9ed,1988-11-15,1988.0,CA,
+1996,Journey,Trial By Fire,,1830000.0,,,0,best_selling_seed,,6bfedbb0-34fb-37f2-97cf-b6dd1fcaef09,1996-10-16,1996.0,XE,2025-11-21
 2023,Jung Kook,Golden,,2778000.0,,,0,best_selling_seed,,e51c54ea-71d2-413a-9fbe-1be9389b0fa6,2023-11-03,2023.0,JP,2025-11-21
 2010,Justin Bieber,My Worlds,,9403000.0,,,0,best_selling_seed,,e22521dc-ed45-489b-ac2c-d9a9a084a4b6,2010-03-22,2010.0,AU,2025-11-21
 2011,Justin Bieber,Under The Mistletoe,,2755000.0,,,0,best_selling_seed,,5708e8f4-71a5-4f47-9b30-d36a0e3bdc56,2011-11-01,2011.0,CA,2025-11-21
@@ -800,10 +800,10 @@ After 1946,Al Jolson,The Jolson Story,,1,,,1,List_of_best-selling_albums,https:/
 2013,Kanye West,Yeezus,,1361000.0,,,0,best_selling_seed,,5d4d0f2d-9be7-4922-bc9a-cbd2880b12c2,2013-06-18,2013.0,XW,2025-11-21
 2018,Kanye West & Kid Cudi,Kids See Ghosts,,591000.0,,,0,best_selling_seed,,,,,,2025-11-21
 2008,Katy Perry,One Of The Boys,,4140000.0,,,0,best_selling_seed,,88f14b0b-f8d1-31b4-87ab-199145fc12d3,2008-06-17,2008.0,CN,2025-11-21
+2010,Katy Perry,Teenage Dream,Capitol,"(3,100,000)[47]",10× Platinum‡,,3100000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,e6f683c9-fc85-412c-a352-d6e411fc2603,2010-08-24,2010.0,AU,
 2013,Katy Perry,Prism,,4294000.0,,,0,best_selling_seed,,0d8b973c-fcff-4830-b645-a877b8a9a08f,2013-10-21,2013.0,AU,2025-11-21
 2017,Katy Perry,Witness,,600000.0,,,0,best_selling_seed,,bded1701-baf2-4066-b76a-49384de006b6,2017-06-09,2017.0,AU,2025-11-21
-2010,Katy Perry,Teenage Dream,Capitol,"(3,100,000)[47]",10× Platinum‡,,3100000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,e6f683c9-fc85-412c-a352-d6e411fc2603,2010-08-24,2010.0,AU,
-2003,Kelly Clarkson,Thankful,,3630000.0,,,0,best_selling_seed,,26af8334-e1ed-3111-b0a4-6863716335d3,2003-04-15,2003,AU,2025-11-21
+2003,Kelly Clarkson,Thankful,,3630000.0,,,0,best_selling_seed,,26af8334-e1ed-3111-b0a4-6863716335d3,2003-04-15,2003.0,AU,2025-11-21
 2004,Kelly Clarkson,Breakaway,,10980000.0,,,0,best_selling_seed,,0d0ddce6-a611-3dc0-923c-60ac3da72ad8,2003,2003.0,US,2025-11-21
 2009,Kelly Clarkson,All I Ever Wanted,,1750000.0,,,0,best_selling_seed,,50e5e68b-626a-3bde-904d-5649163ebecd,2009-03-06,2009.0,BR,2025-11-21
 2011,Kelly Clarkson,Stronger,,1830000.0,,,0,best_selling_seed,,cc073eb5-920b-4dad-a7f7-178a5cad1966,2011-10-21,2011.0,XE,2025-11-21
@@ -818,7 +818,7 @@ After 1946,Al Jolson,The Jolson Story,,1,,,1,List_of_best-selling_albums,https:/
 1988,Kylie Minogue,Kylie,,5040000.0,,,0,best_selling_seed,,f957c32f-2803-3c1a-99c8-66cdc5308a44,1988-07-04,1988.0,AU,2025-11-21
 1989,Kylie Minogue,Enjoy Yourself,,2320000.0,,,0,best_selling_seed,,e3ce0bde-2ccf-3817-8cde-5579f1cd8dc6,1989-10-09,1989.0,AR,2025-11-21
 2000,Kylie Minogue,Light Years,,1220000.0,,,0,best_selling_seed,,128ed442-1e2e-35d3-954f-cdbce2a0207c,2000-07-10,2000.0,CA,2025-11-21
-2001,Kylie Minogue,Fever,,6330000.0,,,0,best_selling_seed,,511f4c22-33ee-4efb-a423-6f6f183e21c2,2002,2002,,2025-11-21
+2001,Kylie Minogue,Fever,,6330000.0,,,0,best_selling_seed,,511f4c22-33ee-4efb-a423-6f6f183e21c2,2002,2002.0,,2025-11-21
 2008,Lady Gaga,The Fame / The Fame Monster,,15745000.0,,,0,best_selling_seed,,,,,,2025-11-21
 2011,Lady Gaga,Born This Way,,6877000.0,,,0,best_selling_seed,,fc4d9ea8-7ba0-42eb-957b-00a84a158af2,2012-05-28,2012.0,US,2025-11-21
 2013,Lady Gaga,Artpop,,2151000.0,,,0,best_selling_seed,,815b31d8-b972-48a7-b74a-38c49a277676,2013-11-05,2013.0,BR,2025-11-21
@@ -836,18 +836,19 @@ After 1946,Al Jolson,The Jolson Story,,1,,,1,List_of_best-selling_albums,https:/
 2023,Le Sserafim,Unforgiven,,1620000.0,,,0,best_selling_seed,,be1d9f08-297f-4832-99cc-015003e051ae,2023-05-01,2023.0,JP,2025-11-21
 2024,Le Sserafim,Easy,,1210000.0,,,0,best_selling_seed,,50f5c625-0add-4fa6-86e5-bfe05f1ca661,2025-09-05,2025.0,US,2025-11-21
 1969,Led Zeppelin,Led Zeppelin,,15800000.0,,,0,best_selling_seed,,07e182ae-6567-4bc4-90f0-73619c942d73,2018-09-27,2018.0,XW,2025-11-21
-1970,Led Zeppelin,Led Zeppelin III,,13700000.0,,,0,best_selling_seed,,53f80f76-f8af-3558-bfd5-e7221e055c75,1970-10-05,1970.0,CA,2025-11-21
-1976,Led Zeppelin,Presence,,7300000.0,,,0,best_selling_seed,,42f8acce-90fc-3471-a4cd-ace1ab816276,1976-03-31,1976.0,XE,2025-11-21
-1979,Led Zeppelin,In Through The Out Door,,11500000.0,,,0,best_selling_seed,,2fbf4c3e-09e5-38f0-ae59-fbdc9ea16b87,1979-08-15,1979.0,JP,2025-11-21
 1969,Led Zeppelin,Led Zeppelin II,Atlantic,12000000,12× Platinum,,12000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,33b4653d-006e-3cc1-8afb-386b15a6cd6e,1969-10-22,1969.0,US,
+1970,Led Zeppelin,Led Zeppelin III,,13700000.0,,,0,best_selling_seed,,53f80f76-f8af-3558-bfd5-e7221e055c75,1970-10-05,1970.0,CA,2025-11-21
 1971,Led Zeppelin,"Untitled (""Led Zeppelin IV"")",Atlantic,24000000,24× Platinum‡,,24000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,,,,,
 1973,Led Zeppelin,Houses of the Holy,Atlantic,11000000,11× Platinum,,11000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,9b5006e5-b276-3a05-bcdd-8d986842320b,1973-03-28,1973.0,CA,
 1975,Led Zeppelin,Physical Graffiti,Swan Song,8000000,16× Platinum(2-disc album),,8000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,116c9490-6af4-3827-8261-2d5b1f508fe7,1975-02-24,1975.0,DE,
+1976,Led Zeppelin,Presence,,7300000.0,,,0,best_selling_seed,,42f8acce-90fc-3471-a4cd-ace1ab816276,1976-03-31,1976.0,XE,2025-11-21
+1979,Led Zeppelin,In Through The Out Door,,11500000.0,,,0,best_selling_seed,,2fbf4c3e-09e5-38f0-ae59-fbdc9ea16b87,1979-08-15,1979.0,JP,2025-11-21
 1990,Led Zeppelin,Led Zeppelin Boxed Set,Atlantic Records,2500000,10× Platinum(4-disc album),,2500000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,,,,,
 ,Led Zeppelin,Led Zeppelin IV,,"30.4 US: 24 million[8] UK: 1.8 million[10] GER: 750,000[11] FRA: 600,000[53] CAN: 2 million[13] AUS: 630,000[14] BRA: 250,000[36] NLD: 100,000[16] ITA: 50,000[17] SPA: 100,000[35] NOR: 40,000[67] ARG: 60,000[38] SWI: 50,000[20]",,,30,List_of_best-selling_albums,https://en.wikipedia.org/wiki/List_of_best-selling_albums,2e61da88-39e9-3473-81d2-c964cb394952,1971-11-08,1971.0,FR,
 2019,Lewis Capaldi,Divinely Uninspired To A Hellish Extent,,916000.0,,,0,best_selling_seed,,f1849099-2dfa-42b8-a3fc-a8248938578f,2019-05-17,2019.0,XE,2025-11-21
 2015,Lin-Manuel Miranda & Various Artists,Hamilton [OCR],,2709000.0,,,0,best_selling_seed,,,,,,2025-11-21
 2016,Lin-Manuel Miranda & Various Artists,Moana [OST],,1905000.0,,,0,best_selling_seed,,,,,,2025-11-21
+2000,Linkin Park,Hybrid Theory,Warner Bros.,"(11,956,000)[4][5]",12× Platinum‡,,11956000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,43091de5-04b6-46e6-b181-b457694f4ce0,2023-07-21,2023.0,XW,
 2003,Linkin Park,Meteora,,14282000.0,,,0,best_selling_seed,,09474d62-17dd-3a4f-98fb-04c65f38a479,2003-03-24,2003.0,AR,2025-11-21
 2007,Linkin Park,Minutes To Midnight,,8322000.0,,,0,best_selling_seed,,a4201f5c-f0d7-319c-ba9d-ba0bac38da7a,2007-05-11,2007.0,XE,2025-11-21
 2010,Linkin Park,A Thousand Suns,,2886000.0,,,0,best_selling_seed,,65404106-2976-4f98-a0e2-4e76923ea06d,2010-09-08,2010.0,AR,2025-11-21
@@ -855,7 +856,6 @@ After 1946,Al Jolson,The Jolson Story,,1,,,1,List_of_best-selling_albums,https:/
 2014,Linkin Park,The Hunting Party,,1300000.0,,,0,best_selling_seed,,20292abb-7023-495b-8081-4b7be106a3b1,2014-06-10,2014.0,ZA,2025-11-21
 2017,Linkin Park,One More Light,,856000.0,,,0,best_selling_seed,,b976c959-d13e-487c-85d7-cab70ed7c842,2017-05-19,2017.0,CN,2025-11-21
 2024,Linkin Park,From Zero,,714000.0,,,0,best_selling_seed,,a3159fb4-2ad3-4678-ba51-36fbc8b8430d,2024-11-15,2024.0,XE,2025-11-21
-2000,Linkin Park,Hybrid Theory,Warner Bros.,"(11,956,000)[4][5]",12× Platinum‡,,11956000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,43091de5-04b6-46e6-b181-b457694f4ce0,2023-07-21,2023.0,XW,
 1983,Lionel Richie,Can't Slow Down,Motown,10000000,10× Platinum,,10000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,cccdb1a1-333d-30e1-9486-81b8113e608a,1983-10-11,1983.0,CA,
 2015,Little Mix,Get Weird,,940000.0,,,0,best_selling_seed,,1fcd4cfe-5aee-4de2-bf6a-09772d53edee,2015-11-06,2015.0,AU,2025-11-21
 2016,Little Mix,Glory Days,,1050000.0,,,0,best_selling_seed,,5f4251cf-80bf-4967-9b0e-a6eac6f8fcca,2016-11-18,2016.0,XE,2025-11-21
@@ -868,9 +868,11 @@ After 1946,Al Jolson,The Jolson Story,,1,,,1,List_of_best-selling_albums,https:/
 1990,MC Hammer,Please Hammer Don't Hurt 'Em,Capitol,10000000,10× Platinum,,10000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,4a076697-3fb1-31fa-aad8-60fc3d93e3ca,1990-01-30,1990.0,CA,
 2012,Macklemore & Ryan Lewis,The Heist,,2840000.0,,,0,best_selling_seed,,22315cdd-4ed9-427c-9492-560cf4afed58,2012-10-09,2012.0,CA,2025-11-21
 1983,Madonna,Madonna,,9625000.0,,,0,best_selling_seed,,79f6bed0-283b-3192-974d-543a3cf45ee6,1996,1996.0,DE,2025-11-21
+1984,Madonna,Like a Virgin,Sire,10000000,10× Platinum,,10000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,b69580b9-7050-3994-b544-4407a22c097a,1984-11-13,1984.0,XE,
 1987,Madonna,Who's That Girl [OST],,5400000.0,,,0,best_selling_seed,,,,,,2025-11-21
 1989,Madonna,Like A Prayer,,14275000.0,,,0,best_selling_seed,,1f75a8df-176c-3d23-8f1f-b0c8935682ec,1989-03-20,1989.0,HU,2025-11-21
 1990,Madonna,I'm Breathless [OST],,6700000.0,,,0,best_selling_seed,,,,,,2025-11-21
+1990,Madonna,The Immaculate Collection,Sire,11000000,11× Platinum‡,,11000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,73ef27d9-07ed-4084-adf8-9a48a9fd3e2e,,,,
 1992,Madonna,Erotica,,6825000.0,,,0,best_selling_seed,,7a6a2e9f-c699-3da5-a2d7-144d6ccba3e6,1992-10-19,1992.0,CA,2025-11-21
 1994,Madonna,Bedtime Stories,,7500000.0,,,0,best_selling_seed,,b3c83c83-4280-363f-8ecc-9cb453a8ea18,1994-10-24,1994.0,AU,2025-11-21
 1998,Madonna,Ray of Light,,16000000.0,,,0,best_selling_seed,,cb93e87f-5d21-3447-a6e8-22d44f9b0d7a,1998-02-23,1998.0,AU,2025-11-21
@@ -879,8 +881,6 @@ After 1946,Al Jolson,The Jolson Story,,1,,,1,List_of_best-selling_albums,https:/
 2005,Madonna,Confessions On A Dance Floor,,9325000.0,,,0,best_selling_seed,,1aef14de-7d07-4e95-8e27-a4c8445d4441,2005,2005.0,CN,2025-11-21
 2008,Madonna,Hard Candy,,3650000.0,,,0,best_selling_seed,,8160f309-f93b-31f3-86da-248aeff39c1f,2008-04-25,2008.0,ZA,2025-11-21
 2012,Madonna,MDNA,,1850000.0,,,0,best_selling_seed,,e7acb0ae-b60b-4ed1-94d0-bc15ddd632e4,2012-03-23,2012.0,AU,2025-11-21
-1984,Madonna,Like a Virgin,Sire,10000000,10× Platinum,,10000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,b69580b9-7050-3994-b544-4407a22c097a,1984-11-13,1984.0,XE,
-1990,Madonna,The Immaculate Collection,Sire,11000000,11× Platinum‡,,11000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,73ef27d9-07ed-4084-adf8-9a48a9fd3e2e,,,,
 ,Madonna,True Blue,,"14.5 US: 7 million[8] JPN: 100,000[9] UK: 2.1 million[10] GER: 1 million[11] FRA: 1 million[53] CAN: 1 million[13] AUS: 280,000[14] BRA: 100,000[36] NLD: 100,000[16] ITA: 800,000[71] SPA: 300,000[34] ARG: 240,000[38] BEL: 75,000[116] NOR: 100,000[71] SWI: 150,000[71] AUT: 50,000[71] FIN: 53,912[22] NZ: 75,000[23] POR: 20,000[71]",,,14,List_of_best-selling_albums,https://en.wikipedia.org/wiki/List_of_best-selling_albums,eb9c3e50-cfa9-3502-af63-41d39c4c3fa6,1986-06-30,1986.0,XE,
 1996,Madonna & Various Artists,Evita [OST],,6525000.0,,,0,best_selling_seed,,,,,,2025-11-21
 1984,Mannheim Steamroller,Christmas,,6450000.0,,,0,best_selling_seed,,76973ff2-ac4a-346b-b303-12a22b233930,1984,1984.0,XE,2025-11-21
@@ -889,7 +889,9 @@ After 1946,Al Jolson,The Jolson Story,,1,,,1,List_of_best-selling_albums,https:/
 2001,Mannheim Steamroller,Christmas Extraordinaire,,3990000.0,,,0,best_selling_seed,,20f1fb2a-8241-3d1b-8d41-54ef943d2ce5,2001-08-14,2001.0,US,2025-11-21
 1990,Mariah Carey,Mariah Carey,,14400000.0,,,0,best_selling_seed,,67cd8314-bdfc-3023-b4d0-46a0b06ff819,1990-08-22,1990.0,AU,2025-11-21
 1991,Mariah Carey,Emotions,,8578000.0,,,0,best_selling_seed,,1746a028-cb05-39db-9249-f2e58331fd23,1991-09-01,1991.0,AU,2025-11-21
+1993,Mariah Carey,Music Box,Columbia,"(8,012,000)[5][29]",10× Platinum,,8012000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,7625cb89-79a6-3a00-bc38-d44552add611,1993-08-31,1993.0,BR,
 1994,Mariah Carey,Merry Christmas,,14454000.0,,,0,best_selling_seed,,2a017702-b13b-4b54-acb4-338ad2b2595c,,,AU,2025-11-21
+1995,Mariah Carey,Daydream,Columbia,"(8,505,000)[5][29]",11× Platinum,,8505000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,bf0126a1-b79c-3c9c-a892-f4bf4fac2bb0,1995-09-28,1995.0,AU,
 1997,Mariah Carey,Butterfly,,10907000.0,,,0,best_selling_seed,,1ea6ffaa-df4f-31cc-955f-0fc57a9cf864,1997-09-10,1997.0,AU,2025-11-21
 1999,Mariah Carey,Rainbow,,7540000.0,,,0,best_selling_seed,,4509577f-ee12-3e4f-bf50-730264301d31,1999-10-15,1999.0,ID,2025-11-21
 2001,Mariah Carey,Glitter [OST],,2058000.0,,,0,best_selling_seed,,,,,,2025-11-21
@@ -897,8 +899,6 @@ After 1946,Al Jolson,The Jolson Story,,1,,,1,List_of_best-selling_albums,https:/
 2005,Mariah Carey,The Emancipation Of Mimi,,9085000.0,,,0,best_selling_seed,,2391debf-38aa-3a90-888e-51f857131e98,2005-04-04,2005.0,US,2025-11-21
 2008,Mariah Carey,E=MC2,,2115000.0,,,0,best_selling_seed,,3e1ef971-24c7-3a9b-ba7b-f40bc0462c38,2008-01-01,2008.0,BR,2025-11-21
 2009,Mariah Carey,Memoirs Of An Imperfect Angel,,1098000.0,,,0,best_selling_seed,,57696575-b91f-45d1-ac7a-f2c80185b22a,2009-09-29,2009.0,US,2025-11-21
-1993,Mariah Carey,Music Box,Columbia,"(8,012,000)[5][29]",10× Platinum,,8012000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,7625cb89-79a6-3a00-bc38-d44552add611,1993-08-31,1993.0,BR,
-1995,Mariah Carey,Daydream,Columbia,"(8,505,000)[5][29]",11× Platinum,,8505000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,bf0126a1-b79c-3c9c-a892-f4bf4fac2bb0,1995-09-28,1995.0,AU,
 2002,Maroon 5,Songs About Jane,,12440000.0,,,0,best_selling_seed,,93d5a1d1-73c0-34d3-b7f1-49473c48face,2002-06-25,2002.0,AR,2025-11-21
 2007,Maroon 5,It Won't Be Soon Before Long,,4690000.0,,,0,best_selling_seed,,0a8d9c8b-1447-43de-bcd0-4da5e0814a55,2007-05-16,2007.0,AL,2025-11-21
 2010,Maroon 5,Hands All Over,,2705000.0,,,0,best_selling_seed,,a097ca51-85d5-4109-8e0f-55189a70cb9b,2010-09-15,2010.0,XE,2025-11-21
@@ -906,16 +906,17 @@ After 1946,Al Jolson,The Jolson Story,,1,,,1,List_of_best-selling_albums,https:/
 2014,Maroon 5,V,,2415000.0,,,0,best_selling_seed,,3622c71c-c674-46bc-8fc2-24d182f7684a,2014-08-29,2014.0,AU,2025-11-21
 2017,Maroon 5,Red Pill Blues,,540000.0,,,0,best_selling_seed,,f3611515-4150-49a1-82cd-26938f0d5bc3,2017-11-01,2017.0,JP,2025-11-21
 1996,Matchbox Twenty,Yourself or Someone Like You,Atlantic,"(9,358,000)[5][23]",12× Platinum,,9358000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,,,,,
+1977,Meat Loaf,Bat Out of Hell,Epic Records,14000000,14× Platinum,,14000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,47616c4c-5d4b-30f6-83bc-60e1c696b099,1977-10-21,1977.0,DE,
 1981,Meat Loaf,Dead Ringer,,1980000.0,,,0,best_selling_seed,,bfc8beb3-dc20-3bc4-a22f-5ccb405d0791,1981,1981.0,PT,2025-11-21
 1993,Meat Loaf,Bat Out Of Hell II: Back Into Hell...,,12730000.0,,,0,best_selling_seed,,758d7dc5-4aa2-3731-b970-549251a98232,1993-09-06,1993.0,AU,2025-11-21
 1995,Meat Loaf,Welcome To The Neighbourhood,,2110000.0,,,0,best_selling_seed,,d178d8e8-4d36-3e9c-8303-2f83075d4941,1995-10-30,1995.0,XE,2025-11-21
-1977,Meat Loaf,Bat Out of Hell,Epic Records,14000000,14× Platinum,,14000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,47616c4c-5d4b-30f6-83bc-60e1c696b099,1977-10-21,1977.0,DE,
 2015,Meghan Trainor,Title,,2165000.0,,,0,best_selling_seed,,e041d145-a199-4ea9-8aba-4988eb4586d7,2015-01-09,2015.0,AU,2025-11-21
 2016,Meghan Trainor,Thank You,,583000.0,,,0,best_selling_seed,,dc475b10-44d7-47e8-9cb5-d1a1b3c9495d,2016-05-13,2016.0,XE,2025-11-21
 1983,Metallica,Kill 'Em All,,8917000.0,,,0,best_selling_seed,,f44f4f73-a714-31a1-a4b8-bfcaaf311f50,1983-07-25,1983.0,NL,2025-11-21
 1984,Metallica,Ride The Lightning,,12337000.0,,,0,best_selling_seed,,0da580f2-6768-498f-af9d-2becaddf15e0,1984-07-27,1984.0,XE,2025-11-21
 1986,Metallica,Master Of Puppets,,14628000.0,,,0,best_selling_seed,,3d00fb45-f8ab-3436-a8e1-b4bfc4d66913,1986-03-03,1986.0,XE,2025-11-21
 1988,Metallica,…And Justice For All,,16355000.0,,,0,best_selling_seed,,67553e23-8dad-3792-b6f2-8fedd5650ff3,1988-08-25,1988.0,AR,2025-11-21
+1991,Metallica,Metallica,Elektra,"(17,810,000)[4]",20× Platinum‡,,17810000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,dd4b2235-a53c-4da5-b2f9-6d438b3a6229,1996,1996.0,DE,
 1991,Metallica,Metallica (Black Album),,32559000.0,,,0,best_selling_seed,,,,,,2025-11-21
 1996,Metallica,Load,,11696000.0,,,0,best_selling_seed,,e389b7df-862d-3d91-a612-acca150f6e71,1996-05-04,1996.0,AR,2025-11-21
 1997,Metallica,Reload,,9095000.0,,,0,best_selling_seed,,8fd32554-02a7-3788-a761-7012e0e75e55,1997-11-15,1997.0,FR,2025-11-21
@@ -923,7 +924,6 @@ After 1946,Al Jolson,The Jolson Story,,1,,,1,List_of_best-selling_albums,https:/
 2003,Metallica,St. Anger,,5204000.0,,,0,best_selling_seed,,8f1cc89b-7e80-3e1c-b571-8cf2b98db347,2003-06-04,2003.0,AU,2025-11-21
 2008,Metallica,Death Magnetic,,5551000.0,,,0,best_selling_seed,,5c8a25bf-4764-3cce-8f37-30af79d3b101,2008-09-06,2008.0,XE,2025-11-21
 2016,Metallica,Hardwired…To Self-Destruct,,3454000.0,,,0,best_selling_seed,,55d8ab42-990b-4c94-93c8-9ca7927b5fc0,2016-11-18,2016.0,MX,2025-11-21
-1991,Metallica,Metallica,Elektra,"(17,810,000)[4]",20× Platinum‡,,17810000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,dd4b2235-a53c-4da5-b2f9-6d438b3a6229,1996,1996.0,DE,
 2003,Michael Bublé,Michael Bublé,,7250000.0,,,0,best_selling_seed,,06d984b6-d02a-30a6-a239-99b6702de04f,2003-02-11,2003.0,CA,2025-11-21
 2005,Michael Bublé,It's Time,,8850000.0,,,0,best_selling_seed,,3c8d9511-10d0-3a57-aaa3-da5ec9136bdd,2005-02-08,2005.0,SG,2025-11-21
 2007,Michael Bublé,Call Me Irresponsible,,7200000.0,,,0,best_selling_seed,,e833803c-e568-368f-b9a8-695683ebe93b,2007-04-27,2007.0,AU,2025-11-21
@@ -932,12 +932,12 @@ After 1946,Al Jolson,The Jolson Story,,1,,,1,List_of_best-selling_albums,https:/
 2013,Michael Bublé,To Be Loved,,3300000.0,,,0,best_selling_seed,,c1e0be5a-6a1e-44c0-b0cb-c0ca2f46bd2c,2013-04-15,2013.0,AU,2025-11-21
 1972,Michael Jackson,Ben,,2125000.0,,,0,best_selling_seed,,51343255-0ad3-3635-9aa2-548ba939b23e,1972-08-04,1972.0,BR,2025-11-21
 1972,Michael Jackson,Got To Be There,,1600000.0,,,0,best_selling_seed,,97e0014d-a267-33a0-a868-bb4e2552918a,1972-01-24,1972.0,GB,2025-11-21
-2001,Michael Jackson,Invincible,,6475000.0,,,0,best_selling_seed,,c24c5313-da47-3155-8277-a6a1a4237966,2001-10-29,2001.0,AU,2025-11-21
-2010,Michael Jackson,Michael,,2300000.0,,,0,best_selling_seed,,0656d7fa-0ed7-4d3f-887e-ed728697c5ad,2010-12-10,2010.0,AU,2025-11-21
-2014,Michael Jackson,Xscape,,1750000.0,,,0,best_selling_seed,,c78abbe0-82a4-4868-9344-401ec34f5b69,2014-05-09,2014.0,US,2025-11-21
 1979,Michael Jackson,Off the Wall,Epic Records,10000000,10× Platinum‡,,10000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,ee749c63-5699-38e0-b565-7e84414648d9,1979-08-10,1979.0,JP,
 1982,Michael Jackson,Thriller,Epic Records,34000000,34× Platinum‡,,34000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,f32fab67-77dd-3937-addc-9062e28e4c37,1982-11-29,1982.0,AU,
 1987,Michael Jackson,Bad,Epic Records,11000000,11× Platinum‡,,11000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,a5711a77-42d1-3f4c-830c-e27a96f0800f,1987-08-25,1987.0,CA,
+2001,Michael Jackson,Invincible,,6475000.0,,,0,best_selling_seed,,c24c5313-da47-3155-8277-a6a1a4237966,2001-10-29,2001.0,AU,2025-11-21
+2010,Michael Jackson,Michael,,2300000.0,,,0,best_selling_seed,,0656d7fa-0ed7-4d3f-887e-ed728697c5ad,2010-12-10,2010.0,AU,2025-11-21
+2014,Michael Jackson,Xscape,,1750000.0,,,0,best_selling_seed,,c78abbe0-82a4-4868-9344-401ec34f5b69,2014-05-09,2014.0,US,2025-11-21
 ,Michael Jackson,Dangerous,,"17.0 US: 8 million[8] JPN: 400,000[9] UK: 1.8 million[10] GER: 2 million[11] FRA: 1 million[53] CAN: 600,000[13] AUS: 700,000[14] BRA: 100,000[36] MEX: 600,000[15] NLD: 300,000[16] SWE: 300,000[18] SPA: 600,000[33] SWI: 250,000[20] AUT: 200,000[21] DEN: 60,000[84] FIN: 61,896[22] NZ: 90,000[24] ITA: 60,000[17]",,,17,List_of_best-selling_albums,https://en.wikipedia.org/wiki/List_of_best-selling_albums,d6b52521-0dfa-390f-970f-790174c22752,1991-11-25,1991.0,AU,
 ,Michael Jackson,"HIStory: Past, Present and Future, Book I",,"15.2 US: 8 million[8] JPN: 400,000[9] UK: 1.2 million[10] GER: 1.5 million[11] FRA: 1 million[53] CAN: 500,000[13] AUS: 560,000[14] BRA: 100,000[36] NLD: 300,000[16] ITA: 35,000[17] SWE: 100,000[18] SPA: 300,000[57] ARG: 60,000[38] DEN: 250,000[181] MEX: 100,000[15] BEL: 250,000[44] NOR: 50,000[45] SWI: 150,000[20] AUT: 100,000[21] POL: 100,000[39] FIN: 61,352[22] NZ: 135,000[23]",,,15,List_of_best-selling_albums,https://en.wikipedia.org/wiki/List_of_best-selling_albums,2324e560-e8ba-302d-a43d-2ea5ec9c83f7,1995-05-01,1995.0,AU,
 2008,Miley Cyrus,Breakout,,2950000.0,,,0,best_selling_seed,,290bd747-8b26-3290-8ff9-360758776d4d,2008-07-22,2008.0,AR,2025-11-21
@@ -951,8 +951,8 @@ After 1946,Al Jolson,The Jolson Story,,1,,,1,List_of_best-selling_albums,https:/
 2023,NCT Dream,ISTJ,,4400000.0,,,0,best_selling_seed,,11357b36-41d5-4d1d-afa2-9d36d3e9e74b,2023-07-17,2023.0,KR,2025-11-21
 2024,NCT Dream,Dream()scape,,2600000.0,,,0,best_selling_seed,,,,,,2025-11-21
 1997,NSYNC,NSYNC,,12490000.0,,,0,best_selling_seed,,0630b411-270c-3ff9-a20d-28762a132cbf,1997-05-30,1997.0,DE,2025-11-21
-1998,NSYNC,The Winter Album,,3300000.0,,,0,best_selling_seed,,34be02d7-7ad6-30c1-95f3-c3dbc015dff4,1998-11-16,1998.0,XE,2025-11-21
 1998,NSYNC,*NSYNC,RCA,"(10,300,000)[5][19]",10× Platinum,,10300000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,0630b411-270c-3ff9-a20d-28762a132cbf,1997-05-30,1997.0,DE,
+1998,NSYNC,The Winter Album,,3300000.0,,,0,best_selling_seed,,34be02d7-7ad6-30c1-95f3-c3dbc015dff4,1998-11-16,1998.0,XE,2025-11-21
 2000,NSYNC,No Strings Attached,Jive,"(12,680,000)[5][11]",12× Platinum‡,,12680000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,a648d0c2-1438-33d0-87d2-5fbab3c0990a,2000-03-20,2000.0,XE,
 1969,Neil Diamond,Brother Love's Travelling Salvation Show / Sweet Caroline,,1111000.0,,,0,best_selling_seed,,fafbec54-cec5-3d3f-bb55-baa245e8b0d2,1969-04,1969.0,US,2025-11-21
 1969,Neil Diamond,"Touching You, Touching Me",,1780000.0,,,0,best_selling_seed,,dfb9390a-bc6d-38cd-844d-ca04812ed4de,1969-11-15,1969.0,US,2025-11-21
@@ -985,23 +985,23 @@ After 1946,Al Jolson,The Jolson Story,,1,,,1,List_of_best-selling_albums,https:/
 2023,NewJeans,Get Up,,2282000.0,,,0,best_selling_seed,,,,,,2025-11-21
 2001,Nickelback,Silver Side Up,,11100000.0,,,0,best_selling_seed,,f35498a6-e3a4-3834-b243-8a67d3d1f88c,2001-09-11,2001.0,BR,2025-11-21
 2003,Nickelback,The Long Road,,6100000.0,,,0,best_selling_seed,,ba053794-a331-31da-a3e6-69a6c3e6cd45,2003-09-22,2003.0,XE,2025-11-21
+2005,Nickelback,All the Right Reasons,Roadrunner,"(7,960,000)[33]",10× Platinum‡,,7960000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,11c5709d-6939-3519-97e8-6be48f3bd4f2,2005-09-26,2005.0,CA,
 2008,Nickelback,Dark Horse,,5700000.0,,,0,best_selling_seed,,4a62f40e-acce-3938-bdcd-c4ee3003e747,2008-11-15,2008.0,RU,2025-11-21
 2011,Nickelback,Here And Now,,2250000.0,,,0,best_selling_seed,,14741ae6-8a67-4010-b0ec-e0804019e705,2011-11-21,2011.0,AU,2025-11-21
-2005,Nickelback,All the Right Reasons,Roadrunner,"(7,960,000)[33]",10× Platinum‡,,7960000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,11c5709d-6939-3519-97e8-6be48f3bd4f2,2005-09-26,2005.0,CA,
 2010,Nicki Minaj,Pink Friday,,2938000.0,,,0,best_selling_seed,,c91d9596-dfa8-482d-b3ab-706e937fd3ec,2010-11-21,2010.0,XE,2025-11-21
 2012,Nicki Minaj,Pink Friday: Roman Reloaded,,1879000.0,,,0,best_selling_seed,,78a4ac64-298f-45ec-ac69-832a68830a6a,2012-04-02,2012.0,AU,2025-11-21
 2014,Nicki Minaj,The Pinkprint,,1035000.0,,,0,best_selling_seed,,75c1375c-1311-4cd0-b5cd-182c42e357e7,2014-12-12,2014.0,AU,2025-11-21
 1989,Nirvana,Bleach,,5200000.0,,,0,best_selling_seed,,f1afec0b-26dd-3db5-9aa1-c91229a74a24,1989-06-01,1989.0,CA,2025-11-21
-1993,Nirvana,In Utero,,12050000.0,,,0,best_selling_seed,,915dc49e-8203-31b8-bb19-ca5996a2b810,1993,1993,,2025-11-21
 1991,Nirvana,Nevermind,DGC Records,"(11,640,000)[4][5]",13× Platinum‡,,11640000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,1b022e01-4da6-387b-8658-8678046e4cef,1991-09-24,1991.0,CA,
+1993,Nirvana,In Utero,,12050000.0,,,0,best_selling_seed,,915dc49e-8203-31b8-bb19-ca5996a2b810,1993,1993.0,,2025-11-21
+1995,No Doubt,Tragic Kingdom,Trauma/Interscope Records,"(9,520,000)[5][22]",10× Platinum,,9520000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,04b0b075-bed7-388b-b44b-cf34077ad96c,1995-10-10,1995.0,CA,
 2000,No Doubt,Return Of Saturn,,2640000.0,,,0,best_selling_seed,,c78cdf1e-4674-37fd-a02e-04c4033adffc,2000-04-05,2000.0,AU,2025-11-21
 2001,No Doubt,Rock Steady,,4050000.0,,,0,best_selling_seed,,578bcf09-58af-3eb0-baf6-0f7e836efbd7,2001-12-11,2001.0,AU,2025-11-21
-1995,No Doubt,Tragic Kingdom,Trauma/Interscope Records,"(9,520,000)[5][22]",10× Platinum,,9520000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,04b0b075-bed7-388b-b44b-cf34077ad96c,1995-10-10,1995.0,CA,
 2022,Noah Kahan,Stick Season,,533000.0,,,0,best_selling_seed,,14fc4370-9b90-411b-a02e-6c6d5a8799fc,2022-10-14,2022.0,US,2025-11-21
+2002,Norah Jones,Come Away with Me,Blue Note,"(11,100,000)[17]",12× Platinum‡,,11100000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,6ccac9d2-22ed-33de-bd5d-f2aadcacf7f8,2002-02-26,2002.0,CA,
 2004,Norah Jones,Feels Like Home,,11500000.0,,,0,best_selling_seed,,689db471-1647-3d0f-a6b8-2e776cf913e8,2004-02-06,2004.0,AU,2025-11-21
 2007,Norah Jones,Not Too Late,,4400000.0,,,0,best_selling_seed,,1155e2ce-f1b2-394a-b23a-22406c8782a3,2006,2006.0,AU,2025-11-21
 2009,Norah Jones,The Fall,,2200000.0,,,0,best_selling_seed,,d757d920-d0e5-4931-919b-f2dd16c64dcf,2009-11-11,2009.0,AR,2025-11-21
-2002,Norah Jones,Come Away with Me,Blue Note,"(11,100,000)[17]",12× Platinum‡,,11100000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,6ccac9d2-22ed-33de-bd5d-f2aadcacf7f8,2002-02-26,2002.0,CA,
 1994,Oasis,Definitely Maybe,,6680000.0,,,0,best_selling_seed,,451dca98-c118-32e1-9244-c47ca9c3c0f9,1994-08-30,1994.0,AU,2025-11-21
 1997,Oasis,Be Here Now,,7410000.0,,,0,best_selling_seed,,aea3ea51-121e-30a6-adc2-c63e659603ac,1997-08-21,1997.0,AU,2025-11-21
 2000,Oasis,Standing On The Shoulder Of Giants,,2620000.0,,,0,best_selling_seed,,4ad23d4c-520e-39a3-8d7e-e4d396d24bfe,2000-02-23,2000.0,ZA,2025-11-21
@@ -1033,7 +1033,7 @@ After 1946,Al Jolson,The Jolson Story,,1,,,1,List_of_best-selling_albums,https:/
 2017,P!nk,Beautiful Trauma,,2660000.0,,,0,best_selling_seed,,d4e5b10a-3f86-4960-8413-a56b8106a6fb,2017-10-13,2017.0,ZA,2025-11-21
 2019,P!nk,Hurts 2B Human,,665000.0,,,0,best_selling_seed,,0e2b2011-6528-4380-93ed-64bc11dee0d5,2019-04-26,2019.0,AF,2025-11-21
 1967,Patsy Cline,Patsy Cline's Greatest Hits,Decca,10000000,10× Platinum,,10000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,26239187-b3f4-3bac-b3cd-538a93b3fcf1,1967-03-13,1967.0,CA,
-1970,Paul McCartney,McCartney,,4426000.0,,,0,best_selling_seed,,d6a52dc7-f4fa-4d10-89d9-5a99d178dae9,1970-04-17,1970,US,2025-11-21
+1970,Paul McCartney,McCartney,,4426000.0,,,0,best_selling_seed,,d6a52dc7-f4fa-4d10-89d9-5a99d178dae9,1970-04-17,1970.0,US,2025-11-21
 1980,Paul McCartney,McCartney II,,2582000.0,,,0,best_selling_seed,,8882d1e4-2a6e-334f-abf7-ffa2e8b83aa7,1980-05-16,1980.0,JP,2025-11-21
 1982,Paul McCartney,Tug Of War,,4342000.0,,,0,best_selling_seed,,e7620374-defe-3656-a65d-ef062ba9df11,1982-04-19,1982.0,JP,2025-11-21
 1983,Paul McCartney,Pipes Of Peace,,3547000.0,,,0,best_selling_seed,,caae8ac4-3c11-307a-b111-1efe880ef1b1,1983-10-26,1983.0,AU,2025-11-21
@@ -1044,7 +1044,7 @@ After 1946,Al Jolson,The Jolson Story,,1,,,1,List_of_best-selling_albums,https:/
 1973,Paul McCartney & Wings,Band On The Run,,9311000.0,,,0,best_selling_seed,,2b678170-1c4e-3e61-b18c-f889fc1537b3,1973-12-05,1973.0,US,2025-11-21
 1973,Paul McCartney & Wings,Red Rose Speedway,,2477000.0,,,0,best_selling_seed,,e8bd188c-deb4-398b-bde8-3a58f7f5c4b4,1973-05-04,1973.0,GB,2025-11-21
 1975,Paul McCartney & Wings,Venus And Mars,,4289000.0,,,0,best_selling_seed,,,,,,2025-11-21
-1976,Paul McCartney & Wings,Wings At The Speed Of Sound,,4053000.0,,,0,best_selling_seed,,16e9f52c-1e98-4690-bb3a-6a0bebff3c38,2010-04-27,2010,,2025-11-21
+1976,Paul McCartney & Wings,Wings At The Speed Of Sound,,4053000.0,,,0,best_selling_seed,,16e9f52c-1e98-4690-bb3a-6a0bebff3c38,2010-04-27,2010.0,,2025-11-21
 1978,Paul McCartney & Wings,London Town,,3677000.0,,,0,best_selling_seed,,,,,,2025-11-21
 1979,Paul McCartney & Wings,Back To The Egg,,2206000.0,,,0,best_selling_seed,,,,,,2025-11-21
 1972,Paul Simon,Paul Simon,,3150000.0,,,0,best_selling_seed,,a1cc3fbd-609b-323c-95e2-435dfceb51e9,,,,2025-11-21
@@ -1053,20 +1053,20 @@ After 1946,Al Jolson,The Jolson Story,,1,,,1,List_of_best-selling_albums,https:/
 1980,Paul Simon,One-Trick Pony,,1430000.0,,,0,best_selling_seed,,3fd3b865-5751-3712-a2cd-e7c10cf3bf5a,1980-08-12,1980.0,FR,2025-11-21
 1986,Paul Simon,Graceland,,14570000.0,,,0,best_selling_seed,,19847822-1430-3380-9cf1-bc45545b34ac,1986-08-29,1986.0,AU,2025-11-21
 1990,Paul Simon,The Rhythm Of The Saints,,5170000.0,,,0,best_selling_seed,,9c08260c-d558-391b-ae2b-aba11b9793d8,1990-10-15,1990.0,CA,2025-11-21
+1991,Pearl Jam,Ten,Epic Records,"(10,790,000)[4]",13× Platinum,,10790000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,cea5d18a-1924-3cda-bebc-38933834b25d,1991-08-27,1991.0,AU,
 1993,Pearl Jam,Vs.,,11087000.0,,,0,best_selling_seed,,50ac60c4-fb35-37f8-a065-222996ea139c,1993-10-08,1993.0,AU,2025-11-21
 1994,Pearl Jam,Vitalogy,,9162000.0,,,0,best_selling_seed,,6e384e83-6cb1-36bd-813c-ca7d4cf4b9ba,1994-11-22,1994.0,AU,2025-11-21
 1996,Pearl Jam,No Code,,3347000.0,,,0,best_selling_seed,,ccdebc6b-dc24-3578-aac3-78c5b8d35738,1996-08-14,1996.0,AU,2025-11-21
 1998,Pearl Jam,Yield,,3570000.0,,,0,best_selling_seed,,e88ee520-a5d1-40bd-84d4-649974435492,1998-01-28,1998.0,AU,2025-11-21
 2000,Pearl Jam,Binaural,,2034000.0,,,0,best_selling_seed,,5e53fed6-a262-42f5-ae26-58a7b6cae852,2000-05-16,2000.0,AR,2025-11-21
 2009,Pearl Jam,Backspacer,,1355000.0,,,0,best_selling_seed,,d37a0c9e-aff4-42e9-b5fa-9fc4e5a2a210,2009-01-01,2009.0,XE,2025-11-21
-1991,Pearl Jam,Ten,Epic Records,"(10,790,000)[4]",13× Platinum,,10790000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,cea5d18a-1924-3cda-bebc-38933834b25d,1991-08-27,1991.0,AU,
 1981,Phil Collins,Face Value,,15640000.0,,,0,best_selling_seed,,1cbc1a5a-5512-3f8e-997b-d9281b83722b,1981-02-13,1981.0,CA,2025-11-21
 1982,Phil Collins,"Hello, I Must Be Going!",,9990000.0,,,0,best_selling_seed,,5143705a-f34a-3e92-96e9-cff32308a508,1982-11-01,1982.0,DE,2025-11-21
+1985,Phil Collins,No Jacket Required,Atlantic,12000000,12× Platinum,,12000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,86b4651b-a6ea-3ac2-ba99-dcac079938d2,1985-01-25,1985.0,AU,
 1989,Phil Collins,...But Seriously,,20810000.0,,,0,best_selling_seed,,822d9247-6059-3716-b1f9-f7b95526f721,1989-11-07,1989.0,AU,2025-11-21
 1993,Phil Collins,Both Sides,,7710000.0,,,0,best_selling_seed,,777aecbd-a9d4-3751-babf-fafd590e16f8,1993-11-08,1993.0,CA,2025-11-21
 1996,Phil Collins,Dance Into The Light,,3480000.0,,,0,best_selling_seed,,364ced42-7450-3b3c-9c74-86835df39290,1996-10-08,1996.0,XW,2025-11-21
 2002,Phil Collins,Testify,,3260000.0,,,0,best_selling_seed,,b0a928dc-45c3-3735-ad13-82f5c7cd3b04,2002-11-12,2002.0,AU,2025-11-21
-1985,Phil Collins,No Jacket Required,Atlantic,12000000,12× Platinum,,12000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,86b4651b-a6ea-3ac2-ba99-dcac079938d2,1985-01-25,1985.0,AU,
 1988,Phil Collins & Various Artists,Buster,,3090000.0,,,0,best_selling_seed,,,,,,2025-11-21
 1999,"Phil Collins, Mark Mancina & Various Artists",Tarzan [OST],,4550000.0,,,0,best_selling_seed,,,,,,2025-11-21
 1967,Pink Floyd,The Piper At The Gates Of Dawn,,2450000.0,,,0,best_selling_seed,,6792b6d1-4e65-3c3c-9d20-d08aa1dcfc60,1967-07-07,1967.0,FR,2025-11-21
@@ -1076,13 +1076,13 @@ After 1946,Al Jolson,The Jolson Story,,1,,,1,List_of_best-selling_albums,https:/
 1970,Pink Floyd,Atom Heart Mother,,5700000.0,,,0,best_selling_seed,,e2f503d7-5488-3fe1-b3ac-f236d9f1b44c,1970-10-10,1970.0,CA,2025-11-21
 1971,Pink Floyd,Meddle,,7950000.0,,,0,best_selling_seed,,4e98c9b4-92f6-3049-b9da-a1088b623672,1971-10-30,1971.0,DE,2025-11-21
 1972,Pink Floyd,Obscured By Clouds,,3600000.0,,,0,best_selling_seed,,a6f0826e-9b27-3d75-b30c-e5d33235777a,1972-06-03,1972.0,CA,2025-11-21
+1973,Pink Floyd,The Dark Side of the Moon,Harvest/Capitol,15000000,15× Platinum,,15000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,f5093c06-23e3-404f-aeaa-40f72885ee3a,1973-03-24,1973.0,AU,
 1977,Pink Floyd,Animals,,12150000.0,,,0,best_selling_seed,,20c77fb4-1c9f-33c8-9d7e-c4977f11e847,1977-01-23,1977.0,AU,2025-11-21
+1979,Pink Floyd,The Wall,Columbia/Harvest Records,11500000,23× Platinum(2-disc album),,11500000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,c4edc6ac-2e47-4ef9-ae83-7f2ef37f3f20,1993,1993.0,IT,
 1983,Pink Floyd,The Final Cut,,6800000.0,,,0,best_selling_seed,,e8b7e7a3-ef56-34a5-bedf-085783c9a076,1983-03-21,1983.0,AU,2025-11-21
 1987,Pink Floyd,A Momentary Lapse Of Reason,,10200000.0,,,0,best_selling_seed,,4940b8aa-898b-3e60-9992-94e073bab6f6,1987-09-07,1987.0,AU,2025-11-21
 1994,Pink Floyd,The Division Bell,,11550000.0,,,0,best_selling_seed,,90878b63-f639-3c8b-aefb-190bdf3d1790,1994-03-28,1994.0,AR,2025-11-21
 2014,Pink Floyd,The Endless River,,2650000.0,,,0,best_selling_seed,,38b4c840-16ce-40fa-b7c0-a354b7c87178,2014-11-07,2014.0,DE,2025-11-21
-1973,Pink Floyd,The Dark Side of the Moon,Harvest/Capitol,15000000,15× Platinum,,15000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,f5093c06-23e3-404f-aeaa-40f72885ee3a,1973-03-24,1973.0,AU,
-1979,Pink Floyd,The Wall,Columbia/Harvest Records,11500000,23× Platinum(2-disc album),,11500000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,c4edc6ac-2e47-4ef9-ae83-7f2ef37f3f20,1993,1993.0,IT,
 ,Pink Floyd,Wish You Were Here,,"10.9 US: 6 million[8] GER: 1.5 million[11] FRA: 1 million[53] UK: 600,000[10] AUS: 490,000[14] ITA: 450,000[17] SPA: 325,000[57] CAN: 300,000[13] AUT: 100,000[21] BRA: 80,000[36] ARG: 30,000[38] POL: 20,000[39]",,,10,List_of_best-selling_albums,https://en.wikipedia.org/wiki/List_of_best-selling_albums,aec8c2eb-0639-436f-99db-9974781f241c,2013,2013.0,XW,
 2016,Post Malone,Stoney,,559000.0,,,0,best_selling_seed,,3843ba6a-0b1e-48c0-bc86-2f64e6d9525c,2016-12-09,2016.0,CA,2025-11-21
 2018,Post Malone,Beerbongs & Bentleys,,880000.0,,,0,best_selling_seed,,a6045fe5-c283-4778-995c-04d953fe73e1,2018-04-27,2018.0,AU,2025-11-21
@@ -1218,7 +1218,7 @@ After 1946,Al Jolson,The Jolson Story,,1,,,1,List_of_best-selling_albums,https:/
 2014,Sam Smith,In The Lonely Hour,,6793000.0,,,0,best_selling_seed,,c8d660d1-4181-4a5b-9507-346970dffe96,2014-05-23,2014.0,AU,2025-11-21
 2017,Sam Smith,The Thrill Of It All,,1708000.0,,,0,best_selling_seed,,b09b9056-bb1c-41ca-9d3a-0be3b2b73064,2017-11-03,2017.0,AU,2025-11-21
 1969,Santana,Santana,,6755000.0,,,0,best_selling_seed,,eda053b1-3ee3-4da5-9042-d75fb11d4742,1997,1997.0,NL,2025-11-21
-1970,Santana,Abraxas,,11870000.0,,,0,best_selling_seed,,a4efabf2-34e1-42cb-9d49-ea2679e6431b,1970-09-23,1970,,2025-11-21
+1970,Santana,Abraxas,,11870000.0,,,0,best_selling_seed,,a4efabf2-34e1-42cb-9d49-ea2679e6431b,1970-09-23,1970.0,,2025-11-21
 1971,Santana,Santana III,,5440000.0,,,0,best_selling_seed,,6258df90-78c7-3395-8830-e7b4328a002c,1971-09,1971.0,GB,2025-11-21
 1972,Santana,Caravanserai,,4200000.0,,,0,best_selling_seed,,5dc38932-b507-3bcd-94a9-3b39c1d96526,1972-10-11,1972.0,US,2025-11-21
 1974,Santana,Borboletta,,2130000.0,,,0,best_selling_seed,,216bd1a1-6ea3-321d-8059-d1c994f7b593,1974-10,1974.0,US,2025-11-21
@@ -1226,8 +1226,8 @@ After 1946,Al Jolson,The Jolson Story,,1,,,1,List_of_best-selling_albums,https:/
 1977,Santana,Moonflower,,4145000.0,,,0,best_selling_seed,,75b6c181-146e-3dec-b18e-9a7230b96ee7,1977-10,1977.0,FR,2025-11-21
 1978,Santana,Inner Secrets,,2205000.0,,,0,best_selling_seed,,1df691bb-c409-3389-9076-eaf09913696b,1978-10-01,1978.0,US,2025-11-21
 1981,Santana,Zebop!,,2015000.0,,,0,best_selling_seed,,db3643f5-a930-324f-b2e0-2c736ce6311f,1981-04-29,1981.0,JP,2025-11-21
-2002,Santana,Shaman,,5275000.0,,,0,best_selling_seed,,61d34b6c-f1ff-3bf7-9e62-0bbde363a283,2002-10-22,2002.0,CA,2025-11-21
 1999,Santana,Supernatural,Arista,"(13,110,000)[5][11]",15× Platinum,,13110000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,70e23797-9da2-33bb-be6f-a85e7b581b69,1999-06-15,1999.0,AU,
+2002,Santana,Shaman,,5275000.0,,,0,best_selling_seed,,61d34b6c-f1ff-3bf7-9e62-0bbde363a283,2002-10-22,2002.0,CA,2025-11-21
 2013,Selena Gomez,Stars Dance,,805000.0,,,0,best_selling_seed,,3309f7fa-61af-439d-a30c-910163ba1ea8,2013-07-19,2013.0,BR,2025-11-21
 2015,Selena Gomez,Revival,,815000.0,,,0,best_selling_seed,,3afd46b3-90bd-402c-af55-8f893f373807,2015-10-09,2015.0,AU,2025-11-21
 2009,Selena Gomez & The Scene,Kiss & Tell,,1430000.0,,,0,best_selling_seed,,03e8cf63-f707-4013-bd07-638149fe09db,2009-09-29,2009.0,BR,2025-11-21
@@ -1259,7 +1259,7 @@ After 1946,Al Jolson,The Jolson Story,,1,,,1,List_of_best-selling_albums,https:/
 2002,Shania Twain,Up!,Mercury Nashville,"(5,409,000)[41]",11× Platinum(2-disc album),,5409000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,f4b7d3e6-059a-4846-9eab-014e37d47290,2002-11-18,2002.0,AR,
 2015,Shawn Mendes,Handwritten,,913000.0,,,0,best_selling_seed,,d0efb4c9-0578-49e7-bb3f-c64f98871009,2015-04-14,2015.0,XE,2025-11-21
 2016,Shawn Mendes,Illuminate,,1025000.0,,,0,best_selling_seed,,3d59017f-bb26-4095-8a78-c9d372cc64f4,2016-09-23,2016.0,XE,2025-11-21
-2018,Shawn Mendes,Shawn Mendes,,750000.0,,,0,best_selling_seed,,41b9c230-aee1-4f02-a01c-a2abdf4d4f36,2018-05-25,2018,AU,2025-11-21
+2018,Shawn Mendes,Shawn Mendes,,750000.0,,,0,best_selling_seed,,41b9c230-aee1-4f02-a01c-a2abdf4d4f36,2018-05-25,2018.0,AU,2025-11-21
 1964,Simon & Garfunkel,"Wednesday Morning, 3 A.M.",,2140000.0,,,0,best_selling_seed,,6c21abaf-2962-3037-836f-842431587949,1964-10-19,1964.0,CA,2025-11-21
 1966,Simon & Garfunkel,"Parsley, Sage, Rosemary And Thyme",,5250000.0,,,0,best_selling_seed,,1e9428ef-9c74-3bb8-8b14-e53defab3b48,1966-10-10,1966.0,CA,2025-11-21
 1966,Simon & Garfunkel,Sounds Of Silence,,5550000.0,,,0,best_selling_seed,,499a8142-b8a7-3ab1-a3db-641a41860afb,1966-01-17,1966.0,GB,2025-11-21
@@ -1286,11 +1286,11 @@ After 1946,Al Jolson,The Jolson Story,,1,,,1,List_of_best-selling_albums,https:/
 1972,Stevie Wonder,Talking Book,,6505000.0,,,0,best_selling_seed,,58c6d809-bfa7-3b25-acf3-a99d53402b08,1972-10-27,1972.0,US,2025-11-21
 1973,Stevie Wonder,Innervisions,,7110000.0,,,0,best_selling_seed,,e626b377-74c5-3b97-8f16-8cef5e1c04ea,1973-08-03,1973.0,NL,2025-11-21
 1974,Stevie Wonder,Fulfillingness' First Finale,,3720000.0,,,0,best_selling_seed,,95e58ee5-5421-38b0-a937-803b004c7ae8,1974-07-22,1974.0,US,2025-11-21
+1976,Stevie Wonder,Songs in the Key of Life,Motown,5000000,10× Platinum(2-disc album),,5000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,ea88b09b-fd34-33cf-a3e5-25a3a2fb4c6f,1976-09-28,1976.0,DE,
 1979,Stevie Wonder,Journey Through The Secret Life Of Plants,,3295000.0,,,0,best_selling_seed,,610a4b7e-061e-3de3-9bd3-b58d04d0482a,1979-10-30,1979.0,CA,2025-11-21
 1980,Stevie Wonder,Hotter Than July,,7435000.0,,,0,best_selling_seed,,6fbde199-c971-3d4f-a8df-ca13a998e3c7,1980-09-29,1980.0,DK,2025-11-21
 1985,Stevie Wonder,In Square Circle,,5980000.0,,,0,best_selling_seed,,59dd99b2-031c-39f7-9bf9-74c9faed3192,1985-05-07,1985.0,AR,2025-11-21
 1987,Stevie Wonder,Characters,,2355000.0,,,0,best_selling_seed,,05177b0d-6b30-3cc0-802e-2ea00c2e1846,1987-11-06,1987.0,AU,2025-11-21
-1976,Stevie Wonder,Songs in the Key of Life,Motown,5000000,10× Platinum(2-disc album),,5000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,ea88b09b-fd34-33cf-a3e5-25a3a2fb4c6f,1976-09-28,1976.0,DE,
 1984,Stevie Wonder & Dionne Warwick,The Woman In Red [OST],,6620000.0,,,0,best_selling_seed,,,,,,2025-11-21
 1985,Sting,The Dream Of The Blue Turtles,,9750000.0,,,0,best_selling_seed,,93ef0ae1-0735-3699-b450-d79bdcb3d0b8,1985-06-01,1985.0,CA,2025-11-21
 1987,Sting,...Nothing Like The Sun,,9540000.0,,,0,best_selling_seed,,ec048bb5-1fc3-32a7-b560-c07ddd0df544,1987-10-01,1987.0,CA,2025-11-21
@@ -1320,8 +1320,8 @@ After 1946,Al Jolson,The Jolson Story,,1,,,1,List_of_best-selling_albums,https:/
 2005,System Of A Down,Hypnotize,,3089000.0,,,0,best_selling_seed,,72035143-d6ec-308b-8ee5-070b8703902a,2005-11-18,2005.0,RU,2025-11-21
 2005,System Of A Down,Mezmerize,,4207000.0,,,0,best_selling_seed,,8d18c070-adea-353f-a089-cbd2543342dd,2005-05-16,2005.0,GB,2025-11-21
 1992,TLC,Ooooooohhh... On The TLC Tip,,4720000.0,,,0,best_selling_seed,,3150a2e0-43b2-33cb-8df8-80a1c3392032,1992-02-25,1992.0,GB,2025-11-21
-1999,TLC,Fanmail,,10150000.0,,,0,best_selling_seed,,b66b980c-7f10-3507-88b8-9851bd9d9a51,1999-02-22,1999.0,AU,2025-11-21
 1994,TLC,CrazySexyCool,LaFace,"(8,970,000)[5][25]",12× Platinum‡,,8970000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,3d886c06-a4c7-3431-be87-2b2940f07acd,1994-11-15,1994.0,AU,
+1999,TLC,Fanmail,,10150000.0,,,0,best_selling_seed,,b66b980c-7f10-3507-88b8-9851bd9d9a51,1999-02-22,1999.0,AU,2025-11-21
 1992,Take That,Take That And Party,,1970000.0,,,0,best_selling_seed,,e6b8ac74-94bd-3a04-ab68-a8094740d460,1992-08-24,1992.0,GB,2025-11-21
 1993,Take That,Everything Changes,,3620000.0,,,0,best_selling_seed,,ee15ae7d-7040-3c51-a6e2-d865eca299bc,1993-10-11,1993.0,XE,2025-11-21
 1995,Take That,Nobody Else,,3720000.0,,,0,best_selling_seed,,6fda0d8e-3e76-3b99-a119-c3876189cca8,1995-05-08,1995.0,AU,2025-11-21
@@ -1329,8 +1329,10 @@ After 1946,Al Jolson,The Jolson Story,,1,,,1,List_of_best-selling_albums,https:/
 2008,Take That,The Circus,,2610000.0,,,0,best_selling_seed,,4b54da5b-faac-35dd-afc2-9d7aa7df2a4a,2008-11-28,2008.0,BR,2025-11-21
 2010,Take That,Progress,,3290000.0,,,0,best_selling_seed,,3e6ec197-af3a-463d-b86d-0f3b2f9083b4,2011-11-21,2011.0,GB,2025-11-21
 2006,Taylor Swift,Taylor Swift,,6877000.0,,,0,best_selling_seed,,f153b0ac-0816-4966-a4f6-70176dd4c301,2009-01-27,2009.0,CA,2025-11-21
+2008,Taylor Swift,Fearless,Big Machine Records,"(7,286,000)[37]",11× Platinum‡,,7286000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,63eba062-847c-3b73-8b0f-6baf27bba6fa,2008-11-11,2008.0,CN,
 2010,Taylor Swift,Speak Now,,6542000.0,,,0,best_selling_seed,,af8d8484-cd0b-4ccb-9a1c-afe6a1e81817,2010-12-20,2010.0,CA,2025-11-21
 2012,Taylor Swift,Red,,7394000.0,,,0,best_selling_seed,,a73cecde-0923-40ad-aad1-e8c24ba6c3d2,2012-08-10,2012.0,XE,2025-11-21
+2014,Taylor Swift,1989,Big Machine Records,"(6,472,000)[39]",14× Platinum‡,,6472000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,148bfc79-6dc7-4d06-8108-c686398a8c94,2022-01-01,2022.0,,
 2017,Taylor Swift,Reputation,,4121000.0,,,0,best_selling_seed,,f060c8fd-bec9-426e-800e-8efc040a71e6,2017-11-10,2017.0,AR,2025-11-21
 2019,Taylor Swift,Lover,,3508000.0,,,0,best_selling_seed,,30e9785b-7b50-4d29-b3d1-96fb55e3397f,2019-08-23,2019.0,AU,2025-11-21
 2020,Taylor Swift,Evermore,,2342000.0,,,0,best_selling_seed,,e86d6219-f5a2-4edd-bf2b-3f9eab190ae0,2020-12-11,2020.0,JP,2025-11-21
@@ -1338,8 +1340,6 @@ After 1946,Al Jolson,The Jolson Story,,1,,,1,List_of_best-selling_albums,https:/
 2022,Taylor Swift,Midnights,,4363000.0,,,0,best_selling_seed,,0dcc84fb-c592-46e9-ba92-a52bb44dd553,2022-10-21,2022.0,AU,2025-11-21
 2024,Taylor Swift,The Tortured Poets Department,,4920000.0,,,0,best_selling_seed,,71c3eed6-466c-4aef-ad12-65a36d19467a,2024-04-19,2024.0,AU,2025-11-21
 2025,Taylor Swift,The Life Of A Showgirl,,4650000.0,,,0,best_selling_seed,,9ae7e7e9-ac40-4874-bd43-d77a9bb9b617,2025-10-03,2025.0,AU,2025-11-21
-2008,Taylor Swift,Fearless,Big Machine Records,"(7,286,000)[37]",11× Platinum‡,,7286000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,63eba062-847c-3b73-8b0f-6baf27bba6fa,2008-11-11,2008.0,CN,
-2014,Taylor Swift,1989,Big Machine Records,"(6,472,000)[39]",14× Platinum‡,,6472000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,148bfc79-6dc7-4d06-8108-c686398a8c94,2022-01-01,2022.0,,
 1962,The Beach Boys,Surfin' Safari,,1029000.0,,,0,best_selling_seed,,6ac5e93d-d669-34ee-8be5-5d3977bec839,1962-10-01,1962.0,US,2025-11-21
 1963,The Beach Boys,Little Deuce Coupe,,1476000.0,,,0,best_selling_seed,,86a79fe7-50a3-3f80-8628-c9a5e6bab12f,1963-10-21,1963.0,US,2025-11-21
 1963,The Beach Boys,Surfer Girl,,1348000.0,,,0,best_selling_seed,,d87efc41-ae9f-4bdf-8493-55c9495cd52c,1973,1973.0,US,2025-11-21
@@ -1355,7 +1355,7 @@ After 1946,Al Jolson,The Jolson Story,,1,,,1,List_of_best-selling_albums,https:/
 1967,The Beach Boys,Wild Honey,,707000.0,,,0,best_selling_seed,,25db75ad-e1e3-3941-85bd-291009a5f00d,1967-12-11,1967.0,US,2025-11-21
 1969,The Beach Boys,20/20,,522000.0,,,0,best_selling_seed,,27e5bbcc-1ff7-3f87-896f-e5f0dfc3464e,1969-02-03,1969.0,US,2025-11-21
 1989,The Beach Boys,Still Cruisin',,1724000.0,,,0,best_selling_seed,,4f6a66c0-c5e1-3ae1-8810-3b6f451a5c6c,1989-08-28,1989.0,CA,2025-11-21
-1963,The Beatles,Please Please Me,,6578000.0,,,0,best_selling_seed,,1b922a09-cd4f-4a89-a0e7-15814f5f815c,2007,2007,,2025-11-21
+1963,The Beatles,Please Please Me,,6578000.0,,,0,best_selling_seed,,1b922a09-cd4f-4a89-a0e7-15814f5f815c,2007,2007.0,,2025-11-21
 1963,The Beatles,With The Beatles,,6748000.0,,,0,best_selling_seed,,a63dc65f-09f2-359b-a10e-648f00ecd96c,1963-11-22,1963.0,DE,2025-11-21
 1964,The Beatles,A Hard Day's Night,,11367000.0,,,0,best_selling_seed,,57ca6a23-65ca-45b7-950e-ee5d96fc2ab1,,,,2025-11-21
 1964,The Beatles,Beatles For Sale,,6813000.0,,,0,best_selling_seed,,f50a3b6f-27f0-3832-bd3f-3568dc557d95,1964-12-04,1964.0,GB,2025-11-21
@@ -1363,12 +1363,12 @@ After 1946,Al Jolson,The Jolson Story,,1,,,1,List_of_best-selling_albums,https:/
 1965,The Beatles,Rubber Soul,,15772000.0,,,0,best_selling_seed,,dca03435-8adb-30a5-ba82-5a162267ff38,1965-12-03,1965.0,CA,2025-11-21
 1966,The Beatles,Revolver,,14560000.0,,,0,best_selling_seed,,72d15666-99a7-321e-b1f3-a3f8c09dff9f,1966-08-05,1966.0,CA,2025-11-21
 1967,The Beatles,Magical Mystery Tour,,11743000.0,,,0,best_selling_seed,,6e514645-fbee-34ac-97e0-c2120a4a5644,1967-11-27,1967.0,US,2025-11-21
-1968,The Beatles,The Beatles (White Album),,21050000.0,,,0,best_selling_seed,,055be730-dcad-31bf-b550-45ba9c202aa3,1968-11-22,1968.0,GB,2025-11-21
-1969,The Beatles,Yellow Submarine [OST],,4844000.0,,,0,best_selling_seed,,,,,,2025-11-21
-1970,The Beatles,Let It Be,,13579000.0,,,0,best_selling_seed,,7e9abe51-9808-4f18-b88a-f40e9b31f303,2003-11-14,2003,CA,2025-11-21
 1967,The Beatles,Sgt. Pepper's Lonely Hearts Club Band,Capitol,11000000,11× Platinum,,11000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,cfd2ffc9-757a-44fc-94e1-39cf93ab86e0,2009,2009.0,GB,
 1968,The Beatles,"The Beatles (""The White Album"")",Apple,12000000,24× Platinum‡(2-disc album),,12000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,,,,,
+1968,The Beatles,The Beatles (White Album),,21050000.0,,,0,best_selling_seed,,055be730-dcad-31bf-b550-45ba9c202aa3,1968-11-22,1968.0,GB,2025-11-21
 1969,The Beatles,Abbey Road,Apple,12000000,12× Platinum,,12000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,42ef6001-3113-440c-ae7c-3667c7351e35,2012,2012.0,JP,
+1969,The Beatles,Yellow Submarine [OST],,4844000.0,,,0,best_selling_seed,,,,,,2025-11-21
+1970,The Beatles,Let It Be,,13579000.0,,,0,best_selling_seed,,7e9abe51-9808-4f18-b88a-f40e9b31f303,2003-11-14,2003.0,CA,2025-11-21
 1973,The Beatles,The Beatles 1962 - 1966,Apple,7500000,15× Platinum(2-disc album),,7500000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,5bb120e2-fe76-33cc-a4bb-8f56f2fd3d67,1973-04-02,1973.0,DE,
 1973,The Beatles,The Beatles 1967 - 1970,Apple,8500000,17× Platinum(2-disc album),,8500000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,,,,,
 2000,The Beatles,1,Apple/EMI/Capitol,"(12,800,000)[12]",11× Platinum(as of 2010),,12800000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,4f539c70-1a19-37a3-ba14-979f11fc0686,2000-11-13,2000.0,AU,
@@ -1407,10 +1407,11 @@ After 1946,Al Jolson,The Jolson Story,,1,,,1,List_of_best-selling_albums,https:/
 1965,The Rolling Stones,The Rolling Stones No. 2,,1000000.0,,,0,best_selling_seed,,66b53bd6-043b-3635-8d9d-02aa71bc0af8,1965-01-15,1965.0,DE,2025-11-21
 1965,The Rolling Stones,"The Rolling Stones, Now!",,1300000.0,,,0,best_selling_seed,,367b4517-4cb1-3834-8132-e980ddb65162,1965-02-13,1965.0,US,2025-11-21
 1966,The Rolling Stones,Aftermath,,3900000.0,,,0,best_selling_seed,,26987c39-5914-483b-a897-d43ce6aad9b1,1966-04-15,1966.0,MX,2025-11-21
-1967,The Rolling Stones,Between The Buttons,,2200000.0,,,0,best_selling_seed,,f91fc259-3a7a-46b1-9744-90fac9b98500,2019-03-24,2019,,2025-11-21
-1967,The Rolling Stones,Their Satanic Majesties Request,,2450000.0,,,0,best_selling_seed,,96bc61cf-9e75-481b-a3d6-56184293ffaa,2013,2013,,2025-11-21
+1967,The Rolling Stones,Between The Buttons,,2200000.0,,,0,best_selling_seed,,f91fc259-3a7a-46b1-9744-90fac9b98500,2019-03-24,2019.0,,2025-11-21
+1967,The Rolling Stones,Their Satanic Majesties Request,,2450000.0,,,0,best_selling_seed,,96bc61cf-9e75-481b-a3d6-56184293ffaa,2013,2013.0,,2025-11-21
 1968,The Rolling Stones,Beggars Banquet,,4000000.0,,,0,best_selling_seed,,6e672bbd-7c7f-32f8-8335-c603be99d13b,1968-12-06,1968.0,GB,2025-11-21
 1969,The Rolling Stones,Let It Bleed,,7000000.0,,,0,best_selling_seed,,62c64b1d-d3a3-4b03-b6df-dcd0e4856a53,2014,2014.0,JP,2025-11-21
+1971,The Rolling Stones,Hot Rocks 1964-1971,London,6000000,12× Platinum(2-disc album),,6000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,6e33402c-62db-3dc9-af86-2c1bef99ce2f,1971-12-20,1971.0,US,
 1971,The Rolling Stones,Sticky Fingers,,9350000.0,,,0,best_selling_seed,,4a4213d0-f224-3d51-bcca-476f61162681,1971-04-23,1971.0,US,2025-11-21
 1972,The Rolling Stones,Exile on Main St.,,8100000.0,,,0,best_selling_seed,,4838a3c9-fd2b-30a5-83eb-e32545b5d7fc,1972-05-12,1972.0,CA,2025-11-21
 1973,The Rolling Stones,Goats Head Soup,,6350000.0,,,0,best_selling_seed,,e82ba8db-3712-3de0-bbe5-0311b89db7e2,1973-08-31,1973.0,DE,2025-11-21
@@ -1425,7 +1426,6 @@ After 1946,Al Jolson,The Jolson Story,,1,,,1,List_of_best-selling_albums,https:/
 1994,The Rolling Stones,Voodoo Lounge,,6400000.0,,,0,best_selling_seed,,7645ef59-6d8c-37fe-8467-d566d3cf5926,1994-07-11,1994.0,CA,2025-11-21
 1997,The Rolling Stones,Bridges To Babylon,,4700000.0,,,0,best_selling_seed,,d7ef7347-c582-3109-a54a-9bc6cde8ee45,1997-09-27,1997.0,CA,2025-11-21
 2005,The Rolling Stones,A Bigger Bang,,2550000.0,,,0,best_selling_seed,,0e0916d9-0449-4d3a-aefb-544e9c0c9fe4,2021-06-12,2021.0,XW,2025-11-21
-1971,The Rolling Stones,Hot Rocks 1964-1971,London,6000000,12× Platinum(2-disc album),,6000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,6e33402c-62db-3dc9-af86-2c1bef99ce2f,1971-12-20,1971.0,US,
 1995,The Smashing Pumpkins,Mellon Collie and the Infinite Sadness,Virgin,"(4,900,000)[44]",10× Platinum(2-disc album),,4900000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,1af599c9-0b44-3a5a-a06b-39e8db6b2b4e,1995-10-23,1995.0,XE,
 1964,The Supremes,Where Did Our Love Go,,1802000.0,,,0,best_selling_seed,,87a0f11f-2c56-37af-a05b-a3efcd2f98f0,1964-08-31,1964.0,US,2025-11-21
 1965,The Supremes,More Hits By The Supremes,,652000.0,,,0,best_selling_seed,,d61b11d2-9430-3102-9abb-bf29d025a6e4,1965-07-23,1965.0,US,2025-11-21
@@ -1468,6 +1468,7 @@ After 1946,Al Jolson,The Jolson Story,,1,,,1,List_of_best-selling_albums,https:/
 1981,U2,October,,3600000.0,,,0,best_selling_seed,,87febb2c-e117-3a0d-a7f6-8fd9a6421af1,1981-10-12,1981.0,AR,2025-11-21
 1983,U2,War,,10900000.0,,,0,best_selling_seed,,c6b36664-7e60-3b3e-a24d-d096c67a11e9,1983-02-28,1983.0,XE,2025-11-21
 1984,U2,The Unforgettable Fire,,8100000.0,,,0,best_selling_seed,,c84d00f4-afd3-3184-be62-6ae5f135aa38,1984-10-01,1984.0,AU,2025-11-21
+1987,U2,The Joshua Tree,Island,10000000,10× Platinum,,10000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,6f3e9fa6-be7a-3de8-a2b2-2072ece8a54d,1987-03-09,1987.0,AU,
 1988,U2,Rattle And Hum,,13800000.0,,,0,best_selling_seed,,fa236320-8ab3-3d4c-8c63-c4a35f76f4b2,1997-03-12,1997.0,GB,2025-11-21
 1991,U2,Achtung Baby,,17500000.0,,,0,best_selling_seed,,744c7a1b-ac79-35c4-bd92-7e2c6a24c8d8,1991-11-18,1991.0,CA,2025-11-21
 1993,U2,Zooropa,,8000000.0,,,0,best_selling_seed,,7c705df7-46e7-3c27-9693-72b3ea559c48,1993-07-05,1993.0,AR,2025-11-21
@@ -1475,52 +1476,51 @@ After 1946,Al Jolson,The Jolson Story,,1,,,1,List_of_best-selling_albums,https:/
 2000,U2,All That You Can’t Leave Behind,,12300000.0,,,0,best_selling_seed,,88c59b55-200d-3ac1-beff-8eb99830807e,2000-10-30,2000.0,XE,2025-11-21
 2004,U2,How To Dismantle An Atomic Bomb,,10200000.0,,,0,best_selling_seed,,3ab33753-c16f-3e44-ae67-2fba4fd0e823,2004-11-17,2004.0,AU,2025-11-21
 2009,U2,No Line On The Horizon,,4400000.0,,,0,best_selling_seed,,acaa5e04-685c-3e47-af62-1cd3012008b6,2009-02-25,2009.0,CA,2025-11-21
-1987,U2,The Joshua Tree,Island,10000000,10× Platinum,,10000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,6f3e9fa6-be7a-3de8-a2b2-2072ece8a54d,1987-03-09,1987.0,AU,
 1997,Usher,My Way,,7450000.0,,,0,best_selling_seed,,1977b74d-07f2-317c-a56e-7cb72f469fa2,1997-09-16,1997.0,US,2025-11-21
 2001,Usher,8701,,7400000.0,,,0,best_selling_seed,,c4fbd5f0-f8f4-3353-9ba6-a6ad16e810f7,2001-07-09,2001.0,US,2025-11-21
+2004,Usher,Confessions,Arista,"(10,300,000)[17]",14× Platinum‡,,10300000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,0ee013ee-5f59-35d5-b6b8-26a0cb3e4372,2004-03-22,2004.0,GB,
 2008,Usher,Here I Stand,,2200000.0,,,0,best_selling_seed,,7f9fe29a-b7db-3218-be0e-a8abbf1b2683,2008-05-26,2008.0,XE,2025-11-21
 2010,Usher,Raymond V Raymond,,2100000.0,,,0,best_selling_seed,,47cf1c09-974a-4558-9a81-fbf1ecd17376,2010-03-30,2010.0,AU,2025-11-21
 2012,Usher,Looking 4 Myself,,850000.0,,,0,best_selling_seed,,b9a895e8-870d-4bfa-bb96-57b314b6081f,2012-06-08,2012.0,DE,2025-11-21
-2004,Usher,Confessions,Arista,"(10,300,000)[17]",14× Platinum‡,,10300000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,0ee013ee-5f59-35d5-b6b8-26a0cb3e4372,2004-03-22,2004.0,GB,
 1997,Uttam Singh & Various Artists,Dil To Pagal Hai (दिल तो पागल है) [OST],,12500000.0,,,0,best_selling_seed,,,,,,2025-11-21
 2023,V,Layover,,2300000.0,,,0,best_selling_seed,,,,,,2025-11-21
+1978,Van Halen,Van Halen,Warner Bros.,10000000,10× Platinum,,10000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,43a0e8b5-6059-397f-81e6-b8df5a648496,1978-02-10,1978.0,JP,
 1979,Van Halen,Van Halen II,,7225000.0,,,0,best_selling_seed,,8001e841-11a1-379d-b52c-da0311340b56,1979,1979.0,DE,2025-11-21
 1980,Van Halen,Women And Children First,,5385000.0,,,0,best_selling_seed,,36338d76-f764-32fb-b11b-4ea68588865a,1980-03-26,1980.0,DE,2025-11-21
 1981,Van Halen,Fair Warning,,4030000.0,,,0,best_selling_seed,,e8e44b8b-d7db-3e46-a2fb-e70757d32c75,1981-04-29,1981.0,DE,2025-11-21
 1982,Van Halen,Diver Down,,5705000.0,,,0,best_selling_seed,,b9201554-b7ee-3093-9093-758af7ad097f,1982-04-14,1982.0,DE,2025-11-21
 1984,Van Halen,1984,,15440000.0,,,0,best_selling_seed,,5846f0c9-fec3-3b9e-a77c-fbe9a7bdf0e7,1984-01-09,1984.0,XE,2025-11-21
+1984,Van Halen,1984 (MCMLXXXIV),Warner Bros.,10000000,10× Platinum,,10000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,,,,,
 1986,Van Halen,5150,,8765000.0,,,0,best_selling_seed,,f546dd9a-d77f-38ec-98c1-c7a2842a3860,1986-03-25,1986.0,AU,2025-11-21
 1988,Van Halen,OU812,,5795000.0,,,0,best_selling_seed,,1af0e74f-d4b2-3105-ae7a-43b6bf7251ea,1988-05-24,1988.0,CA,2025-11-21
 1991,Van Halen,For Unlawful Carnal Knowledge,,4925000.0,,,0,best_selling_seed,,0a5921ef-3aa4-398e-ad4a-2ef45d055842,1991-06-17,1991.0,CA,2025-11-21
 1995,Van Halen,Balance,,4870000.0,,,0,best_selling_seed,,3a032793-ecc7-3d8b-9552-d9bb2464e636,1995-01-24,1995.0,CA,2025-11-21
-1978,Van Halen,Van Halen,Warner Bros.,10000000,10× Platinum,,10000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,43a0e8b5-6059-397f-81e6-b8df5a648496,1978-02-10,1978.0,JP,
-1984,Van Halen,1984 (MCMLXXXIV),Warner Bros.,10000000,10× Platinum,,10000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,,,,,
 2006,"Vanessa Hudgens, Drew Seeley & Various Artists",High School Musical [OST],,9000000.0,,,0,best_selling_seed,,,,,,2025-11-21
 2007,"Vanessa Hudgens, Drew Seeley & Various Artists",High School Musical 2 [OST],,6600000.0,,,0,best_selling_seed,,,,,,2025-11-21
 2008,"Vanessa Hudgens, Drew Seeley & Various Artists",High School Musical 3: Senior Year [OST],,4025000.0,,,0,best_selling_seed,,,,,,2025-11-21
-1983,Various Artists,Flashdance [OST],,15590000.0,,,0,best_selling_seed,,,,,,2025-11-21
-1987,Various Artists,Dirty Dancing [OST],,29970000.0,,,0,best_selling_seed,,,,,,2025-11-21
-1991,Various Artists,Robin Hood: Prince of Thieves,,2800000.0,,,0,best_selling_seed,,,,,,2025-11-21
-2013,Various Artists,Frozen [OST],,11023000.0,,,0,best_selling_seed,,,,,,2025-11-21
-2017,Various Artists,The Greatest Showman [OST],,5020000.0,,,0,best_selling_seed,,,,,,2025-11-21
 1945,Various Artists,Oklahoma! (78 rpm album),,0.5,,,0,List_of_best-selling_albums,https://en.wikipedia.org/wiki/List_of_best-selling_albums,,,,,
 1956,Various Artists,Oklahoma! (LP album),,1.75,,,1,List_of_best-selling_albums,https://en.wikipedia.org/wiki/List_of_best-selling_albums,,,,,
 1956/1957,Various Artists,My Fair Lady,,2,,,2,List_of_best-selling_albums,https://en.wikipedia.org/wiki/List_of_best-selling_albums,ae91dc23-5b3d-4529-9717-dd24cc19e7a0,1962-09,1962.0,DE,
 1960,Various Artists,South Pacific,,2.25,,,2,List_of_best-selling_albums,https://en.wikipedia.org/wiki/List_of_best-selling_albums,737fb45a-9e2e-48a1-948e-de884ac42393,1983,1983.0,JP,
 1975/1976,Various Artists,The Sound of Music,,10–15SM-T,,,10,List_of_best-selling_albums,https://en.wikipedia.org/wiki/List_of_best-selling_albums,7b8ea9f7-ff60-4da0-8c3b-adca83088c71,1993,1993.0,DE,
+1983,Various Artists,Flashdance [OST],,15590000.0,,,0,best_selling_seed,,,,,,2025-11-21
+1987,Various Artists,Dirty Dancing [OST],,29970000.0,,,0,best_selling_seed,,,,,,2025-11-21
+1991,Various Artists,Robin Hood: Prince of Thieves,,2800000.0,,,0,best_selling_seed,,,,,,2025-11-21
+2013,Various Artists,Frozen [OST],,11023000.0,,,0,best_selling_seed,,,,,,2025-11-21
+2017,Various Artists,The Greatest Showman [OST],,5020000.0,,,0,best_selling_seed,,,,,,2025-11-21
 ,Various artists,Dirty Dancing,,"24.1 US: 14 million[8] UK: 3 million[10] GER: 3.250 million[11] FRA: 1 million[12] CAN: 1 million[13] AUS: 770,000[14] BRA: 100,000[36] NLD: 100,000[16] ITA: 25,000[17] SPA: 400,000[43] SWE: 100,000[18] DEN: 60,000[80] POL: 50,000[39] SWI: 250,000[20] NZ: 15,000[24] HKG: 7,500[25]",,,24,List_of_best-selling_albums,https://en.wikipedia.org/wiki/List_of_best-selling_albums,c5f12efe-ecc1-461e-b164-e7a4329df6f5,2004-04-26,2004.0,,
 ,Various artists,Grease: The Original Soundtrack from the Motion Picture,,"20 US: 13 million[8] UK: 2.7 million[10] GER: 1.25 million[11] FRA: 400,000[12] CAN: 1 million[13] AUS: 980,000[14] ITA: 50,000[17] SPA: 300,000[33] DEN: 140,000[136] BEL: 25,000[44] NOR: 50,000[45] SWI: 25,000[20] NZ: 90,000[23] HKG: 20,000[25]",,,20,List_of_best-selling_albums,https://en.wikipedia.org/wiki/List_of_best-selling_albums,61cb81de-fc03-3437-8ba0-216730ff9c03,1978-04-14,1978.0,DK,
 1963,Vaughn Meader,The First Family,,4,,,4,List_of_best-selling_albums,https://en.wikipedia.org/wiki/List_of_best-selling_albums,a46c3f20-fd51-3dbe-9038-132be0a7bd05,,,,
 1983,Wham!,Fantastic,,3750000.0,,,0,best_selling_seed,,1cd34f51-b5cc-3176-873a-bb4e5056e342,1983-07-09,1983.0,XE,2025-11-21
 1984,Wham!,Make It Big,,14000000.0,,,0,best_selling_seed,,0e319e00-ac06-34ed-b4fa-f6d206d4a4e6,1984-11-21,1984.0,AU,2025-11-21
 1986,Wham!,Music From The Edge Of Heaven,,1700000.0,,,0,best_selling_seed,,12bf3f87-44c1-33d7-bfdf-1044dca04f29,1986-06-27,1986.0,AR,2025-11-21
+1985,Whitney Houston,Whitney Houston,Arista,14000000,14× Platinum‡,,14000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,131d12c0-e720-31df-a2f9-d9abd868ceaf,1985-02-14,1985.0,CA,
+1987,Whitney Houston,Whitney,Arista,10000000,10× Platinum‡,,10000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,38adb269-822e-393e-9cf2-aac5950b235d,2002-12-10,2002.0,DE,
 1990,Whitney Houston,I'm Your Baby Tonight,,9900000.0,,,0,best_selling_seed,,2dc208b0-cd05-3002-bc4b-c6926b0259ea,1990-10-12,1990.0,AU,2025-11-21
 1996,Whitney Houston,The Preacher's Wife [OST],,5300000.0,,,0,best_selling_seed,,,,,,2025-11-21
 1998,Whitney Houston,My Love Is Your Love,,10400000.0,,,0,best_selling_seed,,5c246f3c-46cb-3218-a8c4-ac98cbf9326d,1998-11-16,1998.0,ZA,2025-11-21
 2002,Whitney Houston,Just Whitney,,1900000.0,,,0,best_selling_seed,,38adb269-822e-393e-9cf2-aac5950b235d,2002-12-10,2002.0,DE,2025-11-21
 2009,Whitney Houston,I Look To You,,2400000.0,,,0,best_selling_seed,,1bfa1b3f-28a8-488a-ae8f-321c69fa63b7,2009-08-28,2009.0,DE,2025-11-21
-1985,Whitney Houston,Whitney Houston,Arista,14000000,14× Platinum‡,,14000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,131d12c0-e720-31df-a2f9-d9abd868ceaf,1985-02-14,1985.0,CA,
-1987,Whitney Houston,Whitney,Arista,10000000,10× Platinum‡,,10000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,38adb269-822e-393e-9cf2-aac5950b235d,2002-12-10,2002.0,DE,
 1992,Whitney Houston & Various Artists,The Bodyguard [OST],,41100000.0,,,0,best_selling_seed,,,,,,2025-11-21
 ,Whitney Houston / Various artists,The Bodyguard,,"29.7 US: 19 million[8] JPN: 2 million[41][42] UK: 2.1 million[10] GER: 1.5 million[11] FRA: 1 million[12] CAN: 1 million[13] AUS: 350,000[14] BRA: 750,000[36] NLD: 100,000[16] ITA: 25,000[17] SWE: 100,000[18] SPA: 600,000[33][43] ARG: 240,000[38] BEL: 200,000[44] POL: 50,000[39] SWI: 250,000[20] AUT: 200,000[21] NOR: 200,000[45] FIN: 56,486[22] NZ: 15,000[23]",,,29,List_of_best-selling_albums,https://en.wikipedia.org/wiki/List_of_best-selling_albums,,,,,
 1986,Xuxa,Xou Da Xuxa,,2885000.0,,,0,best_selling_seed,,2a0759ba-abdb-482b-ba92-057806530018,1986-07-01,1986.0,BR,2025-11-21

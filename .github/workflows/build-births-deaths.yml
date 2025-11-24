@@ -2,7 +2,7 @@ name: Build Births & Deaths (manual + nightly)
 
 on:
   schedule:
-    - cron: "15 3 * * *"
+    - cron: "0 2 * * *"
   workflow_dispatch:
     inputs:
       mm:

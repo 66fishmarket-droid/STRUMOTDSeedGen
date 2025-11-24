@@ -64,6 +64,7 @@ CAL_BASE_COLS = [
     "extra",
     "used_on",
     "use_count",
+    "added_on",
 ]
 
 

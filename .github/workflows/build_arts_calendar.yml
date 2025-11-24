@@ -34,7 +34,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install requests pandas lxml SPARQLWrapper
 
-      # 4. Build Arts datasets (albums, literature, movies, etc.)
+      # 4. Build Arts datasets (movies, books, quotes, etc.)
       - name: Build arts datasets
         env:
           USER_AGENT_CONTACT: ${{ github.server_url }}/${{ github.repository }}/issues
@@ -54,12 +54,24 @@ jobs:
         run: |
           python scripts/build_calendar_index_births_deaths.py
 
-      # 7. Overlay song facts (release / chart_entry / no1) into calendar_index.csv
+      # 7. Overlay song facts (release / chart_entry / no1)
       - name: Build calendar index (songs)
         run: |
           python scripts/build_calendar_index_songs.py
 
-      # 8. Commit and push any changes to data/*.csv
+      # 8. Build album delta (added_on == today)
+      - name: Build album release delta
+        env:
+          USER_AGENT_CONTACT: ${{ github.server_url }}/${{ github.repository }}/issues
+        run: |
+          python scripts/build_albums_release_delta.py
+
+      # 9. Append new album rows into calendar_index.csv
+      - name: Build calendar index (albums)
+        run: |
+          python scripts/add_albums_to_calendar_index.py
+
+      # 10. Commit and push any changes
       - name: Commit and push changes
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -70,7 +82,7 @@ jobs:
           if [[ -n "$(git status --porcelain)" ]]; then
             echo "Changes detected; committing."
             git add data
-            git commit -m "chore: rebuild arts datasets and calendar index"
+            git commit -m "chore: rebuild arts datasets and calendar index (incl. albums)"
             git push
           else
             echo "No changes to commit."

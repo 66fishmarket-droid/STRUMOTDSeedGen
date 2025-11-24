@@ -3,7 +3,7 @@ name: Build Albums Canon
 on:
   schedule:
     # Run nightly at 03:05 UTC
-    - cron: "5 3 * * *"
+    - cron: "40 2 * * *"
   workflow_dispatch: {}
 
 permissions:

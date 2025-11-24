@@ -3,10 +3,9 @@
 name: Build Albums Release Delta
 
 on:
-  schedule:
-    # Run nightly after Albums Canon (which is at 03:05 UTC)
-    - cron: "35 3 * * *"
+  # Manual trigger only (no daily schedule)
   workflow_dispatch: {}
+
 
 permissions:
   contents: write

@@ -1,204 +1,168 @@
 #!/usr/bin/env python3
 # scripts/build_albums_release_delta.py
 #
-# Build a daily delta of album release rows from data/albums_canon.csv.
+# Build/refresh data/albums_release_delta.csv from data/albums_canon.csv.
 #
-# Intended use:
-#   - albums_canon.csv is maintained nightly by build_albums_canon.py
-#   - This script selects rows whose added_on == today and which have a
-#     full mb_release_date_iso (YYYY-MM-DD).
-#   - It outputs a small CSV with one row per album release including
-#     sales info (sales_raw, shipments_units), ready for ingestion into
-#     your OTD pipeline (e.g. into Google Sheets, then into calendar_index).
+# We DO NOT filter by added_on here; instead we export all albums that:
+#   - have a full day-level release date (YYYY-MM-DD) in mb_release_date_iso
+#
+# The "delta" behaviour (only using new rows) is handled downstream by
+# Make.com / Sheets using the added_on column, just like the other pipelines.
 #
 # Output columns:
-#   work_type       "album"
-#   title           album
-#   byline          artist
-#   release_date    mb_release_date_iso
-#   month           MM from release_date
-#   day             DD from release_date
-#   extra           (blank for now)
-#   source_url      albums_canon.source_url
-#   sales_raw       albums_canon.sales_raw
-#   shipments_units albums_canon.shipments_units
-#   date_source     "musicbrainz:first-release-date"
-#   added_on        albums_canon.added_on
+#   work_type       -> "album"
+#   title           -> album
+#   byline          -> artist
+#   release_date    -> mb_release_date_iso (YYYY-MM-DD)
+#   month           -> MM
+#   day             -> DD
+#   extra           -> optional info (e.g. certification)
+#   source_url      -> source_url from albums_canon
+#   sales_raw       -> sales_raw from albums_canon
+#   shipments_units -> shipments_units from albums_canon
+#   date_source     -> "musicbrainz:first-release-date"
+#   added_on        -> added_on from albums_canon
 #
-# You can then use sales_raw when building summary_template lines like:
-#   "with sales of over {sales_raw}."
+# This file is then used by add_albums_to_calendar_index.py.
 
 import os
+import re
 import argparse
-from datetime import date
 from typing import List
 
 import pandas as pd
 
-ALBUMS_CANON_DEFAULT = "data/albums_canon.csv"
+IN_PATH_DEFAULT = "data/albums_canon.csv"
 OUT_PATH_DEFAULT = "data/albums_release_delta.csv"
+
+OUT_COLS = [
+    "work_type",
+    "title",
+    "byline",
+    "release_date",
+    "month",
+    "day",
+    "extra",
+    "source_url",
+    "sales_raw",
+    "shipments_units",
+    "date_source",
+    "added_on",
+]
 
 
 def load_albums_canon(path: str) -> pd.DataFrame:
     if not os.path.exists(path):
-        print(f"No albums canon file found at {path}")
-        return pd.DataFrame(
-            columns=[
-                "year",
-                "artist",
-                "album",
-                "label",
-                "sales_raw",
-                "certification",
-                "country",
-                "shipments_units",
-                "list_source",
-                "source_url",
-                "musicbrainz_id",
-                "mb_release_date_iso",
-                "mb_release_year",
-                "mb_country",
-                "added_on",
-            ]
-        )
+        raise FileNotFoundError(f"albums_canon not found at {path}")
 
     df = pd.read_csv(path, encoding="utf-8")
 
     # Ensure expected columns exist
-    for col in [
+    expected = [
         "artist",
         "album",
         "sales_raw",
+        "certification",
         "shipments_units",
         "source_url",
         "mb_release_date_iso",
+        "mb_release_year",
+        "mb_country",
         "added_on",
-    ]:
+    ]
+    for col in expected:
         if col not in df.columns:
             df[col] = ""
 
     return df
 
 
-def is_full_iso_date(value: str) -> bool:
+def is_full_iso_date(s: str) -> bool:
+    """Return True if s looks like YYYY-MM-DD."""
+    if not isinstance(s, str):
+        return False
+    s = s.strip()
+    return bool(re.fullmatch(r"\d{4}-\d{2}-\d{2}", s))
+
+
+def build_release_delta(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Very simple check for YYYY-MM-DD. We only want full dates
-    (not YYYY or YYYY-MM) for OTD usage.
+    From albums_canon, build the albums_release_delta structure:
+    one row per album with a full YYYY-MM-DD release date.
     """
-    if not isinstance(value, str):
-        return False
-    v = value.strip()
-    if len(v) != 10:
-        return False
-    if v[4] != "-" or v[7] != "-":
-        return False
-    yyyy, mm, dd = v.split("-")
-    if not (yyyy.isdigit() and mm.isdigit() and dd.isdigit()):
-        return False
-    return True
-
-
-def build_release_delta(canon: pd.DataFrame) -> pd.DataFrame:
-    today_str = date.today().isoformat()
-
-    # Filter to rows added/updated today
-    mask_added_today = canon["added_on"].astype(str).str.strip() == today_str
-    df = canon[mask_added_today].copy()
-
     if df.empty:
-        print("No albums with added_on == today; nothing to output.")
-        return pd.DataFrame(
-            columns=[
-                "work_type",
-                "title",
-                "byline",
-                "release_date",
-                "month",
-                "day",
-                "extra",
-                "source_url",
-                "sales_raw",
-                "shipments_units",
-                "date_source",
-                "added_on",
-            ]
-        )
+        return pd.DataFrame(columns=OUT_COLS)
 
-    # Only keep albums with a full YYYY-MM-DD release date
-    df["mb_release_date_iso"] = df["mb_release_date_iso"].astype(str).str.strip()
-    mask_full_date = df["mb_release_date_iso"].apply(is_full_iso_date)
-    df = df[mask_full_date].copy()
+    rows: List[dict] = []
 
-    if df.empty:
-        print("No albums with full mb_release_date_iso for today; nothing to output.")
-        return pd.DataFrame(
-            columns=[
-                "work_type",
-                "title",
-                "byline",
-                "release_date",
-                "month",
-                "day",
-                "extra",
-                "source_url",
-                "sales_raw",
-                "shipments_units",
-                "date_source",
-                "added_on",
-            ]
-        )
+    for _, r in df.iterrows():
+        album = str(r.get("album", "")).strip()
+        artist = str(r.get("artist", "")).strip()
+        rel_iso = str(r.get("mb_release_date_iso", "")).strip()
 
-    # Build the output structure
-    out_rows: List[dict] = []
+        if not album or not artist:
+            continue
 
-    for _, row in df.iterrows():
-        rel = str(row.get("mb_release_date_iso", "")).strip()
-        yyyy, mm, dd = rel.split("-")
+        if not is_full_iso_date(rel_iso):
+            # Skip partial dates (e.g. "1984" or "1984-05")
+            continue
 
-        out_rows.append(
+        year_str, mm_str, dd_str = rel_iso.split("-")
+
+        sales_raw = r.get("sales_raw", "")
+        shipments_units = r.get("shipments_units", 0)
+        certification = str(r.get("certification", "")).strip()
+        source_url = str(r.get("source_url", "")).strip()
+        added_on = str(r.get("added_on", "")).strip()
+
+        # Extra: you can tuck certification in here if useful
+        extra = ""
+        if certification:
+            extra = f"certification={certification}"
+
+        rows.append(
             {
                 "work_type": "album",
-                "title": str(row.get("album", "")).strip(),
-                "byline": str(row.get("artist", "")).strip(),
-                "release_date": rel,
-                "month": int(mm),
-                "day": int(dd),
-                "extra": "",
-                "source_url": str(row.get("source_url", "")).strip(),
-                "sales_raw": str(row.get("sales_raw", "")).strip(),
-                "shipments_units": row.get("shipments_units", ""),
+                "title": album,
+                "byline": artist,
+                "release_date": rel_iso,
+                "month": int(mm_str),
+                "day": int(dd_str),
+                "extra": extra,
+                "source_url": source_url,
+                "sales_raw": sales_raw,
+                "shipments_units": shipments_units,
                 "date_source": "musicbrainz:first-release-date",
-                "added_on": str(row.get("added_on", "")).strip(),
+                "added_on": added_on,
             }
         )
 
-    out_df = pd.DataFrame(out_rows)
+    if not rows:
+        return pd.DataFrame(columns=OUT_COLS)
 
-    # Stable sort: by release_date then title
-    out_df = out_df.sort_values(
-        by=["release_date", "title"],
-        ascending=[True, True],
-        ignore_index=True,
-    )
+    out = pd.DataFrame(rows, columns=OUT_COLS)
 
-    return out_df
+    # Sort by release_date then title for stability
+    out = out.sort_values(by=["release_date", "title"], ascending=[True, True], ignore_index=True)
+
+    return out
 
 
 def main():
     ap = argparse.ArgumentParser(
-        description="Build a daily albums release delta CSV from albums_canon.csv."
+        description="Build albums_release_delta.csv from albums_canon.csv."
     )
     ap.add_argument(
         "--in",
         dest="in_path",
-        default=ALBUMS_CANON_DEFAULT,
-        help="Input albums canon CSV (default: data/albums_canon.csv)",
+        default=IN_PATH_DEFAULT,
+        help="Input albums_canon.csv path (default: data/albums_canon.csv)",
     )
     ap.add_argument(
         "--out",
         dest="out_path",
         default=OUT_PATH_DEFAULT,
-        help="Output delta CSV path (default: data/albums_release_delta.csv)",
+        help="Output albums_release_delta.csv path (default: data/albums_release_delta.csv)",
     )
     args = ap.parse_args()
 
@@ -206,7 +170,7 @@ def main():
     print(f"Loaded {len(canon)} rows from {args.in_path}")
 
     delta = build_release_delta(canon)
-    print(f"Delta rows to write: {len(delta)}")
+    print(f"Built {len(delta)} album release rows")
 
     out_dir = os.path.dirname(args.out_path)
     if out_dir:

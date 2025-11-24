@@ -10,29 +10,13 @@
 #   - calendar_index.csv uses the same schema as your OTD Repo:
 #       key_mmdd,year,iso_date,fact_domain,fact_category,fact_tags,
 #       title,byline,role,work_type,summary_template,source_url,
-#       source_system,source_id,country,language,extra,used_on,use_count
-#
-# For each album:
-#   - work_type = "album"
-#   - fact_domain = "music"
-#   - fact_category = "album_release"
-#   - fact_tags = "music;album;best_selling"
-#   - role = "artist"
-#   - summary_template example:
-#       "On this day in 1982, the album 'Thriller' by Michael Jackson
-#        was released. To date, over 65,800,000 copies have been sold,
-#        making this a 65× platinum seller."
-#
-#   - We derive platinum multiplier as:
-#       floor(shipments_units / 1_000_000)
-#     using the normalized shipments_units from albums_release_delta.
+#       source_system,source_id,country,language,extra,used_on,
+#       use_count,added_on
 #
 # Deduplication key:
 #   (work_type, iso_date, lower(title), lower(byline))
 #
-# If a matching row already exists in calendar_index:
-#   - We leave it as-is (no update).
-#   - This keeps the script idempotent per delta run.
+# Existing rows win; we only append genuinely new album rows.
 
 import os
 import argparse
@@ -42,7 +26,6 @@ import pandas as pd
 
 CALENDAR_INDEX_DEFAULT = "data/calendar_index.csv"
 ALBUMS_DELTA_DEFAULT = "data/albums_release_delta.csv"
-
 
 CAL_BASE_COLS = [
     "key_mmdd",
@@ -81,11 +64,14 @@ def load_calendar_index(path: str) -> pd.DataFrame:
     # Ensure all columns exist
     for col in CAL_BASE_COLS:
         if col not in df.columns:
-            df[col] = "" if col != "use_count" else 0
+            # use_count numeric, others as string
+            if col == "use_count":
+                df[col] = 0
+            else:
+                df[col] = ""
 
     # Coerce use_count to numeric (default 0)
-    if "use_count" in df.columns:
-        df["use_count"] = pd.to_numeric(df["use_count"], errors="coerce").fillna(0).astype(int)
+    df["use_count"] = pd.to_numeric(df["use_count"], errors="coerce").fillna(0).astype(int)
 
     return df[CAL_BASE_COLS]
 
@@ -220,11 +206,11 @@ def build_album_calendar_rows(delta: pd.DataFrame) -> pd.DataFrame:
             except Exception:
                 continue
 
+        # If your key_mmdd uses "MMDD" (e.g. 0101), use this:
         key_mmdd = f"{mm_int:02d}{dd_int:02d}"
 
         sales_raw = r.get("sales_raw", "")
         shipments_units = r.get("shipments_units", 0)
-
         summary = make_summary_template(title, byline, iso_date, sales_raw, shipments_units)
 
         source_url = str(r.get("source_url", "")).strip()
@@ -251,9 +237,10 @@ def build_album_calendar_rows(delta: pd.DataFrame) -> pd.DataFrame:
                 "source_id": source_id,
                 "country": "",
                 "language": "en",
-                "extra": f"added_on={added_on}",
+                "extra": "",
                 "used_on": "",
                 "use_count": 0,
+                "added_on": added_on,
             }
         )
 
@@ -298,7 +285,10 @@ def merge_calendar(existing: pd.DataFrame, new_rows: pd.DataFrame) -> pd.DataFra
 
     if to_append:
         append_df = new_rows.loc[to_append, CAL_BASE_COLS]
-        existing = pd.concat([existing.drop(columns=["_key"], errors="ignore"), append_df], ignore_index=True)
+        existing = pd.concat(
+            [existing.drop(columns=["_key"], errors="ignore"), append_df],
+            ignore_index=True,
+        )
     else:
         existing = existing.drop(columns=["_key"], errors="ignore")
 
@@ -309,7 +299,8 @@ def merge_calendar(existing: pd.DataFrame, new_rows: pd.DataFrame) -> pd.DataFra
         ignore_index=True,
     )
 
-    return existing
+    # Return with columns in the standard order
+    return existing[CAL_BASE_COLS]
 
 
 def main():

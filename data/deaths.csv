@@ -1,32 +1,4 @@
 work_type,title,byline,release_date,month,day,extra,source_url
-death,Ursula K. Le Guin,American author (1929–2018),2018-01-22,01,22,,https://en.wikipedia.org/wiki/Ursula_K._Le_Guin
-death,Lois Ramsey,Australian actress,2016-01-22,01,22,,https://en.wikipedia.org/wiki/Lois_Ramsey
-death,Margaret Bloy Graham,Canadian children's book author and illustrator,2015-01-22,01,22,,https://en.wikipedia.org/wiki/Margaret_Bloy_Graham
-death,Simon Marsden,English photographer and author,2012-01-22,01,22,,https://en.wikipedia.org/wiki/Simon_Marsden
-death,Clarence Tillenius,Canadian artist (1913–2012),2012-01-22,01,22,,https://en.wikipedia.org/wiki/Clarence_Tillenius
-death,Dick Tufeld,American announcer and actor (1926–2012),2012-01-22,01,22,,https://en.wikipedia.org/wiki/Dick_Tufeld
-death,Jean Simmons,British actress (1929–2010),2010-01-22,01,22,,https://en.wikipedia.org/wiki/Jean_Simmons
-death,Heath Ledger,Australian actor (1979–2008),2008-01-22,01,22,,https://en.wikipedia.org/wiki/Heath_Ledger
-death,Liz Renay,American actress and dancer (1926–2007),2007-01-22,01,22,,https://en.wikipedia.org/wiki/Liz_Renay
-death,Consuelo Velázquez,Mexican concert pianist and composer,2005-01-22,01,22,,https://en.wikipedia.org/wiki/Consuelo_Vel%C3%A1zquez
-death,Billy May,"American composer, arranger and trumpeter (1916–2004)",2004-01-22,01,22,,https://en.wikipedia.org/wiki/Billy_May
-death,Ann Miller,American actress and dancer (1923–2004),2004-01-22,01,22,,https://en.wikipedia.org/wiki/Ann_Miller
-death,Bill Mauldin,American editorial cartoonist (1921–2003),2003-01-22,01,22,,https://en.wikipedia.org/wiki/Bill_Mauldin
-death,Craig Claiborne,"American critic, journalist and author",2000-01-22,01,22,,https://en.wikipedia.org/wiki/Craig_Claiborne
-death,Anne Hébert,Canadian author and poet (1916–2000),2000-01-22,01,22,,https://en.wikipedia.org/wiki/Anne_H%C3%A9bert
-death,Billy Mackenzie,Scottish singer (1957–1997),1997-01-22,01,22,,https://en.wikipedia.org/wiki/Billy_Mackenzie
-death,Jean-Louis Barrault,French actor and theatre director (1910–1994),1994-01-22,01,22,,https://en.wikipedia.org/wiki/Jean-Louis_Barrault
-death,Telly Savalas,American actor (1922–1994),1994-01-22,01,22,,https://en.wikipedia.org/wiki/Telly_Savalas
-death,Kōbō Abe,"Japanese writer, playwright, photographer and inventor",1993-01-22,01,22,,https://en.wikipedia.org/wiki/K%C5%8Db%C5%8D_Abe
-death,Robert Choquette,"Canadian novelist, poet and diplomat",1991-01-22,01,22,,https://en.wikipedia.org/wiki/Robert_Choquette
-death,Herbert Marshall,English actor (1890–1966),1966-01-22,01,22,,https://en.wikipedia.org/wiki/Herbert_Marshall
-death,Marc Blitzstein,American composer,1964-01-22,01,22,,https://en.wikipedia.org/wiki/Marc_Blitzstein
-death,Alan Hale Sr.,American actor (1892–1950),1950-01-22,01,22,,https://en.wikipedia.org/wiki/Alan_Hale_Sr.
-death,William Thomas Walsh,American historian and author (1891–1949),1949-01-22,01,22,,https://en.wikipedia.org/wiki/William_Thomas_Walsh
-death,Else Lasker-Schüler,German poet and playwright (1869–1945),1945-01-22,01,22,,https://en.wikipedia.org/wiki/Else_Lasker-Sch%C3%BCler
-death,R. C. Lehmann,English writer and politician (1856–1929),1929-01-22,01,22,,https://en.wikipedia.org/wiki/R._C._Lehmann
-death,George Holyoake,English secularist writer (1817–1906),1906-01-22,01,22,,https://en.wikipedia.org/wiki/George_Holyoake
-death,Cristofano Malvezzi,Italian composer,1599-01-22,01,22,,https://en.wikipedia.org/wiki/Cristofano_Malvezzi
 death,Melanie (singer),American musician (1947–2024),2024-01-23,01,23,,https://en.wikipedia.org/wiki/Melanie_(singer)
 death,Hal Holbrook,American actor (1925–2021),2021-01-23,01,23,,https://en.wikipedia.org/wiki/Hal_Holbrook
 death,Song Yoo-jung,South Korean actress and model (1994–2021),2021-01-23,01,23,,https://en.wikipedia.org/wiki/Song_Yoo-jung
@@ -614,7 +586,7 @@ death,Markos Vamvakaris,Greek rebetiko musician (1905–1972),1972-02-08,02,08,,
 death,George Dolenz,American actor (1908–1963),1963-02-08,02,08,,https://en.wikipedia.org/wiki/George_Dolenz
 death,George Formby Sr,English comedian and singer (1875-1921),1921-02-08,02,08,,https://en.wikipedia.org/wiki/George_Formby_Sr
 death,François Habeneck,French violinist and conductor (1781–1849),1849-02-08,02,08,,https://en.wikipedia.org/wiki/Fran%C3%A7ois_Habeneck
-death,France Prešeren,Slovene Romantic poet,1849-02-08,02,08,,https://en.wikipedia.org/wiki/France_Pre%C5%A1eren
+death,France Prešeren,Slovene poet (1800-1849),1849-02-08,02,08,,https://en.wikipedia.org/wiki/France_Pre%C5%A1eren
 death,Aaron Hill (writer),,1750-02-08,02,08,,https://en.wikipedia.org/wiki/Aaron_Hill_(writer)
 death,Jan van Huysum,Dutch still-life painter (1682–1749),1749-02-08,02,08,,https://en.wikipedia.org/wiki/Jan_van_Huysum
 death,Giuseppe Torelli,Italian Baroque violinist and composer (1658–1709),1709-02-08,02,08,,https://en.wikipedia.org/wiki/Giuseppe_Torelli
@@ -1076,3 +1048,28 @@ death,Jean-Baptiste-Camille Corot,French painter and printmaker (1796–1875),18
 death,Charles Le Brun,French painter and art theorist (1619–1690),1690-02-22,02,22,,https://en.wikipedia.org/wiki/Charles_Le_Brun
 death,Jean Chapelain,French poet and critic (1595–1674),1674-02-22,02,22,,https://en.wikipedia.org/wiki/Jean_Chapelain
 death,John of Fécamp,11th century Italian spiritual writer,1079-02-22,02,22,,https://en.wikipedia.org/wiki/John_of_F%C3%A9camp
+death,Chris Jasper,"American singer, composer and producer (1951–2025)",2025-02-23,02,23,,https://en.wikipedia.org/wiki/Chris_Jasper
+death,Katherine Helmond,American actress (1929–2019),2019-02-23,02,23,,https://en.wikipedia.org/wiki/Katherine_Helmond
+death,James Aldridge,Australian-British writer and journalist,2015-02-23,02,23,,https://en.wikipedia.org/wiki/James_Aldridge
+death,Alice Herz-Sommer,Israeli classical pianist (1903–2014),2014-02-23,02,23,,https://en.wikipedia.org/wiki/Alice_Herz-Sommer
+death,Roger Hilsman,"American soldier, statesman, teacher, and author. Key figure in Vietnam War policy.",2014-02-23,02,23,,https://en.wikipedia.org/wiki/Roger_Hilsman
+death,Vijay Anand (filmmaker),Indian film director and actor (1934–2004),2004-02-23,02,23,,https://en.wikipedia.org/wiki/Vijay_Anand_(filmmaker)
+death,Howie Epstein,American musician (1955–2003),2003-02-23,02,23,,https://en.wikipedia.org/wiki/Howie_Epstein
+death,Ofra Haza,Israeli singer (1957–2000),2000-02-23,02,23,,https://en.wikipedia.org/wiki/Ofra_Haza
+death,Philip Abbott,American actor (1924–1998),1998-02-23,02,23,,https://en.wikipedia.org/wiki/Philip_Abbott
+death,Tony Williams (drummer),American jazz drummer (1945–1997),1997-02-23,02,23,,https://en.wikipedia.org/wiki/Tony_Williams_(drummer)
+death,Herbert Howells,"English composer, organist and teacher (1892–1983)",1983-02-23,02,23,,https://en.wikipedia.org/wiki/Herbert_Howells
+death,L. S. Lowry,British visual artist (1887–1976),1976-02-23,02,23,,https://en.wikipedia.org/wiki/L._S._Lowry
+death,Harry Ruby,"American pianist, composer, songwriter & screenwriter (1895-1974)",1974-02-23,02,23,,https://en.wikipedia.org/wiki/Harry_Ruby
+death,Madhubala,Indian actress (1933–1969),1969-02-23,02,23,,https://en.wikipedia.org/wiki/Madhubala
+death,Stan Laurel,English actor and comedian (1890–1965),1965-02-23,02,23,,https://en.wikipedia.org/wiki/Stan_Laurel
+death,Paul Claudel,"French diplomat, poet and playwright (1868–1955)",1955-02-23,02,23,,https://en.wikipedia.org/wiki/Paul_Claudel
+death,John Robert Gregg,Irish educator and writer (1867–1948),1948-02-23,02,23,,https://en.wikipedia.org/wiki/John_Robert_Gregg
+death,Edward Elgar,English composer (1857–1934),1934-02-23,02,23,,https://en.wikipedia.org/wiki/Edward_Elgar
+death,Nellie Melba,Australian opera singer (1861–1931),1931-02-23,02,23,,https://en.wikipedia.org/wiki/Nellie_Melba
+death,Ernest Dowson,English writer (1867–1900),1900-02-23,02,23,,https://en.wikipedia.org/wiki/Ernest_Dowson
+death,Woldemar Bargiel,German composer (1828–1897),1897-02-23,02,23,,https://en.wikipedia.org/wiki/Woldemar_Bargiel
+death,Zygmunt Krasiński,Polish poet (1812–1859),1859-02-23,02,23,,https://en.wikipedia.org/wiki/Zygmunt_Krasi%C5%84ski
+death,John Keats,English Romantic poet (1795–1821),1821-02-23,02,23,,https://en.wikipedia.org/wiki/John_Keats
+death,Joshua Reynolds,English painter (1723–1792),1792-02-23,02,23,,https://en.wikipedia.org/wiki/Joshua_Reynolds
+death,Georg Muffat,German composer and organist,1704-02-23,02,23,,https://en.wikipedia.org/wiki/Georg_Muffat

@@ -1,32 +1,4 @@
 work_type,title,byline,release_date,month,day,extra,source_url
-death,Chuck Berry,American musician (1926–2017),2017-03-18,03,18,,https://en.wikipedia.org/wiki/Chuck_Berry
-death,Barry Hines,British writer (1939–2016),2016-03-18,03,18,,https://en.wikipedia.org/wiki/Barry_Hines
-death,Grace Ogot,Kenyan author (1930–2015),2015-03-18,03,18,,https://en.wikipedia.org/wiki/Grace_Ogot
-death,Catherine Obianuju Acholonu,Nigerian writer (1951–2014),2014-03-18,03,18,,https://en.wikipedia.org/wiki/Catherine_Obianuju_Acholonu
-death,Lucius Shepard,American novelist (1943–2014),2014-03-18,03,18,,https://en.wikipedia.org/wiki/Lucius_Shepard
-death,Henry Bromell,American novelist,2013-03-18,03,18,,https://en.wikipedia.org/wiki/Henry_Bromell
-death,Furman Bisher,American sportswriter (1918–2012),2012-03-18,03,18,,https://en.wikipedia.org/wiki/Furman_Bisher
-death,Fess Parker,American actor (1924–2010),2010-03-18,03,18,,https://en.wikipedia.org/wiki/Fess_Parker
-death,Natasha Richardson,British actress (1963–2009),2009-03-18,03,18,,https://en.wikipedia.org/wiki/Natasha_Richardson
-death,Anthony Minghella,British playwright and filmmaker (1954–2008),2008-03-18,03,18,,https://en.wikipedia.org/wiki/Anthony_Minghella
-death,Dan Gibson,"Canadian photographer, cinematographer and sound recordist",2006-03-18,03,18,,https://en.wikipedia.org/wiki/Dan_Gibson
-death,R. A. Lafferty,American writer (1914–2002),2002-03-18,03,18,,https://en.wikipedia.org/wiki/R._A._Lafferty
-death,John Phillips (musician),American musician (1935–2001),2001-03-18,03,18,,https://en.wikipedia.org/wiki/John_Phillips_(musician)
-death,Odysseas Elytis,Greek poet and art critic,1996-03-18,03,18,,https://en.wikipedia.org/wiki/Odysseas_Elytis
-death,Robin Harris (comedian),American comedian and actor (1953–1990),1990-03-18,03,18,,https://en.wikipedia.org/wiki/Robin_Harris_(comedian)
-death,Billy Butterfield,American bandleader and trumpeter (1917–1988),1988-03-18,03,18,,https://en.wikipedia.org/wiki/Billy_Butterfield
-death,Kari Diesen,Norwegian singer and revue actress,1987-03-18,03,18,,https://en.wikipedia.org/wiki/Kari_Diesen
-death,Bernard Malamud,American writer (1914–1986),1986-03-18,03,18,,https://en.wikipedia.org/wiki/Bernard_Malamud
-death,Tamara de Lempicka,Polish painter (1894–1980),1980-03-18,03,18,,https://en.wikipedia.org/wiki/Tamara_de_Lempicka
-death,Leigh Brackett,American novelist and screenwriter (1915–1978),1978-03-18,03,18,,https://en.wikipedia.org/wiki/Leigh_Brackett
-death,Peggy Wood,American actress (1892–1978),1978-03-18,03,18,,https://en.wikipedia.org/wiki/Peggy_Wood
-death,C. C. Martindale,English Jesuit priest and author (1879-1963),1963-03-18,03,18,,https://en.wikipedia.org/wiki/C._C._Martindale
-death,Louis Bromfield,American author and conservationist (1896–1956),1956-03-18,03,18,,https://en.wikipedia.org/wiki/Louis_Bromfield
-death,Jean Leon Gerome Ferris,American painter (1863–1930),1930-03-18,03,18,,https://en.wikipedia.org/wiki/Jean_Leon_Gerome_Ferris
-death,Matilda Joslyn Gage,"American abolitionist, author (1826–1898)",1898-03-18,03,18,,https://en.wikipedia.org/wiki/Matilda_Joslyn_Gage
-death,Jean-Baptiste Bréval,French cellist and composer,1823-03-18,03,18,,https://en.wikipedia.org/wiki/Jean-Baptiste_Br%C3%A9val
-death,Laurence Sterne,Anglo-Irish writer and cleric (1713–1768),1768-03-18,03,18,,https://en.wikipedia.org/wiki/Laurence_Sterne
-death,Maria de Dominici,Maltese artist and sculptor (1645–1703),1703-03-18,03,18,,https://en.wikipedia.org/wiki/Maria_de_Dominici
 death,Safet Plakalo,Bosnian writer (1950–2015),2015-03-19,03,19,,https://en.wikipedia.org/wiki/Safet_Plakalo
 death,Heather Robertson,"Canadian journalist, novelist and non-fiction writer (1942–2014)",2014-03-19,03,19,,https://en.wikipedia.org/wiki/Heather_Robertson
 death,Ulu Grosbard,Belgian-American theatre and film director,2012-03-19,03,19,,https://en.wikipedia.org/wiki/Ulu_Grosbard
@@ -1209,7 +1181,7 @@ death,Svetozar Ćorović,Serbian novelist,1919-04-17,04,17,,https://en.wikipedia
 death,E. G. Squier,"American archaeologist, history writer, painter and newspaper editor (1821-1888)",1888-04-17,04,17,,https://en.wikipedia.org/wiki/E._G._Squier
 death,Hannah Webster Foster,18th and 19th-century American novelist,1840-04-17,04,17,,https://en.wikipedia.org/wiki/Hannah_Webster_Foster
 death,Johann Mattheson,"German composer, critic and lexicographer (1681–1764)",1764-04-17,04,17,,https://en.wikipedia.org/wiki/Johann_Mattheson
-death,Juana Inés de la Cruz,"Mexican writer, philosopher, composer and poet (1648–1695)",1695-04-17,04,17,,https://en.wikipedia.org/wiki/Juana_In%C3%A9s_de_la_Cruz
+death,Juana Inés de la Cruz,"Mexican Catholic nun, philosopher, composer and poet (1648–1695)",1695-04-17,04,17,,https://en.wikipedia.org/wiki/Juana_In%C3%A9s_de_la_Cruz
 death,Antonio Bertali,Italian composer,1669-04-17,04,17,,https://en.wikipedia.org/wiki/Antonio_Bertali
 death,Dickey Betts,American guitarist (1943–2024),2024-04-18,04,18,,https://en.wikipedia.org/wiki/Dickey_Betts
 death,Mandisa,American singer (1976–2024),2024-04-18,04,18,,https://en.wikipedia.org/wiki/Mandisa
@@ -1231,3 +1203,30 @@ death,Juris Alunāns,Latvian writer and philologist (1832-1864),1864-04-18,04,18
 death,Jeanne-Elisabeth Chaudet,French artist (died 1832),1832-04-18,04,18,,https://en.wikipedia.org/wiki/Jeanne-Elisabeth_Chaudet
 death,Luigi Alamanni,Italian poet and statesman,1556-04-18,04,18,,https://en.wikipedia.org/wiki/Luigi_Alamanni
 death,John Leland (antiquary),English Tudor poet and antiquary,1552-04-18,04,18,,https://en.wikipedia.org/wiki/John_Leland_(antiquary)
+death,Moonbin,South Korean singer and actor (1998–2023),2023-04-19,04,19,,https://en.wikipedia.org/wiki/Moonbin
+death,Ron Hamilton (musician),American musician (1950–2023),2023-04-19,04,19,,https://en.wikipedia.org/wiki/Ron_Hamilton_(musician)
+death,Jim Steinman,American musical artist (1947–2021),2021-04-19,04,19,,https://en.wikipedia.org/wiki/Jim_Steinman
+death,Ian Whitcomb,English singer-songwriter (1941–2020),2020-04-19,04,19,,https://en.wikipedia.org/wiki/Ian_Whitcomb
+death,Lu Chao-Hsuan,Taiwanese guitarist (1929-2017),2017-04-19,04,19,,https://en.wikipedia.org/wiki/Lu_Chao-Hsuan
+death,Levon Helm,American drummer and vocalist (1940–2012),2012-04-19,04,19,,https://en.wikipedia.org/wiki/Levon_Helm
+death,Elisabeth Sladen,British actress (1946–2011),2011-04-19,04,19,,https://en.wikipedia.org/wiki/Elisabeth_Sladen
+death,J. G. Ballard,English writer (1930–2009),2009-04-19,04,19,,https://en.wikipedia.org/wiki/J._G._Ballard
+death,Jean-Pierre Cassel,French actor and dancer (1932–2007),2007-04-19,04,19,,https://en.wikipedia.org/wiki/Jean-Pierre_Cassel
+death,Norris McWhirter,English writer,2004-04-19,04,19,,https://en.wikipedia.org/wiki/Norris_McWhirter
+death,Jenny Pike,Canadian photographer and servicewoman,2004-04-19,04,19,,https://en.wikipedia.org/wiki/Jenny_Pike
+death,Reginald Rose,American playwright and screenwriter (1920–2002),2002-04-19,04,19,,https://en.wikipedia.org/wiki/Reginald_Rose
+death,Louis Applebaum,Canadian film score composer,2000-04-19,04,19,,https://en.wikipedia.org/wiki/Louis_Applebaum
+death,Octavio Paz,"Mexican writer, poet and diplomat (1914–1998)",1998-04-19,04,19,,https://en.wikipedia.org/wiki/Octavio_Paz
+death,Frankie Howerd,English actor and comedian (1917–1992),1992-04-19,04,19,,https://en.wikipedia.org/wiki/Frankie_Howerd
+death,Daphne du Maurier,English novelist (1907–1989),1989-04-19,04,19,,https://en.wikipedia.org/wiki/Daphne_du_Maurier
+death,Jim Corbett,"Anglo-Indian hunter, naturalist and author (1875–1955)",1955-04-19,04,19,,https://en.wikipedia.org/wiki/Jim_Corbett
+death,Steve Conway (singer),English singer (1920–1952),1952-04-19,04,19,,https://en.wikipedia.org/wiki/Steve_Conway_(singer)
+death,Johanna Müller-Hermann,Austrian composer and pedagogue (1868 - 1941),1941-04-19,04,19,,https://en.wikipedia.org/wiki/Johanna_M%C3%BCller-Hermann
+death,Signe Rink,Danish writer and ethnologist (1836–1909),1909-04-19,04,19,,https://en.wikipedia.org/wiki/Signe_Rink
+death,Martin Körber,"Baltic German pastor, composer",1893-04-19,04,19,,https://en.wikipedia.org/wiki/Martin_K%C3%B6rber
+death,Lord Byron,English poet (1788–1824),1824-04-19,04,19,,https://en.wikipedia.org/wiki/Lord_Byron
+death,Canaletto,Italian painter of landscapes (1697–1768),1768-04-19,04,19,,https://en.wikipedia.org/wiki/Canaletto
+death,Antonio de Solís y Ribadeneyra,Spanish dramatist and historian,1686-04-19,04,19,,https://en.wikipedia.org/wiki/Antonio_de_Sol%C3%ADs_y_Ribadeneyra
+death,Sigismondo d'India,Italian composer (c1582 – before 1629),1629-04-19,04,19,,https://en.wikipedia.org/wiki/Sigismondo_d'India
+death,"Thomas Sackville, 1st Earl of Dorset",English politician and poet (1536–1608),1608-04-19,04,19,,https://en.wikipedia.org/wiki/Thomas_Sackville%2C_1st_Earl_of_Dorset
+death,Paolo Veronese,Italian Renaissance painter (1528–1588),1588-04-19,04,19,,https://en.wikipedia.org/wiki/Paolo_Veronese

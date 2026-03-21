@@ -1,31 +1,4 @@
 work_type,title,byline,release_date,month,day,extra,source_url
-death,Kenny Rogers,American country singer (1938–2020),2020-03-20,03,20,,https://en.wikipedia.org/wiki/Kenny_Rogers
-death,"Mary Warnock, Baroness Warnock","English philosopher of morality, education, and mind, and a writer (1924–2019)",2019-03-20,03,20,,https://en.wikipedia.org/wiki/Mary_Warnock%2C_Baroness_Warnock
-death,C. K. Mann,Ghanaian highlife musician,2018-03-20,03,20,,https://en.wikipedia.org/wiki/C._K._Mann
-death,Khushwant Singh,Indian writer (1915–2014),2014-03-20,03,20,,https://en.wikipedia.org/wiki/Khushwant_Singh
-death,James Herbert,English horror writer (1943–2013),2013-03-20,03,20,,https://en.wikipedia.org/wiki/James_Herbert
-death,George Lowe (mountaineer),"New Zealand mountaineer, explorer and film director (1924–2013)",2013-03-20,03,20,,https://en.wikipedia.org/wiki/George_Lowe_(mountaineer)
-death,Johnny Pearson,Musical artist,2011-03-20,03,20,,https://en.wikipedia.org/wiki/Johnny_Pearson
-death,Ai (poet),American poet (1947–2010),2010-03-20,03,20,,https://en.wikipedia.org/wiki/Ai_(poet)
-death,Armand Lohikoski,Finnish American film director and screenwriter (1912–2005),2005-03-20,03,20,,https://en.wikipedia.org/wiki/Armand_Lohikoski
-death,Gene Eugene,"Canadian actor, musician, songwriter, record producer and audio engineer",2000-03-20,03,20,,https://en.wikipedia.org/wiki/Gene_Eugene
-death,Patrick Heron,English artist (1920-1999),1999-03-20,03,20,,https://en.wikipedia.org/wiki/Patrick_Heron
-death,V. S. Pritchett,British writer and critic (1900–1997),1997-03-20,03,20,,https://en.wikipedia.org/wiki/V._S._Pritchett
-death,Georges Delerue,French composer (1925–1992),1992-03-20,03,20,,https://en.wikipedia.org/wiki/Georges_Delerue
-death,Marilyn Maxwell,"American actress, singer (1921–1972)",1972-03-20,03,20,,https://en.wikipedia.org/wiki/Marilyn_Maxwell
-death,Falih Rıfkı Atay,"Turkish journalist, writer and politician",1971-03-20,03,20,,https://en.wikipedia.org/wiki/Falih_R%C4%B1fk%C4%B1_Atay
-death,Carl Theodor Dreyer,Danish film director (1889–1968),1968-03-20,03,20,,https://en.wikipedia.org/wiki/Carl_Theodor_Dreyer
-death,Demetrios Galanis,Greek artist (1879–1966),1966-03-20,03,20,,https://en.wikipedia.org/wiki/Demetrios_Galanis
-death,Brendan Behan,Irish poet and writer (1923–1964),1964-03-20,03,20,,https://en.wikipedia.org/wiki/Brendan_Behan
-death,Sigurd Wallén,Swedish actor,1947-03-20,03,20,,https://en.wikipedia.org/wiki/Sigurd_Wall%C3%A9n
-death,Oskar Baum,Czech music educator and writer,1941-03-20,03,20,,https://en.wikipedia.org/wiki/Oskar_Baum
-death,Apollon Maykov,Russian poet and translator (1821–1897),1897-03-20,03,20,,https://en.wikipedia.org/wiki/Apollon_Maykov
-death,Hans Christian Lumbye,Danish composer (1810–1874),1874-03-20,03,20,,https://en.wikipedia.org/wiki/Hans_Christian_Lumbye
-death,James Justinian Morier,British diplomat and author (1782–1849),1849-03-20,03,20,,https://en.wikipedia.org/wiki/James_Justinian_Morier
-death,Louis Léopold Robert,French painter,1835-03-20,03,20,,https://en.wikipedia.org/wiki/Louis_L%C3%A9opold_Robert
-death,Nicolas de Largillière,French painter (1656–1746),1746-03-20,03,20,,https://en.wikipedia.org/wiki/Nicolas_de_Largilli%C3%A8re
-death,Adrienne Lecouvreur,French actress (1692–1730),1730-03-20,03,20,,https://en.wikipedia.org/wiki/Adrienne_Lecouvreur
-death,Georges Chastellain,15th-century French poet,1475-03-20,03,20,,https://en.wikipedia.org/wiki/Georges_Chastellain
 death,Kitty Dukakis,American author (1936–2025),2025-03-21,03,21,,https://en.wikipedia.org/wiki/Kitty_Dukakis
 death,Nawal El Saadawi,"Egyptian feminist writer, activist, doctor and psychiatrist (1931–2021)",2021-03-21,03,21,,https://en.wikipedia.org/wiki/Nawal_El_Saadawi
 death,Colin Dexter,English writer (1930–2017),2017-03-21,03,21,,https://en.wikipedia.org/wiki/Colin_Dexter
@@ -841,7 +814,7 @@ death,Helena Modjeska,Polish-American actress (1840–1909),1909-04-09,04,09,,ht
 death,Dante Gabriel Rossetti,English poet and artist (1828–1882),1882-04-09,04,09,,https://en.wikipedia.org/wiki/Dante_Gabriel_Rossetti
 death,Sarah Fielding,English author (1710–1768),1768-04-09,04,09,,https://en.wikipedia.org/wiki/Sarah_Fielding
 death,Jean Quintin,"French priest, knight of the Order of St John and writer",1561-04-09,04,09,,https://en.wikipedia.org/wiki/Jean_Quintin
-death,François Rabelais,French writer and humanist,1553-04-09,04,09,,https://en.wikipedia.org/wiki/Fran%C3%A7ois_Rabelais
+death,François Rabelais,French writer and humanist (died 1553),1553-04-09,04,09,,https://en.wikipedia.org/wiki/Fran%C3%A7ois_Rabelais
 death,Ted Kotcheff,Canadian film and television director (1931–2025),2025-04-10,04,10,,https://en.wikipedia.org/wiki/Ted_Kotcheff
 death,Peter Lovesey,British writer (1936–2025),2025-04-10,04,10,,https://en.wikipedia.org/wiki/Peter_Lovesey
 death,O. J. Simpson,American football player and actor (1947–2024),2024-04-10,04,10,,https://en.wikipedia.org/wiki/O._J._Simpson
@@ -1232,3 +1205,34 @@ death,Joaquim de Sousa Andrade,Brazilian poet (1833–1902),1902-04-20,04,20,,ht
 death,Joseph Wolf,German natural history artist (1820–1899),1899-04-20,04,20,,https://en.wikipedia.org/wiki/Joseph_Wolf
 death,Lancelot Addison,English writer and clergyman (1632–1703),1703-04-20,04,20,,https://en.wikipedia.org/wiki/Lancelot_Addison
 death,Christoph Demantius,German composer,1643-04-20,04,20,,https://en.wikipedia.org/wiki/Christoph_Demantius
+death,Polly Higgins,"Scottish barrister, author, and environmental lobbyist (1968–2019)",2019-04-21,04,21,,https://en.wikipedia.org/wiki/Polly_Higgins
+death,Prince (musician),American musician and actor (1958–2016),2016-04-21,04,21,,https://en.wikipedia.org/wiki/Prince_(musician)
+death,Win Tin,Burmese writer and political prisoner (12 March 1929 – 21 April 2014),2014-04-21,04,21,,https://en.wikipedia.org/wiki/Win_Tin
+death,Shakuntala Devi,Indian writer and mental calculator (1929–2013),2013-04-21,04,21,,https://en.wikipedia.org/wiki/Shakuntala_Devi
+death,Doris Betts,American writer,2012-04-21,04,21,,https://en.wikipedia.org/wiki/Doris_Betts
+death,Gustav Lorentzen,Musical artist,2010-04-21,04,21,,https://en.wikipedia.org/wiki/Gustav_Lorentzen
+death,Nina Simone,American singer-songwriter (1933–2003),2003-04-21,04,21,,https://en.wikipedia.org/wiki/Nina_Simone
+death,"Charles ""Buddy"" Rogers",American actor and musician (1904–1999),1999-04-21,04,21,,https://en.wikipedia.org/wiki/Charles_%22Buddy%22_Rogers
+death,Väinö Linna,Finnish author (1920–1992),1992-04-21,04,21,,https://en.wikipedia.org/wiki/V%C3%A4in%C3%B6_Linna
+death,Willi Boskovsky,Austrian violinist and conductor,1991-04-21,04,21,,https://en.wikipedia.org/wiki/Willi_Boskovsky
+death,Erté,Russian-born French artist and designer (1892–1990),1990-04-21,04,21,,https://en.wikipedia.org/wiki/Ert%C3%A9
+death,Marjorie Eaton,American actress and artist (1901–1986),1986-04-21,04,21,,https://en.wikipedia.org/wiki/Marjorie_Eaton
+death,Salah Jahin,Egyptian poet and cartoonist,1986-04-21,04,21,,https://en.wikipedia.org/wiki/Salah_Jahin
+death,Rudi Gernreich,Austrian-born American fashion designer (1922–1985),1985-04-21,04,21,,https://en.wikipedia.org/wiki/Rudi_Gernreich
+death,Marcel Janco,"Romanian and Israeli visual artist, architect and art theorist",1984-04-21,04,21,,https://en.wikipedia.org/wiki/Marcel_Janco
+death,Walter Slezak,Austrian-born actor (1902–1983),1983-04-21,04,21,,https://en.wikipedia.org/wiki/Walter_Slezak
+death,Sohrab Sepehri,Iranian poet and painter (1928–1980),1980-04-21,04,21,,https://en.wikipedia.org/wiki/Sohrab_Sepehri
+death,Sandy Denny,English folk rock singer-songwriter (1947–1978),1978-04-21,04,21,,https://en.wikipedia.org/wiki/Sandy_Denny
+death,Gummo Marx,American comedian (1892–1977),1977-04-21,04,21,,https://en.wikipedia.org/wiki/Gummo_Marx
+death,Kemal Tahir,Turkish novelist and intellectual (1910-1973),1973-04-21,04,21,,https://en.wikipedia.org/wiki/Kemal_Tahir
+death,Charles MacArthur,American writer,1956-04-21,04,21,,https://en.wikipedia.org/wiki/Charles_MacArthur
+death,Leslie Banks,English actor (1890–1952),1952-04-21,04,21,,https://en.wikipedia.org/wiki/Leslie_Banks
+death,Muhammad Iqbal,Islamic philosopher and poet (1877–1938),1938-04-21,04,21,,https://en.wikipedia.org/wiki/Muhammad_Iqbal
+death,Robert Bridges,British poet (1844-1930),1930-04-21,04,21,,https://en.wikipedia.org/wiki/Robert_Bridges
+death,Eleonora Duse,Italian actress (1858–1924),1924-04-21,04,21,,https://en.wikipedia.org/wiki/Eleonora_Duse
+death,Mark Twain,American author and humorist (1835–1910),1910-04-21,04,21,,https://en.wikipedia.org/wiki/Mark_Twain
+death,Thomas Tickell,English poet (1685–1740),1740-04-21,04,21,,https://en.wikipedia.org/wiki/Thomas_Tickell
+death,Antoine Hamilton,Irish soldier and writer (died 1719),1720-04-21,04,21,,https://en.wikipedia.org/wiki/Antoine_Hamilton
+death,Philippe de La Hire,French painter and architect (1640–1718),1719-04-21,04,21,,https://en.wikipedia.org/wiki/Philippe_de_La_Hire
+death,Jean Racine,17th-century French dramatist (1639–1699),1699-04-21,04,21,,https://en.wikipedia.org/wiki/Jean_Racine
+death,Jan Boeckhorst,German-born Flemish Baroque painter and draughtsman (c. 1604–1668),1668-04-21,04,21,,https://en.wikipedia.org/wiki/Jan_Boeckhorst

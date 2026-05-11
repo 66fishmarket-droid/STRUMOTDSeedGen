@@ -1,24 +1,4 @@
 work_type,title,byline,release_date,month,day,extra,source_url
-death,Pauline Tinsley,British opera singer (1928–2021),2021-05-10,05,10,,https://en.wikipedia.org/wiki/Pauline_Tinsley
-death,Betty Wright,American singer (1953–2020),2020-05-10,05,10,,https://en.wikipedia.org/wiki/Betty_Wright
-death,Chris Burden,American artist (1946–2015),2015-05-10,05,10,,https://en.wikipedia.org/wiki/Chris_Burden
-death,Horst Faas,"German writer, journalist and photographer (1933–2012)",2012-05-10,05,10,,https://en.wikipedia.org/wiki/Horst_Faas
-death,Frank Frazetta,American illustrator and painter (1928–2010),2010-05-10,05,10,,https://en.wikipedia.org/wiki/Frank_Frazetta
-death,Leyla Gencer,Turkish operatic soprano (1928–2008),2008-05-10,05,10,,https://en.wikipedia.org/wiki/Leyla_Gencer
-death,Soraya (musician),Colombian-American singer-songwriter (1969–2006),2006-05-10,05,10,,https://en.wikipedia.org/wiki/Soraya_(musician)
-death,Kaifi Azmi,Indian Urdu poet (1919–2002),2002-05-10,05,10,,https://en.wikipedia.org/wiki/Kaifi_Azmi
-death,Dick Sprang,American artist (1915–2000),2000-05-10,05,10,,https://en.wikipedia.org/wiki/Dick_Sprang
-death,Shel Silverstein,"American poet, cartoonist, writer, and songwriter (1930–1999)",1999-05-10,05,10,,https://en.wikipedia.org/wiki/Shel_Silverstein
-death,Walker Percy,American writer (1916–1990),1990-05-10,05,10,,https://en.wikipedia.org/wiki/Walker_Percy
-death,Dominik Tatarka,Slovak writer (1913–1989),1989-05-10,05,10,,https://en.wikipedia.org/wiki/Dominik_Tatarka
-death,Shen Congwen,Chinese writer (1902–1988),1988-05-10,05,10,,https://en.wikipedia.org/wiki/Shen_Congwen
-death,Peter Weiss,Swedish-German playwright and author (1916–1982),1982-05-10,05,10,,https://en.wikipedia.org/wiki/Peter_Weiss
-death,Joan Crawford,American actress (1904?–1977),1977-05-10,05,10,,https://en.wikipedia.org/wiki/Joan_Crawford
-death,Scotty Beckett,American actor (1929–1968),1968-05-10,05,10,,https://en.wikipedia.org/wiki/Scotty_Beckett
-death,Mikhail Larionov,Russian painter and costume and set designer,1964-05-10,05,10,,https://en.wikipedia.org/wiki/Mikhail_Larionov
-death,Yury Olesha,Russian author (1899–1960),1960-05-10,05,10,,https://en.wikipedia.org/wiki/Yury_Olesha
-death,Mikhail Saltykov-Shchedrin,Russian author and satirist (1826–1889),1889-05-10,05,10,,https://en.wikipedia.org/wiki/Mikhail_Saltykov-Shchedrin
-death,Hokusai,Japanese artist (1760–1849),1849-05-10,05,10,,https://en.wikipedia.org/wiki/Hokusai
 death,Susan Backlinie,American actress and stuntwoman (1946–2024),2024-05-11,05,11,,https://en.wikipedia.org/wiki/Susan_Backlinie
 death,Norman Lloyd,"American actor, producer and director (1914–2021)",2021-05-11,05,11,,https://en.wikipedia.org/wiki/Norman_Lloyd
 death,Jerry Stiller,American comedian and actor (1927–2020),2020-05-11,05,11,,https://en.wikipedia.org/wiki/Jerry_Stiller
@@ -294,7 +274,7 @@ death,Jeffrey Catherine Jones,American painter,2011-05-19,05,19,,https://en.wiki
 death,Nicholas Maw,British composer (1935–2009),2009-05-19,05,19,,https://en.wikipedia.org/wiki/Nicholas_Maw
 death,Vijay Tendulkar,Indian playwright (1928-2008),2008-05-19,05,19,,https://en.wikipedia.org/wiki/Vijay_Tendulkar
 death,Mary Dresselhuys,Dutch actress (1907–2004),2004-05-19,05,19,,https://en.wikipedia.org/wiki/Mary_Dresselhuys
-death,Walter Lord,American author (1917–2002),2002-05-19,05,19,,https://en.wikipedia.org/wiki/Walter_Lord
+death,Walter Lord,American historian and author (1917–2002),2002-05-19,05,19,,https://en.wikipedia.org/wiki/Walter_Lord
 death,Susannah McCorkle,American jazz singer (1946–2001),2001-05-19,05,19,,https://en.wikipedia.org/wiki/Susannah_McCorkle
 death,John Beradino,American baseball player and actor (1917–1996),1996-05-19,05,19,,https://en.wikipedia.org/wiki/John_Beradino
 death,Yiannis Papaioannou,Greek composer and teacher,1989-05-19,05,19,,https://en.wikipedia.org/wiki/Yiannis_Papaioannou
@@ -897,7 +877,7 @@ death,Barry Sullivan (American actor),American actor (1912–1994),1994-06-06,06
 death,Stan Getz,American jazz saxophonist (1927–1991),1991-06-06,06,06,,https://en.wikipedia.org/wiki/Stan_Getz
 death,Hans Leip,German writer,1983-06-06,06,06,,https://en.wikipedia.org/wiki/Hans_Leip
 death,Kenneth Rexroth,American poet and translator (1905–1982),1982-06-06,06,06,,https://en.wikipedia.org/wiki/Kenneth_Rexroth
-death,Jack Haley,American actor (1897–1979),1979-06-06,06,06,,https://en.wikipedia.org/wiki/Jack_Haley
+death,Jack Haley,American actor (1898–1979),1979-06-06,06,06,,https://en.wikipedia.org/wiki/Jack_Haley
 death,William Baziotes,American painter (1912–1963),1963-06-06,06,06,,https://en.wikipedia.org/wiki/William_Baziotes
 death,Yves Klein,French artist (1928–1962),1962-06-06,06,06,,https://en.wikipedia.org/wiki/Yves_Klein
 death,Max Meldrum,Australian painter,1955-06-06,06,06,,https://en.wikipedia.org/wiki/Max_Meldrum
@@ -1027,3 +1007,31 @@ death,Alessandro Algardi,Italian sculptor (1598–1654),1654-06-10,06,10,,https:
 death,Isabella Andreini,Italian actress and writer (1562–1604),1604-06-10,06,10,,https://en.wikipedia.org/wiki/Isabella_Andreini
 death,Luís de Camões,Portuguese poet (c. 1524–1580),1580-06-10,06,10,,https://en.wikipedia.org/wiki/Lu%C3%ADs_de_Cam%C3%B5es
 death,Martin Agricola,German Renaissance composer and music theorist (1486–1556),1556-06-10,06,10,,https://en.wikipedia.org/wiki/Martin_Agricola
+death,Brian Wilson,American musician (1942–2025),2025-06-11,06,11,,https://en.wikipedia.org/wiki/Brian_Wilson
+death,Tony Lo Bianco,American actor (1936–2024),2024-06-11,06,11,,https://en.wikipedia.org/wiki/Tony_Lo_Bianco
+death,Françoise Hardy,French singer (1944–2024),2024-06-11,06,11,,https://en.wikipedia.org/wiki/Fran%C3%A7oise_Hardy
+death,Stella Pevsner,American children's writer (1921–2020),2020-06-11,06,11,,https://en.wikipedia.org/wiki/Stella_Pevsner
+death,Ornette Coleman,American jazz musician and composer (1930–2015),2015-06-11,06,11,,https://en.wikipedia.org/wiki/Ornette_Coleman
+death,Ron Moody,"English actor, composer, singer and writer (1924–2015)",2015-06-11,06,11,,https://en.wikipedia.org/wiki/Ron_Moody
+death,Ruby Dee,American actress (1922–2014),2014-06-11,06,11,,https://en.wikipedia.org/wiki/Ruby_Dee
+death,Rafael Frühbeck de Burgos,Spanish conductor and composer,2014-06-11,06,11,,https://en.wikipedia.org/wiki/Rafael_Fr%C3%BChbeck_de_Burgos
+death,Ann Rutherford,Canadian-born American actress (1917–2012),2012-06-11,06,11,,https://en.wikipedia.org/wiki/Ann_Rutherford
+death,Mala Powers,American actress (1931–2007),2007-06-11,06,11,,https://en.wikipedia.org/wiki/Mala_Powers
+death,Anne-Marie Alonzo,"Canadian playwright, poet, novelist, critic and publisher",2005-06-11,06,11,,https://en.wikipedia.org/wiki/Anne-Marie_Alonzo
+death,Prince Egon von Fürstenberg,Fashion designer (1946–2004),2004-06-11,06,11,,https://en.wikipedia.org/wiki/Prince_Egon_von_F%C3%BCrstenberg
+death,Amalia Mendoza,Musical artist,2001-06-11,06,11,,https://en.wikipedia.org/wiki/Amalia_Mendoza
+death,DeForest Kelley,American actor (1920–1999),1999-06-11,06,11,,https://en.wikipedia.org/wiki/DeForest_Kelley
+death,Catherine Cookson,British novelist (1906–1998),1998-06-11,06,11,,https://en.wikipedia.org/wiki/Catherine_Cookson
+death,Brigitte Helm,German actress (1908–1996),1996-06-11,06,11,,https://en.wikipedia.org/wiki/Brigitte_Helm
+death,Ray Sharkey,American actor (1952–1993),1993-06-11,06,11,,https://en.wikipedia.org/wiki/Ray_Sharkey
+death,Rafael Orozco Maestre,Colombian vallenato singer (1954–1992),1992-06-11,06,11,,https://en.wikipedia.org/wiki/Rafael_Orozco_Maestre
+death,Chesley Bonestell,American science fiction and space illustrator (1888–1986),1986-06-11,06,11,,https://en.wikipedia.org/wiki/Chesley_Bonestell
+death,Alice Dalgliesh,American writer,1979-06-11,06,11,,https://en.wikipedia.org/wiki/Alice_Dalgliesh
+death,John Wayne,American actor (1907–1979),1979-06-11,06,11,,https://en.wikipedia.org/wiki/John_Wayne
+death,Chhabi Biswas,Indian actor (1900–1962),1962-06-11,06,11,,https://en.wikipedia.org/wiki/Chhabi_Biswas
+death,Daniel Carter Beard,American artist and writer (1850–1941),1941-06-11,06,11,,https://en.wikipedia.org/wiki/Daniel_Carter_Beard
+death,Robert E. Howard,American pulp fiction writer (1906–1936),1936-06-11,06,11,,https://en.wikipedia.org/wiki/Robert_E._Howard
+death,Théodore Dubois,French composer and organist (1837–1924),1924-06-11,06,11,,https://en.wikipedia.org/wiki/Th%C3%A9odore_Dubois
+death,Karl Bryullov,Russian painter (1799–1852),1852-06-11,06,11,,https://en.wikipedia.org/wiki/Karl_Bryullov
+death,Felice Torelli,Italian painter (1667–1748),1748-06-11,06,11,,https://en.wikipedia.org/wiki/Felice_Torelli
+death,André Félibien,French architecture writer (1619–1695),1695-06-11,06,11,,https://en.wikipedia.org/wiki/Andr%C3%A9_F%C3%A9libien

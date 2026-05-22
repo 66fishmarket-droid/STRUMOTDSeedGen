@@ -1,42 +1,4 @@
 work_type,title,byline,release_date,month,day,extra,source_url
-death,Jan A. P. Kaczmarek,Polish composer (1953–2024),2024-05-21,05,21,,https://en.wikipedia.org/wiki/Jan_A._P._Kaczmarek
-death,Rik Kuypers,Belgian film director (1925–2019),2019-05-21,05,21,,https://en.wikipedia.org/wiki/Rik_Kuypers
-death,Binyavanga Wainaina,Kenyan writer and editor (1971–2019),2019-05-21,05,21,,https://en.wikipedia.org/wiki/Binyavanga_Wainaina
-death,Nick Menza,American drummer (1964–2016),2016-05-21,05,21,,https://en.wikipedia.org/wiki/Nick_Menza
-death,Twinkle (singer),English singer-songwriter (1948–2015),2015-05-21,05,21,,https://en.wikipedia.org/wiki/Twinkle_(singer)
-death,Louis Johnson (bassist),American bass guitarist (1955–2015),2015-05-21,05,21,,https://en.wikipedia.org/wiki/Louis_Johnson_(bassist)
-death,Frank Comstock,"American composer, arranger, conductor, and trombonist",2013-05-21,05,21,,https://en.wikipedia.org/wiki/Frank_Comstock
-death,"Bob Thompson (musician, born 1924)",American musician,2013-05-21,05,21,,https://en.wikipedia.org/wiki/Bob_Thompson_(musician%2C_born_1924)
-death,Dominique Venner,French journalist and essayist,2013-05-21,05,21,,https://en.wikipedia.org/wiki/Dominique_Venner
-death,Eddie Blazonczyk,American polka musician (1941–2012),2012-05-21,05,21,,https://en.wikipedia.org/wiki/Eddie_Blazonczyk
-death,Cherd Songsri,"Thai film director, screenwriter and film producer",2006-05-21,05,21,,https://en.wikipedia.org/wiki/Cherd_Songsri
-death,Billy Walker (musician),American country music singer and guitarist (1929–2006),2006-05-21,05,21,,https://en.wikipedia.org/wiki/Billy_Walker_(musician)
-death,Deborah Berger,American female artist (1956–2005),2005-05-21,05,21,,https://en.wikipedia.org/wiki/Deborah_Berger
-death,Stephen Elliott (actor),American actor (1918–2005),2005-05-21,05,21,,https://en.wikipedia.org/wiki/Stephen_Elliott_(actor)
-death,Howard Morris,American actor and director (1919–2005),2005-05-21,05,21,,https://en.wikipedia.org/wiki/Howard_Morris
-death,Niki de Saint Phalle,"French plastician, painter and sculptor",2002-05-21,05,21,,https://en.wikipedia.org/wiki/Niki_de_Saint_Phalle
-death,Barbara Cartland,English writer and media personality (1901–2000),2000-05-21,05,21,,https://en.wikipedia.org/wiki/Barbara_Cartland
-death,John Gielgud,English actor and theatre director (1904–2000),2000-05-21,05,21,,https://en.wikipedia.org/wiki/John_Gielgud
-death,Robert Gist,American actor (1917–1998),1998-05-21,05,21,,https://en.wikipedia.org/wiki/Robert_Gist
-death,Paul Delph,American musician,1996-05-21,05,21,,https://en.wikipedia.org/wiki/Paul_Delph
-death,Lash LaRue,American actor (1917–1996),1996-05-21,05,21,,https://en.wikipedia.org/wiki/Lash_LaRue
-death,Ann Little,American actress (1891–1984),1984-05-21,05,21,,https://en.wikipedia.org/wiki/Ann_Little
-death,Vaughn Monroe,American singer (1911–1973),1973-05-21,05,21,,https://en.wikipedia.org/wiki/Vaughn_Monroe
-death,E. L. Grant Watson,American biologist and writer (1885–1970),1970-05-21,05,21,,https://en.wikipedia.org/wiki/E._L._Grant_Watson
-death,Doris Lloyd,British actress (1891–1968),1968-05-21,05,21,,https://en.wikipedia.org/wiki/Doris_Lloyd
-death,Alexander Vertinsky,Russian and Soviet artist and singer (1889–1957),1957-05-21,05,21,,https://en.wikipedia.org/wiki/Alexander_Vertinsky
-death,John Garfield,American actor (1913–1952),1952-05-21,05,21,,https://en.wikipedia.org/wiki/John_Garfield
-death,Klaus Mann,German writer and dissident (1906–1949),1949-05-21,05,21,,https://en.wikipedia.org/wiki/Klaus_Mann
-death,Marcel Boulenger,French fencer and writer,1932-05-21,05,21,,https://en.wikipedia.org/wiki/Marcel_Boulenger
-death,Ronald Firbank,English novelist (1886–1926),1926-05-21,05,21,,https://en.wikipedia.org/wiki/Ronald_Firbank
-death,Franz von Suppé,Austrian composer (1819–1895),1895-05-21,05,21,,https://en.wikipedia.org/wiki/Franz_von_Supp%C3%A9
-death,John Drew Sr.,19th-century Irish-American actor and theatre manager,1862-05-21,05,21,,https://en.wikipedia.org/wiki/John_Drew_Sr.
-death,Giuseppe Baini,Italian composer,1844-05-21,05,21,,https://en.wikipedia.org/wiki/Giuseppe_Baini
-death,Thomas Warton,"18th-century English literary historian, critic, and poet",1790-05-21,05,21,,https://en.wikipedia.org/wiki/Thomas_Warton
-death,Christopher Smart,English poet (1722–1771),1771-05-21,05,21,,https://en.wikipedia.org/wiki/Christopher_Smart
-death,Pieter Corneliszoon Hooft,Dutch historian and writer (1581–1647),1647-05-21,05,21,,https://en.wikipedia.org/wiki/Pieter_Corneliszoon_Hooft
-death,Tommaso Campanella,"Italian philosopher, theologian, astrologer, and poet (1568–1639)",1639-05-21,05,21,,https://en.wikipedia.org/wiki/Tommaso_Campanella
-death,Martynas Mažvydas,Lithuanian writer (1510–1563),1563-05-21,05,21,,https://en.wikipedia.org/wiki/Martynas_Ma%C5%BEvydas
 death,Dervla Murphy,Irish writer and touring cyclist (1931–2022),2022-05-22,05,22,,https://en.wikipedia.org/wiki/Dervla_Murphy
 death,Judith Kerr,British writer and illustrator (1923–2019),2019-05-22,05,22,,https://en.wikipedia.org/wiki/Judith_Kerr
 death,Bata Živojinović,Serbian actor,2016-05-22,05,22,,https://en.wikipedia.org/wiki/Bata_%C5%BDivojinovi%C4%87
@@ -1027,3 +989,30 @@ death,John Smith (explorer),"English soldier, explorer and writer (1580–1631)"
 death,Kryštof Harant,"Czech nobleman, traveler, humanist, soldier, writer and composer",1621-06-21,06,21,,https://en.wikipedia.org/wiki/Kry%C5%A1tof_Harant
 death,Sebastiano del Piombo,Italian painter (c. 1485 – 1547),1547-06-21,06,21,,https://en.wikipedia.org/wiki/Sebastiano_del_Piombo
 death,John Skelton (poet),English poet and tutor (1463-1529),1529-06-21,06,21,,https://en.wikipedia.org/wiki/John_Skelton_(poet)
+death,Arnaldo Pomodoro,Italian sculptor (1926–2025),2025-06-22,06,22,,https://en.wikipedia.org/wiki/Arnaldo_Pomodoro
+death,Vinnie Paul,American drummer (1964–2018),2018-06-22,06,22,,https://en.wikipedia.org/wiki/Vinnie_Paul
+death,Mao Kobayashi (actress),Japanese newscaster and actress,2017-06-22,06,22,,https://en.wikipedia.org/wiki/Mao_Kobayashi_(actress)
+death,James Horner,American film composer (1953–2015),2015-06-22,06,22,,https://en.wikipedia.org/wiki/James_Horner
+death,Rama Narayanan,Indian film director and film producer,2014-06-22,06,22,,https://en.wikipedia.org/wiki/Rama_Narayanan
+death,Juan Luis Galiardo,Spanish actor,2012-06-22,06,22,,https://en.wikipedia.org/wiki/Juan_Luis_Galiardo
+death,George Carlin,American stand-up comedian (1937–2008),2008-06-22,06,22,,https://en.wikipedia.org/wiki/George_Carlin
+death,Dody Goodman,American actress (1914–2008),2008-06-22,06,22,,https://en.wikipedia.org/wiki/Dody_Goodman
+death,Mattie Stepanek,American writer (1990–2004),2004-06-22,06,22,,https://en.wikipedia.org/wiki/Mattie_Stepanek
+death,Vasil Bykaŭ,"Belarusian writer, human rights activist, and politician (1924–2003)",2003-06-22,06,22,,https://en.wikipedia.org/wiki/Vasil_Byka%C5%AD
+death,Ted Gärdestad,Swedish musician,1997-06-22,06,22,,https://en.wikipedia.org/wiki/Ted_G%C3%A4rdestad
+death,Leonid Derbenyov,Russian poet and lyricist (1931–1995),1995-06-22,06,22,,https://en.wikipedia.org/wiki/Leonid_Derbenyov
+death,Al Hansen,American artist (1927–1995),1995-06-22,06,22,,https://en.wikipedia.org/wiki/Al_Hansen
+death,Dennis Day,"American actor, comedian and singer (1916–1988)",1988-06-22,06,22,,https://en.wikipedia.org/wiki/Dennis_Day
+death,Fred Astaire,American dancer and actor (1899–1987),1987-06-22,06,22,,https://en.wikipedia.org/wiki/Fred_Astaire
+death,Joseph Losey,American theatre and film director (1909–1984),1984-06-22,06,22,,https://en.wikipedia.org/wiki/Joseph_Losey
+death,Jacqueline Audry,French film director (1908–1977),1977-06-22,06,22,,https://en.wikipedia.org/wiki/Jacqueline_Audry
+death,Peter Laughner,"American guitarist, songwriter and singer (1952–1977)",1977-06-22,06,22,,https://en.wikipedia.org/wiki/Peter_Laughner
+death,Darius Milhaud,"French composer, conductor and teacher (1892–1974)",1974-06-22,06,22,,https://en.wikipedia.org/wiki/Darius_Milhaud
+death,Judy Garland,American actress and singer (1922–1969),1969-06-22,06,22,,https://en.wikipedia.org/wiki/Judy_Garland
+death,Walter de la Mare,English poet and fiction writer (1873–1956),1956-06-22,06,22,,https://en.wikipedia.org/wiki/Walter_de_la_Mare
+death,C. J. Dennis,Australian poet (1876–1938),1938-06-22,06,22,,https://en.wikipedia.org/wiki/C._J._Dennis
+death,A. B. Frost,"American illustrator, graphic artist, painter and comics writer",1928-06-22,06,22,,https://en.wikipedia.org/wiki/A._B._Frost
+death,Ștefan Octavian Iosif,Romanian poet and translator (1875-1913),1913-06-22,06,22,,https://en.wikipedia.org/wiki/%C8%98tefan_Octavian_Iosif
+death,Carlo Zimech,Maltese priest and painter (1696–1766),1766-06-22,06,22,,https://en.wikipedia.org/wiki/Carlo_Zimech
+death,Matthew Henry,British Nonconformist minister and author (1662–1714),1714-06-22,06,22,,https://en.wikipedia.org/wiki/Matthew_Henry
+death,Katherine Philips,Anglo-Welsh poet and translator (1631/32 – 1664),1664-06-22,06,22,,https://en.wikipedia.org/wiki/Katherine_Philips

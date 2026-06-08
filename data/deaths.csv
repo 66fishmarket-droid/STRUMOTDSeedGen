@@ -1,26 +1,4 @@
 work_type,title,byline,release_date,month,day,extra,source_url
-death,The Iron Sheik,Iranian-American professional wrestler and actor (1942–2023),2023-06-07,06,07,,https://en.wikipedia.org/wiki/The_Iron_Sheik
-death,Christopher Lee,English actor and singer (1922–2015),2015-06-07,06,07,,https://en.wikipedia.org/wiki/Christopher_Lee
-death,Signe Hasso,Swedish actress (1915–2002),2002-06-07,06,07,,https://en.wikipedia.org/wiki/Signe_Hasso
-death,Betty Neels,British writer,2001-06-07,06,07,,https://en.wikipedia.org/wiki/Betty_Neels
-death,Cahit Zarifoğlu,Turkish poet and writer (1940–1987),1987-06-07,06,07,,https://en.wikipedia.org/wiki/Cahit_Zarifo%C4%9Flu
-death,Elizabeth Craig (writer),Scottish writer and home economist (1883–1980),1980-06-07,06,07,,https://en.wikipedia.org/wiki/Elizabeth_Craig_(writer)
-death,Philip Guston,Canadian-American painter and printmaker (1913–1980),1980-06-07,06,07,,https://en.wikipedia.org/wiki/Philip_Guston
-death,Henry Miller,American novelist (1891–1980),1980-06-07,06,07,,https://en.wikipedia.org/wiki/Henry_Miller
-death,E. M. Forster,English novelist and writer (1879–1970),1970-06-07,06,07,,https://en.wikipedia.org/wiki/E._M._Forster
-death,Dan Duryea,American actor (1907–1968),1968-06-07,06,07,,https://en.wikipedia.org/wiki/Dan_Duryea
-death,Dorothy Parker,"American poet, writer, critic (1893–1967)",1967-06-07,06,07,,https://en.wikipedia.org/wiki/Dorothy_Parker
-death,Jean Arp,German-French sculptor and poet (1886–1966),1966-06-07,06,07,,https://en.wikipedia.org/wiki/Jean_Arp
-death,Judy Holliday,"American actress, singer (1921–1965)",1965-06-07,06,07,,https://en.wikipedia.org/wiki/Judy_Holliday
-death,Jean Harlow,American actress (1911–1937),1937-06-07,06,07,,https://en.wikipedia.org/wiki/Jean_Harlow
-death,Dragutin Domjanić,Croatian poet,1933-06-07,06,07,,https://en.wikipedia.org/wiki/Dragutin_Domjani%C4%87
-death,Émile Faguet,French author and literary critic,1916-06-07,06,07,,https://en.wikipedia.org/wiki/%C3%89mile_Faguet
-death,Pavlos Carrer,Greek composer,1896-06-07,06,07,,https://en.wikipedia.org/wiki/Pavlos_Carrer
-death,Patrick Brontë,Irish clergyman and writer (1777–1861),1861-06-07,06,07,,https://en.wikipedia.org/wiki/Patrick_Bront%C3%AB
-death,David Cox (artist),English landscape painter (1783–1859),1859-06-07,06,07,,https://en.wikipedia.org/wiki/David_Cox_(artist)
-death,Friedrich Hölderlin,German poet and philosopher (1770–1843),1843-06-07,06,07,,https://en.wikipedia.org/wiki/Friedrich_H%C3%B6lderlin
-death,William Warburton,English writer and critic (1698–1779),1779-06-07,06,07,,https://en.wikipedia.org/wiki/William_Warburton
-death,Henry Dodwell,"Anglo-Irish scholar, theologian and controversial writer",1711-06-07,06,07,,https://en.wikipedia.org/wiki/Henry_Dodwell
 death,Paula Rego,Portuguese visual artist (1935–2022),2022-06-08,06,08,,https://en.wikipedia.org/wiki/Paula_Rego
 death,Andre Matos,Brazilian singer and musician (1971–2019),2019-06-08,06,08,,https://en.wikipedia.org/wiki/Andre_Matos
 death,Yoram Kaniuk,"Israeli writer, painter, journalist, and theatre critic (1930–2013)",2013-06-08,06,08,,https://en.wikipedia.org/wiki/Yoram_Kaniuk
@@ -226,7 +204,6 @@ death,Karl-Heinz Kämmerling,German academic teacher of classical pianists (1930
 death,Gitta Sereny,Austrian-British writer and historian (1921–2012),2012-06-14,06,14,,https://en.wikipedia.org/wiki/Gitta_Sereny
 death,Bob Bogle,American musician (1934–2009),2009-06-14,06,14,,https://en.wikipedia.org/wiki/Bob_Bogle
 death,Ruth Graham,American author (1920–2007),2007-06-14,06,14,,https://en.wikipedia.org/wiki/Ruth_Graham
-death,Monty Berman,"English film and television producer, director, writer and cinematographer (1913–2006)",2006-06-14,06,14,,https://en.wikipedia.org/wiki/Monty_Berman
 death,Jean Roba,Belgian comics author,2006-06-14,06,14,,https://en.wikipedia.org/wiki/Jean_Roba
 death,Carlo Maria Giulini,Italian conductor (1914–2005),2005-06-14,06,14,,https://en.wikipedia.org/wiki/Carlo_Maria_Giulini
 death,Mimi Parent,Canadian artist (1924–2005),2005-06-14,06,14,,https://en.wikipedia.org/wiki/Mimi_Parent
@@ -472,7 +449,7 @@ death,John Skelton (poet),English poet and tutor (1463-1529),1529-06-21,06,21,,h
 death,Arnaldo Pomodoro,Italian sculptor (1926–2025),2025-06-22,06,22,,https://en.wikipedia.org/wiki/Arnaldo_Pomodoro
 death,Vinnie Paul,American drummer (1964–2018),2018-06-22,06,22,,https://en.wikipedia.org/wiki/Vinnie_Paul
 death,Mao Kobayashi (actress),Japanese newscaster and actress,2017-06-22,06,22,,https://en.wikipedia.org/wiki/Mao_Kobayashi_(actress)
-death,James Horner,American composer and conductor (1953–2015),2015-06-22,06,22,,https://en.wikipedia.org/wiki/James_Horner
+death,James Horner,American film composer and conductor (1953–2015),2015-06-22,06,22,,https://en.wikipedia.org/wiki/James_Horner
 death,Rama Narayanan,Indian film director and film producer,2014-06-22,06,22,,https://en.wikipedia.org/wiki/Rama_Narayanan
 death,Juan Luis Galiardo,Spanish actor,2012-06-22,06,22,,https://en.wikipedia.org/wiki/Juan_Luis_Galiardo
 death,George Carlin,American stand-up comedian (1937–2008),2008-06-22,06,22,,https://en.wikipedia.org/wiki/George_Carlin
@@ -1027,3 +1004,37 @@ death,Louis Hémon,French writer (1880–1913),1913-07-08,07,08,,https://en.wiki
 death,Franz Xaver Winterhalter,German painter and lithographer (1805–1873),1873-07-08,07,08,,https://en.wikipedia.org/wiki/Franz_Xaver_Winterhalter
 death,Henry Raeburn,Scottish portrait painter (1756–1823),1823-07-08,07,08,,https://en.wikipedia.org/wiki/Henry_Raeburn
 death,Percy Bysshe Shelley,English poet (1792–1822),1822-07-08,07,08,,https://en.wikipedia.org/wiki/Percy_Bysshe_Shelley
+death,Joe Bonsall,American singer (1948–2024),2024-07-09,07,09,,https://en.wikipedia.org/wiki/Joe_Bonsall
+death,Maxine Singer,American biologist (1931–2024),2024-07-09,07,09,,https://en.wikipedia.org/wiki/Maxine_Singer
+death,Jerzy Stuhr,Polish actor (1947–2024),2024-07-09,07,09,,https://en.wikipedia.org/wiki/Jerzy_Stuhr
+death,Rip Torn,American actor (1931–2019),2019-07-09,07,09,,https://en.wikipedia.org/wiki/Rip_Torn
+death,Freddie Jones,English actor (1927–2019),2019-07-09,07,09,,https://en.wikipedia.org/wiki/Freddie_Jones
+death,Christian Audigier,French fashion designer (1958–2015),2015-07-09,07,09,,https://en.wikipedia.org/wiki/Christian_Audigier
+death,Lorenzo Álvarez Florentín,Musical artist,2014-07-09,07,09,,https://en.wikipedia.org/wiki/Lorenzo_%C3%81lvarez_Florent%C3%ADn
+death,John Spinks (musician),British musician (1953–2014),2014-07-09,07,09,,https://en.wikipedia.org/wiki/John_Spinks_(musician)
+death,Barbara Robinson (author),American writer,2013-07-09,07,09,,https://en.wikipedia.org/wiki/Barbara_Robinson_(author)
+death,Shin Jae-chul,Korean martial artist,2012-07-09,07,09,,https://en.wikipedia.org/wiki/Shin_Jae-chul
+death,Facundo Cabral,Musical artist,2011-07-09,07,09,,https://en.wikipedia.org/wiki/Facundo_Cabral
+death,Jessica Anderson (writer),Australian writer,2010-07-09,07,09,,https://en.wikipedia.org/wiki/Jessica_Anderson_(writer)
+death,"Charles Lane (actor, born 1905)",American actor (1905–2007),2007-07-09,07,09,,https://en.wikipedia.org/wiki/Charles_Lane_(actor%2C_born_1905)
+death,Milan Williams,American musician (1948–2006),2006-07-09,07,09,,https://en.wikipedia.org/wiki/Milan_Williams
+death,Isabel Sanford,American actress (1917–2004),2004-07-09,07,09,,https://en.wikipedia.org/wiki/Isabel_Sanford
+death,Rod Steiger,American actor (1925–2002),2002-07-09,07,09,,https://en.wikipedia.org/wiki/Rod_Steiger
+death,Doug Fisher (actor),English actor (1941–2000),2000-07-09,07,09,,https://en.wikipedia.org/wiki/Doug_Fisher_(actor)
+death,Metin Altıok,Turkish poet (1941–1993),1993-07-09,07,09,,https://en.wikipedia.org/wiki/Metin_Alt%C4%B1ok
+death,Vinicius de Moraes,Brazilian poet and lyricist (1913–1980),1980-07-09,07,09,,https://en.wikipedia.org/wiki/Vinicius_de_Moraes
+death,Cornelia Otis Skinner,American actress and author,1979-07-09,07,09,,https://en.wikipedia.org/wiki/Cornelia_Otis_Skinner
+death,Robert Weede,American baritone (1903–1972),1972-07-09,07,09,,https://en.wikipedia.org/wiki/Robert_Weede
+death,Karl Ast,Estonian writer and politician,1971-07-09,07,09,,https://en.wikipedia.org/wiki/Karl_Ast
+death,Sigrid Holmquist,Swedish actress,1970-07-09,07,09,,https://en.wikipedia.org/wiki/Sigrid_Holmquist
+death,Fatima Jinnah,Pakistani politician and author (1893–1967),1967-07-09,07,09,,https://en.wikipedia.org/wiki/Fatima_Jinnah
+death,Whittaker Chambers,"American defected communist spy, writer, editor (1901–1961)",1961-07-09,07,09,,https://en.wikipedia.org/wiki/Whittaker_Chambers
+death,Ferenc Talányi,"Slovene writer, painter and politician",1959-07-09,07,09,,https://en.wikipedia.org/wiki/Ferenc_Tal%C3%A1nyi
+death,Fritz Hart,British composer (1874–1949),1949-07-09,07,09,,https://en.wikipedia.org/wiki/Fritz_Hart
+death,John Drew Jr.,19th/20th-century American actor,1927-07-09,07,09,,https://en.wikipedia.org/wiki/John_Drew_Jr.
+death,Cathinka Buchwieser,German operatic soprano and actress (1789–1828),1828-07-09,07,09,,https://en.wikipedia.org/wiki/Cathinka_Buchwieser
+death,Edmund Burke,"Anglo-Irish politician, writer and philosopher (1729–1797)",1797-07-09,07,09,,https://en.wikipedia.org/wiki/Edmund_Burke
+death,Anna Morandi Manzolini,Italian anatomist and artist (1714–1774),1774-07-09,07,09,,https://en.wikipedia.org/wiki/Anna_Morandi_Manzolini
+death,Giovanni Bononcini,Italian composer (1670–1747),1747-07-09,07,09,,https://en.wikipedia.org/wiki/Giovanni_Bononcini
+death,Jan van Eyck,Flemish painter (died 1441),1441-07-09,07,09,,https://en.wikipedia.org/wiki/Jan_van_Eyck
+death,Ariwara no Narihira,"Japanese writer, courtier and waka poet (825–880)",880-07-09,07,09,,https://en.wikipedia.org/wiki/Ariwara_no_Narihira

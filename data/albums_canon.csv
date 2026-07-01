@@ -27,7 +27,7 @@ year,artist,album,label,sales_raw,certification,country,shipments_units,list_sou
 1977,AC/DC,Let There Be Rock,,6200000.0,,,0,best_selling_seed,,c9673ff0-15b5-394d-a5ec-3d2a27dfce83,1977-03-21,1977.0,DE,2025-11-21
 1978,AC/DC,Powerage,,5220000.0,,,0,best_selling_seed,,d1b829ec-6112-3562-b38f-26949564e106,1978-05-05,1978.0,DE,2025-11-21
 1979,AC/DC,Highway To Hell,,15150000.0,,,0,best_selling_seed,,f85647ec-a69b-3b0a-ad04-bb6076c4dcf1,1979-07-27,1979.0,DE,2025-11-21
-1980,AC/DC,Back in Black,Atlantic,27000000,27× Platinum‡,,27000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,d3bc1a64-7561-3787-b680-0003aa50f8f1,1980-07-25,1980.0,CA,
+1980.0,AC/DC,Back in Black,Atlantic,27000000.0,27× Platinum‡,,27000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,d3bc1a64-7561-3787-b680-0003aa50f8f1,1980-07-25,1980.0,CA,2026-07-01
 1981,AC/DC,For Those About To Rock (We Salute You),,10040000.0,,,0,best_selling_seed,,331084ff-497b-3e3a-958e-0fefdae80cb6,1981-11-23,1981.0,DE,2025-11-21
 1983,AC/DC,Flick Of The Switch,,3900000.0,,,0,best_selling_seed,,91a288b8-8404-3d1e-991c-cdc837cf915d,1983-08-15,1983.0,PT,2025-11-21
 1985,AC/DC,Fly On The Wall,,3510000.0,,,0,best_selling_seed,,af8a0f91-5326-3acb-b6e1-03a9b22d30e6,1985-06-28,1985.0,CA,2025-11-21
@@ -471,8 +471,8 @@ After 1946,Al Jolson,The Jolson Story,,1,,,1,List_of_best-selling_albums,https:/
 1973,Eagles,Desperado,,3800000.0,,,0,best_selling_seed,,9e7b49bb-b4bd-3583-87ba-f516f793eff2,1973-04-17,1973.0,GB,2025-11-21
 1974,Eagles,On The Border,,4275000.0,,,0,best_selling_seed,,425353d2-98b9-35a0-94d1-15f99f125994,1974-03-22,1974.0,FR,2025-11-21
 1975,Eagles,One Of These Nights,,7175000.0,,,0,best_selling_seed,,7f9ea3a4-5c4b-3082-a233-3462540e57e3,1975-06-10,1975.0,DE,2025-11-21
-1976,Eagles,Hotel California,Asylum,28000000,28× Platinum‡,,28000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,91bf707c-6c33-4efd-83ca-e4c88f14bcaa,1992,1992.0,DE,2026-01-23
-1976,Eagles,Their Greatest Hits (1971–1975),Asylum,40000000,40× Platinum‡,,40000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,,,,,2026-01-23
+1976.0,Eagles,Hotel California,Asylum,28000000.0,28× Platinum‡,,28000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,91bf707c-6c33-4efd-83ca-e4c88f14bcaa,1992,1992.0,DE,2026-07-01
+1976.0,Eagles,Their Greatest Hits (1971–1975),Asylum,40000000.0,40× Platinum‡,,40000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,,,,,2026-07-01
 1979,Eagles,The Long Run,,11150000.0,,,0,best_selling_seed,,1a265de4-136d-3414-adf5-b0913ca2aa15,1979-09-24,1979.0,CA,2025-11-21
 1982,Eagles,"Eagles Greatest Hits, Vol. 2",Asylum,11000000,11× Platinum,,11000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,,,,,
 2007,Eagles,Long Road Out Of Eden,,6025000.0,,,0,best_selling_seed,,82e10fc2-3863-39d8-b91e-8f59f0cb7a03,2007-10-29,2007.0,AU,2025-11-21
@@ -586,7 +586,7 @@ After 1946,Al Jolson,The Jolson Story,,1,,,1,List_of_best-selling_albums,https:/
 1968,Fleetwood Mac,Mr. Wonderful,,1100000.0,,,0,best_selling_seed,,265dda3d-802e-3e21-b133-34ac7e064146,1968-08-23,1968.0,GB,2025-11-21
 1969,Fleetwood Mac,Then Play On,,2000000.0,,,0,best_selling_seed,,f8d4b05b-e5dc-3c67-aed8-13cac163b06c,1969-09,1969.0,DE,2025-11-21
 1975,Fleetwood Mac,Fleetwood Mac,,9400000.0,,,0,best_selling_seed,,71db9dad-4ab3-48d2-bc16-4a7f9c32b10b,2006,2006.0,GB,2025-11-21
-1977,Fleetwood Mac,Rumours,Warner Bros.,21000000,21× Platinum‡,,21000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,416bb5e5-c7d1-3977-8fd7-7c9daf6c2be6,1977-02-04,1977.0,DE,
+1977.0,Fleetwood Mac,Rumours,Warner Bros.,21000000.0,21× Platinum‡,,21000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,416bb5e5-c7d1-3977-8fd7-7c9daf6c2be6,1977-02-04,1977.0,DE,2026-07-01
 1979,Fleetwood Mac,Tusk,,6600000.0,,,0,best_selling_seed,,22deeac8-6009-31ad-a069-26e85d246412,1979-10-19,1979.0,DE,2025-11-21
 1982,Fleetwood Mac,Mirage,,5500000.0,,,0,best_selling_seed,,a0e25b7f-30d4-3e87-b469-df315573bb16,1982-06-28,1982.0,GB,2025-11-21
 1987,Fleetwood Mac,Tango In The Night,,11300000.0,,,0,best_selling_seed,,680b3cd8-426b-3112-bcf3-42cd66f75fa9,1987-04-09,1987.0,AU,2025-11-21
@@ -839,7 +839,7 @@ After 1946,Al Jolson,The Jolson Story,,1,,,1,List_of_best-selling_albums,https:/
 1969,Led Zeppelin,Led Zeppelin,,15800000.0,,,0,best_selling_seed,,07e182ae-6567-4bc4-90f0-73619c942d73,2018-09-27,2018.0,XW,2025-11-21
 1969,Led Zeppelin,Led Zeppelin II,Atlantic,12000000,12× Platinum,,12000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,33b4653d-006e-3cc1-8afb-386b15a6cd6e,1969-10-22,1969.0,US,
 1970,Led Zeppelin,Led Zeppelin III,,13700000.0,,,0,best_selling_seed,,53f80f76-f8af-3558-bfd5-e7221e055c75,1970-10-05,1970.0,CA,2025-11-21
-1971,Led Zeppelin,"Untitled (""Led Zeppelin IV"")",Atlantic,24000000,24× Platinum‡,,24000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,,,,,
+1971.0,Led Zeppelin,"Untitled (""Led Zeppelin IV"")",Atlantic,24000000.0,24× Platinum‡,,24000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,,,,,2026-07-01
 1973,Led Zeppelin,Houses of the Holy,Atlantic,11000000,11× Platinum,,11000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,9b5006e5-b276-3a05-bcdd-8d986842320b,1973-03-28,1973.0,CA,
 1975,Led Zeppelin,Physical Graffiti,Swan Song,8000000,16× Platinum(2-disc album),,8000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,116c9490-6af4-3827-8261-2d5b1f508fe7,1975-02-24,1975.0,DE,
 1976,Led Zeppelin,Presence,,7300000.0,,,0,best_selling_seed,,42f8acce-90fc-3471-a4cd-ace1ab816276,1976-03-31,1976.0,XE,2025-11-21
@@ -934,7 +934,7 @@ After 1946,Al Jolson,The Jolson Story,,1,,,1,List_of_best-selling_albums,https:/
 1972,Michael Jackson,Ben,,2125000.0,,,0,best_selling_seed,,51343255-0ad3-3635-9aa2-548ba939b23e,1972-08-04,1972.0,BR,2025-11-21
 1972,Michael Jackson,Got To Be There,,1600000.0,,,0,best_selling_seed,,97e0014d-a267-33a0-a868-bb4e2552918a,1972-01-24,1972.0,GB,2025-11-21
 1979,Michael Jackson,Off the Wall,Epic,10000000,10× Platinum‡,,10000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,ee749c63-5699-38e0-b565-7e84414648d9,1979-08-10,1979.0,JP,2025-11-26
-1982,Michael Jackson,Thriller,Epic,34000000,34× Platinum‡,,34000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,f32fab67-77dd-3937-addc-9062e28e4c37,1982-11-29,1982.0,AU,2025-11-26
+1982.0,Michael Jackson,Thriller,Epic,34000000.0,34× Platinum‡,,34000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,f32fab67-77dd-3937-addc-9062e28e4c37,1982-11-29,1982.0,AU,2026-07-01
 1987,Michael Jackson,Bad,Epic,11000000,11× Platinum‡,,11000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,a5711a77-42d1-3f4c-830c-e27a96f0800f,1987-08-25,1987.0,CA,2025-11-26
 2001,Michael Jackson,Invincible,,6475000.0,,,0,best_selling_seed,,c24c5313-da47-3155-8277-a6a1a4237966,2001-10-29,2001.0,AU,2025-11-21
 2010,Michael Jackson,Michael,,2300000.0,,,0,best_selling_seed,,0656d7fa-0ed7-4d3f-887e-ed728697c5ad,2010-12-10,2010.0,AU,2025-11-21
@@ -1538,3 +1538,4 @@ After 1946,Al Jolson,The Jolson Story,,1,,,1,List_of_best-selling_albums,https:/
 2001,Xuxa,Só Para Baixinhos 2,,550000.0,,,0,best_selling_seed,,,,,,2025-11-21
 1983,ZZ Top,Eliminator,Warner Bros.,10000000,10× Platinum,,10000000,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,c58b50f0-d7a4-322c-b281-d86ebe3b8acf,1983-03-23,1983.0,AT,
 2013,will.i.am,#willpower,,600000.0,,,0,best_selling_seed,,9dc491dc-96ae-4aa3-ae5d-1cd695496fae,2013-04-19,2013.0,XE,2025-11-21
+,,,,,,,0,List_of_best-selling_albums_in_the_United_States,https://en.wikipedia.org/wiki/List_of_best-selling_albums_in_the_United_States,f5fb521b-beef-4a9d-9329-eeba7b1c2515,2015-06-29,2015,GB,2026-07-01

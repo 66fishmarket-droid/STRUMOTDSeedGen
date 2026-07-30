@@ -1,32 +1,4 @@
 work_type,title,byline,release_date,month,day,extra,source_url
-death,Alon Abutbul,Israeli actor (1965–2025),2025-07-29,07,29,,https://en.wikipedia.org/wiki/Alon_Abutbul
-death,Oliver Dragojević,Croatian singer (1947–2018),2018-07-29,07,29,,https://en.wikipedia.org/wiki/Oliver_Dragojevi%C4%87
-death,Antony Holland,British actor and theatre director (1920–2015),2015-07-29,07,29,,https://en.wikipedia.org/wiki/Antony_Holland
-death,Giorgio Gaslini,Italian jazz musician,2014-07-29,07,29,,https://en.wikipedia.org/wiki/Giorgio_Gaslini
-death,María Antonia Iglesias,Spanish writer and journalist,2014-07-29,07,29,,https://en.wikipedia.org/wiki/Mar%C3%ADa_Antonia_Iglesias
-death,Idris Muhammad,American jazz drummer and bandleader (1939–2014),2014-07-29,07,29,,https://en.wikipedia.org/wiki/Idris_Muhammad
-death,Thomas R. St. George,American novelist,2014-07-29,07,29,,https://en.wikipedia.org/wiki/Thomas_R._St._George
-death,August Kowalczyk,"Polish actor, activist and Holocaust survivor (1921–2012)",2012-07-29,07,29,,https://en.wikipedia.org/wiki/August_Kowalczyk
-death,Mike Reid (actor),British actor and comedian (1940–2007),2007-07-29,07,29,,https://en.wikipedia.org/wiki/Mike_Reid_(actor)
-death,Michel Serrault,French actor (1928–2007),2007-07-29,07,29,,https://en.wikipedia.org/wiki/Michel_Serrault
-death,Rena Vlahopoulou,Greek actress and singer,2004-07-29,07,29,,https://en.wikipedia.org/wiki/Rena_Vlahopoulou
-death,Jason Thirsk,American bassist (1967–1996),1996-07-29,07,29,,https://en.wikipedia.org/wiki/Jason_Thirsk
-death,Les Elgart,American swing jazz bandleader and trumpeter (1917–1995),1995-07-29,07,29,,https://en.wikipedia.org/wiki/Les_Elgart
-death,Bibhutibhushan Mukhopadhyay,Indian Bengali-language author,1987-07-29,07,29,,https://en.wikipedia.org/wiki/Bibhutibhushan_Mukhopadhyay
-death,Fred Waring,American musician (1900–1984),1984-07-29,07,29,,https://en.wikipedia.org/wiki/Fred_Waring
-death,Raymond Massey,Canadian-American actor (1896–1983),1983-07-29,07,29,,https://en.wikipedia.org/wiki/Raymond_Massey
-death,David Niven,"English actor, memoirist and novelist (1910–1983)",1983-07-29,07,29,,https://en.wikipedia.org/wiki/David_Niven
-death,Harold Sakata,"American Olympian, wrestler, and actor (1920–1982)",1982-07-29,07,29,,https://en.wikipedia.org/wiki/Harold_Sakata
-death,Sydney Kyte,English bandleader and violinist (1896–1981),1981-07-29,07,29,,https://en.wikipedia.org/wiki/Sydney_Kyte
-death,Andrzej Bogucki,Polish actor (1904–1978),1978-07-29,07,29,,https://en.wikipedia.org/wiki/Andrzej_Bogucki
-death,Cass Elliot,American singer (1941–1974),1974-07-29,07,29,,https://en.wikipedia.org/wiki/Cass_Elliot
-death,Erich Kästner,"German author, poet and satirist (1899–1974)",1974-07-29,07,29,,https://en.wikipedia.org/wiki/Erich_K%C3%A4stner
-death,John Barbirolli,British conductor and cellist (1899–1970),1970-07-29,07,29,,https://en.wikipedia.org/wiki/John_Barbirolli
-death,Leonardo De Lorenzo,Musical artist,1962-07-29,07,29,,https://en.wikipedia.org/wiki/Leonardo_De_Lorenzo
-death,Ernest William Christmas,Australian painter,1918-07-29,07,29,,https://en.wikipedia.org/wiki/Ernest_William_Christmas
-death,Vincent van Gogh,Dutch painter (1853–1890),1890-07-29,07,29,,https://en.wikipedia.org/wiki/Vincent_van_Gogh
-death,Robert Schumann,"German composer, pianist and critic (1810–1856)",1856-07-29,07,29,,https://en.wikipedia.org/wiki/Robert_Schumann
-death,Li Shen,Tang dynasty official and poet,846-07-29,07,29,,https://en.wikipedia.org/wiki/Li_Shen
 death,David Argue,Australian actor (1959–2025),2025-07-30,07,30,,https://en.wikipedia.org/wiki/David_Argue
 death,Onyeka Onwenu,"Nigerian singer, actress and politician (1952–2024)",2024-07-30,07,30,,https://en.wikipedia.org/wiki/Onyeka_Onwenu
 death,Paul Reubens,American actor and comedian (1952–2023),2023-07-30,07,30,,https://en.wikipedia.org/wiki/Paul_Reubens
@@ -290,7 +262,7 @@ death,Jacopo Sannazaro,Italian poet,1530-08-06,08,06,,https://en.wikipedia.org/w
 death,David McCullough,American historian and author (1933–2022),2022-08-07,08,07,,https://en.wikipedia.org/wiki/David_McCullough
 death,Markie Post,American actress (1950–2021),2021-08-07,08,07,,https://en.wikipedia.org/wiki/Markie_Post
 death,Trevor Moore (comedian),American comedian and actor (1980–2021),2021-08-07,08,07,,https://en.wikipedia.org/wiki/Trevor_Moore_(comedian)
-death,David Berman (musician),"American musician, singer, and poet (1967–2019)",2019-08-07,08,07,,https://en.wikipedia.org/wiki/David_Berman_(musician)
+death,David Berman (musician),American musician and poet (1967–2019),2019-08-07,08,07,,https://en.wikipedia.org/wiki/David_Berman_(musician)
 death,M. Karunanidhi,Indian writer and politician (1924–2018),2018-08-07,08,07,,https://en.wikipedia.org/wiki/M._Karunanidhi
 death,David Maslanka,American composer (1943–2017),2017-08-07,08,07,,https://en.wikipedia.org/wiki/David_Maslanka
 death,Margaret Pellegrini,"American actress, vaudeville performer and dancer (1923–2013)",2013-08-07,08,07,,https://en.wikipedia.org/wiki/Margaret_Pellegrini
@@ -1026,3 +998,41 @@ death,Mary Anne Schimmelpenninck,British writer,1856-08-29,08,29,,https://en.wik
 death,Edmond Hoyle,English writer (1672–1769),1769-08-29,08,29,,https://en.wikipedia.org/wiki/Edmond_Hoyle
 death,Ulrich von Hutten,"German scholar, poet and reformer (1488–1523)",1523-08-29,08,29,,https://en.wikipedia.org/wiki/Ulrich_von_Hutten
 death,Alesso Baldovinetti,Italian painter (1427-1499),1499-08-29,08,29,,https://en.wikipedia.org/wiki/Alesso_Baldovinetti
+death,Fatman Scoop,American hip-hop artist (1968–2024),2024-08-30,08,30,,https://en.wikipedia.org/wiki/Fatman_Scoop
+death,Valerie Harper,American actress (1939–2019),2019-08-30,08,30,,https://en.wikipedia.org/wiki/Valerie_Harper
+death,Louise Hay,American author (1926–2017),2017-08-30,08,30,,https://en.wikipedia.org/wiki/Louise_Hay
+death,Skip Prokop,Canadian musical artist (1943–2017),2017-08-30,08,30,,https://en.wikipedia.org/wiki/Skip_Prokop
+death,M. M. Kalburgi,Indian scholar and writer (1938–2015),2015-08-30,08,30,,https://en.wikipedia.org/wiki/M._M._Kalburgi
+death,Oliver Sacks,British neurologist and writer (1933–2015),2015-08-30,08,30,,https://en.wikipedia.org/wiki/Oliver_Sacks
+death,Charles Bowden,American writer (1945–2014),2014-08-30,08,30,,https://en.wikipedia.org/wiki/Charles_Bowden
+death,Andrew V. McLaglen,British-American film director (1920–2014),2014-08-30,08,30,,https://en.wikipedia.org/wiki/Andrew_V._McLaglen
+death,Felipe Osterling,"Peruvian lawyer, writer and politician",2014-08-30,08,30,,https://en.wikipedia.org/wiki/Felipe_Osterling
+death,Seamus Heaney,Irish poet (1939–2013),2013-08-30,08,30,,https://en.wikipedia.org/wiki/Seamus_Heaney
+death,Alain Corneau,French film director and writer (1943–2010),2010-08-30,08,30,,https://en.wikipedia.org/wiki/Alain_Corneau
+death,Michael Jackson (writer),Beer and whisky expert,2007-08-30,08,30,,https://en.wikipedia.org/wiki/Michael_Jackson_(writer)
+death,Glenn Ford,American actor (1916–2006),2006-08-30,08,30,,https://en.wikipedia.org/wiki/Glenn_Ford
+death,Naguib Mahfouz,Egyptian writer (1911–2006),2006-08-30,08,30,,https://en.wikipedia.org/wiki/Naguib_Mahfouz
+death,Charles Bronson,American actor (1921–2003),2003-08-30,08,30,,https://en.wikipedia.org/wiki/Charles_Bronson
+death,J. Lee Thompson,British film director (1914–2002),2002-08-30,08,30,,https://en.wikipedia.org/wiki/J._Lee_Thompson
+death,Raymond Poïvet,French cartoonist,1999-08-30,08,30,,https://en.wikipedia.org/wiki/Raymond_Po%C3%AFvet
+death,Christine Pascal,"French actress, writer and director",1996-08-30,08,30,,https://en.wikipedia.org/wiki/Christine_Pascal
+death,Sterling Morrison,American guitarist (1942–1995),1995-08-30,08,30,,https://en.wikipedia.org/wiki/Sterling_Morrison
+death,Lindsay Anderson,"English filmmaker, theatre director, and film critic (1923–1994)",1994-08-30,08,30,,https://en.wikipedia.org/wiki/Lindsay_Anderson
+death,Richard Jordan,American film and theatrical actor (1937–1993),1993-08-30,08,30,,https://en.wikipedia.org/wiki/Richard_Jordan
+death,Vladimír Padrůněk,Czech musician (1952–1991),1991-08-30,08,30,,https://en.wikipedia.org/wiki/Vladim%C3%ADr_Padr%C5%AFn%C4%9Bk
+death,Jean Tinguely,Swiss sculptor (1925–1991),1991-08-30,08,30,,https://en.wikipedia.org/wiki/Jean_Tinguely
+death,Seymour Krim,American writer (1922–1989),1989-08-30,08,30,,https://en.wikipedia.org/wiki/Seymour_Krim
+death,Taylor Caldwell,American novelist (1900–1985),1985-08-30,08,30,,https://en.wikipedia.org/wiki/Taylor_Caldwell
+death,Vera-Ellen,"American actress, singer and dancer (1921–1981)",1981-08-30,08,30,,https://en.wikipedia.org/wiki/Vera-Ellen
+death,Jean Seberg,American actress (1938–1979),1979-08-30,08,30,,https://en.wikipedia.org/wiki/Jean_Seberg
+death,Ali Hadi Bara,Turkish sculptor,1971-08-30,08,30,,https://en.wikipedia.org/wiki/Ali_Hadi_Bara
+death,Del Moore,"American actor, comedian and radio announcer (1916–1970)",1970-08-30,08,30,,https://en.wikipedia.org/wiki/Del_Moore
+death,William Talman (actor),American actor (1915–1968),1968-08-30,08,30,,https://en.wikipedia.org/wiki/William_Talman_(actor)
+death,Ad Reinhardt,American painter and printmaker,1967-08-30,08,30,,https://en.wikipedia.org/wiki/Ad_Reinhardt
+death,Charles Coburn,"American film, theater actor (1877–1961)",1961-08-30,08,30,,https://en.wikipedia.org/wiki/Charles_Coburn
+death,Konstantin Märska,Estonian cinematographer and film director,1951-08-30,08,30,,https://en.wikipedia.org/wiki/Konstantin_M%C3%A4rska
+death,Gunnar Sommerfeldt,Danish actor & film maker (1890–1947),1947-08-30,08,30,,https://en.wikipedia.org/wiki/Gunnar_Sommerfeldt
+death,Max Factor Sr.,Polish beautician and founder of Max Factor,1938-08-30,08,30,,https://en.wikipedia.org/wiki/Max_Factor_Sr.
+death,Henri Barbusse,French novelist and writer (1873–1935),1935-08-30,08,30,,https://en.wikipedia.org/wiki/Henri_Barbusse
+death,Namık İsmail,Turkish painter,1935-08-30,08,30,,https://en.wikipedia.org/wiki/Nam%C4%B1k_%C4%B0smail
+death,Richard Mansfield,English actor-manager (1857–1907),1907-08-30,08,30,,https://en.wikipedia.org/wiki/Richard_Mansfield

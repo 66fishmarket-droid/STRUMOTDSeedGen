@@ -1,31 +1,4 @@
 work_type,title,byline,release_date,month,day,extra,source_url
-death,Toto Cutugno,Italian musician (1943–2023),2023-08-22,08,22,,https://en.wikipedia.org/wiki/Toto_Cutugno
-death,Ed King,American rock musician (1949–2018),2018-08-22,08,22,,https://en.wikipedia.org/wiki/Ed_King
-death,Krishna Reddy (artist),Indian master-printmaker and sculptor (1925-2018),2018-08-22,08,22,,https://en.wikipedia.org/wiki/Krishna_Reddy_(artist)
-death,Toots Thielemans,Belgian jazz musician (1922–2016),2016-08-22,08,22,,https://en.wikipedia.org/wiki/Toots_Thielemans
-death,U. R. Ananthamurthy,Indian Kannada-language writer and critic (1932-2014),2014-08-22,08,22,,https://en.wikipedia.org/wiki/U._R._Ananthamurthy
-death,Nina Bawden,English novelist and children's writer (1925–2012),2012-08-22,08,22,,https://en.wikipedia.org/wiki/Nina_Bawden
-death,Jeffrey Stone,American actor (1926–2012),2012-08-22,08,22,,https://en.wikipedia.org/wiki/Jeffrey_Stone
-death,Elmer Kelton,American journalist and writer,2009-08-22,08,22,,https://en.wikipedia.org/wiki/Elmer_Kelton
-death,Grace Paley,"American author, poet, teacher, and activist (1922–2007)",2007-08-22,08,22,,https://en.wikipedia.org/wiki/Grace_Paley
-death,Luc Ferrari,Musical artist,2005-08-22,08,22,,https://en.wikipedia.org/wiki/Luc_Ferrari
-death,Konstantin Aseev,Russian chess grandmaster and writer (1960–2004),2004-08-22,08,22,,https://en.wikipedia.org/wiki/Konstantin_Aseev
-death,Daniel Petrie,"Canadian film, television, and stage director",2004-08-22,08,22,,https://en.wikipedia.org/wiki/Daniel_Petrie
-death,Allan Houser,American sculptor and painter,1994-08-22,08,22,,https://en.wikipedia.org/wiki/Allan_Houser
-death,Colleen Dewhurst,Canadian-American actress (1924–1991),1991-08-22,08,22,,https://en.wikipedia.org/wiki/Colleen_Dewhurst
-death,Vicente Manansala,Filipino painter (1910–1981),1981-08-22,08,22,,https://en.wikipedia.org/wiki/Vicente_Manansala
-death,James T. Farrell,American novelist (1904–1979),1979-08-22,08,22,,https://en.wikipedia.org/wiki/James_T._Farrell
-death,Sebastian Cabot (actor),English actor (1918–1977),1977-08-22,08,22,,https://en.wikipedia.org/wiki/Sebastian_Cabot_(actor)
-death,Gina Bachauer,Greek pianist (1913–1976),1976-08-22,08,22,,https://en.wikipedia.org/wiki/Gina_Bachauer
-death,Roger Martin du Gard,French novelist (1881-1958),1958-08-22,08,22,,https://en.wikipedia.org/wiki/Roger_Martin_du_Gard
-death,Anders Zorn,Swedish painter and engraver (1860–1920),1920-08-22,08,22,,https://en.wikipedia.org/wiki/Anders_Zorn
-death,Kate Chopin,American author (1850–1904),1904-08-22,08,22,,https://en.wikipedia.org/wiki/Kate_Chopin
-death,Jan Neruda,"Czech poet, theater reviewer, publicist, journalist and writer",1891-08-22,08,22,,https://en.wikipedia.org/wiki/Jan_Neruda
-death,Nikolaus Lenau,Austrian poet (1802–1850),1850-08-22,08,22,,https://en.wikipedia.org/wiki/Nikolaus_Lenau
-death,Jean-Honoré Fragonard,French Rococo painter (1732–1806),1806-08-22,08,22,,https://en.wikipedia.org/wiki/Jean-Honor%C3%A9_Fragonard
-death,"George Lyttelton, 1st Baron Lyttelton",British politician and writer (1709–1773),1773-08-22,08,22,,https://en.wikipedia.org/wiki/George_Lyttelton%2C_1st_Baron_Lyttelton
-death,Luca Marenzio,Italian composer (1553/54 – 1599),1599-08-22,08,22,,https://en.wikipedia.org/wiki/Luca_Marenzio
-death,Jan Kochanowski,Polish Renaissance poet (1530–1584),1584-08-22,08,22,,https://en.wikipedia.org/wiki/Jan_Kochanowski
 death,Elizabeth Blackadder,Scottish painter and printmaker (1931–2021),2021-08-23,08,23,,https://en.wikipedia.org/wiki/Elizabeth_Blackadder
 death,Albert Ebossé Bodjongo,Cameroonian footballer (1989-2014),2014-08-23,08,23,,https://en.wikipedia.org/wiki/Albert_Eboss%C3%A9_Bodjongo
 death,Birgitta Stenberg,"Swedish author, translator and illustrator (1932–2014)",2014-08-23,08,23,,https://en.wikipedia.org/wiki/Birgitta_Stenberg
@@ -351,7 +324,7 @@ death,Otl Aicher,German graphic designer and typographer,1991-09-01,09,01,,https
 death,Murray Hamilton,American actor (1923–1986),1986-09-01,09,01,,https://en.wikipedia.org/wiki/Murray_Hamilton
 death,Ann Harding,American actress (1902–1981),1981-09-01,09,01,,https://en.wikipedia.org/wiki/Ann_Harding
 death,Ethel Waters,American vocalist and actress (1896–1977),1977-09-01,09,01,,https://en.wikipedia.org/wiki/Ethel_Waters
-death,François Mauriac,"French novelist, dramatist, critic, poet, and journalist (1885-1970)",1970-09-01,09,01,,https://en.wikipedia.org/wiki/Fran%C3%A7ois_Mauriac
+death,François Mauriac,French author (1885-1970),1970-09-01,09,01,,https://en.wikipedia.org/wiki/Fran%C3%A7ois_Mauriac
 death,Siegfried Sassoon,English war poet and writer (1886–1967),1967-09-01,09,01,,https://en.wikipedia.org/wiki/Siegfried_Sassoon
 death,Nellie McClung,"Canadian author, activist, suffragist and politician (1873–1951)",1951-09-01,09,01,,https://en.wikipedia.org/wiki/Nellie_McClung
 death,François Girardon,French sculptor (1628–1715),1715-09-01,09,01,,https://en.wikipedia.org/wiki/Fran%C3%A7ois_Girardon
@@ -1157,3 +1130,31 @@ death,Alain-Fournier,French author and soldier (1886–1914),1914-09-22,09,22,,h
 death,Alessandro Allori,Italian painter,1607-09-22,09,22,,https://en.wikipedia.org/wiki/Alessandro_Allori
 death,Gabriel Spenser,16th-century English actor,1598-09-22,09,22,,https://en.wikipedia.org/wiki/Gabriel_Spenser
 death,Ouyang Xiu,"Chinese poet, historian and statesman (1007–1072)",1072-09-22,09,22,,https://en.wikipedia.org/wiki/Ouyang_Xiu
+death,Juliette Gréco,French singer and actress (1927–2020),2020-09-23,09,23,,https://en.wikipedia.org/wiki/Juliette_Gr%C3%A9co
+death,Jane Fortune,"American author, journalist and philanthropist",2018-09-23,09,23,,https://en.wikipedia.org/wiki/Jane_Fortune
+death,Malcolm Arnold,English composer (1921–2006),2006-09-23,09,23,,https://en.wikipedia.org/wiki/Malcolm_Arnold
+death,Etta Baker,American Piedmont blues musician (1913–2006),2006-09-23,09,23,,https://en.wikipedia.org/wiki/Etta_Baker
+death,Ivan Goff,Australian screenwriter (1910–1999),1999-09-23,09,23,,https://en.wikipedia.org/wiki/Ivan_Goff
+death,Mary Frann,American actress (1943–1998),1998-09-23,09,23,,https://en.wikipedia.org/wiki/Mary_Frann
+death,Natalie Savage Carlson,American writer,1997-09-23,09,23,,https://en.wikipedia.org/wiki/Natalie_Savage_Carlson
+death,Robert Bloch,American fiction writer (1917–1994),1994-09-23,09,23,,https://en.wikipedia.org/wiki/Robert_Bloch
+death,Madeleine Renaud,French actress (1900–1994),1994-09-23,09,23,,https://en.wikipedia.org/wiki/Madeleine_Renaud
+death,Ivar Ivask,Estonian poet and literary scholar (1927-1992),1992-09-23,09,23,,https://en.wikipedia.org/wiki/Ivar_Ivask
+death,Glendon Swarthout,American writer (1918–1992),1992-09-23,09,23,,https://en.wikipedia.org/wiki/Glendon_Swarthout
+death,Tibor Sekelj,Hungarian author and explorer (1912–1988),1988-09-23,09,23,,https://en.wikipedia.org/wiki/Tibor_Sekelj
+death,Chief Dan George,"Chief of the Tsleil-Waututh Nation, actor (1899–1981)",1981-09-23,09,23,,https://en.wikipedia.org/wiki/Chief_Dan_George
+death,Catherine Lacey,English actress (1904–1979),1979-09-23,09,23,,https://en.wikipedia.org/wiki/Catherine_Lacey
+death,Cliff Arquette,American actor and comedian (1905–1974),1974-09-23,09,23,,https://en.wikipedia.org/wiki/Cliff_Arquette
+death,Robbie McIntosh (drummer),Scottish drummer (1950-1974),1974-09-23,09,23,,https://en.wikipedia.org/wiki/Robbie_McIntosh_(drummer)
+death,Pablo Neruda,"Chilean poet, diplomat, and politician (1904–1973)",1973-09-23,09,23,,https://en.wikipedia.org/wiki/Pablo_Neruda
+death,Jakob Schaffner,Swiss novelist,1944-09-23,09,23,,https://en.wikipedia.org/wiki/Jakob_Schaffner
+death,Elinor Glyn,British novelist and scriptwriter (1864–1943),1943-09-23,09,23,,https://en.wikipedia.org/wiki/Elinor_Glyn
+death,Emmanuel Benner,French painter,1896-09-23,09,23,,https://en.wikipedia.org/wiki/Emmanuel_Benner
+death,Wilkie Collins,English novelist and playwright (1824–1889),1889-09-23,09,23,,https://en.wikipedia.org/wiki/Wilkie_Collins
+death,Prosper Mérimée,"French writer, archaeologist and historian (1803–1870)",1870-09-23,09,23,,https://en.wikipedia.org/wiki/Prosper_M%C3%A9rim%C3%A9e
+death,Vincenzo Bellini,Italian opera composer (1801–1835),1835-09-23,09,23,,https://en.wikipedia.org/wiki/Vincenzo_Bellini
+death,Robert Dodsley,English publisher and writer (1703–1764),1764-09-23,09,23,,https://en.wikipedia.org/wiki/Robert_Dodsley
+death,Valentin Conrart,French author,1675-09-23,09,23,,https://en.wikipedia.org/wiki/Valentin_Conrart
+death,Pontus de Tyard,French poet and priest,1605-09-23,09,23,,https://en.wikipedia.org/wiki/Pontus_de_Tyard
+death,Snorri Sturluson,"Icelandic historian, poet and politician (1179–1241)",1241-09-23,09,23,,https://en.wikipedia.org/wiki/Snorri_Sturluson
+death,Al-Mutanabbi,Arab poet (c. 915 – 965),965-09-23,09,23,,https://en.wikipedia.org/wiki/Al-Mutanabbi

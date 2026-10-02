@@ -1,29 +1,4 @@
 work_type,title,byline,release_date,month,day,extra,source_url
-death,Karel Gott,Czech singer (1939–2019),2019-10-01,10,01,,https://en.wikipedia.org/wiki/Karel_Gott
-death,Charles Aznavour,French singer and songwriter (1924–2018),2018-10-01,10,01,,https://en.wikipedia.org/wiki/Charles_Aznavour
-death,Lynsey de Paul,English singer-songwriter and record producer (1948–2014),2014-10-01,10,01,,https://en.wikipedia.org/wiki/Lynsey_de_Paul
-death,Tom Clancy,American author (1947–2013),2013-10-01,10,01,,https://en.wikipedia.org/wiki/Tom_Clancy
-death,Octavio Getino,Argentine film director and writer (1935–2012),2012-10-01,10,01,,https://en.wikipedia.org/wiki/Octavio_Getino
-death,Cintio Vitier,"Cuban poet, essayist, and novelist (1921–2009)",2009-10-01,10,01,,https://en.wikipedia.org/wiki/Cintio_Vitier
-death,Ronnie Hazlehurst,English composer and conductor (1928–2007),2007-10-01,10,01,,https://en.wikipedia.org/wiki/Ronnie_Hazlehurst
-death,Richard Avedon,American photographer (1923–2004),2004-10-01,10,01,,https://en.wikipedia.org/wiki/Richard_Avedon
-death,Bruce Palmer,Canadian bassist (1946–2004),2004-10-01,10,01,,https://en.wikipedia.org/wiki/Bruce_Palmer
-death,Robert Vaidlo,Estonian journalist and children's writer,2004-10-01,10,01,,https://en.wikipedia.org/wiki/Robert_Vaidlo
-death,Sacheverell Sitwell,English writer,1988-10-01,10,01,,https://en.wikipedia.org/wiki/Sacheverell_Sitwell
-death,E. B. White,American author (1899–1985),1985-10-01,10,01,,https://en.wikipedia.org/wiki/E._B._White
-death,Al Jackson Jr.,American drummer (1935–1975),1975-10-01,10,01,,https://en.wikipedia.org/wiki/Al_Jackson_Jr.
-death,Ludwig Bemelmans,American writer and illustrator (1898–1962),1961-10-01,10,01,,https://en.wikipedia.org/wiki/Ludwig_Bemelmans
-death,Robert Falk,Russian painter (1886–1958),1958-10-01,10,01,,https://en.wikipedia.org/wiki/Robert_Falk
-death,Christie brothers,Canadian film directors and producers,1955-10-01,10,01,,https://en.wikipedia.org/wiki/Christie_brothers
-death,John Marin,American artist (1870–1953),1953-10-01,10,01,,https://en.wikipedia.org/wiki/John_Marin
-death,Faik Ali Ozansoy,"Turkish politician, poet, and educator",1950-10-01,10,01,,https://en.wikipedia.org/wiki/Faik_Ali_Ozansoy
-death,Antoine Bourdelle,French painter and sculptor (1861–1929),1929-10-01,10,01,,https://en.wikipedia.org/wiki/Antoine_Bourdelle
-death,John Blow,English composer (1649–1708),1708-10-01,10,01,,https://en.wikipedia.org/wiki/John_Blow
-death,Jan Asselijn,Dutch painter (c. 1610 – c. 1652),1652-10-01,10,01,,https://en.wikipedia.org/wiki/Jan_Asselijn
-death,Giammateo Asola,Italian composer,1609-10-01,10,01,,https://en.wikipedia.org/wiki/Giammateo_Asola
-death,Maarten van Heemskerck,Dutch painter (1498–1574),1574-10-01,10,01,,https://en.wikipedia.org/wiki/Maarten_van_Heemskerck
-death,Frans Floris,Flemish painter (1519–1570),1570-10-01,10,01,,https://en.wikipedia.org/wiki/Frans_Floris
-death,Jan Gossaert,Flemish painter (1478–1532),1532-10-01,10,01,,https://en.wikipedia.org/wiki/Jan_Gossaert
 death,Marissa Haque,Indonesian actress (1962–2024),2024-10-02,10,02,,https://en.wikipedia.org/wiki/Marissa_Haque
 death,Sacheen Littlefeather,American actress and activist (1946–2022),2022-10-02,10,02,,https://en.wikipedia.org/wiki/Sacheen_Littlefeather
 death,Tom Petty,American rock musician (1950–2017),2017-10-02,10,02,,https://en.wikipedia.org/wiki/Tom_Petty
@@ -433,7 +408,7 @@ death,Cevat Şakir Kabaağaçlı,"Cretan Turkish author, essayist, ethnographer,
 death,Bea Benaderet,American actress (1906–1968),1968-10-13,10,13,,https://en.wikipedia.org/wiki/Bea_Benaderet
 death,Clifton Webb,"American actor, singer, dancer (1889–1966)",1966-10-13,10,13,,https://en.wikipedia.org/wiki/Clifton_Webb
 death,Cahit Sıtkı Tarancı,Turkish poet and author from Türkiye (1910–1956),1956-10-13,10,13,,https://en.wikipedia.org/wiki/Cahit_S%C4%B1tk%C4%B1_Taranc%C4%B1
-death,Ernest Haycox,American novelist,1950-10-13,10,13,,https://en.wikipedia.org/wiki/Ernest_Haycox
+death,Ernest Haycox,American novelist (1899-1950),1950-10-13,10,13,,https://en.wikipedia.org/wiki/Ernest_Haycox
 death,E. C. Segar,American cartoonist (1894–1938),1938-10-13,10,13,,https://en.wikipedia.org/wiki/E._C._Segar
 death,Ernst Didring,Swedish author,1931-10-13,10,13,,https://en.wikipedia.org/wiki/Ernst_Didring
 death,T. Alexander Harrison,American painter (1853–1930),1930-10-13,10,13,,https://en.wikipedia.org/wiki/T._Alexander_Harrison
@@ -888,6 +863,44 @@ death,Carl Ditters von Dittersdorf,Austrian composer (1739–1799),1799-10-24,10
 death,Alessandro Scarlatti,Italian Baroque composer (1660–1725),1725-10-24,10,24,,https://en.wikipedia.org/wiki/Alessandro_Scarlatti
 death,William Prynne,"English lawyer, author and politician (1600–1669)",1669-10-24,10,24,,https://en.wikipedia.org/wiki/William_Prynne
 death,Jean Titelouze,French Catholic priest and composer,1633-10-24,10,24,,https://en.wikipedia.org/wiki/Jean_Titelouze
+death,Satish Shah,Indian actor and comedian (1951–2025),2025-10-25,10,25,,https://en.wikipedia.org/wiki/Satish_Shah
+death,Phil Lesh,American musician (1940–2024),2024-10-25,10,25,,https://en.wikipedia.org/wiki/Phil_Lesh
+death,Kim Soo-mi,South Korean actress (1949–2024),2024-10-25,10,25,,https://en.wikipedia.org/wiki/Kim_Soo-mi
+death,Jack Bruce,Scottish musician (1943–2014),2014-10-25,10,25,,https://en.wikipedia.org/wiki/Jack_Bruce
+death,Hal Needham,American stunt performer and film director (1931–2013),2013-10-25,10,25,,https://en.wikipedia.org/wiki/Hal_Needham
+death,Marcia Wallace,American actress and comedienne (1942–2013),2013-10-25,10,25,,https://en.wikipedia.org/wiki/Marcia_Wallace
+death,Jaspal Bhatti,Indian actor (1955–2012),2012-10-25,10,25,,https://en.wikipedia.org/wiki/Jaspal_Bhatti
+death,Lisa Blount,American actress (1957–2010),2010-10-25,10,25,,https://en.wikipedia.org/wiki/Lisa_Blount
+death,Gregory Isaacs,Jamaican reggae musician (1950–2010),2010-10-25,10,25,,https://en.wikipedia.org/wiki/Gregory_Isaacs
+death,Vesna Parun,Croatian poet,2010-10-25,10,25,,https://en.wikipedia.org/wiki/Vesna_Parun
+death,John Peel,English DJ and radio presenter (1939–2004),2004-10-25,10,25,,https://en.wikipedia.org/wiki/John_Peel
+death,Richard Harris,Irish actor and singer (1930–2002),2002-10-25,10,25,,https://en.wikipedia.org/wiki/Richard_Harris
+death,Viveca Lindfors,Swedish actress (1920–1995),1995-10-25,10,25,,https://en.wikipedia.org/wiki/Viveca_Lindfors
+death,Mildred Natwick,American actress (1905–1994),1994-10-25,10,25,,https://en.wikipedia.org/wiki/Mildred_Natwick
+death,Danny Chan,Hong Kong singer (1958–1993),1993-10-25,10,25,,https://en.wikipedia.org/wiki/Danny_Chan
+death,Vincent Price,American actor (1911–1993),1993-10-25,10,25,,https://en.wikipedia.org/wiki/Vincent_Price
+death,Roger Miller,American country musician (1936–1992),1992-10-25,10,25,,https://en.wikipedia.org/wiki/Roger_Miller
+death,Richard Pousette-Dart,American abstract expressionist artist (1916–1992),1992-10-25,10,25,,https://en.wikipedia.org/wiki/Richard_Pousette-Dart
+death,Mary McCarthy (American writer),American novelist and political activist (1912–1989),1989-10-25,10,25,,https://en.wikipedia.org/wiki/Mary_McCarthy_(American_writer)
+death,Forrest Tucker,American actor (1919–1986),1986-10-25,10,25,,https://en.wikipedia.org/wiki/Forrest_Tucker
+death,Gary Holton,"British singer-songwriter, musician and actor (1952–1985)",1985-10-25,10,25,,https://en.wikipedia.org/wiki/Gary_Holton
+death,Virgil Fox,American organist (1912–1980),1980-10-25,10,25,,https://en.wikipedia.org/wiki/Virgil_Fox
+death,Sahir Ludhianvi,Indian poet (1921–1980),1980-10-25,10,25,,https://en.wikipedia.org/wiki/Sahir_Ludhianvi
+death,Raymond Queneau,French novelist and poet (1903–1976),1976-10-25,10,25,,https://en.wikipedia.org/wiki/Raymond_Queneau
+death,Cleo Moore,American actress (1924–1973),1973-10-25,10,25,,https://en.wikipedia.org/wiki/Cleo_Moore
+death,Ülo Sooster,Estonian painter (1924–1970),1970-10-25,10,25,,https://en.wikipedia.org/wiki/%C3%9Clo_Sooster
+death,Ellinor Aiki,Estonian painter (1893–1969),1969-10-25,10,25,,https://en.wikipedia.org/wiki/Ellinor_Aiki
+death,Margaret Ayer Barnes,American dramatist,1967-10-25,10,25,,https://en.wikipedia.org/wiki/Margaret_Ayer_Barnes
+death,Roger Désormière,French conductor (1898–1963),1963-10-25,10,25,,https://en.wikipedia.org/wiki/Roger_D%C3%A9sormi%C3%A8re
+death,Lord Dunsany,Anglo-Irish writer and dramatist (1878–1957),1957-10-25,10,25,,https://en.wikipedia.org/wiki/Lord_Dunsany
+death,Alfonsina Storni,Argentine poet (1892–1938),1938-10-25,10,25,,https://en.wikipedia.org/wiki/Alfonsina_Storni
+death,Ziya Gökalp,Turkish writer and journalist (1876–1924),1924-10-25,10,25,,https://en.wikipedia.org/wiki/Ziya_G%C3%B6kalp
+death,Terence MacSwiney,Irish writer and politician (1879–1920),1920-10-25,10,25,,https://en.wikipedia.org/wiki/Terence_MacSwiney
+death,William Merritt Chase,American painter (1849–1916),1916-10-25,10,25,,https://en.wikipedia.org/wiki/William_Merritt_Chase
+death,Frank Norris,American journalist and novelist (1870–1902),1902-10-25,10,25,,https://en.wikipedia.org/wiki/Frank_Norris
+death,Charles Hallé,Prussian and British musician (1819–1895),1895-10-25,10,25,,https://en.wikipedia.org/wiki/Charles_Hall%C3%A9
+death,Émile Augier,French dramatist (1820–1889),1889-10-25,10,25,,https://en.wikipedia.org/wiki/%C3%89mile_Augier
+death,Geoffrey Chaucer,English writer (1343–1400),1400-10-25,10,25,,https://en.wikipedia.org/wiki/Geoffrey_Chaucer
 death,Björn Andrésen,Swedish actor and musician (1955–2025),2025-10-26,10,26,,https://en.wikipedia.org/wiki/Bj%C3%B6rn_Andr%C3%A9sen
 death,Ali Ashraf Darvishian,Iranian writer (1941–2017),2017-10-26,10,26,,https://en.wikipedia.org/wiki/Ali_Ashraf_Darvishian
 death,Ritva Arvelo,"Finnish actress, film director and screenwriter",2013-10-26,10,26,,https://en.wikipedia.org/wiki/Ritva_Arvelo
@@ -1136,3 +1149,33 @@ death,Alfred Jarry,French symbolist writer (1873–1907),1907-11-01,11,01,,https
 death,Hendrick ter Brugghen,Dutch painter (1588–1629),1629-11-01,11,01,,https://en.wikipedia.org/wiki/Hendrick_ter_Brugghen
 death,Jean Daurat,French poet and scholar (1508–1588),1588-11-01,11,01,,https://en.wikipedia.org/wiki/Jean_Daurat
 death,Giulio Romano,Italian painter and architect (1499–1546),1546-11-01,11,01,,https://en.wikipedia.org/wiki/Giulio_Romano
+death,Janey Godley,"Scottish actress, writer and comedian (1961–2024)",2024-11-02,11,02,,https://en.wikipedia.org/wiki/Janey_Godley
+death,Alan Rachins,American actor and comedian (1942–2024),2024-11-02,11,02,,https://en.wikipedia.org/wiki/Alan_Rachins
+death,Humaira Himu,Bangladeshi actress (1985–2023),2023-11-02,11,02,,https://en.wikipedia.org/wiki/Humaira_Himu
+death,Atilio Stampone,Argentine pianist and composer (1926–2022),2022-11-02,11,02,,https://en.wikipedia.org/wiki/Atilio_Stampone
+death,Tommy Overstreet,American country music singer (1937–2015),2015-11-02,11,02,,https://en.wikipedia.org/wiki/Tommy_Overstreet
+death,Acker Bilk,English clarinetist and vocalist (1929–2014),2014-11-02,11,02,,https://en.wikipedia.org/wiki/Acker_Bilk
+death,Michael Coleman (blues musician),American songwriter,2014-11-02,11,02,,https://en.wikipedia.org/wiki/Michael_Coleman_(blues_musician)
+death,Han Suyin,Chinese-Belgian-British physician and author (1916–2012),2012-11-02,11,02,,https://en.wikipedia.org/wiki/Han_Suyin
+death,Boots Plata,Filipino film director (1943–2011),2011-11-02,11,02,,https://en.wikipedia.org/wiki/Boots_Plata
+death,José Luis López Vázquez,Spanish actor (1922–2009),2009-11-02,11,02,,https://en.wikipedia.org/wiki/Jos%C3%A9_Luis_L%C3%B3pez_V%C3%A1zquez
+death,Nien Cheng,Chinese author (1915–2009),2009-11-02,11,02,,https://en.wikipedia.org/wiki/Nien_Cheng
+death,Theo van Gogh (film director),Dutch film director (1957–2004),2004-11-02,11,02,,https://en.wikipedia.org/wiki/Theo_van_Gogh_(film_director)
+death,Charles Sheffield,"British mathematician, physicist and writer (1935–2002)",2002-11-02,11,02,,https://en.wikipedia.org/wiki/Charles_Sheffield
+death,Robert Cormier,American writer and journalist (1925–2000),2000-11-02,11,02,,https://en.wikipedia.org/wiki/Robert_Cormier
+death,Vincent Winter,Scottish actor (1947–1998),1998-11-02,11,02,,https://en.wikipedia.org/wiki/Vincent_Winter
+death,Eva Cassidy,American singer (1963–1996),1996-11-02,11,02,,https://en.wikipedia.org/wiki/Eva_Cassidy
+death,Peter Taylor (writer),American author (1917–1994),1994-11-02,11,02,,https://en.wikipedia.org/wiki/Peter_Taylor_(writer)
+death,Robert Arneson,American sculptor and professor (1930–1992),1992-11-02,11,02,,https://en.wikipedia.org/wiki/Robert_Arneson
+death,Mort Shuman,American songwriter (1938–1991),1991-11-02,11,02,,https://en.wikipedia.org/wiki/Mort_Shuman
+death,Eliot Porter,American photographer (1901–1990),1990-11-02,11,02,,https://en.wikipedia.org/wiki/Eliot_Porter
+death,Wally Wood,American comic strip cartoonist and illustrator (1927–1981),1981-11-02,11,02,,https://en.wikipedia.org/wiki/Wally_Wood
+death,Pier Paolo Pasolini,"Italian writer, filmmaker, poet, and intellectual (1922–1975)",1975-11-02,11,02,,https://en.wikipedia.org/wiki/Pier_Paolo_Pasolini
+death,Mississippi John Hurt,American singer and guitarist (1893–1966),1966-11-02,11,02,,https://en.wikipedia.org/wiki/Mississippi_John_Hurt
+death,Harriet Bosse,Swedish–Norwegian actress (1878–1961),1961-11-02,11,02,,https://en.wikipedia.org/wiki/Harriet_Bosse
+death,James Thurber,"American cartoonist, author, journalist, and playwright (1894–1961)",1961-11-02,11,02,,https://en.wikipedia.org/wiki/James_Thurber
+death,Dimitri Mitropoulos,Greek and American conductor (1896–1960),1960-11-02,11,02,,https://en.wikipedia.org/wiki/Dimitri_Mitropoulos
+death,George Bernard Shaw,"Irish playwright, critic, and polemicist (1856–1950)",1950-11-02,11,02,,https://en.wikipedia.org/wiki/George_Bernard_Shaw
+death,Gao Qifeng,Chinese painter (1889–1933),1933-11-02,11,02,,https://en.wikipedia.org/wiki/Gao_Qifeng
+death,Kyrle Bellew,19th/20th-century English actor,1911-11-02,11,02,,https://en.wikipedia.org/wiki/Kyrle_Bellew
+death,Jenny Lind,Swedish opera singer (1820–1887),1887-11-02,11,02,,https://en.wikipedia.org/wiki/Jenny_Lind

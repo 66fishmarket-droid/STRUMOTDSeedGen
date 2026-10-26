@@ -81,7 +81,7 @@ song,The Battle of New Orleans,Johnny Horton,1959-04,04,,US Top 10,https://en.wi
 song,Only You (And You Alone),Franck Pourcel's French Fiddles,1955-06,6.0,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1959,1959-05-25,1959-06-01,9.0,wikitext:released,2025-11-20
 song,Personality,Lloyd Price,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1959,1959-05-25,1959-06-15,2.0,,2025-11-20
 song,Lonely Boy,Paul Anka,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1959,1959-06-15,1959-07-13,1.0,,2025-11-20
-song,Tallahassee Lassie,Freddy Cannon,1959-05,05,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1959,1959-06-15,1959-06-29,6.0,error:HTTPError,2025-11-20
+song,Tallahassee Lassie,Freddy Cannon,1959-05,05,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1959,1959-06-15,1959-06-29,6.0,wikitext:released,2025-11-20
 song,Along Came Jones,The Coasters,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1959,1959-06-22,1959-06-22,9.0,,2025-11-20
 song,Lipstick on Your Collar,Connie Francis,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1959,1959-06-22,1959-06-29,5.0,,2025-11-20
 song,Bobby Sox to Stockings,Frankie Avalon,1959,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1959,1959-07-06,1959-07-06,8.0,wikidata:P577,2025-11-20
@@ -155,7 +155,7 @@ song,Forever,The Little Dippers,,,,US Top 10,https://en.wikipedia.org/wiki/List_
 song,"O, Dio Mio",Annette,1960-01,1.0,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1960,1960-03-28,1960-03-28,10.0,error:HTTPError,2025-11-20
 song,Footsteps,Steve Lawrence,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1960,1960-04-04,1960-04-04,7.0,,2025-11-20
 song,Mama,Connie Francis,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1960,1960-04-04,1960-04-11,8.0,,2025-11-20
-song,Sink the Bismarck,Johnny Horton,1960,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1960,1960-04-04,1960-04-25,3.0,error:HTTPError,2025-11-20
+song,Sink the Bismarck,Johnny Horton,1960,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1960,1960-04-04,1960-04-25,3.0,wikidata:P577,2025-11-20
 song,Greenfields,The Brothers Four,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1960,1960-04-11,1960-04-18,2.0,,2025-11-20
 song,I Love the Way You Love,Marv Johnson,1960-02,02,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1960,1960-04-11,1960-04-11,9.0,wikitext:released,2025-11-20
 song,Sixteen Reasons,Connie Stevens,1959-12,12,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1960,1960-04-18,1960-05-02,3.0,wikidata:P577,2025-11-20
@@ -446,7 +446,7 @@ song,The Night Has a Thousand Eyes,Bobby Vee,,,,US Top 10,https://en.wikipedia.o
 song,Two Lovers,Mary Wells,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1963,1963-01-12,1963-01-19,7.0,error:HTTPError,2025-11-20
 song,Hey Paula,Paul & Paula,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1963,1963-01-19,1963-02-09,1.0,,2025-11-20
 song,It's Up to You,Rick Nelson,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1963,1963-01-26,1963-02-02,6.0,,2025-11-20
-song,Walk Right In,The Rooftop Singers,1962-12,12,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1963,1963-01-26,1963-01-26,1.0,error:HTTPError,2025-11-20
+song,Walk Right In,The Rooftop Singers,1962-12,12,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1963,1963-01-26,1963-01-26,1.0,wikitext:released,2025-11-20
 song,Loop de Loop,Johnny Thunder,1962-12,12,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1963,1963-02-02,1963-02-09,4.0,wikitext:released,2025-11-20
 song,Up on the Roof,The Drifters,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1963,1963-02-02,1963-02-09,5.0,,2025-11-20
 song,Rhythm of the Rain,The Cascades,1962-11,11,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1963,1963-02-09,1963-03-09,3.0,wikitext:released,2025-11-20
@@ -889,7 +889,7 @@ song,Snoopy vs. the Red Baron,The Royal Guardsmen,,,,US Top 10,https://en.wikipe
 song,Good Thing,Paul Revere & the Raiders,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1966,1966-12-31,1966-01-14,4.0,,2025-11-20
 song,Tell It Like It Is,Aaron Neville,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1966,1966-12-31,1966-01-28,2.0,,2025-11-20
 song,Standing in the Shadows of Love,Four Tops,1966-11-28,11.0,28.0,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1967,1967-01-07,1967-01-21,6.0,wikidata:P577,2025-11-20
-song,Words of Love,The Mamas and the Papas,1957,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1967,1967-01-07,1967-01-21,5.0,error:HTTPError,2025-11-20
+song,Words of Love,The Mamas and the Papas,1957,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1967,1967-01-07,1967-01-21,5.0,wikidata:P577,2025-11-20
 song,Georgy Girl,The Seekers,1966,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1967,1967-01-14,1967-02-04,2.0,wikidata:P577,2025-11-20
 song,Nashville Cats,The Lovin' Spoonful,1966-11,11,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1967,1967-01-21,1967-01-28,8.0,wikitext:released,2025-11-20
 song,Tell It to the Rain,The Four Seasons,1966-11,11,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1967,1967-01-21,1967-01-21,10.0,wikitext:released,2025-11-20
@@ -973,7 +973,7 @@ song,How Can I Be Sure,The Young Rascals,1967-08-28,8.0,28.0,US Top 10,https://e
 song,"Little Ole Man (Uptight, Everything's Alright)",Bill Cosby,1967,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1967,1967-10-07,1967-10-14,4.0,error:HTTPError,2025-11-20
 song,Soul Man,Sam & Dave,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1967,1967-10-14,1967-11-04,2.0,,2025-11-20
 song,"To Sir, with Love",Lulu,1966,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1967,1967-10-14,1967-10-21,1.0,wikidata:P577,2025-11-20
-song,Expressway to Your Heart,The Soul Survivors,1967-07,07,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1967,1967-10-21,1967-11-04,4.0,error:HTTPError,2025-11-20
+song,Expressway to Your Heart,The Soul Survivors,1967-07,07,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1967,1967-10-21,1967-11-04,4.0,wikitext:released,2025-11-20
 song,It Must Be Him,Vikki Carr,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1967,1967-10-21,1967-11-04,3.0,,2025-11-20
 song,Your Precious Love,Marvin Gaye & Tammi Terrell,1967-08-22,8.0,22.0,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1967,1967-10-21,1967-11-04,5.0,wikitext:released,2025-11-20
 song,(You Make Me Feel Like) A Natural Woman,Aretha Franklin,1967-09,9.0,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1967,1967-10-28,1967-11-04,8.0,wikitext:released,2025-11-20
@@ -1070,7 +1070,7 @@ song,Girl Watcher,The O'Kaysions,1968-06,06,,US Top 10,https://en.wikipedia.org/
 song,Slip Away,Clarence Carter,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1968,1968-09-28,1968-10-05,6.0,,2025-11-20
 song,I Say a Little Prayer,Aretha Franklin,1967-10,10,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1968,1968-10-05,1968-10-05,10.0,wikidata:P577,2025-11-20
 song,Little Green Apples,O. C. Smith,1968-09,09,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1968,1968-10-05,1968-10-26,2.0,wikitext:released,2025-11-20
-song,Midnight Confessions,The Grass Roots,1968,06,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1968,1968-10-12,1968-11-02,5.0,wikidata:P577,2025-11-20
+song,Midnight Confessions,The Grass Roots,1968-06,06,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1968,1968-10-12,1968-11-02,5.0,wikitext:released,2025-11-20
 song,My Special Angel,The Vogues,1957-07,07,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1968,1968-10-12,1968-10-12,7.0,wikitext:released,2025-11-20
 song,Over You,Gary Puckett & The Union Gap,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1968,1968-10-12,1968-10-26,7.0,,2025-11-20
 song,Say It Loud – I'm Black and I'm Proud,James Brown,1968-08,8.0,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1968,1968-10-19,1968-10-19,10.0,wikidata:P577,2025-11-20
@@ -1243,7 +1243,7 @@ song,Ride Captain Ride,Blues Image,1970-04,04,,US Top 10,https://en.wikipedia.or
 song,The Wonder of You,Elvis Presley,1970-04-20,4.0,20.0,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1970,1970-06-27,1970-06-27,9.0,wikidata:P577,2025-11-20
 song,Band of Gold,Freda Payne,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1970,1970-07-04,1970-07-25,3.0,,2025-11-20
 song,(They Long to Be) Close to You,The Carpenters,1963,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1970,1970-07-11,1970-07-25,1.0,wikidata:P577,2025-11-20
-song,Gimme Dat Ding,The Pipkins,1970,05,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1970,1970-07-18,1970-07-18,9.0,wikidata:P577,2025-11-20
+song,Gimme Dat Ding,The Pipkins,1970-05,05,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1970,1970-07-18,1970-07-18,9.0,wikitext:released,2025-11-20
 song,Make It with You,Bread,1970-06,06,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1970,1970-07-18,1970-08-22,1.0,wikidata:P577,2025-11-20
 song,O-o-h Child,Five Stairsteps,1970-04,04,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1970,1970-07-18,1970-07-18,8.0,wikitext:released,2025-11-20
 song,"Signed, Sealed, Delivered I'm Yours",Stevie Wonder,1970-06-03,6.0,3.0,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1970,1970-07-25,1970-08-08,3.0,wikidata:P577,2025-11-20
@@ -1421,7 +1421,7 @@ song,Sylvia's Mother,Dr. Hook & the Medicine Show,1972-03,3.0,,US Top 10,https:/
 song,The Candy Man,Sammy Davis Jr.,1972-04,04,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1972,1972-05-27,1972-06-10,1.0,wikidata:P577,2025-11-20
 song,Nice to Be with You,Gallery,1972-02,02,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1972,1972-06-03,1972-06-24,4.0,wikidata:P577,2025-11-20
 song,(Last Night) I Didn't Get to Sleep at All,The 5th Dimension,1972-03,3.0,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1972,1972-06-10,1972-06-17,8.0,wikitext:released,2025-11-20
-song,Outa-Space,Billy Preston,1971,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1972,1972-06-10,1972-07-08,2.0,error:HTTPError,2025-11-20
+song,Outa-Space,Billy Preston,1971,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1972,1972-06-10,1972-07-08,2.0,wikidata:P577,2025-11-20
 song,Song Sung Blue,Neil Diamond,1972-05,05,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1972,1972-06-10,1972-07-01,1.0,wikidata:P577,2025-11-20
 song,Lean on Me,Bill Withers,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1972,1972-06-17,1972-07-08,1.0,,2025-11-20
 song,Troglodyte (Cave Man),The Jimmy Castor Bunch,1972,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1972,1972-06-17,1972-06-24,6.0,wikidata:P577,2025-11-20
@@ -1677,7 +1677,7 @@ song,Everlasting Love,Carl Carlton,1967-07,07,,US Top 10,https://en.wikipedia.or
 song,I Can Help,Billy Swan,1974-07,07,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1974,1974-11-16,1974-11-23,1.0,wikidata:P577,2025-11-20
 song,Longfellow Serenade,Neil Diamond,1974,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1974,1974-11-16,1974-11-23,5.0,wikidata:P577,2025-11-20
 song,Cat's in the Cradle,Harry Chapin,1974-10-01,10.0,1.0,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1974,1974-11-23,1974-12-21,1.0,wikidata:P577,2025-11-20
-song,Kung Fu Fighting,Carl Douglas,1974-08,08,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1974,1974-11-23,1974-12-07,1.0,error:HTTPError,2025-11-20
+song,Kung Fu Fighting,Carl Douglas,1974-08,08,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1974,1974-11-23,1974-12-07,1.0,wikitext:released,2025-11-20
 song,When Will I See You Again,The Three Degrees,1974-09-27,9.0,27.0,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1974,1974-11-23,1974-12-14,2.0,wikidata:P577,2025-11-20
 song,Angie Baby,Helen Reddy,1974-10-07,10.0,7.0,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1974,1974-11-30,1974-12-28,1.0,wikidata:P577,2025-11-20
 song,Sha-La-La (Make Me Happy),Al Green,1974-10,10.0,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1974,1974-12-07,1974-12-21,7.0,wikidata:P577,2025-11-20
@@ -1764,7 +1764,7 @@ song,Could It Be Magic,Barry Manilow,1992-11-30,11.0,30.0,US Top 10,https://en.w
 song,Fame,David Bowie,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1975,1975-09-06,1975-09-20,1.0,,2025-11-20
 song,I'm Sorry,John Denver,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1975,1975-09-13,1975-09-27,1.0,,2025-11-20
 song,Run Joey Run,David Geddes,1975-07,07,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1975,1975-09-13,1975-10-04,4.0,wikidata:P577,2025-11-20
-song,Wasted Days and Wasted Nights,Freddy Fender,1975-06,06,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1975,1975-09-13,1975-09-27,8.0,wikitext:released,2025-11-20
+song,Wasted Days and Wasted Nights,Freddy Fender,1975-06,06,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1975,1975-09-13,1975-09-27,8.0,wikidata:P577,2025-11-20
 song,Feel Like Makin' Love,Bad Company,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1975,1975-09-20,1975-09-20,10.0,,2025-11-20
 song,The Ballroom Blitz,Sweet,1973-09-14,09,14,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1975,1975-09-27,1975-10-18,5.0,wikitext:released,2025-11-20
 song,Ain't No Way to Treat a Lady,Helen Reddy,1975-08,8.0,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1975,1975-10-04,1975-10-11,8.0,wikidata:P577,2025-11-20
@@ -1854,7 +1854,7 @@ song,You'll Never Find Another Love Like Mine,Lou Rawls,1976-05,5.0,,US Top 10,h
 song,"(Shake, Shake, Shake) Shake Your Booty",KC and the Sunshine Band,1976-05-27,5.0,27.0,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1976,1976-08-14,1976-09-11,1.0,wikidata:P577,2025-11-20
 song,I'd Really Love to See You Tonight,England Dan & John Ford Coley,1976-05,5.0,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1976,1976-08-14,1976-09-25,2.0,wikidata:P577,2025-11-20
 song,Turn the Beat Around,Vicki Sue Robinson,1976-04,04,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1976,1976-08-14,1976-08-14,10.0,wikidata:P577,2025-11-20
-song,A Fifth of Beethoven,Walter Murphy & the Big Apple Band,1976,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1976,1976-08-28,1976-10-09,1.0,error:HTTPError,2025-11-20
+song,A Fifth of Beethoven,Walter Murphy & the Big Apple Band,1976,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1976,1976-08-28,1976-10-09,1.0,wikidata:P577,2025-11-20
 song,Play That Funky Music,Wild Cherry,1976-04,04,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1976,1976-08-28,1976-09-18,1.0,wikidata:P577,2025-11-20
 song,This Masquerade,George Benson,1976-04,04,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1976,1976-08-28,1976-08-28,10.0,wikitext:released,2025-11-20
 song,Lowdown,Boz Scaggs,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1976,1976-09-04,1976-10-09,3.0,,2025-11-20
@@ -2111,7 +2111,7 @@ song,Lonesome Loser,Little River Band,1979-07,07,,US Top 10,https://en.wikipedia
 song,Sail On,Commodores,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1979,1979-09-15,1979-10-13,4.0,error:HTTPError,2025-11-20
 song,Rise,Herb Alpert,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1979,1979-09-22,1979-10-20,1.0,,2025-11-20
 song,Don't Stop 'Til You Get Enough,Michael Jackson,1978,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1979,1979-09-29,1979-10-13,1.0,wikidata:P577,2025-11-20
-song,Dim All the Lights,Donna Summer,1979-08,08,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1979,1979-10-06,1979-11-10,2.0,error:HTTPError,2025-11-20
+song,Dim All the Lights,Donna Summer,1979-08,08,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1979,1979-10-06,1979-11-10,2.0,wikidata:P577,2025-11-20
 song,Pop Muzik,M,1979-03-25,3.0,25.0,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1979,1979-10-06,1979-11-03,1.0,wikidata:P577,2025-11-20
 song,Heartache Tonight,Eagles,1979-09-18,9.0,18.0,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1979,1979-10-20,1979-11-10,1.0,wikidata:P577,2025-11-20
 song,Still,Commodores,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1979,1979-10-20,1979-11-17,1.0,,2025-11-20
@@ -2376,7 +2376,7 @@ song,Separate Ways (Worlds Apart),Journey,1983-01-04,1.0,4.0,US Top 10,https://e
 song,You Are,Lionel Richie,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1983,1983-03-12,1983-03-26,4.0,,2025-11-20
 song,Mr. Roboto,Styx,1983,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1983,1983-03-19,1983-04-16,3.0,wikidata:P577,2025-11-20
 song,One on One,Hall & Oates,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1983,1983-03-19,1983-04-09,7.0,,2025-11-20
-song,Twilight Zone,Golden Earring,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1983,1983-03-26,1983-03-26,10.0,error:HTTPError,2025-11-20
+song,Twilight Zone,Golden Earring,1959-10-02,10,02,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1983,1983-03-26,1983-03-26,10.0,wikitext:released,2025-11-20
 song,Beat It,Michael Jackson,1983-02,02,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1983,1983-04-09,1983-04-30,1.0,wikidata:P577,2025-11-20
 song,Come On Eileen,Dexys Midnight Runners,1982-06-25,6.0,25.0,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1983,1983-04-09,1983-04-23,1.0,wikidata:P577,2025-11-20
 song,Jeopardy,The Greg Kihn Band,1964-03-30,3.0,30.0,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1983,1983-04-09,1983-05-07,2.0,wikitext:released,2025-11-20
@@ -3458,7 +3458,7 @@ song,If You Go,Jon Secada,1961-11,11,,US Top 10,https://en.wikipedia.org/wiki/Li
 song,Can You Feel the Love Tonight,Elton John,1994-05-02,5.0,2.0,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1994,1994-07-09,1994-08-06,4.0,wikitext:released,2025-11-20
 song,Fantastic Voyage,Coolio,1966-08-24,8.0,24.0,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1994,1994-07-16,1994-07-30,3.0,wikidata:P577,2025-11-20
 song,Funkdafied,Da Brat,1994-06-28,6.0,28.0,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1994,1994-07-16,1994-08-13,6.0,wikidata:P577,2025-11-20
-song,Wild Night,John Mellencamp and Meshell Ndegeocello,1971-10,10,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1994,1994-07-30,1994-09-03,3.0,wikidata:P577,2025-11-20
+song,Wild Night,John Mellencamp and Meshell Ndegeocello,1971-09,09,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1994,1994-07-30,1994-09-03,3.0,wikitext:released,2025-11-20
 song,I'll Make Love to You,Boyz II Men,1994-07-26,7.0,26.0,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1994,1994-08-20,1994-08-27,1.0,wikidata:P577,2025-11-20
 song,When Can I See You,Babyface,1994-05-20,5.0,20.0,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1994,1994-08-20,1994-09-10,4.0,wikidata:P577,2025-11-20
 song,Stroke You Up,Changing Faces,1994-06-30,6.0,30.0,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1994,1994-08-27,1994-09-17,3.0,wikidata:P577,2025-11-20

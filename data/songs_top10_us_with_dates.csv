@@ -478,7 +478,7 @@ song,If You Wanna Be Happy,Jimmy Soul,1963-01,01,,US Top 10,https://en.wikipedia
 song,Surfin' U.S.A.,The Beach Boys,1963-03-04,3.0,4.0,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1963,1963-05-04,1963-05-25,3.0,wikitext:released,2025-11-20
 song,Foolish Little Girl,The Shirelles,1963,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1963,1963-05-11,1963-05-25,4.0,wikidata:P577,2025-11-20
 song,Losing You,Brenda Lee,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1963,1963-05-11,1963-05-25,6.0,,2025-11-20
-song,The Reverend Mr. Black,The Kingston Trio,1963,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1963,1963-05-11,1963-05-18,8.0,wikidata:P577,2025-11-20
+song,The Reverend Mr. Black,The Kingston Trio,1963,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1963,1963-05-11,1963-05-18,8.0,wikitext:released,2025-11-20
 song,I Love You Because,Al Martino,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1963,1963-05-18,1963-06-01,3.0,,2025-11-20
 song,Another Saturday Night,Sam Cooke,1963,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1963,1963-05-25,1963-05-25,10.0,wikidata:P577,2025-11-20
 song,It's My Party,Lesley Gore,1963,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1963,1963-05-25,1963-06-01,1.0,wikidata:P577,2025-11-20
@@ -556,7 +556,7 @@ song,The Nitty Gritty,Shirley Ellis,,,,US Top 10,https://en.wikipedia.org/wiki/L
 song,Surfin' Bird,The Trashmen,1963-11-13,11.0,13.0,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1964,1964-01-11,1964-01-25,4.0,wikitext:released,2025-11-20
 song,Drag City,Jan and Dean,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1964,1964-01-18,1964-01-18,10.0,,2025-11-20
 song,Hey Little Cobra,The Rip Chords,1963-11,11,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1964,1964-01-18,1964-02-08,4.0,wikitext:released,2025-11-20
-song,Out of Limits,The Marketts,1963-10,10,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1964,1964-01-18,1964-02-01,3.0,wikitext:released,2025-11-20
+song,Out of Limits,The Marketts,1963-10,10,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1964,1964-01-18,1964-02-01,3.0,error:HTTPError,2025-11-20
 song,I Want to Hold Your Hand,The Beatles,1963-11-29,11.0,29.0,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1964,1964-01-25,1964-02-01,1.0,wikitext:released,2025-11-20
 song,"Um, Um, Um, Um, Um, Um",Major Lance,1963-12,12.0,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1964,1964-01-25,1964-02-08,5.0,wikidata:P577,2025-11-20
 song,Anyone Who Had a Heart,Dionne Warwick,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1964,1964-02-01,1964-02-15,8.0,,2025-11-20
@@ -648,7 +648,7 @@ song,You Really Got Me,The Kinks,1964-08-04,8.0,4.0,US Top 10,https://en.wikiped
 song,Mountain of Love,Johnny Rivers,1960-02,02,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1964,1964-11-28,1964-12-05,9.0,wikitext:released,2025-11-20
 song,Mr. Lonely,Bobby Vinton,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1964,1964-11-28,1964-12-12,1.0,,2025-11-20
 song,Come See About Me,The Supremes,1964,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1964,1964-12-05,1964-12-19,1.0,wikidata:P577,2025-11-20
-song,I'm Gonna Be Strong,Gene Pitney,1964,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1964,1964-12-05,1964-12-12,9.0,wikidata:P577,2025-11-20
+song,I'm Gonna Be Strong,Gene Pitney,1964,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1964,1964-12-05,1964-12-12,9.0,error:HTTPError,2025-11-20
 song,"Dance, Dance, Dance",The Beach Boys,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1964,1964-12-12,1964-12-19,8.0,,2025-11-20
 song,I Feel Fine,The Beatles,1964-11-23,11.0,23.0,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1964,1964-12-12,1964-12-26,1.0,wikitext:released,2025-11-20
 song,Goin' Out of My Head,Little Anthony and the Imperials,1964-10-13,10.0,13.0,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1964,1964-12-19,1964-12-26,6.0,wikitext:released,2025-11-20
@@ -1192,7 +1192,7 @@ song,Whole Lotta Love,Led Zeppelin,1969,,,US Top 10,https://en.wikipedia.org/wik
 song,La La La (If I Had You),Bobby Sherman,1969-11,11.0,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1970,1970-01-03,1970-01-10,9.0,wikitext:released,2025-11-20
 song,Venus,Shocking Blue,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1970,1970-01-03,1970-02-07,1.0,error:HTTPError,2025-11-20
 song,Jam Up and Jelly Tight,Tommy Roe,1969-11,11,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1970,1970-01-10,1970-01-17,8.0,wikitext:released,2025-11-20
-song,Don't Cry Daddy,Elvis Presley,1969-11,11.0,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1970,1970-01-17,1970-01-31,6.0,wikidata:P577,2025-11-20
+song,Don't Cry Daddy,Elvis Presley,1969-11,11.0,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1970,1970-01-17,1970-01-31,6.0,error:HTTPError,2025-11-20
 song,Midnight Cowboy,Ferrante & Teicher,1969,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1970,1970-01-17,1970-01-17,10.0,wikidata:P577,2025-11-20
 song,I'll Never Fall in Love Again,Dionne Warwick,1969,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1970,1970-01-24,1970-02-07,6.0,wikidata:P577,2025-11-20
 song,Without Love (There Is Nothing),Tom Jones,1969-12,12.0,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1970,1970-01-24,1970-01-31,5.0,error:HTTPError,2025-11-20
@@ -1370,7 +1370,7 @@ song,Have You Seen Her,The Chi-Lites,1971-10,10,,US Top 10,https://en.wikipedia.
 song,Baby I'm-a Want You,Bread,1972-01,1.0,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1971,1971-11-20,1971-11-27,3.0,wikidata:P577,2025-11-20
 song,Family Affair,Sly and the Family Stone,1966-09-12,9.0,12.0,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1971,1971-11-20,1971-12-04,1.0,wikitext:released,2025-11-20
 song,Got to Be There,Michael Jackson,1972-01-24,1.0,24.0,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1971,1971-11-20,1971-12-11,4.0,wikidata:P577,2025-11-20
-song,Desiderata,Les Crane,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1971,1971-11-27,1971-12-04,8.0,,2025-11-20
+song,Desiderata,Les Crane,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1971,1971-11-27,1971-12-04,8.0,error:HTTPError,2025-11-20
 song,Rock Steady,Aretha Franklin,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1971,1971-11-27,1971-11-27,9.0,,2025-11-20
 song,An Old Fashioned Love Song,Three Dog Night,1971-11,11,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1971,1971-12-04,1971-12-18,4.0,wikidata:P577,2025-11-20
 song,All I Ever Need Is You,Sonny & Cher,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1971,1971-12-11,1971-12-25,7.0,error:HTTPError,2025-11-20
@@ -1798,7 +1798,7 @@ song,I Write the Songs,Barry Manilow,1975-05-23,05,23,US Top 10,https://en.wikip
 song,Convoy,C. W. McCall,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1975,1975-12-27,1975-01-10,1.0,,2025-11-20
 song,I Love Music,The O'Jays,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1975,1975-12-27,1975-01-24,5.0,error:HTTPError,2025-11-20
 song,Love to Love You Baby,Donna Summer,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1976,1976-01-10,1976-02-07,2.0,,2025-11-20
-song,Times of Your Life,Paul Anka,1975-11,11,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1976,1976-01-10,1976-02-07,7.0,wikidata:P577,2025-11-20
+song,Times of Your Life,Paul Anka,1975-11,11,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1976,1976-01-10,1976-02-07,7.0,error:HTTPError,2025-11-20
 song,Walk Away from Love,David Ruffin,1975,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1976,1976-01-17,1976-01-24,9.0,wikidata:P577,2025-11-20
 song,You Sexy Thing,Hot Chocolate,1975-10-24,10,24,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1976,1976-01-17,1976-02-07,3.0,wikitext:released,2025-11-20
 song,Sing a Song,"Earth, Wind & Fire",,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1976,1976-01-24,1976-02-07,5.0,,2025-11-20
@@ -1881,7 +1881,7 @@ song,You Don't Have to Be a Star (To Be in My Show),Marilyn McCoo and Billy Davi
 song,Nights Are Forever Without You,England Dan & John Ford Coley,1976-10,10,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1976,1976-12-11,1976-12-11,10.0,wikidata:P577,2025-11-20
 song,You Make Me Feel Like Dancing,Leo Sayer,1976-10,10,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1976,1976-12-11,1976-01-15,1.0,wikidata:P577,2025-11-20
 song,Sorry Seems to Be the Hardest Word,Elton John,1976-11-01,11.0,1.0,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1976,1976-12-18,1976-12-25,6.0,wikitext:released,2025-11-20
-song,After the Lovin,Engelbert Humperdinck,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1976,1976-12-25,1976-01-22,8.0,,2025-11-20
+song,After the Lovin,Engelbert Humperdinck,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1976,1976-12-25,1976-01-22,8.0,error:HTTPError,2025-11-20
 song,Car Wash,Rose Royce,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1976,1976-12-25,1976-01-29,1.0,,2025-11-20
 song,Dazz,Brick,1976,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1976,1976-12-25,1976-01-29,3.0,wikidata:P577,2025-11-20
 song,I Wish,Stevie Wonder,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1976,1976-12-25,1976-01-22,1.0,,2025-11-20
@@ -2145,7 +2145,7 @@ song,"Working My Way Back to You (Forgive Me, Girl)",The Spinners,1966-01,1.0,,U
 song,Him,Rupert Holmes,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1980,1980-03-08,1980-03-29,6.0,,2025-11-20
 song,The Second Time Around,Shalamar,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1980,1980-03-08,1980-03-22,8.0,,2025-11-20
 song,Too Hot,Kool & the Gang,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1980,1980-03-15,1980-04-05,5.0,,2025-11-20
-song,How Do I Make You,Linda Ronstadt,1980-01,01,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1980,1980-03-22,1980-03-22,10.0,wikitext:released,2025-11-20
+song,How Do I Make You,Linda Ronstadt,1980,01,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1980,1980-03-22,1980-03-22,10.0,wikidata:P577,2025-11-20
 song,Call Me,Blondie,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1980,1980-03-29,1980-04-19,1.0,,2025-11-20
 song,Ride Like the Wind,Christopher Cross,1980-02-15,2.0,15.0,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1980,1980-03-29,1980-04-26,2.0,wikidata:P577,2025-11-20
 song,Special Lady,"Ray, Goodman & Brown",1980-01,01,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1980,1980-04-05,1980-04-19,5.0,wikitext:released,2025-11-20
@@ -2341,7 +2341,7 @@ song,Eye in the Sky,The Alan Parsons Project,,,,US Top 10,https://en.wikipedia.o
 song,Love Is in Control (Finger on the Trigger),Donna Summer,1982-06-01,6.0,1.0,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1982,1982-09-25,1982-09-25,10.0,wikitext:released,2025-11-20
 song,Somebody's Baby,Jackson Browne,1982-07,7.0,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1982,1982-09-25,1982-10-16,7.0,wikidata:P577,2025-11-20
 song,Who Can It Be Now?,Men at Work,1981-06-06,6.0,6.0,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1982,1982-09-25,1982-10-30,1.0,wikidata:P577,2025-11-20
-song,I Keep Forgettin' (Every Time You're Near),Michael McDonald,1982-08,8.0,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1982,1982-10-02,1982-10-23,4.0,wikitext:released,2025-11-20
+song,I Keep Forgettin' (Every Time You're Near),Michael McDonald,1982-08,8.0,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1982,1982-10-02,1982-10-23,4.0,error:HTTPError,2025-11-20
 song,I Ran (So Far Away),A Flock of Seagulls,1982,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1982,1982-10-09,1982-10-23,9.0,wikidata:P577,2025-11-20
 song,You Can Do Magic,America,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1982,1982-10-09,1982-10-16,8.0,error:HTTPError,2025-11-20
 song,Heart Attack,Olivia Newton-John,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1982,1982-10-16,1982-11-06,3.0,,2025-11-20
@@ -2565,7 +2565,7 @@ song,Nightshift,Commodores,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Bi
 song,We Are the World,USA for Africa,1985-03-28,3.0,28.0,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1985,1985-03-30,1985-04-13,1.0,wikidata:P577,2025-11-20
 song,I'm on Fire,Bruce Springsteen,1985-02-06,2.0,6.0,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1985,1985-04-06,1985-04-13,6.0,wikidata:P577,2025-11-20
 song,Rhythm of the Night,DeBarge,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1985,1985-04-06,1985-04-27,3.0,error:HTTPError,2025-11-20
-song,Missing You,Diana Ross,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1985,1985-04-13,1985-04-13,10.0,,2025-11-20
+song,Missing You,Diana Ross,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1985,1985-04-13,1985-04-13,10.0,error:HTTPError,2025-11-20
 song,Obsession,Animotion,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1985,1985-04-13,1985-05-04,6.0,,2025-11-20
 song,Don't You (Forget About Me),Simple Minds,1985,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1985,1985-04-20,1985-05-18,1.0,wikidata:P577,2025-11-20
 song,One Night in Bangkok,Murray Head,1984-10,10,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1985,1985-04-20,1985-05-18,3.0,wikitext:released,2025-11-20
@@ -3938,7 +3938,7 @@ song,Beautiful,Christina Aguilera,,,,US Top 10,https://en.wikipedia.org/wiki/Lis
 song,"Bump, Bump, Bump",B2K featuring P. Diddy,2002-10-23,10.0,23.0,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2002,2002-12-28,2002-02-01,1.0,wikidata:P577,2025-11-20
 song,Love of My Life (An Ode to Hip-Hop),Erykah Badu featuring Common,2002-08-20,8.0,20.0,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2003,2003-01-04,2003-01-04,9.0,wikidata:P577,2025-11-20
 song,Landslide,Dixie Chicks,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2003,2003-01-11,2003-03-08,7.0,,2025-11-20
-song,All I Have,Jennifer Lopez featuring LL Cool J,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2003,2003-01-25,2003-02-08,1.0,,2025-11-20
+song,All I Have,Jennifer Lopez featuring LL Cool J,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2003,2003-01-25,2003-02-08,1.0,error:HTTPError,2025-11-20
 song,Cry Me a River,Justin Timberlake,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2003,2003-01-25,2003-02-01,3.0,,2025-11-20
 song,I'm With You,Avril Lavigne,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2003,2003-01-25,2003-02-01,4.0,,2025-11-20
 song,Mesmerize,Ja Rule featuring Ashanti,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2003,2003-02-01,2003-02-15,2.0,,2025-11-20
@@ -4634,7 +4634,7 @@ song,Time of Our Lives,Pitbull and Ne-Yo,,,,US Top 10,https://en.wikipedia.org/w
 song,Lay Me Down,Sam Smith,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2015,2015-03-28,2015-03-28,8.0,,2025-11-20
 song,Trap Queen,Fetty Wap,2014-04-22,4.0,22.0,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2015,2015-03-28,2015-05-16,2.0,wikidata:P577,2025-11-20
 song,G.D.F.R.,Flo Rida featuring Sage the Gemini and Lookas,2014-10-21,10.0,21.0,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2015,2015-04-04,2015-04-18,8.0,wikidata:P577,2025-11-20
-song,Somebody,Natalie La Rose featuring Jeremih,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2015,2015-04-11,2015-04-11,10.0,,2025-11-20
+song,Somebody,Natalie La Rose featuring Jeremih,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2015,2015-04-11,2015-04-11,10.0,error:HTTPError,2025-11-20
 song,See You Again,Wiz Khalifa featuring Charlie Puth,2015-03-10,3.0,10.0,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2015,2015-04-18,2015-04-25,1.0,wikidata:P577,2025-11-20
 song,Shut Up and Dance,Walk the Moon,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2015,2015-04-25,2015-05-30,4.0,,2025-11-20
 song,Want to Want Me,Jason Derulo,2015-03-09,3.0,9.0,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2015,2015-05-09,2015-06-20,5.0,wikidata:P577,2025-11-20

@@ -1372,7 +1372,7 @@ song,Family Affair,Sly and the Family Stone,1966-09-12,9.0,12.0,US Top 10,https:
 song,Got to Be There,Michael Jackson,1972-01-24,1.0,24.0,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1971,1971-11-20,1971-12-11,4.0,wikidata:P577,2025-11-20
 song,Desiderata,Les Crane,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1971,1971-11-27,1971-12-04,8.0,error:HTTPError,2025-11-20
 song,Rock Steady,Aretha Franklin,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1971,1971-11-27,1971-11-27,9.0,error:HTTPError,2025-11-20
-song,An Old Fashioned Love Song,Three Dog Night,1971-11,11,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1971,1971-12-04,1971-12-18,4.0,error:HTTPError,2025-11-20
+song,An Old Fashioned Love Song,Three Dog Night,1971-11,11,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1971,1971-12-04,1971-12-18,4.0,wikidata:P577,2025-11-20
 song,All I Ever Need Is You,Sonny & Cher,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1971,1971-12-11,1971-12-25,7.0,error:HTTPError,2025-11-20
 song,Brand New Key,Melanie,1971-10,10,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1971,1971-12-11,1971-12-25,1.0,wikidata:P577,2025-11-20
 song,American Pie,Don McLean,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1971,1971-12-18,1971-01-15,1.0,,2025-11-20
@@ -1540,7 +1540,7 @@ song,Live and Let Die,Paul McCartney and Wings,,,,US Top 10,https://en.wikipedia
 song,Touch Me in the Morning,Diana Ross,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1973,1973-08-04,1973-08-18,1.0,,2025-11-20
 song,Let's Get It On,Marvin Gaye,1973-08-28,8.0,28.0,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1973,1973-08-11,1973-09-08,1.0,wikidata:P577,2025-11-20
 song,Monster Mash,Bobby (Boris) Pickett and the Crypt-Kickers,1962-08-25,8.0,25.0,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1973,1973-08-11,1973-08-11,10.0,wikidata:P577,2025-11-20
-song,Uneasy Rider,Charlie Daniels,1973,06,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1973,1973-08-11,1973-08-11,9.0,wikidata:P577,2025-11-20
+song,Uneasy Rider,Charlie Daniels,1973-06,06,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1973,1973-08-11,1973-08-11,9.0,wikitext:released,2025-11-20
 song,Delta Dawn,Helen Reddy,1971,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1973,1973-08-18,1973-09-15,1.0,wikidata:P577,2025-11-20
 song,Feelin' Stronger Every Day,Chicago,1973,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1973,1973-08-18,1973-08-18,10.0,wikidata:P577,2025-11-20
 song,Get Down,Gilbert O'Sullivan,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1973,1973-08-18,1973-08-18,7.0,,2025-11-20
@@ -2569,7 +2569,7 @@ song,Missing You,Diana Ross,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_B
 song,Obsession,Animotion,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1985,1985-04-13,1985-05-04,6.0,,2025-11-20
 song,Don't You (Forget About Me),Simple Minds,1985,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1985,1985-04-20,1985-05-18,1.0,wikidata:P577,2025-11-20
 song,One Night in Bangkok,Murray Head,1984-10,10,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1985,1985-04-20,1985-05-18,3.0,wikitext:released,2025-11-20
-song,All She Wants to Do Is Dance,Don Henley,1985-02,02,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1985,1985-04-27,1985-05-04,9.0,error:HTTPError,2025-11-20
+song,All She Wants to Do Is Dance,Don Henley,1985-02,02,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1985,1985-04-27,1985-05-04,9.0,wikidata:P577,2025-11-20
 song,Some Like It Hot,The Power Station,1959-03-19,03,19,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1985,1985-04-27,1985-05-11,6.0,wikidata:P577,2025-11-20
 song,Smooth Operator,Sade,1984-09-15,9.0,15.0,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1985,1985-05-04,1985-05-18,5.0,wikidata:P577,2025-11-20
 song,Everybody Wants to Rule the World,Tears for Fears,1985-03-22,3.0,22.0,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1985,1985-05-11,1985-06-08,1.0,wikitext:released,2025-11-20
@@ -2771,7 +2771,7 @@ song,Big Time,Peter Gabriel,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_B
 song,Respect Yourself,Bruce Willis,1971,10,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1987,1987-02-28,1987-03-07,5.0,wikidata:P577,2025-11-20
 song,Somewhere Out There,Linda Ronstadt and James Ingram,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1987,1987-02-28,1987-03-14,2.0,,2025-11-20
 song,Let's Wait Awhile,Janet Jackson,1987-01-06,1.0,6.0,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1987,1987-03-07,1987-03-21,2.0,wikidata:P577,2025-11-20
-song,Mandolin Rain,Bruce Hornsby and the Range,1986,12,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1987,1987-03-07,1987-03-21,4.0,wikidata:P577,2025-11-20
+song,Mandolin Rain,Bruce Hornsby and the Range,1986-12,12,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1987,1987-03-07,1987-03-21,4.0,wikitext:released,2025-11-20
 song,Lean on Me,Club Nouveau,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1987,1987-03-14,1987-03-21,1.0,,2025-11-20
 song,Nothing's Gonna Stop Us Now,Starship,1987-01,1.0,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1987,1987-03-14,1987-04-04,1.0,wikidata:P577,2025-11-20
 song,Come Go with Me,Exposé,,,,US Top 10,https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1987,1987-03-21,1987-04-04,5.0,,2025-11-20
